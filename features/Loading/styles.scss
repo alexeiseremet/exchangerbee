@@ -1,0 +1,28 @@
+@import "root";
+
+$size: 16px;
+
+.loading {
+  position: relative;
+}
+
+.loading__elem {
+  display: block;
+  width: $size;
+  height: $size;
+  background-color: $light-gray;
+  animation: rotatePlane 1.2s infinite ease-in-out;
+}
+
+@keyframes rotatePlane {
+  0% {
+    transform: perspective($size) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective($size) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective($size) rotateX(-180deg) rotateY(-179.9deg);
+
+  }
+}

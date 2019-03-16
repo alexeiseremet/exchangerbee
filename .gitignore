@@ -1,0 +1,12 @@
+# OS-specific files.
+.DS_Store
+
+# Editor and language files.
+.idea/
+.project/
+.bundle/
+
+# App files.
+.env
+.next
+node_modules

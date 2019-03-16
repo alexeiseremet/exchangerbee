@@ -1,0 +1,80 @@
+@import "root";
+
+fieldset {
+  border: $base-border;
+  margin: 0 0 $small-spacing;
+  padding: $base-size;
+  padding-bottom: 0;
+}
+
+legend {
+  width: 100%;
+  font-weight: 600;
+  padding: 0 10px;
+  margin-bottom: 0;
+  line-height: inherit;
+}
+
+input,
+button,
+select,
+textarea,
+label {
+  display: block;
+  margin: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+select {
+  -webkit-appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  // Undo the Firefox inner focus ring.
+  &:focus:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+}
+
+.form {
+  position: relative;
+}
+
+.form__item {
+  position: relative;
+  margin-bottom: $base-spacing;
+
+  &--actions {
+    @extend %flex-row;
+  }
+}
+
+.label {
+  @include heading-regular;
+  @extend %text-truncate;
+  font-size: 10px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: $xsmall-spacing;
+  position: relative;
+
+  &.required::after {
+    content: "*";
+    margin-left: 2px;
+  }
+
+  abbr {
+    display: none;
+  }
+}

@@ -1,0 +1,37 @@
+@import "root";
+
+// Flex
+.flex {
+  @extend %flex-row;
+  height: 100%;
+  width: 100%;
+
+  &--column {
+    @extend %flex-column;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  // Items.
+  > * {
+    flex: 1 99 auto;
+  }
+
+  &--fit > * {
+    flex: 1 1 0%;
+  }
+
+  &--gutter-sm {
+    > *:not(:first-child) {
+      margin-left: 12px;
+
+    }
+  }
+}
+
+// Do not wrapping into .flex--fit.
+.flex__item-grow {
+  flex: 99 1 auto;
+}

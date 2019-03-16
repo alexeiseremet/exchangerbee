@@ -1,0 +1,48 @@
+@import "root";
+
+.page {
+  @extend %container;
+}
+
+.page__inner {
+  @extend %flex-row;
+  flex-wrap: wrap;
+}
+
+.page__top {
+  @include flex-width(100%);
+  padding-bottom: 20px;
+}
+
+.page__content {
+  @include flex-width(100%);
+  order: 2;
+
+  @include mappy-bp(medium) {
+    @include flex-width(calc(100% - 280px));
+    margin: 0 auto;
+  }
+
+  @include mappy-bp(large) {
+    @include flex-width(calc(100% - 300px));
+  }
+
+  .page--no-aside & {
+    @include mappy-bp(max-width large) {
+      @include flex-width(100%);
+    }
+  }
+}
+
+.page__aside {
+  @include flex-width(100%);
+
+  @include mappy-bp(medium) {
+    @include flex-width(280px);
+    padding-right: 20px;
+  }
+
+  @include mappy-bp(large) {
+    @include flex-width(300px);
+  }
+}

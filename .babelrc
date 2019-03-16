@@ -1,0 +1,20 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": "./",
+        "alias": {
+          "Root": "./",
+          "Features": "./features",
+          "Images": "./assets/images",
+          "Lib": "./assets/lib"
+        }
+      }
+    ],
+    "@babel/plugin-proposal-class-properties"
+  ]
+}

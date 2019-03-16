@@ -1,0 +1,26 @@
+@import "root";
+
+.unordered-list {
+  @extend %default-ul;
+}
+
+.ordered-list {
+  @extend %default-ol;
+}
+
+// Definition list
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: bold;
+
+  & ~ dt {
+    margin-top: $small-spacing;
+  }
+}
+
+dd {
+  margin: 0;
+}

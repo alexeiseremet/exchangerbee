@@ -1,0 +1,109 @@
+@import "root";
+
+.input {
+  position: relative;
+}
+
+.input__label {
+  width: 100%;
+}
+
+.input__control {
+  display: block;
+}
+
+.input__element {
+  background-color: $white;
+  border-bottom: $form-input-border;
+  border-color: $form-input-border-color;
+  border-radius: $base-border-radius;
+  box-shadow: $form-box-shadow;
+  padding: 0 $form-input-padding;
+  transition: border-color $base-animation;
+  height: $base-size;
+  width: 100%;
+  -webkit-appearance: none;
+
+  .input--focused & {
+    box-shadow: $form-box-shadow-focus;
+    outline: 0;
+  }
+
+  .input--disabled & {
+    background-color: darken($white, 2%);
+    cursor: not-allowed;
+  }
+}
+
+.input__toggle {
+  height: $base-size;
+  width: $base-size;
+  border: $form-input-border;
+  display: none;
+  background-size: contain;
+  background-position: 50% 50%;
+}
+
+// Textarea.
+.input--textarea {
+  resize: vertical;
+  height: auto;
+}
+
+// Select.
+.input--select {
+  .input__element {
+    padding-right: 3.4rem;
+  }
+
+  .input__toggle {
+    background: url(#{$img_src}/icon-arrow-down.svg) no-repeat;
+    pointer-events: none;
+  }
+}
+
+// Checkbox & Radio.
+.input--checkbox,
+.input--radio {
+  @extend %flex-row;
+  flex-direction: row-reverse;
+
+  .input__control {
+    margin-right: 1rem
+  }
+
+  .input__element {
+    position: absolute;
+    left: 0;
+    padding: 0;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .input__toggle {
+    border-color: $form-input-border-color;
+    display: block;
+  }
+
+  &.input--checked .input__toggle {
+    background-size: contain;
+    background: url(#{$img_src}/icon-checkmark.svg) no-repeat;
+  }
+
+  &.input--focused .input__toggle {
+    box-shadow: $form-box-shadow-focus;
+    outline: none;
+  }
+
+  &.input--disabled .input__toggle {
+    background-color: darken($white, 2%);
+    cursor: not-allowed;
+  }
+}
+
+.input--radio {
+  .input__toggle {
+    border-radius: 50%;
+  }
+}
+

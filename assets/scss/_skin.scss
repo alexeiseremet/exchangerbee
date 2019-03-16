@@ -1,0 +1,25 @@
+// Skin.
+$medium-gray: #a3acbe;
+$light-gray: #e5e9f2;
+
+$border-color: $light-gray;
+
+$action-color: #df4d2f;
+$action-active-color: darken($action-color, 10%);
+$action-disabled-color: lighten($action-color, 20%);
+$header-background: #f76042;
+$header-active-background: #df4d2f;
+$footer-background: #3c4858;
+
+// Colors from simpleicons.org
+$socials: (
+    odnoklassniki: #f4731c,
+    mailru: #168de2,
+    vkontakte: #6383a8,
+    facebook: #3b5998,
+    google: #dc4e41,
+    viber: #665cac,
+    skype: #00aff0,
+    telegram: #2ca5e0,
+    whatsapp: #25d366
+);

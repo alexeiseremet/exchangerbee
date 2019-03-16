@@ -1,0 +1,61 @@
+@import "root";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+}
+
+.modal__backdrop {
+  @extend %absolute-cover;
+  background: rgba($dark-gray, .9);
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.modal__inner {
+  background: $base-background;
+  width: 560px;
+  margin: 0 auto;
+  max-width: calc(100% - 20px);
+  height: auto;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.modal__header {
+  position: relative;
+  background: $secondary-background;
+}
+
+.modal__title {
+  @include heading-bold;
+  color: $medium-gray;
+  padding: 15px 50px 15px 20px;
+  line-height: 1.2;
+}
+
+.modal__btn-close {
+  @extend %button-link;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 46px;
+  height: 46px;
+
+  svg {
+    padding: 10px;
+    fill: $light-gray;
+  }
+
+  &:hover svg{
+    fill: $dark-gray;
+  }
+}
+
+.modal__content {
+  padding: 40px 20px;
+}

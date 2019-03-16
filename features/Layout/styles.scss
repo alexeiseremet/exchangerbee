@@ -1,0 +1,102 @@
+@import "root";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  position: relative;
+}
+
+html {
+  height: 100%;
+  // All the REM measurements are based on 10px sizing. So basically 1.5rem = 15px :)
+  font-size: 62.5%;
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  @include base-regular;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $base-font-color;
+  background-color: $base-background;
+  margin: 0;
+}
+
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.clearfix {
+  @extend %clearfix;
+}
+
+.container {
+  @extend %container;
+}
+
+// Layout with sticky footer.
+.layout {
+  @extend %flex-column;
+  height: 100%;
+  overflow-y: scroll;
+
+  &.no-yscroll {
+    overflow-y: hidden;
+  }
+}
+
+.layout__header-wrapper,
+.layout__content-wrapper {
+  flex: none;
+}
+
+.layout__header-wrapper {
+  &.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1041;
+  }
+}
+
+.layout__header {
+  background-color: $header-background;
+  width: 100%;
+}
+
+.layout__header-inner {
+  @extend %container;
+  @extend %flex-row;
+}
+
+.layout__content-wrapper {
+  padding: 20px 0;
+  overflow-x: hidden;
+  flex-grow: 1;
+
+  @include mappy-bp(medium) {
+    padding: 40px 0;
+  }
+}
+
+.layout__content {
+  width: 100%;
+}
+
+.layout__footer-wrapper {
+  @extend %flex-row;
+  align-items: flex-end;
+  flex-grow: 0;
+}
+
+.layout__footer {
+  background-color: $footer-background;
+  width: 100%;
+}
+
+.layout__footer-inner {
+  @extend %container;
+}
