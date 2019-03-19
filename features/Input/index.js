@@ -1,42 +1,47 @@
 import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
+import { Field } from 'formik'
 
 export default (
   {
-    id,
-    label,
-    type = 'text',
-    required = false,
-    disabled = false,
-    checked = null,
     value = '',
-    onChange = null,
+    required = false,
+    type = 'text',
+    name = null,
+    values,
+    labelText,
+    id,
   }
 ) => {
   const classes = classnames(
     'input',
     {
       [`input--${type}`]: type,
+      [`input--checked`]: values[name] === value || values[name] === true,
       [`input--required`]: required,
-      [`input--disabled`]: disabled,
     }
   )
 
   return (
     <div className={classes}>
-      <label className="input__label" htmlFor={id}>{label}</label>
+      <label className="input__label" htmlFor={id}>
+        {labelText}
+      </label>
 
       <div className="input__control">
-        <input className="input__element"
-               id={id}
-               type={type}
-               required={required}
-               disabled={disabled}
-               checked={checked}
-               defaultValue={value}
-               onChange={onChange}
+        <Field
+          className="input__element"
+          required={required}
+          aria-required={required}
+          aria-label={labelText}
+          checked={values[name] === true || values[name] === value}
+          type={type}
+          value={value || values[name]}
+          name={name}
+          id={id}
         />
+
         <i className="input__toggle"/>
       </div>
     </div>

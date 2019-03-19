@@ -42,6 +42,7 @@
   display: none;
   background-size: contain;
   background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
 // Textarea.
@@ -87,7 +88,7 @@
 
   &.input--checked .input__toggle {
     background-size: contain;
-    background: url(#{$img_src}/icon-checkmark.svg) no-repeat;
+    background-image: url(#{$img_src}/icon-checkmark.svg);
   }
 
   &.input--focused .input__toggle {

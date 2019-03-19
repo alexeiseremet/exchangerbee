@@ -1,5 +1,4 @@
 // Import temporary.
-import '../assets/scss/form.scss'
 import '../assets/scss/helper.scss'
 import '../assets/scss/tables.scss'
 import '../assets/scss/typography.scss'
@@ -10,7 +9,9 @@ import { textIndexPage as t } from 'Lib/locale'
 import Metadata from 'Features/Metadata'
 import Layout from 'Features/Layout'
 import Page from 'Features/Page'
+import Form from 'Features/Form'
 import Input from 'Features/Input'
+import Fieldset from 'Features/Form/_fieldset'
 
 class Index extends React.Component {
   /**
@@ -37,13 +38,50 @@ class Index extends React.Component {
         />
 
         <Page>
-          <Input id="text" type="text" label="Text"/>
-          <Input id="checkbox" type="checkbox" label="Checkbox" value="Checkbox input"/>
-          <Input id="radio" type="radio" label="Radio" value="Radio input"/>
+          <Form initialValues={
+            {
+              text: 'jared',
+              checkbox: true,
+              radioGroup: 'radio2'
+            }
+          }>
+            <Input
+              name="text"
+              id="text"
+              type="text"
+              labelText="Text"
+            />
+            <Input
+              name="checkbox"
+              id="checkbox"
+              type="checkbox"
+              labelText="Checkbox"
+            />
+            <Input
+              name="radio"
+              id="radio"
+              type="radio"
+              value="radio"
+              labelText="Radio 0"
+            />
+            <Fieldset legendText="Radio Group">
+              <Input
+                name="radioGroup"
+                id="radio1"
+                value="radio1"
+                type="radio"
+                labelText="Radio 1"
+              />
+              <Input
+                name="radioGroup"
+                id="radio2"
+                value="radio2"
+                type="radio"
+                labelText="Radio 2"
+              />
+            </Fieldset>
+          </Form>
 
-          <button className="button" type="submit">
-            Save
-          </button>
         </Page>
       </Layout>
     )
