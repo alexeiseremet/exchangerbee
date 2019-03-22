@@ -1,0 +1,12 @@
+@import "root";
+
+.button {
+  @extend %flex-row;
+  @extend %button-link;
+}
+
+.button__label {
+  @extend %text-truncate;
+  @include base-bold;
+  z-index: 1;
+}

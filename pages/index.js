@@ -50,6 +50,7 @@ class Index extends React.Component {
               id="text"
               type="text"
               labelText="Text"
+              required
             />
             <Input
               name="checkbox"

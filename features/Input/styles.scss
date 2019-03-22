@@ -1,11 +1,12 @@
 @import "root";
 
 .input {
-  position: relative;
+  display: block;
 }
 
 .input__label {
-  width: 100%;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .input__control {
@@ -45,37 +46,22 @@
   background-repeat: no-repeat;
 }
 
-// Textarea.
-.input--textarea {
-  resize: vertical;
-  height: auto;
-}
-
-// Select.
-.input--select {
-  .input__element {
-    padding-right: 3.4rem;
-  }
-
-  .input__toggle {
-    background: url(#{$img_src}/icon-arrow-down.svg) no-repeat;
-    pointer-events: none;
-  }
-}
-
 // Checkbox & Radio.
 .input--checkbox,
 .input--radio {
-  @extend %flex-row;
-  flex-direction: row-reverse;
+  .input__label {
+    padding-left: ($base-size + $small-spacing);
+    display: inline-block;
+  }
 
   .input__control {
-    margin-right: 1rem
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 
   .input__element {
     position: absolute;
-    left: 0;
     padding: 0;
     opacity: 0;
     z-index: -1;
@@ -108,3 +94,20 @@
   }
 }
 
+// Select.
+.input--select {
+  .input__element {
+    padding-right: 3.4rem;
+  }
+
+  .input__toggle {
+    background: url(#{$img_src}/icon-arrow-down.svg) no-repeat;
+    pointer-events: none;
+  }
+}
+
+// Textarea.
+.input--textarea {
+  resize: vertical;
+  height: auto;
+}

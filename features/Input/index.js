@@ -18,7 +18,7 @@ export default (
     'input',
     {
       [`input--${type}`]: type,
-      [`input--checked`]: values[name] === value || values[name] === true,
+      [`input--checked`]: (value !== '' && values[name] === value) || (values[name] === true),
       [`input--required`]: required,
     }
   )

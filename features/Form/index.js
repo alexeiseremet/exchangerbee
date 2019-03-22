@@ -2,6 +2,7 @@ import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
 import { Formik, Form as FormikForm } from 'formik'
+import Button from 'Features/Button'
 import Items from './_items'
 
 export default (
@@ -27,7 +28,8 @@ export default (
 
           <div className="form__row">
             {props.errors.name && <div>{props.errors.name}</div>}
-            <button className="button" type="submit">Submit</button>
+
+            <Button type="submit" labelText="Submit"/>
           </div>
         </FormikForm>
       )}
