@@ -9,9 +9,7 @@ import { textIndexPage as t } from 'Lib/locale'
 import Metadata from 'Features/Metadata'
 import Layout from 'Features/Layout'
 import Page from 'Features/Page'
-import Form from 'Features/Form'
-import Input from 'Features/Input'
-import Fieldset from 'Features/Form/_fieldset'
+import AddInstitution from 'Features/AddInstitution'
 
 class Index extends React.Component {
   /**
@@ -38,51 +36,7 @@ class Index extends React.Component {
         />
 
         <Page>
-          <Form initialValues={
-            {
-              text: 'jared',
-              checkbox: true,
-              radioGroup: 'radio2'
-            }
-          }>
-            <Input
-              name="text"
-              id="text"
-              type="text"
-              labelText="Text"
-              required
-            />
-            <Input
-              name="checkbox"
-              id="checkbox"
-              type="checkbox"
-              labelText="Checkbox"
-            />
-            <Input
-              name="radio"
-              id="radio"
-              type="radio"
-              value="radio"
-              labelText="Radio 0"
-            />
-            <Fieldset legendText="Radio Group">
-              <Input
-                name="radioGroup"
-                id="radio1"
-                value="radio1"
-                type="radio"
-                labelText="Radio 1"
-              />
-              <Input
-                name="radioGroup"
-                id="radio2"
-                value="radio2"
-                type="radio"
-                labelText="Radio 2"
-              />
-            </Fieldset>
-          </Form>
-
+          <AddInstitution/>
         </Page>
       </Layout>
     )
