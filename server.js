@@ -16,7 +16,7 @@ app.prepare().then(() => {
 
   // Setup API proxy.
   const appProxy = proxy({
-    target: process.env.API_HOST || 'http://localhost:9001/',
+    target: process.env.API_HOST || 'http://localhost:4000/',
     cookiePathRewrite: apiPath,
     changeOrigin: true,
     router: {
