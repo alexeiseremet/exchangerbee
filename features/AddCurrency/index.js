@@ -9,7 +9,7 @@ export default () => {
       initialValues={{
         name: '',
         slug: '',
-        country: ''
+        numCode: ''
       }}
     >
       <Input
@@ -27,10 +27,10 @@ export default () => {
         required
       />
       <Input
-        name="country"
-        id="country"
+        name="numCode"
+        id="numCode"
         type="text"
-        labelText="Country"
+        labelText="Numeric code"
         required
       />
     </Form>

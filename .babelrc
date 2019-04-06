@@ -11,7 +11,7 @@
           "Root": "./",
           "Features": "./features",
           "Images": "./assets/images",
-          "Lib": "./assets/lib"
+          "Lib": "./lib"
         }
       }
     ],

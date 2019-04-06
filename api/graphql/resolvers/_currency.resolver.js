@@ -1,28 +1,28 @@
 const {
-  Institution
+  Currency
 } = require('../../models')
 
 module.exports = {
   Query: {
-    institution (_, args) {
+    currency (_, args) {
       return new Promise((resolve, reject) => {
-        Institution.findOne(args).exec((err, res) => {
+        Currency.findOne(args).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
     },
-    allInstitution () {
+    allCurrency () {
       return new Promise((resolve, reject) => {
-        Institution.find({}).exec((err, res) => {
+        Currency.find({}).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
     }
   },
   Mutation: {
-    async createInstitution (_, args) {
-      const newInstitution = await new Institution({
-        ...args.institution
+    async createCurrency (_, args) {
+      const newInstitution = await new Currency({
+        ...args.currency
       })
 
       return new Promise((resolve, reject) => {
@@ -31,9 +31,9 @@ module.exports = {
         })
       })
     },
-    async deleteInstitution (_, {_id}) {
+    async deleteCurrency (_, {_id}) {
       return new Promise((resolve, reject) => {
-        Institution.findByIdAndDelete(_id).exec((err, res) => {
+        Currency.findByIdAndDelete(_id).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })

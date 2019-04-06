@@ -37,7 +37,7 @@ server
       throw err
     }
 
-    console.log(`> Ready on http://localhost:${port}/graphql`)
+    console.log(`🚀  Ready on http://localhost:${port}/graphql`)
   })
 
 module.exports = server

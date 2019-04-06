@@ -1,28 +1,26 @@
 module.exports = `
   type Institution {
-    _id: ID!
-    alias: String!
+    id: ID!
+    slug: String!
     name: String!
-    countryId: String!
+    country: ID!
     logo: String
     website: String
   }
   
   type Query {
-    Institution(alias: String!): Institution!
-    allInstitutions: [Institution!]!
+    institution(slug: String!): Institution!
+    allInstitution: [Institution!]!
   }
   
   type Mutation {
     createInstitution(institution: createInstitutionInput): Institution!
-    deleteInstitution(alias: String!): Institution!
+    deleteInstitution(slug: String!): Institution!
   }
     
   input createInstitutionInput {
-    alias: String!
+    slug: String!
     name: String!
-    countryId: String!
-    logo: String
-    website: String
+    country: ID!
   }
 `

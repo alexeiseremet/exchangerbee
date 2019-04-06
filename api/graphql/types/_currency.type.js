@@ -1,19 +1,25 @@
 module.exports = `
   type Currency {
-    _id: ID!
-    alias: String!
+    id: ID!
+    slug: String!
     name: String!
-    numeric_code: Int!
+    numCode: Int!
     symbol: String
+  }
+  
+  type Query {
+    currency(slug: String!): Currency!
+    allCurrency: [Currency!]!
   }
   
   type Mutation {
     createCurrency(institution: createCurrencyInput): Currency!
-    deleteCurrency(alias: String!): Currency!
+    deleteCurrency(slug: String!): Currency!
   }
     
   input createCurrencyInput {
-    alias: String!
+    slug: String!
     name: String!
+    numCode: Int!
   }
 `

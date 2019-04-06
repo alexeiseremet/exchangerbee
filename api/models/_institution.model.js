@@ -1,24 +1,25 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-
 const institutionSchema = new Schema({
-  alias: {
-    type: String,
-    lowercase: true,
-    index: true,
-    unique: true,
+  country: {
+    type: Schema.Types.ObjectId,
+    ref: 'Country',
     required: true,
   },
   name: {
     type: String,
     required: true,
   },
-  country: {
-    type: Schema.Types.ObjectId,
-    ref: 'Country',
+  slug: {
+    type: String,
+    lowercase: true,
+    index: true,
+    unique: true,
     required: true,
   },
+  logo: String,
+  website: String,
 })
 
 module.exports = model('Institution', institutionSchema)
