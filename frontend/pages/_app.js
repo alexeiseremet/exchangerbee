@@ -23,7 +23,7 @@ const initStore = (initialState = {}) => (
   )
 )
 
-class EXBEEApp extends App {
+class ExbeeApp extends App {
   static async getInitialProps ({Component, ctx}) {
     // await ctx.store.dispatch(loadCategories())
 
@@ -49,4 +49,4 @@ class EXBEEApp extends App {
   }
 }
 
-export default withRedux(initStore)(EXBEEApp)
+export default withRedux(initStore)(ExbeeApp)
