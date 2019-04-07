@@ -1,8 +1,6 @@
 import './styles.scss'
 import React from 'react'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { hideModal } from './actions'
 
 import Svg from 'Features/Svg'
@@ -98,4 +96,4 @@ function mapDispatchToProps (dispatch) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalMarkup)
+export default ModalMarkup
