@@ -1,7 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
-import withApolloClient from 'Lib/apollo/with-apollo-client'
+import withApolloClient from '../lib/apollo/with-apollo-client'
 
 class ExbeeApp extends App {
   render () {

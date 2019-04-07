@@ -4,13 +4,13 @@ import '../assets/scss/tables.scss'
 import '../assets/scss/typography.scss'
 
 import React from 'react'
-import { textIndexPage as t } from 'Lib/locale'
-import Metadata from 'Features/Metadata'
-import Layout from 'Features/Layout'
-import Page from 'Features/Page'
-import AddCountry from 'Features/AddCountry'
-import AddCurrency from 'Features/AddCurrency'
-import AddInstitution from 'Features/AddInstitution'
+import { textIndexPage as t } from '../lib/locale'
+import Metadata from '../features/Metadata'
+import Layout from '../features/Layout'
+import Page from '../features/Page'
+import AddCountry from '../features/AddCountry'
+import AddCurrency from '../features/AddCurrency'
+import AddInstitution from '../features/AddInstitution'
 
 class Index extends React.Component {
   /**

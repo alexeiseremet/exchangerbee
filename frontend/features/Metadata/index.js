@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import { host, locale } from 'Root/server.config'
-import { textMetadata as t } from 'Lib/locale'
+import { host, locale } from '../../server.config'
+import { textMetadata as t } from '../../lib/locale'
 
 /**
  * Component to render Metadata.

@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
 import fetch from 'isomorphic-unfetch'
 
-import { apiBaseUrl } from 'Root/server.config'
+import { apiBaseUrl } from '../../server.config'
 
 let apolloClient = null
 

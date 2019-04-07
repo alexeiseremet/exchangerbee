@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Form from 'Features/Form'
-import Input from 'Features/Input'
+import Form from '../Form'
+import Input from '../Input'
 
 export default () => {
   return (

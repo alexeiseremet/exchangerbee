@@ -1,7 +1,7 @@
 import './styles.scss'
 import React from 'react'
-import Loading from 'Features/Loading'
 import VisibilitySensor from 'react-visibility-sensor'
+import Loading from '../Loading'
 
 export default ({hasMore, loadMore}) => {
   if (!hasMore) {

@@ -1,4 +1,4 @@
-import { textModal as t } from 'Lib/locale'
+import { textModal as t } from '../../lib/locale'
 
 export const modalContent = {
   AUTH: 'AUTH',

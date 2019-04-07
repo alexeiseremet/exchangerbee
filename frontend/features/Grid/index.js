@@ -1,7 +1,7 @@
 import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
-import Loading from 'Features/Loading'
+import Loading from '../Loading'
 
 export default (props) => {
   const {

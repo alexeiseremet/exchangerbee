@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Form from 'Features/Form'
-import Fieldset from 'Features/Form/_fieldset'
-import Input from 'Features/Input'
+import Form from '../Form'
+import Fieldset from '../Form/_fieldset'
+import Input from '../Input'
 
 export default () => {
   return (

@@ -2,7 +2,7 @@ import './styles.scss'
 import React from 'react'
 import Router from 'next/router'
 
-import Modal from 'Features/Modal'
+import Modal from '../Modal'
 import Header from './_header'
 import Content from './_content'
 import Footer from './_footer'

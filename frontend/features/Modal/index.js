@@ -3,8 +3,8 @@ import React from 'react'
 
 import { hideModal } from './actions'
 
-import Svg from 'Features/Svg'
-import iconClose from 'Images/icon-close.svg?sprite'
+import Svg from '../Svg'
+import iconClose from '../../assets/images/icon-close.svg?sprite'
 
 export class ModalMarkup extends React.Component {
   constructor (props) {

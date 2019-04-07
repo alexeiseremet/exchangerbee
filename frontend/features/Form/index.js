@@ -2,7 +2,7 @@ import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
 import { Formik, Form as FormikForm } from 'formik'
-import Button from 'Features/Button'
+import Button from '../Button'
 import Items from './_items'
 
 export default (

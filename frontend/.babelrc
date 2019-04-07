@@ -3,18 +3,6 @@
     "next/babel"
   ],
   "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": "./",
-        "alias": {
-          "Root": "./",
-          "Features": "./features",
-          "Images": "./assets/images",
-          "Lib": "./lib"
-        }
-      }
-    ],
     "@babel/plugin-proposal-class-properties"
   ]
 }
