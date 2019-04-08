@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
+import { gql } from 'apollo-boost'
+import { graphql } from 'react-apollo'
 
 import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export default ({mutate}) => (
+export const AddCountryMarkup = ({mutate}) => (
   <Fragment>
     <div className="text">
       <h1>{t.addCountry}</h1>
@@ -19,7 +21,7 @@ export default ({mutate}) => (
       }}
       onSubmit={values => {
         mutate({
-          variables: {currency: values}
+          variables: {country: values}
         })
       }}
     >
@@ -62,3 +64,11 @@ export default ({mutate}) => (
   </Fragment>
 )
 
+export default graphql(gql`
+  mutation createCountryMutation ($country: CreateCountryInput!) {
+    createCountry(country: $country) {
+      slug,
+      numCode
+    }
+  }
+`)(AddCountryMarkup)

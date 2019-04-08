@@ -9,6 +9,7 @@ import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
 import AddCurrency from '../features/AddCurrency'
+import AddCountry from '../features/AddCountry'
 
 class Index extends React.Component {
   /**
@@ -30,6 +31,7 @@ class Index extends React.Component {
         <Metadata title={t.metaTitle} />
         <Page>
           <AddCurrency/>
+          <AddCountry/>
         </Page>
       </Layout>
     )
