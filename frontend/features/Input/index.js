@@ -9,6 +9,7 @@ export default (
     required = false,
     type = 'text',
     name = null,
+    autocomplete = "off",
     values,
     labelText,
     id,
@@ -40,6 +41,7 @@ export default (
           value={value || values[name]}
           name={name}
           id={id}
+          autoComplete={autocomplete}
         />
 
         <i className="input__toggle"/>

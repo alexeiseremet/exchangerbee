@@ -21,5 +21,6 @@ module.exports = `
     slug: String!
     name: String!
     numCode: String!
+    symbol: String
   }
 `

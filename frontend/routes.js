@@ -7,6 +7,10 @@ const APP_ROUTES = [
     pattern: '/',
   },
   {
+    page: 'admin',
+    pattern: '/admin/:slug/:slug?/:slug?',
+  },
+  {
     page: 'quotes',
     pattern: '/quotes/:slug?',
   },

@@ -18,3 +18,11 @@ export const textIndexPage = {
   ogDescription: 'ogDescription',
   pageTitle: 'pageTitle',
 }
+
+export const textAdminPage = {
+  metaTitle: 'Admin Page',
+  addCountry: 'Add Country',
+  addCurrency: 'Add Currency',
+  addInstitution: 'Add Institution',
+}
+

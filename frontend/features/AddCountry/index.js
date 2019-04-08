@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
+import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export default () => {
-  return (
+export default ({mutate}) => (
+  <Fragment>
+    <div className="text">
+      <h1>{t.addCountry}</h1>
+    </div>
     <Form
       initialValues={{
         slug: '',
@@ -12,6 +16,11 @@ export default () => {
         name: '',
         numCode: '',
         shortName: ''
+      }}
+      onSubmit={values => {
+        mutate({
+          variables: {currency: values}
+        })
       }}
     >
       <Input
@@ -50,6 +59,6 @@ export default () => {
         required
       />
     </Form>
-  )
-}
+  </Fragment>
+)
 
