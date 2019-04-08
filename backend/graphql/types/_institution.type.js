@@ -14,11 +14,11 @@ module.exports = `
   }
   
   type Mutation {
-    createInstitution(institution: createInstitutionInput): Institution!
+    createInstitution(institution: CreateInstitutionInput!): Institution!
     deleteInstitution(slug: String!): Institution!
   }
     
-  input createInstitutionInput {
+  input CreateInstitutionInput {
     slug: String!
     name: String!
     country: ID!

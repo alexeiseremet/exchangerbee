@@ -3,7 +3,7 @@ module.exports = `
     id: ID!
     slug: String!
     name: String!
-    numCode: Int!
+    numCode: String!
     symbol: String
   }
   
@@ -13,13 +13,13 @@ module.exports = `
   }
   
   type Mutation {
-    createCurrency(institution: createCurrencyInput): Currency!
+    createCurrency(currency: CreateCurrencyInput!): Currency!
     deleteCurrency(slug: String!): Currency!
   }
     
-  input createCurrencyInput {
+  input CreateCurrencyInput {
     slug: String!
     name: String!
-    numCode: Int!
+    numCode: String!
   }
 `

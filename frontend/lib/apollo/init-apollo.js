@@ -17,7 +17,7 @@ function create (initialState) {
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
       uri: apiBaseUrl, // Server URL (must be absolute)
-      // credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
+      credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
     }),
     cache: new InMemoryCache().restore(initialState || {})
   })

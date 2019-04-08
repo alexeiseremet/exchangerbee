@@ -7,7 +7,7 @@ const currencySchema = new Schema({
     required: true,
   },
   numCode: {
-    type: Number,
+    type: String,
     index: true,
     unique: true,
     required: true,

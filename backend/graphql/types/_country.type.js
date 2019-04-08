@@ -4,7 +4,7 @@ module.exports = `
     slug: String!
     currency: ID!
     name: String!
-    numCode: Int!
+    numCode: String!
     shortName: String!
   }
   
@@ -14,15 +14,15 @@ module.exports = `
   }
   
   type Mutation {
-    createCountry(institution: createCountryInput): Country!
+    createCountry(country: CreateCountryInput!): Country!
     deleteCountry(slug: String!): Country!
   }
     
-  input createCountryInput {
+  input CreateCountryInput {
     slug: String!
     currency: ID!
     name: String!
-    numCode: Int!
+    numCode: String!
     shortName: String!
   }
 `
