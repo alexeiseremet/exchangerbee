@@ -1,0 +1,41 @@
+@import "root";
+
+.tabs {
+  position: relative;
+}
+
+.tabs__nav {
+  @extend %inline-list;
+  position: relative;
+}
+
+.tabs__nav-button {
+  @extend %button-link;
+
+  &.is-active {
+    color: $action-active-color;
+    pointer-events: none;
+  }
+}
+
+.tabs__nav-label {
+  @include heading-bold;
+  font-size: $base-font-size;
+  display: block;
+
+  .tabs__nav-button.is-active & {
+    color: $base-font-color;
+  }
+}
+
+.tabs__panels {
+  border: $base-border;
+  margin-top: $small-spacing;
+  padding: $small-spacing;
+  width: 100%;
+}
+
+.tabs__body {
+  position: relative;
+  outline: none;
+}

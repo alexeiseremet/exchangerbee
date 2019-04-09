@@ -9,7 +9,7 @@ import Input from '../Input'
 export const AddCurrencyMarkup = ({mutate}) => (
   <Fragment>
     <div className="text">
-      <h1>{t.addCurrency}</h1>
+      <h1>{t.currency}</h1>
     </div>
 
     <Form
@@ -27,28 +27,28 @@ export const AddCurrencyMarkup = ({mutate}) => (
     >
       <Input
         name="name"
-        id="name"
+        id="currency-name"
         type="text"
         labelText="Name"
         required
       />
       <Input
         name="slug"
-        id="slug"
+        id="currency-slug"
         type="text"
         labelText="Slug"
         required
       />
       <Input
         name="numCode"
-        id="numCode"
+        id="currency-num-code"
         type="text"
         labelText="Numeric code"
         required
       />
       <Input
         name="symbol"
-        id="symbol"
+        id="currency-symbol"
         type="text"
         labelText="Symbol"
       />

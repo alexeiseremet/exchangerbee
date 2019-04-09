@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react'
 import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
 import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCountryMarkup = ({mutate}) => (
+export const AddCountryMarkup = ({mutate, data, loading}) => (
   <Fragment>
     <div className="text">
-      <h1>{t.addCountry}</h1>
+      <h1>{t.country}</h1>
     </div>
     <Form
       initialValues={{
@@ -27,35 +27,35 @@ export const AddCountryMarkup = ({mutate}) => (
     >
       <Input
         name="name"
-        id="name"
+        id="country-name"
         type="text"
         labelText="Name"
         required
       />
       <Input
         name="slug"
-        id="slug"
+        id="country-slug"
         type="text"
         labelText="Slug"
         required
       />
       <Input
         name="numCode"
-        id="numCode"
+        id="country-num-code"
         type="text"
         labelText="Numeric code"
         required
       />
       <Input
         name="shortName"
-        id="shortName"
+        id="country-short-name"
         type="text"
         labelText="Short name"
         required
       />
       <Input
         name="currency"
-        id="currency"
+        id="country-currency"
         type="text"
         labelText="Currency"
         required
@@ -64,11 +64,21 @@ export const AddCountryMarkup = ({mutate}) => (
   </Fragment>
 )
 
-export default graphql(gql`
-  mutation createCountryMutation ($country: CreateCountryInput!) {
-    createCountry(country: $country) {
-      slug,
-      numCode
+export default compose(
+  graphql(gql`
+    query AllCurrency {
+      allCurrency {
+        id
+        slug
+      }
     }
-  }
-`)(AddCountryMarkup)
+  `),
+  graphql(gql`
+    mutation CreateCountry ($country: CreateCountryInput!) {
+      createCountry(country: $country) {
+        slug,
+        numCode
+      }
+    }
+  `),
+)(AddCountryMarkup)

@@ -21,8 +21,8 @@ export const textIndexPage = {
 
 export const textAdminPage = {
   metaTitle: 'Admin Page',
-  addCountry: 'Add Country',
-  addCurrency: 'Add Currency',
-  addInstitution: 'Add Institution',
+  country: 'Country',
+  currency: 'Currency',
+  institution: 'Institution',
 }
 
