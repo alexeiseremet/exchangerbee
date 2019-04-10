@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
+import { gql } from 'apollo-boost'
+import { graphql } from 'react-apollo'
 
+import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
-import { textAdminPage as t } from '../../lib/locale'
 
-export default ({mutate}) => (
+const AddInstitutionMarkup = ({mutate}) => (
   <Fragment>
     <div className="text">
       <h1>{t.institution}</h1>
@@ -15,6 +17,11 @@ export default ({mutate}) => (
         name: '',
         slug: '',
         country: ''
+      }}
+      onSubmit={institution => {
+        mutate({
+          variables: {institution}
+        })
       }}
     >
       <Input
@@ -42,4 +49,15 @@ export default ({mutate}) => (
   </Fragment>
 )
 
+const GQL_CREATE_INSTITUTION = gql`
+  mutation CreateInstitution ($institution: CreateInstitutionInput!) {
+    createInstitution(institution: $institution) {
+      slug,
+      country
+    }
+  }
+`
 
+export default graphql(
+  GQL_CREATE_INSTITUTION
+)(AddInstitutionMarkup)

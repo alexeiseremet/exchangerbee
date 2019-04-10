@@ -5,12 +5,14 @@ const currencySchema = new Schema({
   name: {
     type: String,
     required: true,
+    trim: true,
   },
   numCode: {
     type: String,
     index: true,
     unique: true,
     required: true,
+    trim: true,
   },
   slug: {
     type: String,
@@ -18,8 +20,12 @@ const currencySchema = new Schema({
     index: true,
     unique: true,
     required: true,
+    trim: true,
   },
-  symbol: String,
+  symbol: {
+    type: String,
+    trim: true,
+  },
 })
 
 module.exports = model('Currency', currencySchema)

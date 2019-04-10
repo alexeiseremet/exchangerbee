@@ -19,9 +19,9 @@ export const AddCurrencyMarkup = ({mutate}) => (
         numCode: '',
         symbol: '',
       }}
-      onSubmit={values => {
+      onSubmit={currency => {
         mutate({
-          variables: {currency: values}
+          variables: {currency}
         })
       }}
     >
@@ -56,11 +56,15 @@ export const AddCurrencyMarkup = ({mutate}) => (
   </Fragment>
 )
 
-export default graphql(gql`
-  mutation createCurrencyMutation ($currency: CreateCurrencyInput!) {
+const GQL_CREATE_CURRENCY = gql`
+  mutation CreateCurrency ($currency: CreateCurrencyInput!) {
     createCurrency(currency: $currency) {
       slug,
       numCode
     }
   }
-`)(AddCurrencyMarkup)
+`
+
+export default graphql(
+  GQL_CREATE_CURRENCY
+)(AddCurrencyMarkup)

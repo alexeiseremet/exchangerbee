@@ -31,9 +31,9 @@ module.exports = {
         })
       })
     },
-    async deleteCurrency (_, {slug}) {
+    async deleteCurrency (_, args) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndDelete(slug).exec((err, res) => {
+        Currency.findOneAndDelete(args).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })

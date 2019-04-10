@@ -6,10 +6,12 @@ const institutionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Country',
     required: true,
+    trim: true,
   },
   name: {
     type: String,
     required: true,
+    trim: true,
   },
   slug: {
     type: String,
@@ -17,9 +19,16 @@ const institutionSchema = new Schema({
     index: true,
     unique: true,
     required: true,
+    trim: true,
   },
-  logo: String,
-  website: String,
+  logo: {
+    type: String,
+    trim: true,
+  },
+  website: {
+    type: String,
+    trim: true,
+  },
 })
 
 module.exports = model('Institution', institutionSchema)

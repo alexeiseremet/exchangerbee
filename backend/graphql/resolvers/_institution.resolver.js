@@ -31,9 +31,9 @@ module.exports = {
         })
       })
     },
-    async deleteInstitution (_, {slug}) {
+    async deleteInstitution (_, args) {
       return new Promise((resolve, reject) => {
-        Institution.findOneAndDelete(slug).exec((err, res) => {
+        Institution.findOneAndDelete(args).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })

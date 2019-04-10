@@ -3,7 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { googleSiteVerification, yandexSiteVerification } from '../server.config'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
-export default class MyDocument extends Document {
+export default class ExbeeDocument extends Document {
   static getInitialProps ({renderPage}) {
     const spriteContent = sprite.stringify()
     const pageProps = renderPage()

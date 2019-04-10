@@ -1,7 +1,7 @@
 FROM node:8
-COPY . /usr/src/exbee
+COPY ../ /usr/src/exbee
 WORKDIR /usr/src/exbee
-VOLUME ./pages /usr/src/exbee/pages
+VOLUME ../pages /usr/src/exbee/pages
 RUN yarn install
 RUN yarn build
 RUN yarn build-storybook

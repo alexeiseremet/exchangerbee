@@ -6,20 +6,24 @@ const countrySchema = new Schema({
     type: String,
     ref: 'Currency',
     required: true,
+    trim: true,
   },
   name: {
     type: String,
     required: true,
+    trim: true,
   },
   numCode: {
     type: String,
     index: true,
     unique: true,
     required: true,
+    trim: true,
   },
   shortName: {
     type: String,
     required: true,
+    trim: true,
   },
   slug: {
     type: String,
@@ -27,6 +31,7 @@ const countrySchema = new Schema({
     index: true,
     unique: true,
     required: true,
+    trim: true,
   },
 })
 

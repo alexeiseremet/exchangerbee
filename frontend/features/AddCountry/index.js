@@ -6,7 +6,7 @@ import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCountryMarkup = ({mutate, data, loading}) => (
+export const AddCountryMarkup = ({mutate}) => (
   <Fragment>
     <div className="text">
       <h1>{t.country}</h1>
@@ -19,9 +19,9 @@ export const AddCountryMarkup = ({mutate, data, loading}) => (
         numCode: '',
         shortName: ''
       }}
-      onSubmit={values => {
+      onSubmit={country => {
         mutate({
-          variables: {country: values}
+          variables: {country}
         })
       }}
     >
@@ -64,21 +64,24 @@ export const AddCountryMarkup = ({mutate, data, loading}) => (
   </Fragment>
 )
 
+const GQL_ALL_CURRENCY = gql`
+  query AllCurrency {
+    allCurrency {
+      id
+      slug
+    }
+  }
+`
+const GQL_CREATE_COUNTRY = gql`
+  mutation CreateCountry ($country: CreateCountryInput!) {
+    createCountry(country: $country) {
+      slug,
+      numCode
+    }
+  }
+`
+
 export default compose(
-  graphql(gql`
-    query AllCurrency {
-      allCurrency {
-        id
-        slug
-      }
-    }
-  `),
-  graphql(gql`
-    mutation CreateCountry ($country: CreateCountryInput!) {
-      createCountry(country: $country) {
-        slug,
-        numCode
-      }
-    }
-  `),
+  graphql(GQL_ALL_CURRENCY),
+  graphql(GQL_CREATE_COUNTRY),
 )(AddCountryMarkup)

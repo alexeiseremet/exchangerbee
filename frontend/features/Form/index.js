@@ -29,7 +29,10 @@ export default (
           <div className="form__row">
             {props.errors.name && <div>{props.errors.name}</div>}
 
-            <Button type="submit" labelText="Submit"/>
+            <Button
+              type="submit"
+              labelText="Submit"
+            />
           </div>
         </FormikForm>
       )}

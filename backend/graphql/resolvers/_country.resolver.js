@@ -31,9 +31,9 @@ module.exports = {
         })
       })
     },
-    async deleteCountry (_, {slug}) {
+    async deleteCountry (_, args) {
       return new Promise((resolve, reject) => {
-        Country.findOneAndDelete(slug).exec((err, res) => {
+        Country.findOneAndDelete(args).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
