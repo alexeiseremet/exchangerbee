@@ -37,6 +37,15 @@ module.exports = {
           err ? reject(err) : resolve(res)
         })
       })
-    }
+    },
+    async updateCountry (_, {id, country}) {
+      return new Promise((resolve, reject) => {
+        Country.findOneAndUpdate(
+          {id}, {$set: country}
+        ).exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
+      })
+    },
   },
 }

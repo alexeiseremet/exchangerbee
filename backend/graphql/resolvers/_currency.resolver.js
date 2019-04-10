@@ -37,6 +37,15 @@ module.exports = {
           err ? reject(err) : resolve(res)
         })
       })
-    }
+    },
+    async updateCurrency (_, {id, currency}) {
+      return new Promise((resolve, reject) => {
+        Currency.findOneAndUpdate(
+          {id}, {$set: currency}
+        ).exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
+      })
+    },
   },
 }

@@ -1,9 +1,9 @@
 module.exports = `
   type Institution {
     id: ID!
-    slug: String!
-    name: String!
-    country: ID!
+    slug: String
+    name: String
+    country: ID
     logo: String
     website: String
   }
@@ -14,13 +14,14 @@ module.exports = `
   }
   
   type Mutation {
-    createInstitution(institution: CreateInstitutionInput!): Institution!
+    createInstitution(institution: InstitutionInput!): Institution!
+    updateInstitution(id: ID!, institution: InstitutionInput!): Institution!
     deleteInstitution(slug: String!): Institution!
   }
     
-  input CreateInstitutionInput {
-    slug: String!
-    name: String!
-    country: ID!
+  input InstitutionInput {
+    slug: String
+    name: String
+    country: ID
   }
 `

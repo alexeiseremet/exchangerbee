@@ -1,11 +1,11 @@
 module.exports = `
   type Country {
     id: ID!
-    slug: String!
-    currency: ID!
-    name: String!
-    numCode: String!
-    shortName: String!
+    slug: String
+    currency: ID
+    name: String
+    numCode: String
+    shortName: String
   }
   
   type Query {
@@ -14,15 +14,16 @@ module.exports = `
   }
   
   type Mutation {
-    createCountry(country: CreateCountryInput!): Country!
+    createCountry(country: CountryInput!): Country!
+    updateCountry(id: ID!, country: CountryInput!): Country!
     deleteCountry(slug: String!): Country!
   }
     
-  input CreateCountryInput {
-    slug: String!
-    currency: ID!
-    name: String!
-    numCode: String!
-    shortName: String!
+  input CountryInput {
+    slug: String
+    currency: ID
+    name: String
+    numCode: String
+    shortName: String
   }
 `

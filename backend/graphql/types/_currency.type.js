@@ -1,9 +1,9 @@
 module.exports = `
   type Currency {
     id: ID!
-    slug: String!
-    name: String!
-    numCode: String!
+    slug: String
+    name: String
+    numCode: String
     symbol: String
   }
   
@@ -13,14 +13,15 @@ module.exports = `
   }
   
   type Mutation {
-    createCurrency(currency: CreateCurrencyInput!): Currency!
+    createCurrency(currency: CurrencyInput!): Currency!
+    updateCurrency(id: ID!,currency: CurrencyInput!): Currency!
     deleteCurrency(slug: String!): Currency!
   }
     
-  input CreateCurrencyInput {
-    slug: String!
-    name: String!
-    numCode: String!
+  input CurrencyInput {
+    slug: String
+    name: String
+    numCode: String
     symbol: String
   }
 `
