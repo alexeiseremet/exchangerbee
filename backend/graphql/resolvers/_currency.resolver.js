@@ -20,20 +20,18 @@ module.exports = {
     }
   },
   Mutation: {
-    async createCurrency (_, args) {
-      const newInstitution = await new Currency({
-        ...args.currency
-      })
+    async createCurrency (_, {currency}) {
+      const newCurrency = await new Currency(currency)
 
       return new Promise((resolve, reject) => {
-        newInstitution.save((err, res) => {
+        newCurrency.save((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
     },
-    async deleteCurrency (_, args) {
+    async deleteCurrency (_, {id}) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndDelete(args).exec((err, res) => {
+        Currency.findOneAndDelete({_id: id}).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
@@ -41,7 +39,7 @@ module.exports = {
     async updateCurrency (_, {id, currency}) {
       return new Promise((resolve, reject) => {
         Currency.findOneAndUpdate(
-          {id}, {$set: currency}
+          {_id: id}, {$set: currency}, {new: true}
         ).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })

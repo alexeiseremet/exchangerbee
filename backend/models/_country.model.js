@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
+const {ObjectId } = Schema.Types
 const countrySchema = new Schema({
   currency: {
-    type: String,
+    type: ObjectId,
     ref: 'Currency',
     required: true,
     trim: true,

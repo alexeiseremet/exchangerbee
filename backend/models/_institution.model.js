@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
+const {ObjectId } = Schema.Types
 const institutionSchema = new Schema({
   country: {
-    type: Schema.Types.ObjectId,
+    type: ObjectId,
     ref: 'Country',
     required: true,
     trim: true,

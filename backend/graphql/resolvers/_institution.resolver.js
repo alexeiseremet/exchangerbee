@@ -41,7 +41,7 @@ module.exports = {
     async updateInstitution (_, {id, institution}) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndUpdate(
-          {id}, {$set: institution}
+          {_id: id}, {$set: institution}, {new: true}
         ).exec((err, res) => {
           err ? reject(err) : resolve(res)
         })

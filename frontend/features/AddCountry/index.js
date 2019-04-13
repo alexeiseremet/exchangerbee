@@ -73,7 +73,7 @@ const GQL_ALL_CURRENCY = gql`
   }
 `
 const GQL_CREATE_COUNTRY = gql`
-  mutation CreateCountry ($country: CreateCountryInput!) {
+  mutation CreateCountry ($country: CountryInput!) {
     createCountry(country: $country) {
       slug,
       numCode

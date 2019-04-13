@@ -24,5 +24,6 @@ export const textAdminPage = {
   country: 'Country',
   currency: 'Currency',
   institution: 'Institution',
+  quote: 'Quote',
 }
 

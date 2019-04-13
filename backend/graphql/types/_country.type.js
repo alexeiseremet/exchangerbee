@@ -1,10 +1,10 @@
 module.exports = `
   type Country {
     id: ID!
-    slug: String
-    currency: ID
-    name: String
-    numCode: String
+    slug: String!
+    currency: ID!
+    name: String!
+    numCode: String!
     shortName: String
   }
   
@@ -16,7 +16,7 @@ module.exports = `
   type Mutation {
     createCountry(country: CountryInput!): Country!
     updateCountry(id: ID!, country: CountryInput!): Country!
-    deleteCountry(slug: String!): Country!
+    deleteCountry(id: ID!): Country!
   }
     
   input CountryInput {

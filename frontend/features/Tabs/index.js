@@ -31,13 +31,13 @@ class Tabs extends React.Component {
             activeIndex={activeIndex}
             onClick={this.handlerOnClick}
           />
+        </div>
 
-          <div className="tabs__panels">
-            <TabsPanels
-              items={items}
-              activeIndex={activeIndex}
-            />
-          </div>
+        <div className="tabs__panels">
+          <TabsPanels
+            items={items}
+            activeIndex={activeIndex}
+          />
         </div>
       </div>
     )

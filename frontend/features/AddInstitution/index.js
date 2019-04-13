@@ -50,7 +50,7 @@ const AddInstitutionMarkup = ({mutate}) => (
 )
 
 const GQL_CREATE_INSTITUTION = gql`
-  mutation CreateInstitution ($institution: CreateInstitutionInput!) {
+  mutation CreateInstitution ($institution: InstitutionInput!) {
     createInstitution(institution: $institution) {
       slug,
       country
