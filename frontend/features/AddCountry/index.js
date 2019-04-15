@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import { gql } from 'apollo-boost'
-import { graphql, compose } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 
 import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCountryMarkup = ({mutate}) => (
+export const AddCountryMarkup = ({onSubmit, allCurrency}) => (
   <Fragment>
     <div className="text">
       <h1>{t.country}</h1>
@@ -19,11 +19,7 @@ export const AddCountryMarkup = ({mutate}) => (
         numCode: '',
         shortName: ''
       }}
-      onSubmit={country => {
-        mutate({
-          variables: {country}
-        })
-      }}
+      onSubmit={onSubmit}
     >
       <Input
         name="name"
@@ -64,6 +60,7 @@ export const AddCountryMarkup = ({mutate}) => (
   </Fragment>
 )
 
+// Container.
 const GQL_ALL_CURRENCY = gql`
   query AllCurrency {
     allCurrency {
@@ -82,6 +79,24 @@ const GQL_CREATE_COUNTRY = gql`
 `
 
 export default compose(
-  graphql(GQL_ALL_CURRENCY),
-  graphql(GQL_CREATE_COUNTRY),
+  graphql(
+    GQL_ALL_CURRENCY,
+    {
+      props: ({data: {allCurrency}}) => ({
+        allCurrency
+      })
+    }
+  ),
+  graphql(
+    GQL_CREATE_COUNTRY,
+    {
+      props: ({mutate}) => ({
+        onSubmit: country => {
+          mutate({
+            variables: {country}
+          })
+        }
+      })
+    }
+  ),
 )(AddCountryMarkup)

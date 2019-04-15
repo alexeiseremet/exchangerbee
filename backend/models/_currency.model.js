@@ -1,7 +1,16 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
+
 const currencySchema = new Schema({
+  slug: {
+    type: String,
+    lowercase: true,
+    index: true,
+    unique: true,
+    required: true,
+    trim: true,
+  },
   name: {
     type: String,
     required: true,
@@ -9,15 +18,6 @@ const currencySchema = new Schema({
   },
   numCode: {
     type: String,
-    index: true,
-    unique: true,
-    required: true,
-    trim: true,
-  },
-  slug: {
-    type: String,
-    lowercase: true,
-    index: true,
     unique: true,
     required: true,
     trim: true,

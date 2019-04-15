@@ -13,7 +13,11 @@ module.exports = {
     },
     allQuote () {
       return new Promise((resolve, reject) => {
-        Quote.find({}).exec((err, res) => {
+        Quote.find({})
+          .populate('institution')
+          .populate('currency')
+          .populate('baseCurrency')
+          .exec((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })

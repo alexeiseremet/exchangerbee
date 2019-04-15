@@ -2,7 +2,16 @@ const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
 const {ObjectId } = Schema.Types
+
 const countrySchema = new Schema({
+  slug: {
+    type: String,
+    lowercase: true,
+    index: true,
+    unique: true,
+    required: true,
+    trim: true,
+  },
   currency: {
     type: ObjectId,
     ref: 'Currency',
@@ -14,22 +23,13 @@ const countrySchema = new Schema({
     required: true,
     trim: true,
   },
-  numCode: {
-    type: String,
-    index: true,
-    unique: true,
-    required: true,
-    trim: true,
-  },
   shortName: {
     type: String,
     required: true,
     trim: true,
   },
-  slug: {
+  numCode: {
     type: String,
-    lowercase: true,
-    index: true,
     unique: true,
     required: true,
     trim: true,

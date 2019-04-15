@@ -1,8 +1,16 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-const {ObjectId, Date } = Schema.Types
+const {ObjectId} = Schema.Types
+
 const quoteSchema = new Schema({
+  slug: {
+    type: String,
+    index: true,
+    unique: true,
+    required: true,
+    trim: true,
+  },
   country: {
     type: ObjectId,
     ref: 'Country',
@@ -17,19 +25,19 @@ const quoteSchema = new Schema({
     required: true,
     trim: true,
   },
-  date: {
+  createdAt: {
     type: Date,
+    index: true,
     required: true,
     trim: true,
   },
   currency: {
-    type: ObjectId,
+    type: String,
     ref: 'Currency',
     required: true,
-    trim: true,
   },
   baseCurrency: {
-    type: ObjectId,
+    type: String,
     ref: 'Currency',
     required: true,
     trim: true,
@@ -49,7 +57,7 @@ const quoteSchema = new Schema({
     required: true,
     trim: true,
   },
-  updateDate: {
+  updatedAt: {
     type: Date,
     trim: true,
   },

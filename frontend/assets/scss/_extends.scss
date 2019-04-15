@@ -89,3 +89,42 @@
   text-align: inherit;
   cursor: pointer;
 }
+
+%list {
+  margin-bottom: $base-spacing;
+
+  > li {
+    position: relative;
+    padding-left: $base-size;
+    margin-bottom: .5rem;
+
+    &::before {
+      float: left;
+      margin-left: -$base-size;
+    }
+  }
+
+}
+
+%list-unordered {
+  @extend %list;
+
+  > li {
+    &::before {
+      content: "\2014";
+    }
+  }
+}
+
+%list-ordered {
+  @extend %list;
+  counter-reset: step-counter;
+
+  > li {
+    counter-increment: step-counter;
+
+    &::before {
+      content: counter(step-counter) ".";
+    }
+  }
+}

@@ -8,11 +8,23 @@ const APP_ROUTES = [
   },
   {
     page: 'admin',
-    pattern: '/admin/:slug?',
+    pattern: '/admin',
   },
   {
-    page: 'quotes',
-    pattern: '/quotes/:slug?',
+    page: 'bank',
+    pattern: '/banks/:slug',
+  },
+  {
+    page: 'banks',
+    pattern: '/banks',
+  },
+  {
+    page: 'rate',
+    pattern: '/rates/:slug',
+  },
+  {
+    page: 'rates',
+    pattern: '/rates',
   },
 ]
 

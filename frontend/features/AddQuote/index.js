@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 
 import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddQuoteMarkup = ({mutate}) => (
+export const AddQuoteMarkup = ({onSubmit}) => (
   <Fragment>
     <div className="text">
       <h1>{t.quote}</h1>
@@ -14,16 +14,17 @@ export const AddQuoteMarkup = ({mutate}) => (
 
     <Form
       initialValues={{
-        name: '',
-        slug: '',
-        numCode: '',
-        symbol: '',
+        country: '',
+        institution: '',
+        createdAt: '',
+        currency: '',
+        baseCurrency: '',
+        amount: '',
+        ask: '',
+        bid: '',
+        period: '',
       }}
-      onSubmit={quote => {
-        mutate({
-          variables: {quote}
-        })
-      }}
+      onSubmit={onSubmit}
     >
       <Input
         name="country"
@@ -40,8 +41,8 @@ export const AddQuoteMarkup = ({mutate}) => (
         required
       />
       <Input
-        name="date"
-        id="quote-date"
+        name="createdAt"
+        id="quote-createdAt"
         type="text"
         labelText="Numeric code"
         required
@@ -83,12 +84,6 @@ export const AddQuoteMarkup = ({mutate}) => (
         required
       />
       <Input
-        name="updateDate"
-        id="quote-update-date"
-        type="text"
-        labelText="Update Date"
-      />
-      <Input
         name="period"
         id="quote-period"
         type="text"
@@ -99,15 +94,26 @@ export const AddQuoteMarkup = ({mutate}) => (
   </Fragment>
 )
 
+// Container.
 const GQL_CREATE_QUOTE = gql`
   mutation CreateQuote ($quote: QuoteInput!) {
     createQuote(quote: $quote) {
-      slug,
-      numCode
+      institution,
+      createdAt,
+      currency,
     }
   }
 `
 
-export default graphql(
-  GQL_CREATE_QUOTE
+export default compose(
+  graphql(
+    GQL_CREATE_QUOTE,
+    {
+      props: ({mutate}) => ({
+        onSubmit: quote => (
+          mutate({variables: {quote}})
+        )
+      })
+    }
+  )
 )(AddQuoteMarkup)

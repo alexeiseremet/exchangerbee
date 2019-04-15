@@ -10,7 +10,15 @@ module.exports = `
   
   type Query {
     country(slug: String!): Country!
-    allCountry: [Country!]!
+    allCountry(
+      where: CountryWhereInput
+      orderBy: CountryOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Country!]!
   }
   
   type Mutation {
@@ -25,5 +33,18 @@ module.exports = `
     name: String
     numCode: String
     shortName: String
+  }
+  
+  input CountryWhereInput {
+    id: ID
+    slug: String
+    name: String
+  }
+  
+  enum CountryOrderByInput {
+    id_ASC
+    id_DESC
+    name_ASC
+    name_DESC
   }
 `

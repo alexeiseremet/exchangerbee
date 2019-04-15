@@ -1,3 +1,8 @@
+// Import temporary.
+import '../assets/scss/helper.scss'
+import '../assets/scss/tables.scss'
+import '../assets/scss/typography.scss'
+
 import React from 'react'
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'

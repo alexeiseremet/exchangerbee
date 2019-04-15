@@ -1,11 +1,11 @@
 @import "root";
 
 .unordered-list {
-  @extend %default-ul;
+  @extend %list-unordered;
 }
 
 .ordered-list {
-  @extend %default-ol;
+  @extend %list-ordered;
 }
 
 // Definition list

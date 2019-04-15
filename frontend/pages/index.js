@@ -1,16 +1,10 @@
-// Import temporary.
-import '../assets/scss/helper.scss'
-import '../assets/scss/tables.scss'
-import '../assets/scss/typography.scss'
-//
-
 import React from 'react'
 import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
 
-const IndexPage = () => (
+const IndexPageMarkup = () => (
   <Layout>
     <Metadata
       title={t.metaTitle}
@@ -20,9 +14,9 @@ const IndexPage = () => (
     />
 
     <Page>
-      {'index'}
+      {`index`}
     </Page>
   </Layout>
 )
 
-export default IndexPage
+export default IndexPageMarkup

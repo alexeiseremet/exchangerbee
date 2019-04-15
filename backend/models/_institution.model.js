@@ -1,24 +1,26 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-const {ObjectId } = Schema.Types
+const {ObjectId} = Schema.Types
+
 const institutionSchema = new Schema({
-  country: {
-    type: ObjectId,
-    ref: 'Country',
-    required: true,
-    trim: true,
-  },
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
   slug: {
     type: String,
     lowercase: true,
     index: true,
     unique: true,
+    required: true,
+    trim: true,
+  },
+  country: {
+    type: ObjectId,
+    ref: 'Country',
+    index: true,
+    required: true,
+    trim: true,
+  },
+  name: {
+    type: String,
     required: true,
     trim: true,
   },

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 
 import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCurrencyMarkup = ({mutate}) => (
+export const AddCurrencyMarkup = ({onSubmit}) => (
   <Fragment>
     <div className="text">
       <h1>{t.currency}</h1>
@@ -19,11 +19,7 @@ export const AddCurrencyMarkup = ({mutate}) => (
         numCode: '',
         symbol: '',
       }}
-      onSubmit={currency => {
-        mutate({
-          variables: {currency}
-        })
-      }}
+      onSubmit={onSubmit}
     >
       <Input
         name="name"
@@ -56,6 +52,7 @@ export const AddCurrencyMarkup = ({mutate}) => (
   </Fragment>
 )
 
+// Container.
 const GQL_CREATE_CURRENCY = gql`
   mutation CreateCurrency ($currency: CurrencyInput!) {
     createCurrency(currency: $currency) {
@@ -65,6 +62,17 @@ const GQL_CREATE_CURRENCY = gql`
   }
 `
 
-export default graphql(
-  GQL_CREATE_CURRENCY
+export default compose(
+  graphql(
+    GQL_CREATE_CURRENCY,
+    {
+      props: ({mutate}) => ({
+        onSubmit: currency => {
+          mutate({
+            variables: {currency}
+          })
+        }
+      })
+    }
+  )
 )(AddCurrencyMarkup)

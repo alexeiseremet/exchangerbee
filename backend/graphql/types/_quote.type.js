@@ -2,20 +2,29 @@ module.exports = `
   type Quote {
     id: ID!
     country: ID
-    institution: ID!
-    date: String!
-    currency: ID!
-    baseCurrency: ID!
+    slug: String!
+    institution: Institution!
+    createdAt: String!
+    currency: Currency!
+    baseCurrency: Currency!
     amount: String!
     ask: String!
     bid: String!
-    updateDate: String
+    updatedAt: String
     period: String
   }
   
   type Query {
-    quote(id: ID, date: String, institution: ID, currency: ID): Quote!
-    allQuote: [Quote!]!
+    quote(id: ID): Quote!
+    allQuote(
+      where: QuoteWhereInput
+      orderBy: QuoteOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Quote!]!
   }
   
   type Mutation {
@@ -26,14 +35,31 @@ module.exports = `
     
   input QuoteInput {
     country: ID
+    slug: String
     institution: ID
-    date: String
+    createdAt: String
     currency: ID
     baseCurrency: ID
     amount: String
     ask: String
     bid: String
-    updateDate: String
+    updatedAt: String
     period: String
+  }
+  
+  input QuoteWhereInput {
+    id: ID
+    created: String
+    institution: ID
+    currency: ID
+  }
+  
+  enum QuoteOrderByInput {
+    id_ASC
+    id_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    createdAt_ASC
+    createdAt_DESC
   }
 `

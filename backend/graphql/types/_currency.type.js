@@ -9,7 +9,15 @@ module.exports = `
   
   type Query {
     currency(slug: String!): Currency!
-    allCurrency: [Currency!]!
+    allCurrency(
+      where: CurrencyWhereInput
+      orderBy: CurrencyOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Currency!]!
   }
   
   type Mutation {
@@ -23,5 +31,18 @@ module.exports = `
     name: String
     numCode: String
     symbol: String
+  }
+  
+  input CurrencyWhereInput {
+    id: ID
+    slug: String
+    name: String
+  }
+  
+  enum CurrencyOrderByInput {
+    id_ASC
+    id_DESC
+    name_ASC
+    name_DESC
   }
 `
