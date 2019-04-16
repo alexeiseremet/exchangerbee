@@ -1,6 +1,6 @@
 const withPlugins = require('next-compose-plugins')
-const sass = require('@zeit/next-sass')
 const optimizedImages = require('next-optimized-images')
+const sass = require('@zeit/next-sass')
 
 const nextConfig = {
   webpack: config => {

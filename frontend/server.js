@@ -5,11 +5,18 @@ const {join} = require('path')
 const express = require('express')
 const proxy = require('http-proxy-middleware')
 const next = require('next')
+
+const nextI18NextMiddleware = require('next-i18next/middleware')
+const nextI18next = require('./lib/i18n')
+
 const app = next({dev: process.env.NODE_ENV !== 'production'})
 const routes = require('./routes')
 const handler = routes.getRequestHandler(app)
 const {apiPath, storagePath} = require('./server.config')
 const port = parseInt(process.env.PORT, 10) || 8080
+
+
+
 
 app.prepare()
   .then(() => {
@@ -31,6 +38,7 @@ app.prepare()
       .use('/favicon.ico', express.static(join(__dirname, '/static/favicon.ico')))
 
     server
+      .use(nextI18NextMiddleware(nextI18next))
       .use([apiPath, storagePath], appProxy)
       .use(handler)
       .listen(port, err => {

@@ -9,7 +9,7 @@ import List from '../features/List'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 
-class RatesPageMarkup extends React.Component {
+class CountriesPageMarkup extends React.Component {
   static async getInitialProps () {
     return {
       namespacesRequired: ['common'],
@@ -17,7 +17,7 @@ class RatesPageMarkup extends React.Component {
   }
 
   render () {
-    const {allQuote} = this.props
+    const {allCountry} = this.props
 
     return (
       <Layout>
@@ -30,15 +30,13 @@ class RatesPageMarkup extends React.Component {
 
         <Page>
           {
-            allQuote && (
+            allCountry && (
               <List type="ordered">
                 {
-                  allQuote.map((
-                    {id, currency, baseCurrency, institution, ask, bid}
-                  ) => (
+                  allCountry.map(({id, slug, name}) => (
                     <li key={id}>
-                      <Link prefetch href={`/rates/${currency.slug}-${baseCurrency.slug}`}>
-                        <a>{institution.name} {ask} {bid}</a>
+                      <Link prefetch href={`/countries/${slug}`}>
+                        <a>{name}</a>
                       </Link>
                     </li>
                   ))
@@ -53,36 +51,26 @@ class RatesPageMarkup extends React.Component {
 }
 
 // i18n.
-const RatesPageI18N = withNamespaces('common')(RatesPageMarkup)
+const CountriesPageI18N = withNamespaces('common')(CountriesPageMarkup)
 
 // Container.
-const GQL_ALL_QUOTE = gql`
-  query AllQuote {
-    allQuote {
+const GQL_ALL_COUNTRY = gql`
+  query AllCountry {
+    allCountry {
       id,
-      institution {
-        id,
-        name,
-      },
-      currency {
-        slug,
-      },
-      baseCurrency {
-        slug,
-      },
-      ask,
-      bid,
+      slug,
+      name,
     },
   }
 `
 
 export default compose(
   graphql(
-    GQL_ALL_QUOTE,
+    GQL_ALL_COUNTRY,
     {
-      props: ({data: {allQuote}}) => ({
-        allQuote
+      props: ({data: {allCountry}}) => ({
+        allCountry
       })
     }
   )
-)(RatesPageI18N)
+)(CountriesPageI18N)

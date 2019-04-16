@@ -1,8 +1,7 @@
 import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
-import Link from 'next/link'
-import { withRouter } from 'next/router'
+import { Link } from '../../lib/i18n'
 import List from '../List'
 
 const Sidebar = (
@@ -11,6 +10,11 @@ const Sidebar = (
       <li>
         <Link prefetch href='/'>
           <a>Home</a>
+        </Link>
+      </li>
+      <li>
+        <Link prefetch href="/countries">
+          <a>Countries</a>
         </Link>
       </li>
       <li>
@@ -68,4 +72,4 @@ const Page = ({children, top, aside = Sidebar}) => {
   )
 }
 
-export default withRouter(Page)
+export default Page

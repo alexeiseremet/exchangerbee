@@ -7,6 +7,7 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
 import withApolloClient from '../lib/apollo/with-apollo-client'
+import { appWithTranslation } from '../lib/i18n'
 
 class ExbeeApp extends App {
   render () {
@@ -22,4 +23,4 @@ class ExbeeApp extends App {
   }
 }
 
-export default withApolloClient(ExbeeApp)
+export default withApolloClient(appWithTranslation(ExbeeApp))
