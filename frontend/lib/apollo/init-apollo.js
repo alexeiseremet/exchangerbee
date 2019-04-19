@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
 import fetch from 'isomorphic-unfetch'
 
 import { apiBaseUrl } from '../../server.config'
+import { typeDefs, resolvers } from '../../localSchema'
 
 let apolloClient = null
 
@@ -19,7 +20,9 @@ function create (initialState) {
       uri: apiBaseUrl, // Server URL (must be absolute)
       credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
     }),
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache().restore(initialState || {}),
+    resolvers,
+    typeDefs,
   })
 }
 

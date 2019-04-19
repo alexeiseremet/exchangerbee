@@ -67,10 +67,27 @@ export default compose(
     GQL_CREATE_CURRENCY,
     {
       props: ({mutate}) => ({
-        onSubmit: currency => {
+        onSubmit: (
+          currency,
+          // form actions
+          {
+            setStatus,
+            setSubmitting,
+            resetForm
+          }
+        ) => {
           mutate({
             variables: {currency}
           })
+            .then(({createCurrency}) => {
+              resetForm()
+              console.log(createCurrency)
+            })
+            .catch(err => {
+              setStatus('error')
+              setSubmitting(false)
+              console.error(err)
+            })
         }
       })
     }

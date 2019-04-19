@@ -60,10 +60,27 @@ export default compose(
     GQL_CREATE_INSTITUTION,
     {
       props: ({mutate}) => ({
-        onSubmit: institution => {
+        onSubmit: (
+          institution,
+          // form actions
+          {
+            setStatus,
+            setSubmitting,
+            resetForm
+          }
+        ) => {
           mutate({
             variables: {institution}
           })
+            .then(({createInstitution}) => {
+              resetForm()
+              console.log(createInstitution)
+            })
+            .catch(err => {
+              setStatus('error')
+              setSubmitting(false)
+              console.error(err)
+            })
         }
       })
     }

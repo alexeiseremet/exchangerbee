@@ -6,7 +6,7 @@ import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCountryMarkup = ({onSubmit, allCurrency}) => (
+export const AddCountryMarkup = ({allCurrency, onSubmit}) => (
   <Fragment>
     <div className="text">
       <h1>{t.country}</h1>
@@ -82,7 +82,7 @@ export default compose(
   graphql(
     GQL_ALL_CURRENCY,
     {
-      props: ({data: {allCurrency}}) => ({
+      props: ({allCurrency}) => ({
         allCurrency
       })
     }
@@ -91,10 +91,27 @@ export default compose(
     GQL_CREATE_COUNTRY,
     {
       props: ({mutate}) => ({
-        onSubmit: country => {
+        onSubmit: (
+          country,
+          // form actions
+          {
+            setStatus,
+            setSubmitting,
+            resetForm
+          }
+        ) => {
           mutate({
             variables: {country}
           })
+            .then(({createCountry}) => {
+              resetForm()
+              console.log(createCountry)
+            })
+            .catch(err => {
+              setStatus('error')
+              setSubmitting(false)
+              console.error(err)
+            })
         }
       })
     }

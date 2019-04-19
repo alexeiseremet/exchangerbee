@@ -28,6 +28,7 @@ class AdminPageMarkup extends React.Component {
         <Metadata title={t.metaTitle}/>
         <Page>
           <Tabs
+            activeIndex={3}
             items={[
               {
                 id: 'add-quote',

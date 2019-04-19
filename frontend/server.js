@@ -15,9 +15,6 @@ const handler = routes.getRequestHandler(app)
 const {apiPath, storagePath} = require('./server.config')
 const port = parseInt(process.env.PORT, 10) || 8080
 
-
-
-
 app.prepare()
   .then(() => {
     const server = express()
@@ -53,3 +50,10 @@ app.prepare()
     console.error(ex.stack)
     process.exit(1)
   })
+
+//
+// router.get('/', function (req, res) {
+//   var domain = req.get('host').match(/\w+/); // e.g., host: "subdomain.website.com"
+//   if (domain)
+//     var subdomain = domain[0]; // Use "subdomain"
+// });
