@@ -1,51 +1,74 @@
 import { gql } from 'apollo-boost'
 
+const GQL_MODAL_ID = 'modal'
+
+const query = gql`
+  query Modal {
+    modal @client {
+      id
+      show
+      title
+      content
+      __typename
+    }
+  }
+`
+
 export const ModalType = `  
   type Modal {
     id: ID!
-    isActive: Boolean
+    show: Boolean
+    title: String
+    content: String
   }
   
   extend type Query {
-    modal(id: String!): Modal
+    modal: Modal
   }
   
   extend type Mutation {
-    modalToggle(id: String!): Modal
+    modalToggle
   }
 `
-
 export const ModalDefaultState = {
   modal: {
-    id: 'modal',
-    isActive: false,
-    __typename: 'Modal'
+    id: GQL_MODAL_ID,
+    show: false,
+    title: '',
+    content: '',
+    __typename: 'Modal',
   }
 }
-
-const fragment = gql`
-  fragment modal on Modal {
-    id
-    isActive
-    __typename
-  }
-`
 
 export const ModalResolvers = {
   Query: {
-    modal (_, args, {cache, getCacheKey}) {
-      const id = getCacheKey({__typename: 'Modal', id: args.id})
-      return cache.readFragment({fragment, id})
+    modal (_, __, {cache}) {
+      return cache.readQuery({query})
     },
   },
   Mutation: {
-    modalToggle (_, args, {cache, getCacheKey}) {
-      const id = getCacheKey({__typename: 'Modal', id: args.id})
-      const prevModal = cache.readFragment({fragment, id})
-      const data = {...prevModal, isActive: !prevModal.isActive}
+    modalToggle (_, {title, content}, {cache}) {
+      const prevModal = cache.readQuery({query})
 
-      cache.writeData({id, data})
-      return data
+      cache.writeQuery({
+        query,
+        data: {
+          modal: {
+            ...prevModal.modal,
+            show: !prevModal.modal.show,
+            title,
+            content,
+          }
+        }
+      })
+
+      return null
     },
   }
 }
+
+// Other example.
+// modal (_, __, {cache, getCacheKey}) {
+//   const id = getCacheKey({__typename: 'Modal', id: MODAL_ID})
+//   return cache.readFragment({fragment, id})
+// },

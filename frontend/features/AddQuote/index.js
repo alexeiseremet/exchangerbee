@@ -98,9 +98,9 @@ export const AddQuoteMarkup = ({onSubmit}) => (
 const GQL_CREATE_QUOTE = gql`
   mutation CreateQuote ($quote: QuoteInput!) {
     createQuote(quote: $quote) {
-      institution,
-      createdAt,
-      currency,
+      institution
+      createdAt
+      currency
     }
   }
 `
@@ -110,9 +110,28 @@ export default compose(
     GQL_CREATE_QUOTE,
     {
       props: ({mutate}) => ({
-        onSubmit: quote => (
-          mutate({variables: {quote}})
-        )
+        onSubmit: (
+          quote,
+          // form actions
+          {
+            setStatus,
+            setSubmitting,
+            resetForm
+          }
+        ) => {
+          mutate({
+            variables: {quote}
+          })
+            .then(({createQuote}) => {
+              resetForm()
+              console.log(createQuote)
+            })
+            .catch(err => {
+              setStatus('error')
+              setSubmitting(false)
+              console.error(err)
+            })
+        }
       })
     }
   )

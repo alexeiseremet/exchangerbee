@@ -2,7 +2,6 @@ import './styles.scss'
 import React from 'react'
 import Router from 'next/router'
 
-import Modal from '../Modal'
 import Header from './_header'
 import Content from './_content'
 import Footer from './_footer'
@@ -44,7 +43,6 @@ class Layout extends React.Component {
         <Header/>
         <Content>{children}</Content>
         <Footer/>
-        <Modal/>
       </div>
     )
   }

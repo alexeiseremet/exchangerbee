@@ -56,7 +56,7 @@ export const AddCurrencyMarkup = ({onSubmit}) => (
 const GQL_CREATE_CURRENCY = gql`
   mutation CreateCurrency ($currency: CurrencyInput!) {
     createCurrency(currency: $currency) {
-      slug,
+      slug
       numCode
     }
   }

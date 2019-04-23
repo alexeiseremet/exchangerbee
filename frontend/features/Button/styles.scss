@@ -3,6 +3,7 @@
 .button {
   @extend %flex-row;
   @extend %button-link;
+  font-size: $base-font-size;
 }
 
 .button__label {

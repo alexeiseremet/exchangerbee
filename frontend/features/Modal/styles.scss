@@ -12,29 +12,29 @@
 .modal__backdrop {
   @extend %absolute-cover;
   background: rgba($dark-gray, .9);
+  padding: $large-spacing 0;
   overflow-y: auto;
-  padding: 20px 0;
 }
 
 .modal__inner {
   background: $base-background;
-  width: 560px;
+  width: 56rem;
   margin: 0 auto;
-  max-width: calc(100% - 20px);
+  max-width: calc(100% - #{$small-spacing});
   height: auto;
-  border-radius: 6px;
+  border-radius: $base-border-radius;
   overflow: hidden;
 }
 
 .modal__header {
-  position: relative;
   background: $secondary-background;
 }
 
 .modal__title {
   @include heading-bold;
-  color: $medium-gray;
-  padding: 15px 50px 15px 20px;
+  color: $dark-gray;
+  padding: $small-spacing;
+  padding-right: 4rem;
   line-height: 1.2;
 }
 
@@ -43,19 +43,19 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 46px;
-  height: 46px;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
 
   svg {
-    padding: 10px;
-    fill: $light-gray;
+    fill: $medium-gray;
   }
 
   &:hover svg{
-    fill: $dark-gray;
+    fill: $light-gray;
   }
 }
 
 .modal__content {
-  padding: 40px 20px;
+  padding: $base-spacing $small-spacing;
 }

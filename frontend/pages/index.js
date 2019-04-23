@@ -4,6 +4,8 @@ import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
+import ModalHandler from '../features/Modal/ModalHandler'
+import Modal from '../features/Modal'
 
 class IndexPageMarkup extends React.Component {
   static async getInitialProps () {
@@ -14,18 +16,21 @@ class IndexPageMarkup extends React.Component {
 
   render () {
     return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
+      <React.Fragment>
+        <Layout>
+          <Metadata
+            title={t.metaTitle}
+            description={t.metaDescription}
+            ogTitle={t.ogTitle}
+            ogDescription={t.ogDescription}
+          />
 
-        <Page>
-          {`index`}
-        </Page>
-      </Layout>
+          <Page>
+            <ModalHandler/>
+          </Page>
+        </Layout>
+        <Modal/>
+      </React.Fragment>
     )
   }
 }
