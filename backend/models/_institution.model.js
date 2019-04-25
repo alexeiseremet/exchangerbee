@@ -12,13 +12,6 @@ const institutionSchema = new Schema({
     required: true,
     trim: true,
   },
-  country: {
-    type: ObjectId,
-    ref: 'Country',
-    index: true,
-    required: true,
-    trim: true,
-  },
   name: {
     type: String,
     required: true,

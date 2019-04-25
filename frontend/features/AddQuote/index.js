@@ -14,7 +14,6 @@ export const AddQuoteMarkup = ({onSubmit}) => (
 
     <Form
       initialValues={{
-        country: '',
         institution: '',
         createdAt: '',
         currency: '',
@@ -26,13 +25,6 @@ export const AddQuoteMarkup = ({onSubmit}) => (
       }}
       onSubmit={onSubmit}
     >
-      <Input
-        name="country"
-        id="quote-country"
-        type="text"
-        labelText="Country"
-        required
-      />
       <Input
         name="institution"
         id="quote-institution"

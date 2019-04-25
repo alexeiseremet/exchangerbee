@@ -11,13 +11,6 @@ const quoteSchema = new Schema({
     required: true,
     trim: true,
   },
-  country: {
-    type: ObjectId,
-    ref: 'Country',
-    index: true,
-    required: true,
-    trim: true,
-  },
   institution: {
     type: ObjectId,
     ref: 'Institution',

@@ -16,7 +16,6 @@ const AddInstitutionMarkup = ({onSubmit}) => (
       initialValues={{
         name: '',
         slug: '',
-        country: ''
       }}
       onSubmit={onSubmit}
     >
@@ -34,13 +33,6 @@ const AddInstitutionMarkup = ({onSubmit}) => (
         labelText="Slug"
         required
       />
-      <Input
-        name="country"
-        id="institution-country"
-        type="text"
-        labelText="Country"
-        required
-      />
     </Form>
   </Fragment>
 )
@@ -50,7 +42,6 @@ const GQL_CREATE_INSTITUTION = gql`
   mutation CreateInstitution ($institution: InstitutionInput!) {
     createInstitution(institution: $institution) {
       slug
-      country
     }
   }
 `

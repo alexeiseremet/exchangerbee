@@ -3,7 +3,6 @@ module.exports = `
     id: ID!
     slug: String!
     name: String!
-    country: ID!
     logo: String
     website: String
   }
@@ -30,13 +29,11 @@ module.exports = `
   input InstitutionInput {
     slug: String
     name: String
-    country: ID
   }
   
   input InstitutionWhereInput {
     id: ID
     name: String
-    country: ID
   }
   
   enum InstitutionOrderByInput {

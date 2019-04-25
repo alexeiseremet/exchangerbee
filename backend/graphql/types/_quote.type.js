@@ -1,7 +1,6 @@
 module.exports = `
   type Quote {
     id: ID!
-    country: ID
     slug: String!
     institution: Institution!
     createdAt: String!
@@ -34,7 +33,6 @@ module.exports = `
   }
     
   input QuoteInput {
-    country: ID
     slug: String
     institution: ID
     createdAt: String

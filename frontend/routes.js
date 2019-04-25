@@ -19,14 +19,6 @@ const APP_ROUTES = [
     pattern: '/banks',
   },
   {
-    page: 'country',
-    pattern: '/countries/:slug',
-  },
-  {
-    page: 'countries',
-    pattern: '/countries',
-  },
-  {
     page: 'rate',
     pattern: '/rates/:slug',
   },

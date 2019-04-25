@@ -10,7 +10,6 @@ import Metadata from '../../features/Metadata'
 import Layout from '../../features/Layout'
 import Page from '../../features/Page'
 import AddCurrency from '../../features/AddCurrency'
-import AddCountry from '../../features/AddCountry'
 import AddInstitution from '../../features/AddInstitution'
 import AddQuote from '../../features/AddQuote'
 import Tabs, { Tab } from '../../features/Tabs'
@@ -28,8 +27,13 @@ class AdminPageMarkup extends React.Component {
         <Metadata title={t.metaTitle}/>
         <Page>
           <Tabs
-            activeIndex={3}
+            activeIndex={0}
             items={[
+              {
+                id: 'add-institution',
+                label: 'Add Institution',
+                content: <AddInstitution/>,
+              },
               {
                 id: 'add-quote',
                 label: 'Add Quote',
@@ -39,16 +43,6 @@ class AdminPageMarkup extends React.Component {
                 id: 'add-currency',
                 label: 'Add Currency',
                 content: <AddCurrency/>,
-              },
-              {
-                id: 'add-country',
-                label: 'Add Country',
-                content: <AddCountry/>,
-              },
-              {
-                id: 'add-institution',
-                label: 'Add Institution',
-                content: <AddInstitution/>,
               },
             ]}
           />
