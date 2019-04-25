@@ -27,7 +27,7 @@
 }
 
 .modal__header {
-  background: $secondary-background;
+  background: $light-gray;
 }
 
 .modal__title {
@@ -52,7 +52,7 @@
   }
 
   &:hover svg{
-    fill: $light-gray;
+    fill: $dark-gray;
   }
 }
 
