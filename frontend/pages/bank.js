@@ -9,9 +9,10 @@ import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 
 class BankPageMarkup extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
+      query
     }
   }
 
@@ -44,11 +45,11 @@ const BankPageI18N = withNamespaces('common')(BankPageMarkup)
 
 // Container.
 const GQL_INSTITUTION = gql`
-  query Institution {
-    institution(slug: "bnm") {
-      id,
-      slug,
-      name,
+  query Institution ($slug: String!) {
+    institution(slug: $slug) {
+      id
+      slug
+      name
     },
   }
 `
@@ -57,9 +58,14 @@ export default compose(
   graphql(
     GQL_INSTITUTION,
     {
+      options: ({query}) => ({
+        variables: {
+          slug: query.slug,
+        },
+      }),
       props: ({data: {institution}}) => ({
         institution
-      })
+      }),
     }
   )
 )(BankPageI18N)
