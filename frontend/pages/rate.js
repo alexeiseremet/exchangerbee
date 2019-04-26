@@ -9,9 +9,10 @@ import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 
 class RatePageMarkup extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
+      query,
     }
   }
 
@@ -43,12 +44,12 @@ const RatePageI18N = withNamespaces('common')(RatePageMarkup)
 
 // Container.
 const GQL_QUOTE = gql`
-  query Quote {
-    quote {
-      createdAt,
-      ask,
-      bid,
-    },
+  query Quote ($slug: String!) {
+    quote(slug: $slug) {
+      createdAt
+      ask
+      bid
+    }
   }
 `
 
@@ -56,9 +57,14 @@ export default compose(
   graphql(
     GQL_QUOTE,
     {
+      options: ({query}) => ({
+        variables: {
+          slug: query.slug,
+        },
+      }),
       props: ({data: {quote}}) => ({
         quote
-      })
+      }),
     }
   )
 )(RatePageI18N)

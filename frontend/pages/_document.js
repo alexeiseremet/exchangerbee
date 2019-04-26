@@ -23,12 +23,12 @@ export default class ExbeeDocument extends Document {
               rel='stylesheet'/>
       </Head>
       <body itemScope itemType={'http://schema.org/WebPage'}>
+      <Main/>
+      <div id="modal-portal"/>
       <div className="sprite"
            dangerouslySetInnerHTML={{__html: this.props.spriteContent}}
            aria-hidden="true"
       />
-      <Main/>
-      <div id="modal-portal"/>
       <NextScript/>
       </body>
       </html>

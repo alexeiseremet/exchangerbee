@@ -10,7 +10,7 @@ class Layout extends React.Component {
   /**
    * Scroll page to #layout or to element with id === hash.
    */
-  static triggerScroll () {
+  triggerScroll = () => {
     const {hash} = window.location
 
     if (!!hash) {

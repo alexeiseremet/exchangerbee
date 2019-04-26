@@ -37,7 +37,8 @@ class RatesPageMarkup extends React.Component {
                     {id, currency, baseCurrency, institution, ask, bid}
                   ) => (
                     <li key={id}>
-                      <Link prefetch href={`/rates/${currency.slug}-${baseCurrency.slug}`}>
+                      <Link href={`/rate?slug=${currency.slug}-${baseCurrency.slug}`}
+                            as={`/rates/${currency.slug}-${baseCurrency.slug}`} prefetch>
                         <a>{institution.name} {ask} {bid}</a>
                       </Link>
                     </li>
@@ -59,20 +60,20 @@ const RatesPageI18N = withNamespaces('common')(RatesPageMarkup)
 const GQL_ALL_QUOTE = gql`
   query AllQuote {
     allQuote {
-      id,
+      id
       institution {
-        id,
-        name,
-      },
+        id
+        name
+      }
       currency {
-        slug,
-      },
+        slug
+      }
       baseCurrency {
-        slug,
-      },
-      ask,
-      bid,
-    },
+        slug
+      }
+      ask
+      bid
+    }
   }
 `
 

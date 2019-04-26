@@ -12,7 +12,7 @@ class BankPageMarkup extends React.Component {
   static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
-      query
+      query,
     }
   }
 
@@ -27,7 +27,6 @@ class BankPageMarkup extends React.Component {
           ogTitle={t.ogTitle}
           ogDescription={t.ogDescription}
         />
-
         <Page>
           {
             institution && (
@@ -50,7 +49,7 @@ const GQL_INSTITUTION = gql`
       id
       slug
       name
-    },
+    }
   }
 `
 

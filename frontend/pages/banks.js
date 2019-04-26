@@ -35,7 +35,7 @@ class BanksPageMarkup extends React.Component {
                 {
                   allInstitution.map(({id, slug, name}) => (
                     <li key={id}>
-                      <Link prefetch href={`/banks/${slug}`}>
+                      <Link href={`/bank?slug=${slug}`} as={`/banks/${slug}`} prefetch>
                         <a>{name}</a>
                       </Link>
                     </li>
@@ -57,10 +57,10 @@ const BanksPageI18N = withNamespaces('common')(BanksPageMarkup)
 const GQL_ALL_INSTITUTION = gql`
   query AllInstitution {
     allInstitution {
-      id,
-      slug,
-      name,
-    },
+      id
+      slug
+      name
+    }
   }
 `
 
