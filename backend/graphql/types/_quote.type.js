@@ -1,15 +1,12 @@
 module.exports = `
   type Quote {
     id: ID!
-    slug: String!
     institution: Institution!
-    createdAt: String!
     currency: Currency!
-    baseCurrency: Currency!
+    date: String!
     amount: String!
     ask: String!
     bid: String!
-    updatedAt: String
     period: String
   }
   
@@ -33,31 +30,26 @@ module.exports = `
   }
     
   input QuoteInput {
-    slug: String
     institution: ID
-    createdAt: String
     currency: ID
-    baseCurrency: ID
+    date: String
     amount: String
     ask: String
     bid: String
-    updatedAt: String
     period: String
   }
   
   input QuoteWhereInput {
     id: ID
-    created: String
     institution: ID
     currency: ID
+    date: String
   }
   
   enum QuoteOrderByInput {
     id_ASC
     id_DESC
-    updatedAt_ASC
-    updatedAt_DESC
-    createdAt_ASC
-    createdAt_DESC
+    date_ASC
+    date_DESC
   }
 `

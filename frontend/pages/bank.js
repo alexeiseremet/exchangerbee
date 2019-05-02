@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from '../lib/i18n'
+import { Link, withNamespaces } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
@@ -7,6 +7,7 @@ import Page from '../features/Page'
 
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
+import { UpdateInstitution, DeleteInstitution } from '../features/Institution'
 
 class BankPageMarkup extends React.Component {
   static async getInitialProps ({query}) {
@@ -17,7 +18,12 @@ class BankPageMarkup extends React.Component {
   }
 
   render () {
-    const {institution} = this.props
+    const {institution, query: {action}} = this.props
+    if (!institution) {
+      return null
+    }
+
+    const {name, slug} = institution
 
     return (
       <Layout>
@@ -29,10 +35,21 @@ class BankPageMarkup extends React.Component {
         />
         <Page>
           {
-            institution && (
-              <div>{institution.name}</div>
+            !action && (
+              <React.Fragment>
+                <Link href={`/bank?slug=${slug}&action=update`} as={`/banks/${slug}/update`} prefetch>
+                  <a>{'Update'}</a>
+                </Link>
+                &nbsp;|&nbsp;
+                <DeleteInstitution institution={institution}/>
+                <hr/>
+
+                <h1>{name}</h1>
+              </React.Fragment>
             )
           }
+
+          {action && <UpdateInstitution institution={institution}/>}
         </Page>
       </Layout>
     )

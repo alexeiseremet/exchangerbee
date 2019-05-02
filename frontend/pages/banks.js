@@ -8,16 +8,18 @@ import Page from '../features/Page'
 import List from '../features/List'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
+import { CreateInstitution } from '../features/Institution'
 
 class BanksPageMarkup extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
+      query
     }
   }
 
   render () {
-    const {allInstitution} = this.props
+    const {allInstitution, query: {action}} = this.props
 
     return (
       <Layout>
@@ -27,23 +29,31 @@ class BanksPageMarkup extends React.Component {
           ogTitle={t.ogTitle}
           ogDescription={t.ogDescription}
         />
-
         <Page>
           {
-            allInstitution && (
-              <List type="ordered">
-                {
-                  allInstitution.map(({id, slug, name}) => (
-                    <li key={id}>
-                      <Link href={`/bank?slug=${slug}`} as={`/banks/${slug}`} prefetch>
-                        <a>{name}</a>
-                      </Link>
-                    </li>
-                  ))
-                }
-              </List>
+            !action && allInstitution && (
+              <React.Fragment>
+                <Link href={`/banks?action=create`} as={`/banks/create`} prefetch>
+                  <a>{'Create'}</a>
+                </Link>
+                <hr/>
+
+                <List type="ordered">
+                  {
+                    allInstitution.map(({id, slug, name}) => (
+                      <li key={id}>
+                        <Link href={`/bank?slug=${slug}`} as={`/banks/${slug}`} prefetch>
+                          <a>{name}</a>
+                        </Link>
+                      </li>
+                    ))
+                  }
+                </List>
+              </React.Fragment>
             )
           }
+
+          {action && <CreateInstitution/>}
         </Page>
       </Layout>
     )

@@ -1,23 +1,25 @@
 import React from 'react'
+import { gql } from 'apollo-boost'
+import { compose, graphql } from 'react-apollo'
+
 import { Link, withNamespaces } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
-
 import List from '../features/List'
-import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
+import AddQuote from '../features/AddQuote'
 
 class RatesPageMarkup extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
+      query
     }
   }
 
   render () {
-    const {allQuote} = this.props
+    const {allQuote, query: {action}} = this.props
 
     return (
       <Layout>
@@ -27,24 +29,29 @@ class RatesPageMarkup extends React.Component {
           ogTitle={t.ogTitle}
           ogDescription={t.ogDescription}
         />
-
         <Page>
           {
-            allQuote && (
+            !action && allQuote && (
               <List type="ordered">
                 {
                   allQuote.map((
-                    {id, currency, baseCurrency, institution, ask, bid}
+                    {id, currency, institution, ask, bid}
                   ) => (
                     <li key={id}>
-                      <Link href={`/rate?slug=${currency.slug}-${baseCurrency.slug}`}
-                            as={`/rates/${currency.slug}-${baseCurrency.slug}`} prefetch>
-                        <a>{institution.name} {ask} {bid}</a>
+                      <Link href={`/rate?slug=${currency.slug}`}
+                            as={`/rates/${currency.slug}`} prefetch>
+                        <a>{currency.name} {ask} {bid}</a>
                       </Link>
                     </li>
                   ))
                 }
               </List>
+            )
+          }
+
+          {
+            action && (
+              <AddQuote action={action}/>
             )
           }
         </Page>
@@ -67,9 +74,7 @@ const GQL_ALL_QUOTE = gql`
       }
       currency {
         slug
-      }
-      baseCurrency {
-        slug
+        name
       }
       ask
       bid

@@ -16,7 +16,6 @@ module.exports = {
         Quote.find({})
           .populate('institution')
           .populate('currency')
-          .populate('baseCurrency')
           .exec((err, res) => {
           err ? reject(err) : resolve(res)
         })

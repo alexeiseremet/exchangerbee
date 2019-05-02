@@ -27,6 +27,7 @@ module.exports = `
   }
     
   input InstitutionInput {
+    id: ID
     slug: String
     name: String
   }

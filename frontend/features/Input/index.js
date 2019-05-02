@@ -7,6 +7,7 @@ export default (
   {
     value = '',
     required = false,
+    readOnly = null,
     type = 'text',
     name = null,
     autocomplete = "off",
@@ -34,6 +35,7 @@ export default (
         <Field
           className="input__element"
           required={required}
+          readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
           checked={values[name] === true || values[name] === value}

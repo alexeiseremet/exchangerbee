@@ -9,9 +9,7 @@ import { textAdminPage as t } from '../../lib/locale'
 import Metadata from '../../features/Metadata'
 import Layout from '../../features/Layout'
 import Page from '../../features/Page'
-import AddCurrency from '../../features/AddCurrency'
-import AddInstitution from '../../features/AddInstitution'
-import AddQuote from '../../features/AddQuote'
+import CreateCurrencyForm from '../../features/AddCurrency'
 import Tabs, { Tab } from '../../features/Tabs'
 
 class AdminPageMarkup extends React.Component {
@@ -30,19 +28,9 @@ class AdminPageMarkup extends React.Component {
             activeIndex={0}
             items={[
               {
-                id: 'add-institution',
-                label: 'Add Institution',
-                content: <AddInstitution/>,
-              },
-              {
-                id: 'add-quote',
-                label: 'Add Quote',
-                content: <AddQuote/>,
-              },
-              {
                 id: 'add-currency',
                 label: 'Add Currency',
-                content: <AddCurrency/>,
+                content: <CreateCurrencyForm action="create"/>,
               },
             ]}
           />

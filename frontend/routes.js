@@ -11,21 +11,22 @@ const APP_ROUTES = [
     pattern: '/admin',
   },
   {
-    page: 'bank',
-    pattern: '/banks/:slug',
-  },
-  {
     page: 'banks',
-    pattern: '/banks',
+    pattern: '/banks/:action(create)?',
   },
   {
-    page: 'rate',
-    pattern: '/rates/:slug',
+    page: 'bank',
+    pattern: '/banks/:slug/:action(update|delete)?',
   },
   {
     page: 'rates',
-    pattern: '/rates',
+    pattern: '/rates/:action(create)?',
   },
+  {
+    page: 'rate',
+    pattern: '/rates/:slug/:action(update|delete)?',
+  },
+
 ]
 
 APP_ROUTES.map(route => routes.add(route))

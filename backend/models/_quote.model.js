@@ -1,25 +1,10 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-const {ObjectId} = Schema.Types
-
 const quoteSchema = new Schema({
-  slug: {
-    type: String,
-    index: true,
-    unique: true,
-    required: true,
-    trim: true,
-  },
   institution: {
-    type: ObjectId,
+    type: String,
     ref: 'Institution',
-    index: true,
-    required: true,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
     index: true,
     required: true,
     trim: true,
@@ -28,12 +13,6 @@ const quoteSchema = new Schema({
     type: String,
     ref: 'Currency',
     required: true,
-  },
-  baseCurrency: {
-    type: String,
-    ref: 'Currency',
-    required: true,
-    trim: true,
   },
   amount: {
     type: String,
@@ -50,7 +29,7 @@ const quoteSchema = new Schema({
     required: true,
     trim: true,
   },
-  updatedAt: {
+  date: {
     type: Date,
     trim: true,
   },

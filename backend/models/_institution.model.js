@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-const {ObjectId} = Schema.Types
-
 const institutionSchema = new Schema({
   slug: {
     type: String,

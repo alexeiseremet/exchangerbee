@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 
@@ -6,8 +6,8 @@ import { textAdminPage as t } from '../../lib/locale'
 import Form from '../Form'
 import Input from '../Input'
 
-export const AddCurrencyMarkup = ({onSubmit}) => (
-  <Fragment>
+export const CreateCurrencyForm = ({onSubmit, currency = null}) => (
+  <React.Fragment>
     <div className="text">
       <h1>{t.currency}</h1>
     </div>
@@ -18,6 +18,7 @@ export const AddCurrencyMarkup = ({onSubmit}) => (
         slug: '',
         numCode: '',
         symbol: '',
+        ...currency
       }}
       onSubmit={onSubmit}
     >
@@ -49,7 +50,7 @@ export const AddCurrencyMarkup = ({onSubmit}) => (
         labelText="Symbol"
       />
     </Form>
-  </Fragment>
+  </React.Fragment>
 )
 
 // Container.
@@ -68,19 +69,14 @@ export default compose(
     {
       props: ({mutate}) => ({
         onSubmit: (
+          // form values & actions
           currency,
-          // form actions
-          {
-            setStatus,
-            setSubmitting,
-            resetForm
-          }
+          {setStatus, setSubmitting}
         ) => {
           mutate({
             variables: {currency}
           })
-            .then(({createCurrency}) => {
-              resetForm()
+            .then(({data: {createCurrency}}) => {
               console.log(createCurrency)
             })
             .catch(err => {
@@ -89,7 +85,7 @@ export default compose(
               console.error(err)
             })
         }
-      })
+      }),
     }
   )
-)(AddCurrencyMarkup)
+)(CreateCurrencyForm)

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
-
 const currencySchema = new Schema({
   slug: {
     type: String,
