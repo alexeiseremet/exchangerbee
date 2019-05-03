@@ -13,7 +13,7 @@ const app = next({dev: process.env.NODE_ENV !== 'production'})
 const routes = require('./routes')
 const handler = routes.getRequestHandler(app)
 const {apiPath, storagePath} = require('./server.config')
-const port = parseInt(process.env.PORT, 10) || 8080
+const port = parseInt(process.env.PORT, 10) || 3050
 
 app.prepare()
   .then(() => {
@@ -21,7 +21,7 @@ app.prepare()
 
     // Setup API proxy.
     const appProxy = proxy({
-      target: process.env.API_HOST || 'http://localhost:4000/',
+      target: process.env.API_HOST || 'http://localhost:3010/',
       cookiePathRewrite: apiPath,
       changeOrigin: true,
       router: {

@@ -4,11 +4,14 @@ import { googleSiteVerification, yandexSiteVerification } from '../server.config
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 export default class ExbeeDocument extends Document {
-  static getInitialProps ({renderPage}) {
+  static async getInitialProps (ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
     const spriteContent = sprite.stringify()
-    const pageProps = renderPage()
 
-    return {spriteContent, ...pageProps}
+    return {
+      spriteContent,
+      ...initialProps,
+    }
   }
 
   render () {
@@ -17,8 +20,8 @@ export default class ExbeeDocument extends Document {
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
         <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'/>
-        <meta name="google-site-verification" content={googleSiteVerification}/>
-        <meta name="yandex-verification" content={yandexSiteVerification}/>
+        {/*<meta name="google-site-verification" content={googleSiteVerification}/>*/}
+        {/*<meta name="yandex-verification" content={yandexSiteVerification}/>*/}
         <link href='//fonts.googleapis.com/css?family=Montserrat+Alternates:400,700&amp;subset=cyrillic'
               rel='stylesheet'/>
       </Head>
