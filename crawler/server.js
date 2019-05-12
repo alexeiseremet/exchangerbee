@@ -1,7 +1,11 @@
+// Load server variables from .env file.
+// const dotenv = require('dotenv')
+// dotenv.config()
+
 const express = require('express')
 const runCrawler = require('./crawler')
 
-const port = parseInt(process.env.PORT, 10) || 3030
+const PORT = parseInt(process.env.PORT, 10)
 const server = express()
 
 const parser = {
@@ -41,12 +45,12 @@ server
   )
 
 server
-  .listen(port, err => {
+  .listen(PORT, err => {
     if (err) {
       throw err
     }
 
-    console.log(`🎉  Ready on http://localhost:${port}.`)
+    console.log(`🎉  Ready on http://localhost:${PORT}.`)
   })
 
 module.exports = server

@@ -1,19 +1,22 @@
 // Load server variables from .env file.
-const dotenv = require('dotenv')
-dotenv.config()
-const {join} = require('path')
+// const dotenv = require('dotenv')
+// dotenv.config()
+
 const express = require('express')
 const proxy = require('http-proxy-middleware')
 const next = require('next')
 
+const PORT = parseInt(process.env.PORT, 10)
+const API_HOST = process.env.API_HOST
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+
 const nextI18NextMiddleware = require('next-i18next/middleware')
 const nextI18next = require('./lib/i18n')
 
-const app = next({dev: process.env.NODE_ENV !== 'production'})
+const app = next({dev: !IS_PRODUCTION})
 const routes = require('./routes')
 const handler = routes.getRequestHandler(app)
 const {apiPath, storagePath} = require('./server.config')
-const port = parseInt(process.env.PORT, 10) || 3050
 
 app.prepare()
   .then(() => {
@@ -21,7 +24,7 @@ app.prepare()
 
     // Setup API proxy.
     const appProxy = proxy({
-      target: process.env.API_HOST || 'http://localhost:3010/',
+      target: API_HOST,
       cookiePathRewrite: apiPath,
       changeOrigin: true,
       router: {
@@ -31,19 +34,19 @@ app.prepare()
 
     // Serve static files.
     server
-      .use('/robots.txt', express.static(join(__dirname, '/static/robots.txt')))
-      .use('/favicon.ico', express.static(join(__dirname, '/static/favicon.ico')))
+      .use('/robots.txt', express.static(`${__dirname}/static/robots.txt`))
+      .use('/favicon.ico', express.static(`${__dirname}/static/favicon.ico`))
 
     server
       .use(nextI18NextMiddleware(nextI18next))
       .use([apiPath, storagePath], appProxy)
       .use(handler)
-      .listen(port, err => {
+      .listen(PORT, err => {
         if (err) {
           throw err
         }
 
-        console.log(`🎉  Ready on http://localhost:${port}`)
+        console.log(`🎉  Ready on http://localhost:${PORT}`)
       })
   })
   .catch((ex) => {

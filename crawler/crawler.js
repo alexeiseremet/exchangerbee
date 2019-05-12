@@ -3,13 +3,12 @@ const devices = require('puppeteer/DeviceDescriptors')
 const iPad = devices['iPad Pro landscape']
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
-const getBrowser = () => IS_PRODUCTION ?
-
-  // Connect to browserless so we don't run Chrome on the same hardware in production
-  puppeteer.connect({ browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_API_TOKEN' }) :
-
-  // Run the browser locally while in development
-  puppeteer.launch();
+const getBrowser = () => (
+  IS_PRODUCTION
+    // ? puppeteer.connect({browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_API_TOKEN'})
+    ? puppeteer.launch()
+    : puppeteer.launch()
+)
 
 const runCrawler = async (parser) => {
   const startDate = new Date().getTime()

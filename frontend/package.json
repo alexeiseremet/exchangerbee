@@ -3,14 +3,12 @@
   "name": "@exchangerbee/frontend",
   "version": "1.0.0",
   "engines": {
-    "node": ">=8.14.0"
+    "node": ">=8.16.0"
   },
   "scripts": {
-    "dev": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -54,12 +52,6 @@
   },
   "devDependencies": {
     "@babel/core": "7.4.4",
-    "@babel/runtime": "7.4.4",
-    "@kadira/react-storybook-addon-info": "3.4.0",
-    "@storybook/addon-actions": "5.0.11",
-    "@storybook/addon-links": "5.0.11",
-    "@storybook/addon-options": "5.0.11",
-    "@storybook/addons": "5.0.11",
-    "@storybook/react": "5.0.11"
+    "@babel/runtime": "7.4.4"
   }
 }

@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  backend:
+    build: ./backend
+    env_file:
+    - ./backend/.env
+    ports:
+    - "3010:3010"
+    restart: always
+    depends_on:
+    - database
+    volumes:
+    - ./backend:/usr/share/exbee/backend
+    - /usr/share/exbee/backend/node_modules
+
+  frontend:
+    build: ./frontend
+    env_file:
+    - ./frontend/.env
+    ports:
+    - "3050:3050"
+    restart: always
+    depends_on:
+    - backend
+    volumes:
+    - ./frontend:/usr/share/exbee/frontend
+    - /usr/share/exbee/frontend/node_modules
+    - /usr/share/exbee/frontend/.next
+
+  database:
+    build: ./data
+    env_file:
+    - ./data/.env
+    ports:
+    - "27017:27017"
+    restart: always
+    volumes:
+    - ./data/db:/data/db
+
+#########################
+# docker-compose down
+# docker-compose build --no-cache
+# docker-compose up -d
+# docker ps -a
+# docker exec -it 89fc7b0ff34d bash/sh
+# docker logs 89fc7b0ff34d
+
+# With Dockerfie.
+# docker build --no-cache --tag=exbee_frontend_1 .
+# docker run -it --publish=3050:3050 exbee_frontend_1
+
+# Clean.
+# https://docs.docker.com/get-started/part2/
+# https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
+# docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+# docker inspect -f "{{json .Mounts}}" exbee_frontend_1

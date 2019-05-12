@@ -10,3 +10,4 @@
 .env
 .next
 node_modules
+data/db
