@@ -1,6 +1,6 @@
 FROM node:alpine
-COPY . /usr/share/exbee/frontend
-WORKDIR /usr/share/exbee/frontend
-RUN yarn install
-RUN yarn build
+COPY . /usr/share/frontend
+WORKDIR /usr/share/frontend
+RUN yarn install && yarn build
 CMD ["yarn", "start"]
+USER node

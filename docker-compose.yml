@@ -11,8 +11,8 @@ services:
     depends_on:
     - database
     volumes:
-    - ./backend:/usr/share/exbee/backend
-    - /usr/share/exbee/backend/node_modules
+    - ./backend:/usr/share/backend
+    - /usr/share/backend/node_modules
 
   frontend:
     build: ./frontend
@@ -24,9 +24,9 @@ services:
     depends_on:
     - backend
     volumes:
-    - ./frontend:/usr/share/exbee/frontend
-    - /usr/share/exbee/frontend/node_modules
-    - /usr/share/exbee/frontend/.next
+    - ./frontend:/usr/share/frontend
+    - /usr/share/frontend/node_modules
+    - /usr/share/frontend/.next
 
   database:
     build: ./data
