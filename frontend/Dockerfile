@@ -1,6 +1,9 @@
 FROM node:alpine
-COPY . /usr/share/frontend
-WORKDIR /usr/share/frontend
-RUN yarn install && yarn build
-CMD ["yarn", "start"]
+COPY --chown=node:node ./ /usr/src/frontend
+WORKDIR /usr/src/frontend
+RUN yarn install && yarn build \
+    && chown -R node:node node_modules \
+    && chown -R node:node .next
+RUN ls -la
+CMD ["yarn", "dev"]
 USER node

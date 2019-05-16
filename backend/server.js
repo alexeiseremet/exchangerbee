@@ -8,6 +8,9 @@ const server = express()
 
 const mongoose = require('mongoose')
 const schema = require('./graphql')
+const runCrawler = require('./crawler')
+
+const parser = require('./parser.json')
 
 const PORT = parseInt(process.env.PORT, 10)
 const MONGO_URL = process.env.MONGO_URL
@@ -46,6 +49,20 @@ server
       pretty: true,
       graphiql: !IS_PRODUCTION
     })
+  )
+
+// Crawler server route.
+server
+  .use(
+    '/crawler',
+    async (req, res, next) => {
+      try {
+        const data = await runCrawler(parser)
+        res.json(data)
+      } catch (error) {
+        next(error)
+      }
+    }
   )
 
 server

@@ -1,6 +1,16 @@
 version: '3.7'
 
 services:
+  database:
+    build: ./database
+    env_file:
+    - ./database/.env
+    ports:
+    - "27017:27017"
+    restart: always
+    volumes:
+    - ./database/db:/data/db
+
   backend:
     build: ./backend
     env_file:
@@ -11,8 +21,19 @@ services:
     depends_on:
     - database
     volumes:
-    - ./backend:/usr/share/backend
-    - /usr/share/backend/node_modules
+    - ./backend:/usr/src/backend
+    - ./backend/screenshots:/usr/src/backend/screenshots
+    - /usr/src/backend/node_modules
+
+  crawler:
+    build: ./crawler
+    env_file:
+    - ./crawler/.env
+    depends_on:
+    - backend
+    ports:
+    - "3030:3030"
+    restart: always
 
   frontend:
     build: ./frontend
@@ -24,24 +45,14 @@ services:
     depends_on:
     - backend
     volumes:
-    - ./frontend:/usr/share/frontend
-    - /usr/share/frontend/node_modules
-    - /usr/share/frontend/.next
-
-  database:
-    build: ./data
-    env_file:
-    - ./data/.env
-    ports:
-    - "27017:27017"
-    restart: always
-    volumes:
-    - ./data/db:/data/db
+    - ./frontend:/usr/src/frontend
+    - /usr/src/frontend/node_modules
+    - /usr/src/frontend/.next
 
 #########################
 # docker-compose down
 # docker-compose build --no-cache
-# docker-compose up -d
+# docker-compose up -d --force-recreate
 # docker ps -a
 # docker exec -it 89fc7b0ff34d bash/sh
 # docker logs 89fc7b0ff34d

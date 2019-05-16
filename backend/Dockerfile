@@ -1,6 +1,8 @@
 FROM node:alpine
-COPY . /usr/share/backend
-WORKDIR /usr/share/backend
-RUN yarn install
-CMD ["yarn", "start"]
+COPY --chown=node:node ./ /usr/src/backend
+WORKDIR /usr/src/backend
+RUN yarn install \
+    && chown -R node:node node_modules
+RUN ls -la
+CMD ["yarn", "dev"]
 USER node

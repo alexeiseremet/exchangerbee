@@ -1,14 +1,10 @@
+// Load server variables from .env file.
+// const dotenv = require('dotenv')
+// dotenv.config()
+
 const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const iPad = devices['iPad Pro landscape']
-const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-
-const getBrowser = () => (
-  IS_PRODUCTION
-    // ? puppeteer.connect({browserWSEndpoint: 'wss://chrome.browserless.io?token=YOUR_API_TOKEN'})
-    ? puppeteer.launch()
-    : puppeteer.launch()
-)
 
 const runCrawler = async (parser) => {
   const startDate = new Date().getTime()
@@ -21,7 +17,9 @@ const runCrawler = async (parser) => {
     return null
   }
 
-  const browser = await getBrowser()
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: process.env.WSS_BROWSER
+  })
   const page = await browser.newPage()
 
   await page.emulate(iPad)

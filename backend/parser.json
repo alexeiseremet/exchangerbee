@@ -1,0 +1,21 @@
+{
+  "url": "http://bnm.md/ro/content/ratele-de-schimb",
+  "quotes": [
+    {
+      "code": "usd",
+      "xPaths": {
+        "bid": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[5]/div/span",
+        "ask": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[5]/div/span",
+        "currency": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[3]"
+      }
+    },
+    {
+      "code": "eur",
+      "xPaths": {
+        "bid": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[5]/div/span",
+        "ask": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[5]/div/span",
+        "currency": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[3]"
+      }
+    }
+  ]
+}
