@@ -46,8 +46,8 @@ server
     expressGraphql({
       schema,
       context: {startTime: Date.now()},
+      graphiql: !IS_PRODUCTION,
       pretty: true,
-      graphiql: !IS_PRODUCTION
     })
   )
 

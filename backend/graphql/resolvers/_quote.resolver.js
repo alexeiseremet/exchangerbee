@@ -1,24 +1,25 @@
-const {
-  Quote
-} = require('../../models')
+const {Quote} = require('../../models')
 
 module.exports = {
   Query: {
     quote (_, args) {
       return new Promise((resolve, reject) => {
-        Quote.findOne(args).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
-      })
-    },
-    allQuote () {
-      return new Promise((resolve, reject) => {
-        Quote.find({})
+        Quote.findOne(args)
           .populate('institution')
           .populate('currency')
           .exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+            err ? reject(err) : resolve(res)
+          })
+      })
+    },
+    allQuote (_, args) {
+      return new Promise((resolve, reject) => {
+        Quote.find(args)
+          .populate('institution')
+          .populate('currency')
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     }
   },
@@ -34,18 +35,18 @@ module.exports = {
     },
     async deleteQuote (_, {id}) {
       return new Promise((resolve, reject) => {
-        Quote.findOneAndDelete({_id: id}).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Quote.findOneAndDelete({_id: id})
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     },
     async updateQuote (_, {id, quote}) {
       return new Promise((resolve, reject) => {
-        Quote.findOneAndUpdate(
-          {_id: id}, {$set: quote}, {new: true}
-        ).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Quote.findOneAndUpdate({_id: id}, {$set: quote}, {new: true})
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     },
   },

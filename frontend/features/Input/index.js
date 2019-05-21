@@ -2,6 +2,7 @@ import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
 import { Field } from 'formik'
+import {get as _get} from 'lodash'
 
 export default (
   {
@@ -16,11 +17,12 @@ export default (
     id,
   }
 ) => {
+  const valueByName = _get(values, name)
   const classes = classnames(
     'input',
     {
       [`input--${type}`]: type,
-      [`input--checked`]: (value !== '' && values[name] === value) || (values[name] === true),
+      [`input--checked`]: (value !== '' && valueByName === value) || (valueByName === true),
       [`input--required`]: required,
     }
   )
@@ -38,9 +40,9 @@ export default (
           readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
-          checked={values[name] === true || values[name] === value}
+          checked={valueByName === true || valueByName === value}
           type={type}
-          value={value || values[name]}
+          value={value || valueByName}
           name={name}
           id={id}
           autoComplete={autocomplete}

@@ -10,6 +10,8 @@ import Metadata from '../../features/Metadata'
 import Layout from '../../features/Layout'
 import Page from '../../features/Page'
 import CreateCurrencyForm from '../../features/AddCurrency'
+import CreateQuoteForm from '../../features/AddQuote'
+import CreateParserForm from '../../features/AddParser'
 import Tabs, { Tab } from '../../features/Tabs'
 
 class AdminPageMarkup extends React.Component {
@@ -28,9 +30,19 @@ class AdminPageMarkup extends React.Component {
             activeIndex={0}
             items={[
               {
+                id: 'add-parser',
+                label: 'Add Parser',
+                content: <CreateParserForm action="create"/>,
+              },
+              {
                 id: 'add-currency',
                 label: 'Add Currency',
                 content: <CreateCurrencyForm action="create"/>,
+              },
+              {
+                id: 'add-quote',
+                label: 'Add Quote',
+                content: <CreateQuoteForm action="create"/>,
               },
             ]}
           />

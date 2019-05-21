@@ -7,11 +7,17 @@ const quoteSchema = new Schema({
     ref: 'Institution',
     index: true,
     required: true,
+  },
+  date: {
+    type: Date,
+    index: true,
+    required: true,
     trim: true,
   },
   currency: {
     type: String,
     ref: 'Currency',
+    index: true,
     required: true,
   },
   amount: {
@@ -29,12 +35,12 @@ const quoteSchema = new Schema({
     required: true,
     trim: true,
   },
-  date: {
-    type: Date,
-    trim: true,
-  },
   period: {
     type: String,
+    trim: true,
+  },
+  error: {
+    type: Boolean,
     trim: true,
   },
 })

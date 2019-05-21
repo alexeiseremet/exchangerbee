@@ -1,21 +1,21 @@
-const {
-  Currency
-} = require('../../models')
+const {Currency} = require('../../models')
 
 module.exports = {
   Query: {
     currency (_, args) {
       return new Promise((resolve, reject) => {
-        Currency.findOne(args).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Currency.findOne(args)
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     },
-    allCurrency () {
+    allCurrency (_, args) {
       return new Promise((resolve, reject) => {
-        Currency.find({}).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Currency.find(args)
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     }
   },
@@ -31,18 +31,18 @@ module.exports = {
     },
     async deleteCurrency (_, {id}) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndDelete({_id: id}).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Currency.findOneAndDelete({_id: id})
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     },
     async updateCurrency (_, {id, currency}) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndUpdate(
-          {_id: id}, {$set: currency}, {new: true}
-        ).exec((err, res) => {
-          err ? reject(err) : resolve(res)
-        })
+        Currency.findOneAndUpdate({_id: id}, {$set: currency}, {new: true})
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res)
+          })
       })
     },
   },

@@ -7,7 +7,8 @@ module.exports = `
     amount: String!
     ask: String!
     bid: String!
-    period: String
+    period: QuotePeriod!
+    error: Boolean!
   }
   
   type Query {
@@ -37,6 +38,7 @@ module.exports = `
     ask: String
     bid: String
     period: String
+    error: Boolean
   }
   
   input QuoteWhereInput {
@@ -44,6 +46,13 @@ module.exports = `
     institution: ID
     currency: ID
     date: String
+    period: String
+    error: Boolean
+  }
+  
+  enum QuotePeriod {
+    daily
+    monthly
   }
   
   enum QuoteOrderByInput {
@@ -51,5 +60,7 @@ module.exports = `
     id_DESC
     date_ASC
     date_DESC
+    error_ASC
+    error_DESC
   }
 `

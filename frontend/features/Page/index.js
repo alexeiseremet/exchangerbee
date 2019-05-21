@@ -23,6 +23,16 @@ const Sidebar = (
         </Link>
       </li>
       <li>
+        <Link prefetch href="/parsers">
+          <a>Parsers</a>
+        </Link>
+      </li>
+      <li>
+        <Link prefetch href="/currencies">
+          <a>Currencies</a>
+        </Link>
+      </li>
+      <li>
         <Link prefetch href="/admin">
           <a>Admin</a>
         </Link>

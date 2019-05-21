@@ -1,18 +1,22 @@
-const {Institution} = require('../../models')
+const {Parser} = require('../../models')
 
 module.exports = {
   Query: {
-    institution (_, args) {
+    parser (_, args) {
       return new Promise((resolve, reject) => {
-        Institution.findOne(args)
+        Parser.findOne(args)
+          .populate('institution')
+          .populate('quotes.currency')
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    allInstitution (_, args) {
+    allParser (_, args) {
       return new Promise((resolve, reject) => {
-        Institution.find(args)
+        Parser.find(args)
+          .populate('institution')
+          .populate('quotes.currency')
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -20,26 +24,26 @@ module.exports = {
     }
   },
   Mutation: {
-    async createInstitution (_, {institution}) {
-      const newInstitution = await new Institution(institution)
+    async createParser (_, {parser}) {
+      const newParser = await new Parser(parser)
 
       return new Promise((resolve, reject) => {
-        newInstitution.save((err, res) => {
+        newParser.save((err, res) => {
           err ? reject(err) : resolve(res)
         })
       })
     },
-    async deleteInstitution (_, {id}) {
+    async deleteParser (_, {id}) {
       return new Promise((resolve, reject) => {
-        Institution.findOneAndDelete({_id: id})
+        Parser.findOneAndDelete({_id: id})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    async updateInstitution (_, {id, institution}) {
+    async updateParser (_, {id, parser}) {
       return new Promise((resolve, reject) => {
-        Institution.findOneAndUpdate({_id: id}, {$set: institution}, {new: true})
+        Parser.findOneAndUpdate({_id: id}, {$set: parser}, {new: true})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

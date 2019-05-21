@@ -86,12 +86,11 @@ const GQL_CREATE_QUOTE = gql`
     createQuote(quote: $quote) {
       institution
       currency
-      updatedAt
+      date
     }
   }
 `
 
-// Container.
 const GQL_UDATE_QUOTE = gql`
   mutation CreateQuote ($id: ID!, $quote: QuoteInput!) {
     updateQuote(id: $id, quote: $quote) {
