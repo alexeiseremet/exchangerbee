@@ -2,13 +2,13 @@ import React from 'react'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 
-const DeleteInstitutionButton = ({onSubmit}) => (
+const DeleteCurrencyButton = ({onSubmit}) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
 )
 
-const GQL_DELETE_INSTITUTION = gql`
-  mutation DeleteInstitution ($id: ID!) {
-    deleteInstitution(id: $id) {
+const GQL_DELETE_CURRENCY = gql`
+  mutation DeleteCurrency ($id: ID!) {
+    deleteCurrency(id: $id) {
       id
     }
   }
@@ -16,20 +16,20 @@ const GQL_DELETE_INSTITUTION = gql`
 
 export default compose(
   graphql(
-    GQL_DELETE_INSTITUTION,
+    GQL_DELETE_CURRENCY,
     {
-      props: ({mutate, ownProps: {institution}}) => ({
+      props: ({mutate, ownProps: {currency}}) => ({
         onSubmit: (elem) => {
           elem.preventDefault()
 
           if (window.confirm('Do you really want to detele?')) {
             mutate({
               variables: {
-                id: institution.id,
+                id: currency.id,
               }
             })
-              .then(({data: {deteleInstitution}}) => {
-                console.dir(deteleInstitution)
+              .then(({data: {deteleCurrency}}) => {
+                console.dir(deteleCurrency)
               })
               .catch(err => {
                 console.error(err)
@@ -39,9 +39,9 @@ export default compose(
       }),
       options: {
         refetchQueries: [
-          'AllInstitution',
+          'AllCurrency',
         ],
       },
     }
   )
-)(DeleteInstitutionButton)
+)(DeleteCurrencyButton)

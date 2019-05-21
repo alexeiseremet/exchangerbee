@@ -19,6 +19,14 @@ const APP_ROUTES = [
     pattern: '/banks/:slug/:action(update|delete)?',
   },
   {
+    page: 'currencies',
+    pattern: '/currencies/:action(create)?',
+  },
+  {
+    page: 'currency',
+    pattern: '/currencies/:slug/:action(update|delete)?',
+  },
+  {
     page: 'rates',
     pattern: '/rates/:action(create)?',
   },

@@ -9,7 +9,6 @@ import { textAdminPage as t } from '../../lib/locale'
 import Metadata from '../../features/Metadata'
 import Layout from '../../features/Layout'
 import Page from '../../features/Page'
-import CreateCurrencyForm from '../../features/AddCurrency'
 import CreateQuoteForm from '../../features/AddQuote'
 import CreateParserForm from '../../features/AddParser'
 import Tabs, { Tab } from '../../features/Tabs'
@@ -33,11 +32,6 @@ class AdminPageMarkup extends React.Component {
                 id: 'add-parser',
                 label: 'Add Parser',
                 content: <CreateParserForm action="create"/>,
-              },
-              {
-                id: 'add-currency',
-                label: 'Add Currency',
-                content: <CreateCurrencyForm action="create"/>,
               },
               {
                 id: 'add-quote',

@@ -6,38 +6,53 @@ import Input from '../Input'
 
 const FormMarkup = (
   {
-    institution = null,
+    currency = null,
     onSubmit,
     action,
   }
 ) => (
   <React.Fragment>
     <div className="text">
-      <h1>{t.institution} {action}</h1>
+      <h1>{t.currency} {action}</h1>
     </div>
 
     <Form
       initialValues={{
         name: '',
         slug: '',
-        ...institution
+        numCode: '',
+        symbol: '',
+        ...currency
       }}
       onSubmit={onSubmit}
     >
       <Input
         name="name"
-        id="institution-name"
+        id="currency-name"
         type="text"
         labelText="Name"
         required
       />
       <Input
         name="slug"
-        id="institution-slug"
+        id="currency-slug"
         type="text"
         labelText="Slug"
         required
         readOnly={action === 'update'}
+      />
+      <Input
+        name="numCode"
+        id="currency-num-code"
+        type="text"
+        labelText="Numeric code"
+        required
+      />
+      <Input
+        name="symbol"
+        id="currency-symbol"
+        type="text"
+        labelText="Symbol"
       />
     </Form>
   </React.Fragment>

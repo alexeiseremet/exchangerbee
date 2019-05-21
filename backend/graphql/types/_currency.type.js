@@ -27,6 +27,7 @@ module.exports = `
   }
     
   input CurrencyInput {
+    id: ID
     slug: String
     name: String
     numCode: String
@@ -36,13 +37,12 @@ module.exports = `
   input CurrencyWhereInput {
     id: ID
     slug: String
-    name: String
   }
   
   enum CurrencyOrderByInput {
     id_ASC
     id_DESC
-    name_ASC
-    name_DESC
+    slug_ASC
+    slug_DESC
   }
 `

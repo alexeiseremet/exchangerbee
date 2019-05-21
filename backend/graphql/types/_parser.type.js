@@ -40,6 +40,7 @@ module.exports = `
   }
     
   input ParserInput {
+    id: ID
     institution: ID
     url: String
     period: String

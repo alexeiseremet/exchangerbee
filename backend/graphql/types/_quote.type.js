@@ -31,6 +31,7 @@ module.exports = `
   }
     
   input QuoteInput {
+    id: ID
     institution: ID
     currency: ID
     date: String
@@ -60,6 +61,8 @@ module.exports = `
     id_DESC
     date_ASC
     date_DESC
+    period_ASC
+    period_DESC
     error_ASC
     error_DESC
   }

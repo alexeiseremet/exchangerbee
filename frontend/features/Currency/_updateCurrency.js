@@ -5,17 +5,17 @@ import {omit as _omit} from 'lodash'
 
 import FormMarkup from './_formMarkup'
 
-const UpdateInstitutionForm = ({onSubmit, institution}) => (
+const UpdateCurrencyForm = ({onSubmit, currency}) => (
   <FormMarkup
     action={'update'}
     onSubmit={onSubmit}
-    institution={institution}
+    currency={currency}
   />
 )
 
-const GQL_UPDATE_INSTITUTION = gql`
-  mutation UpdateInstitution ($id: ID!, $institution: InstitutionInput!) {
-    updateInstitution(id: $id, institution: $institution) {
+const GQL_UPDATE_CURRENCY = gql`
+  mutation UpdateCurrency ($id: ID!, $currency: CurrencyInput!) {
+    updateCurrency(id: $id, currency: $currency) {
       slug
       name
     }
@@ -28,9 +28,9 @@ const excludeKeys = obj => (
 
 export default compose(
   graphql(
-    GQL_UPDATE_INSTITUTION,
+    GQL_UPDATE_CURRENCY,
     {
-      props: ({mutate, ownProps: {institution}}) => ({
+      props: ({mutate, ownProps: {currency}}) => ({
         onSubmit: (
           // form values & actions
           formValues,
@@ -38,12 +38,12 @@ export default compose(
         ) => {
           mutate({
             variables: {
-              id: institution.id,
-              institution: excludeKeys(formValues),
+              id: currency.id,
+              currency: excludeKeys(formValues),
             }
           })
-            .then(({data: {updateInstitution}}) => {
-              console.dir(updateInstitution)
+            .then(({data: {updateCurrency}}) => {
+              console.dir(updateCurrency)
             })
             .catch(err => {
               setStatus('error')
@@ -54,9 +54,9 @@ export default compose(
       }),
       options: {
         refetchQueries: [
-          'AllInstitution',
+          'AllCurrency',
         ],
       },
     }
   )
-)(UpdateInstitutionForm)
+)(UpdateCurrencyForm)
