@@ -2,11 +2,9 @@ const {Quote} = require('../../models')
 
 module.exports = {
   Query: {
-    quote (_, args) {
+    quote (_, {id, ...args}) {
       return new Promise((resolve, reject) => {
-        Quote.findOne(args)
-          .populate('institution')
-          .populate('currency')
+        Quote.findOne({_id: id, ...args})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -15,8 +13,6 @@ module.exports = {
     allQuote (_, args) {
       return new Promise((resolve, reject) => {
         Quote.find(args)
-          .populate('institution')
-          .populate('currency')
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

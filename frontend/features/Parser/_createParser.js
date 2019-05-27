@@ -25,12 +25,13 @@ export default compose(
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting}
+          {setStatus, setSubmitting, resetForm}
         ) => {
           mutate({
             variables: {parser: formValues}
           })
             .then(({data: {createParser}}) => {
+              resetForm()
               console.dir(createParser)
             })
             .catch(err => {

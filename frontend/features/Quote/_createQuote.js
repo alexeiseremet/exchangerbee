@@ -4,22 +4,22 @@ import { compose, graphql } from 'react-apollo'
 
 import FormMarkup from './_formMarkup'
 
-const CreateCurrencyForm = ({onSubmit}) => (
+const CreateQuoteForm = ({onSubmit}) => (
   <FormMarkup action={'create'} onSubmit={onSubmit}/>
 )
 
-const GQL_CREATE_CURRENCY = gql`
-  mutation CreateCurrency ($currency: CurrencyInput!) {
-    createCurrency(currency: $currency) {
-      slug
-      name
+const GQL_CREATE_QUOTE = gql`
+  mutation CreateQuote ($quote: QuoteInput!) {
+    createQuote(quote: $quote) {
+      institution
+      currency
     }
   }
 `
 
 export default compose(
   graphql(
-    GQL_CREATE_CURRENCY,
+    GQL_CREATE_QUOTE,
     {
       props: ({mutate}) => ({
         onSubmit: (
@@ -28,11 +28,11 @@ export default compose(
           {setStatus, setSubmitting, resetForm}
         ) => {
           mutate({
-            variables: {currency: formValues}
+            variables: {quote: formValues}
           })
-            .then(({data: {createCurrency}}) => {
+            .then(({data: {createQuote}}) => {
               resetForm()
-              console.dir(createCurrency)
+              console.dir(createQuote)
             })
             .catch(err => {
               setStatus('error')
@@ -43,9 +43,9 @@ export default compose(
       }),
       options: {
         refetchQueries: [
-          'AllCurrency',
+          'AllQuote',
         ],
       },
     }
   )
-)(CreateCurrencyForm)
+)(CreateQuoteForm)

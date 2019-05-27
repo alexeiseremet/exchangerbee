@@ -22,18 +22,16 @@ const Sidebar = (
           <a>Currencies</a>
         </Link>
       </li>
-
-      <li>
-        <Link prefetch href="/rates">
-          <a>Rates</a>
-        </Link>
-      </li>
       <li>
         <Link prefetch href="/parsers">
           <a>Parsers</a>
         </Link>
       </li>
-
+      <li>
+        <Link prefetch href="/rates">
+          <a>Rates</a>
+        </Link>
+      </li>
       <li>
         <Link prefetch href="/admin">
           <a>Admin</a>

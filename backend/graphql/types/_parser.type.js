@@ -34,8 +34,8 @@ module.exports = `
   }
   
   type ParserQuoteXPaths {
-    ask: String!
     bid: String!
+    ask: String!
     code: String
   }
     

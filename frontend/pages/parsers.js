@@ -10,7 +10,7 @@ import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 import { CreateParser } from '../features/Parser'
 
-class BanksPageMarkup extends React.Component {
+class ParsersPageMarkup extends React.Component {
   static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
@@ -61,7 +61,7 @@ class BanksPageMarkup extends React.Component {
 }
 
 // i18n.
-const BanksPageI18N = withNamespaces('common')(BanksPageMarkup)
+const ParsersPageI18N = withNamespaces('common')(ParsersPageMarkup)
 
 // Container.
 const GQL_ALL_PARSER = gql`
@@ -83,4 +83,4 @@ export default compose(
       })
     }
   )
-)(BanksPageI18N)
+)(ParsersPageI18N)

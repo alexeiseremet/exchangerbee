@@ -9,8 +9,6 @@ import { textAdminPage as t } from '../../lib/locale'
 import Metadata from '../../features/Metadata'
 import Layout from '../../features/Layout'
 import Page from '../../features/Page'
-import CreateQuoteForm from '../../features/AddQuote'
-import CreateParserForm from '../../features/AddParser'
 import Tabs, { Tab } from '../../features/Tabs'
 
 class AdminPageMarkup extends React.Component {
@@ -29,14 +27,14 @@ class AdminPageMarkup extends React.Component {
             activeIndex={0}
             items={[
               {
-                id: 'add-parser',
-                label: 'Add Parser',
-                content: <CreateParserForm action="create"/>,
+                id: 'tab-1',
+                label: 'Tab item 1',
+                content: 'tab content 1',
               },
               {
-                id: 'add-quote',
-                label: 'Add Quote',
-                content: <CreateQuoteForm action="create"/>,
+                id: 'tab-2',
+                label: 'Tab item 2',
+                content: 'tab content 2',
               },
             ]}
           />

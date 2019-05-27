@@ -1,14 +1,14 @@
 import React from 'react'
-import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
-
 import { Link, withNamespaces } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
+
 import List from '../features/List'
-import AddQuote from '../features/AddQuote'
+import { gql } from 'apollo-boost'
+import { compose, graphql } from 'react-apollo'
+import { CreateQuote } from '../features/Quote'
 
 class RatesPageMarkup extends React.Component {
   static async getInitialProps ({query}) {
@@ -32,28 +32,28 @@ class RatesPageMarkup extends React.Component {
         <Page>
           {
             !action && allQuote && (
-              <List type="ordered">
-                {
-                  allQuote.map((
-                    {id, currency, institution, ask, bid}
-                  ) => (
-                    <li key={id}>
-                      <Link href={`/rate?slug=${currency.slug}`}
-                            as={`/rates/${currency.slug}`} prefetch>
-                        <a>{currency.name} {ask} {bid}</a>
-                      </Link>
-                    </li>
-                  ))
-                }
-              </List>
+              <React.Fragment>
+                <Link href={`/rates?action=create`} as={`/rates/create`} prefetch>
+                  <a>{'Create'}</a>
+                </Link>
+                <hr/>
+
+                <List type="ordered">
+                  {
+                    allQuote.map(({id, institution, currency}) => (
+                      <li key={id}>
+                        <Link href={`/rate?id=${id}`} as={`/rates/${id}`} prefetch>
+                          <a>{institution}-{currency}</a>
+                        </Link>
+                      </li>
+                    ))
+                  }
+                </List>
+              </React.Fragment>
             )
           }
 
-          {
-            action && (
-              <AddQuote action={action}/>
-            )
-          }
+          {action && <CreateQuote/>}
         </Page>
       </Layout>
     )
@@ -68,16 +68,8 @@ const GQL_ALL_QUOTE = gql`
   query AllQuote {
     allQuote {
       id
-      institution {
-        id
-        name
-      }
-      currency {
-        slug
-        name
-      }
-      ask
-      bid
+      institution
+      currency
     }
   }
 `

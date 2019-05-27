@@ -32,7 +32,7 @@ const APP_ROUTES = [
   },
   {
     page: 'rate',
-    pattern: '/rates/:slug/:action(update|delete)?',
+    pattern: '/rates/:id/:action(update|delete)?',
   },
   {
     page: 'parsers',

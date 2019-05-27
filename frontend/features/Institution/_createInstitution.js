@@ -25,12 +25,13 @@ export default compose(
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting}
+          {setStatus, setSubmitting, resetForm}
         ) => {
           mutate({
             variables: {institution: formValues}
           })
             .then(({data: {createInstitution}}) => {
+              resetForm()
               console.dir(createInstitution)
             })
             .catch(err => {
