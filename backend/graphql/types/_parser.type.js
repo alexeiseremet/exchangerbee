@@ -1,27 +1,15 @@
 module.exports = `
   type Parser {
     id: ID!
-    institution: Institution!
+    institution: ID!
     url: String!
     period: String!
     processedAt: String
     quotes: [ParserQuote]
   }
   
-  type ParserQuote {
-    amount: String!
-    currency: Currency!
-    xPaths: ParserQuoteXPaths!
-  }
-  
-  type ParserQuoteXPaths {
-    ask: String!
-    bid: String!
-    code: String
-  }
-  
   type Query {
-    parser(id: ID): Parser!
+    parser(id: ID!): Parser!
     allParser(
       where: ParserWhereInput
       orderBy: ParserOrderByInput
@@ -37,6 +25,18 @@ module.exports = `
     createParser(parser: ParserInput!): Parser!
     updateParser(id: ID!, parser: ParserInput!): Parser!
     deleteParser(id: ID!): Parser!
+  }
+  
+  type ParserQuote {
+    amount: String!
+    currency: ID!
+    xPaths: ParserQuoteXPaths!
+  }
+  
+  type ParserQuoteXPaths {
+    ask: String!
+    bid: String!
+    code: String
   }
     
   input ParserInput {

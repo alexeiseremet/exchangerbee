@@ -2,11 +2,9 @@ const {Parser} = require('../../models')
 
 module.exports = {
   Query: {
-    parser (_, args) {
+    parser (_, {id, ...args}) {
       return new Promise((resolve, reject) => {
-        Parser.findOne(args)
-          .populate('institution')
-          .populate('quotes.currency')
+        Parser.findOne({_id: id, ...args})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -15,8 +13,6 @@ module.exports = {
     allParser (_, args) {
       return new Promise((resolve, reject) => {
         Parser.find(args)
-          .populate('institution')
-          .populate('quotes.currency')
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

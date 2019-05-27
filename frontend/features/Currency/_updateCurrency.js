@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
-import {omit as _omit} from 'lodash'
+import _omit from 'lodash/omit'
 
 import FormMarkup from './_formMarkup'
 

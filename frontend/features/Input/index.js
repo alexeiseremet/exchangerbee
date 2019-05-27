@@ -2,7 +2,7 @@ import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
 import { Field } from 'formik'
-import {get as _get} from 'lodash'
+import _get from 'lodash/get'
 
 export default (
   {

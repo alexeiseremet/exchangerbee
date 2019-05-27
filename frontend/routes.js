@@ -34,7 +34,14 @@ const APP_ROUTES = [
     page: 'rate',
     pattern: '/rates/:slug/:action(update|delete)?',
   },
-
+  {
+    page: 'parsers',
+    pattern: '/parsers/:action(create)?',
+  },
+  {
+    page: 'parser',
+    pattern: '/parsers/:id/:action(update|delete)?',
+  },
 ]
 
 APP_ROUTES.map(route => routes.add(route))
