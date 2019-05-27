@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
-import _omit from 'lodash/omit'
+import excludeKeys from '../../lib/excludeKeys'
 
 import FormMarkup from './_formMarkup'
 
@@ -22,10 +22,6 @@ const GQL_UPDATE_INSTITUTION = gql`
   }
 `
 
-const excludeKeys = obj => (
-  _omit(obj, ['id', 'slug', '__typename'])
-)
-
 export default compose(
   graphql(
     GQL_UPDATE_INSTITUTION,
@@ -39,7 +35,7 @@ export default compose(
           mutate({
             variables: {
               id: institution.id,
-              institution: excludeKeys(formValues),
+              institution: excludeKeys(formValues, ['id', 'slug', '__typename']),
             }
           })
             .then(({data: {updateInstitution}}) => {

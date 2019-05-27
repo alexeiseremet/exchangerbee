@@ -1,15 +1,8 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
-import {
-  omit as _omit,
-  unset as _unset,
-  isArray as _isArray,
-  isObject as _isObject,
-  isPlainObject as _isPlainObject,
-  mapValues as _mapValues,
-} from 'lodash'
 
+import excludeKeys from '../../lib/excludeKeys'
 import FormMarkup from './_formMarkup'
 
 const UpdateParserForm = ({onSubmit, parser}) => (
@@ -29,32 +22,6 @@ const GQL_UPDATE_PARSER = gql`
   }
 `
 
-const excludeKeys = obj => {
-  const unsetValues = ['id', '__typename']
-
-  const mapValuesDeep = obj => {
-    if (_isArray(obj)) {
-      return obj.map(innerObj => {
-        const clearedObj = _omit(innerObj, unsetValues)
-        return mapValuesDeep(clearedObj)
-      });
-    }
-
-    if (_isObject(obj)) {
-      return _mapValues(obj, val => {
-        const clearedVal = _isPlainObject(val) ? _omit(val, unsetValues) : val
-
-        return mapValuesDeep(clearedVal)
-      })
-    }
-
-    return obj
-  }
-
-  const clearedObj = _omit(obj, unsetValues)
-
-  return mapValuesDeep(clearedObj)
-}
 
 export default compose(
   graphql(
@@ -69,7 +36,7 @@ export default compose(
           mutate({
             variables: {
               id: parser.id,
-              parser: excludeKeys(formValues),
+              parser: excludeKeys(formValues, ['id', '__typename']),
             }
           })
             .then(({data: {updateParser}}) => {
