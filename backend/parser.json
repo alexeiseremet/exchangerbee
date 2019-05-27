@@ -1,20 +1,24 @@
 {
   "url": "http://bnm.md/ro/content/ratele-de-schimb",
+  "institution": "5ce3eba364a10a00265d568c",
+  "period": "daily",
   "quotes": [
     {
-      "code": "usd",
+      "amount": "1",
+      "currency": "5ce246f39659a100269942ce",
       "xPaths": {
         "bid": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[5]/div/span",
         "ask": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[5]/div/span",
-        "currency": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[3]"
+        "code": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[12]/td[3]"
       }
     },
     {
-      "code": "eur",
+      "amount": "1",
+      "currency": "5cada9a4488a5b41c6aa3f1d",
       "xPaths": {
         "bid": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[5]/div/span",
         "ask": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[5]/div/span",
-        "currency": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[3]"
+        "code": "//*[@id='ajax-wrapper-table']/div[1]/div[1]/table[2]/tbody/tr[17]/td[3]"
       }
     }
   ]

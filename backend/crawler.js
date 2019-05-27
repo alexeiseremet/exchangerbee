@@ -6,11 +6,13 @@ const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const iPad = devices['iPad Pro landscape']
 
+const updateQuotes = require('./updateQuotesByCrawler')
+
 const runCrawler = async (parser) => {
   const startDate = new Date().getTime()
-  const {url, quotes} = parser
+  const {institution, period, url, quotes} = parser
   const result = {
-    quotes: {}
+    quotes: []
   }
 
   if (!url) {
@@ -37,20 +39,27 @@ const runCrawler = async (parser) => {
     await page.goto(url, {waitUntil: 'networkidle2'})
 
     for (let quote of quotes) {
-      const {code, xPaths} = quote
+      const {amount, currency, xPaths} = quote
       const listOfKeys = Object.keys(xPaths)
-      result['quotes'][code] = {}
+      const parsedItem = {
+        institution,
+        currency,
+        amount,
+        period,
+      }
 
       for (let key of listOfKeys) {
         const handle = await page.$x(xPaths[key])
-        result['quotes'][code][key] = await page.evaluate(el => el.textContent.toLowerCase(), handle[0])
+        parsedItem[key] = await page.evaluate(el => el.textContent.toLowerCase(), handle[0])
 
         // Take screenshot.
         // const fileName = url.replace(/([-=.:/%?#])/g, '_')
         // await handle[0].screenshot({
-        //   path: `${__dirname}/screenshots/${fileName}_${code}_${key}.jpeg`
+        //   path: `${__dirname}/screenshots/${fileName}_${currency.id}_${key}.jpeg`
         // })
       }
+
+      result['quotes'].push(parsedItem)
     }
   } catch (err) {
     console.log(`An error occurred on ${url}`)
@@ -59,8 +68,10 @@ const runCrawler = async (parser) => {
   }
 
   await browser.close()
-
   result.time = `${Math.round((new Date().getTime() - startDate) / 1000)} s`
+
+  updateQuotes(result.quotes)
+
   return result
 }
 
