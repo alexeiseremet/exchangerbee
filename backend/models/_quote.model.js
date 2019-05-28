@@ -6,11 +6,11 @@ const quoteSchema = new Schema({
     refId: {
       type: String,
       ref: 'Institution',
+      index: true,
       required: true,
     },
     refSlug: {
       type: String,
-      index: true,
     }
   },
   date: {

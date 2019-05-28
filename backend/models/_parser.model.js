@@ -39,12 +39,10 @@ const parserSchema = new Schema({
       refId: {
         type: String,
         ref: 'Currency',
-        unique: true,
         required: true,
       },
       refSlug: {
         type: String,
-        index: true,
       }
     },
     xPaths: {
