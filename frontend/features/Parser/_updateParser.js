@@ -16,7 +16,10 @@ const UpdateParserForm = ({onSubmit, parser}) => (
 const GQL_UPDATE_PARSER = gql`
   mutation UpdateParser ($id: ID!, $parser: ParserInput!) {
     updateParser(id: $id, parser: $parser) {
-      institution
+      institution {
+        refId
+        refSlug
+      }
       period
     }
   }

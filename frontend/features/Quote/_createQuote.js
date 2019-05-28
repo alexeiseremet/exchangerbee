@@ -11,8 +11,14 @@ const CreateQuoteForm = ({onSubmit}) => (
 const GQL_CREATE_QUOTE = gql`
   mutation CreateQuote ($quote: QuoteInput!) {
     createQuote(quote: $quote) {
-      institution
-      currency
+      institution {
+        refId
+        refSlug
+      }
+      currency {
+        refId
+        refSlug
+      }
     }
   }
 `

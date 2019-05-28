@@ -64,13 +64,19 @@ const GQL_PARSER = gql`
   query Parser ($id: ID!) {
     parser(id: $id) {
       id
-      institution
+      institution {
+        refId
+        refSlug
+      }
       url
       period
       processedAt
       quotes {
         amount
-        currency
+        currency {
+          refId
+          refSlug
+        }
         xPaths {
           bid
           ask

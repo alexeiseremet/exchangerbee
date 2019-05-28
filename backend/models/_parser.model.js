@@ -3,9 +3,15 @@ const mongoose = require('mongoose')
 const {Schema, model} = mongoose
 const parserSchema = new Schema({
   institution: {
-    type: String,
-    ref: 'Institution',
-    required: true,
+    refId: {
+      type: String,
+      ref: 'Institution',
+      index: true,
+      required: true,
+    },
+    refSlug: {
+      type: String,
+    }
   },
   url: {
     type: String,
@@ -30,9 +36,16 @@ const parserSchema = new Schema({
       trim: true,
     },
     currency: {
-      type: String,
-      ref: 'Currency',
-      required: true,
+      refId: {
+        type: String,
+        ref: 'Currency',
+        unique: true,
+        required: true,
+      },
+      refSlug: {
+        type: String,
+        index: true,
+      }
     },
     xPaths: {
       ask: {

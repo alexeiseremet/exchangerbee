@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-const getDate = (date = new Date()) => (
+const inputDate = (date = new Date()) => (
   moment(+date).format('YYYY-MM-DD')
 )
 
@@ -23,20 +23,26 @@ const FormMarkup = (
 
     <Form
       initialValues={{
-        institution: '',
-        currency: '',
+        institution: {
+          refId: '',
+          refSlug: '',
+        },
+        currency: {
+          refId: '',
+          refSlug: '',
+        },
         amount: '1',
         bid: '',
         ask: '',
         period: 'daily',
         error: '0',
         ...quote,
-        date: quote? getDate(quote.date) : getDate(),
+        date: quote ? inputDate(quote.date) : inputDate(),
       }}
       onSubmit={onSubmit}
     >
       <Input
-        name="institution"
+        name="institution.refId"
         id="quote-institution"
         type="text"
         labelText="Institution"
@@ -44,7 +50,7 @@ const FormMarkup = (
         readOnly={action === 'update'}
       />
       <Input
-        name="currency"
+        name="currency.refId"
         id="quote-currency"
         type="text"
         labelText="Quote currency"

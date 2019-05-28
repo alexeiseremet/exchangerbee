@@ -11,7 +11,10 @@ const CreateParserForm = ({onSubmit}) => (
 const GQL_CREATE_PARSER = gql`
   mutation CreateParser ($parser: ParserInput!) {
     createParser(parser: $parser) {
-      institution
+      institution {
+        refId
+        refSlug
+      }
       period
     }
   }

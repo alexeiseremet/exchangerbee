@@ -3,10 +3,15 @@ const mongoose = require('mongoose')
 const {Schema, model} = mongoose
 const quoteSchema = new Schema({
   institution: {
-    type: String,
-    ref: 'Institution',
-    index: true,
-    required: true,
+    refId: {
+      type: String,
+      ref: 'Institution',
+      required: true,
+    },
+    refSlug: {
+      type: String,
+      index: true,
+    }
   },
   date: {
     type: Date,
@@ -15,10 +20,15 @@ const quoteSchema = new Schema({
     trim: true,
   },
   currency: {
-    type: String,
-    ref: 'Currency',
-    index: true,
-    required: true,
+    refId: {
+      type: String,
+      ref: 'Currency',
+      required: true,
+    },
+    refSlug: {
+      type: String,
+      index: true,
+    }
   },
   amount: {
     type: String,

@@ -7,8 +7,11 @@ import Input from '../Input'
 import Button from '../Button'
 
 const emptyQuote = {
-  amount: '',
-  currency: '',
+  amount: '1',
+  currency: {
+    refId: '',
+    refSlug: '',
+  },
   xPaths: {
     ask: '',
     bid: '',
@@ -30,16 +33,19 @@ const FormMarkup = (
 
     <Form
       initialValues={{
-        institution: '',
+        institution: {
+          refId: '',
+          refSlug: '',
+        },
         url: '',
-        period: '',
+        period: 'daily',
         quotes: [emptyQuote],
         ...parser
       }}
       onSubmit={onSubmit}
     >
       <Input
-        name="institution"
+        name="institution.refId"
         id="parser-institution"
         type="text"
         labelText="Institution"
@@ -77,8 +83,8 @@ const FormMarkup = (
                   />
                   <Input
                     values={form.values}
-                    name={`quotes.${index}.currency`}
-                    id={`quotes.${index}.currency`}
+                    name={`quotes.${index}.currency.refId`}
+                    id={`quotes.${index}.currency.refId`}
                     type="text"
                     labelText="Currency"
                     required

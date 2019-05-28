@@ -43,7 +43,7 @@ class RatesPageMarkup extends React.Component {
                     allQuote.map(({id, institution, currency}) => (
                       <li key={id}>
                         <Link href={`/rate?id=${id}`} as={`/rates/${id}`} prefetch>
-                          <a>{institution}-{currency}</a>
+                          <a>{institution.refId}-{currency.refId}</a>
                         </Link>
                       </li>
                     ))
@@ -68,8 +68,14 @@ const GQL_ALL_QUOTE = gql`
   query AllQuote {
     allQuote {
       id
-      institution
-      currency
+      institution {
+        refId
+        refSlug
+      }
+      currency {
+        refId
+        refSlug
+      }
     }
   }
 `

@@ -16,8 +16,14 @@ const UpdateQuoteForm = ({onSubmit, quote}) => (
 const GQL_UPDATE_QUOTE = gql`
   mutation UpdateQuote ($id: ID!, $quote: QuoteInput!) {
     updateQuote(id: $id, quote: $quote) {
-      institution
-      currency
+      institution {
+        refId
+        refSlug
+      }
+      currency {
+        refId
+        refSlug
+      }
     }
   }
 `

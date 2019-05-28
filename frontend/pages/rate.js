@@ -23,7 +23,7 @@ class RatePageMarkup extends React.Component {
       return null
     }
 
-    const {id, institution} = quote
+    const {id, institution, currency} = quote
 
     return (
       <Layout>
@@ -44,7 +44,7 @@ class RatePageMarkup extends React.Component {
                 <DeleteQuote quote={quote}/>
                 <hr/>
 
-                <h1>{institution}</h1>
+                <h1>{institution.refId}-{currency.refId}</h1>
               </React.Fragment>
             )
           }
@@ -64,8 +64,14 @@ const GQL_QUOTE = gql`
   query Quote ($id: ID!) {
     quote(id: $id) {
       id
-      institution
-      currency
+      institution {
+        refId
+        refSlug
+      }
+      currency {
+        refId
+        refSlug
+      }
       date
       amount
       bid
