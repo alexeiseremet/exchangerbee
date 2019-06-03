@@ -8,7 +8,7 @@ module.exports = `
     bid: String!
     ask: String!
     period: QuotePeriod!
-    error: String!
+    error: String
   }
   
   type QuoteRef {
@@ -30,9 +30,9 @@ module.exports = `
   }
   
   type Mutation {
-    createQuote(quote: QuoteInput!): Quote!
-    updateQuote(id: ID!, quote: QuoteInput!): Quote!
-    deleteQuote(id: ID!): Quote!
+    createQuote(quote: QuoteInput!): Quote
+    updateQuote(id: ID!, quote: QuoteInput!): Quote
+    deleteQuote(id: ID!): Quote
   }
   
   input QuoteInput {

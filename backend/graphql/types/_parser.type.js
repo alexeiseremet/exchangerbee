@@ -39,9 +39,9 @@ module.exports = `
   }
   
   type Mutation {
-    createParser(parser: ParserInput!): Parser!
-    updateParser(id: ID!, parser: ParserInput!): Parser!
-    deleteParser(id: ID!): Parser!
+    createParser(parser: ParserInput!): Parser
+    updateParser(id: ID!, parser: ParserInput!): Parser
+    deleteParser(id: ID!): Parser
   }
   
   input ParserInput {

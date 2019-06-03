@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 
 const inputDate = (date = new Date()) => (
-  moment(+date).format('YYYY-MM-DD')
+  moment(+date).startOf('day').format('YYYY-MM-DD')
 )
 
 import { textAdminPage as t } from '../../lib/locale'

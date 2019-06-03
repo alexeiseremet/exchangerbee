@@ -6,11 +6,14 @@ const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const iPad = devices['iPad Pro landscape']
 
-const updateQuotes = require('./updateQuotesByCrawler')
+const getParser = require('./crawlerGetParser')
+const createUpdateQuotes = require('./crawlerCreateUpdateQuotes')
+const updateParser = require('./crawlerUpdateParser')
 
-const runCrawler = async (parser) => {
+const runCrawler = async () => {
   const startDate = new Date().getTime()
-  const {institution, period, url, quotes} = parser
+  const {data: {allParser}} = await getParser()
+  const {id, institution, period, url, quotes} = allParser[0] || {}
   const result = {
     quotes: []
   }
@@ -55,14 +58,14 @@ const runCrawler = async (parser) => {
         // Take screenshot.
         // const fileName = url.replace(/([-=.:/%?#])/g, '_')
         // await handle[0].screenshot({
-        //   path: `${__dirname}/screenshots/${fileName}_${currency.id}_${key}.jpeg`
+        //   path: `${__dirname}/screenshots/${fileName}_${currency.refSlug}_${key}.jpeg`
         // })
       }
 
       result['quotes'].push(parsedItem)
     }
-  } catch (err) {
-    console.log(`An error occurred on ${url}`)
+  } catch (e) {
+    console.error(`An error occurred on ${url}`)
   } finally {
     await page.close()
   }
@@ -70,7 +73,8 @@ const runCrawler = async (parser) => {
   await browser.close()
   result.time = `${Math.round((new Date().getTime() - startDate) / 1000)} s`
 
-  updateQuotes(result.quotes)
+  await createUpdateQuotes(result.quotes)
+  await updateParser(id)
 
   return result
 }

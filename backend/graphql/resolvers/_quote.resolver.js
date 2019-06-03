@@ -13,6 +13,7 @@ module.exports = {
     allQuote (_, args) {
       return new Promise((resolve, reject) => {
         Quote.find(args)
+          .sort({date: 'asc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -29,7 +30,7 @@ module.exports = {
         })
       })
     },
-    async deleteQuote (_, {id}) {
+    deleteQuote (_, {id}) {
       return new Promise((resolve, reject) => {
         Quote.findOneAndDelete({_id: id})
           .exec((err, res) => {
@@ -37,7 +38,7 @@ module.exports = {
           })
       })
     },
-    async updateQuote (_, {id, quote}) {
+    updateQuote (_, {id, quote}) {
       return new Promise((resolve, reject) => {
         Quote.findOneAndUpdate({_id: id}, {$set: quote}, {new: true})
           .exec((err, res) => {

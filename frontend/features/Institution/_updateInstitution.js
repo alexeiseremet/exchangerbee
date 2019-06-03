@@ -16,8 +16,7 @@ const UpdateInstitutionForm = ({onSubmit, institution}) => (
 const GQL_UPDATE_INSTITUTION = gql`
   mutation UpdateInstitution ($id: ID!, $institution: InstitutionInput!) {
     updateInstitution(id: $id, institution: $institution) {
-      slug
-      name
+      id
     }
   }
 `

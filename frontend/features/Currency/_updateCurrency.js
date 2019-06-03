@@ -16,8 +16,7 @@ const UpdateCurrencyForm = ({onSubmit, currency}) => (
 const GQL_UPDATE_CURRENCY = gql`
   mutation UpdateCurrency ($id: ID!, $currency: CurrencyInput!) {
     updateCurrency(id: $id, currency: $currency) {
-      slug
-      name
+      id
     }
   }
 `

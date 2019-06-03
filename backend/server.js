@@ -10,8 +10,6 @@ const mongoose = require('mongoose')
 const schema = require('./graphql')
 const runCrawler = require('./crawler')
 
-const parser = require('./parser.json')
-
 const PORT = parseInt(process.env.PORT, 10)
 const MONGO_URL = process.env.MONGO_URL
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
@@ -57,7 +55,7 @@ server
     '/crawler',
     async (req, res, next) => {
       try {
-        const data = await runCrawler(parser)
+        const data = await runCrawler()
         res.json(data)
       } catch (error) {
         next(error)

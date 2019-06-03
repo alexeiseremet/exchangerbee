@@ -13,6 +13,7 @@ module.exports = {
     allInstitution (_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
+          .sort({slug: 'desc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -29,7 +30,7 @@ module.exports = {
         })
       })
     },
-    async deleteInstitution (_, {id}) {
+    deleteInstitution (_, {id}) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndDelete({_id: id})
           .exec((err, res) => {
@@ -37,7 +38,7 @@ module.exports = {
           })
       })
     },
-    async updateInstitution (_, {id, institution}) {
+    updateInstitution (_, {id, institution}) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndUpdate({_id: id}, {$set: institution}, {new: true})
           .exec((err, res) => {

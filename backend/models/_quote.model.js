@@ -47,6 +47,7 @@ const quoteSchema = new Schema({
   },
   period: {
     type: String,
+    required: true,
     trim: true,
   },
   error: {

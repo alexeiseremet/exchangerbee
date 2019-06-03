@@ -13,6 +13,7 @@ module.exports = {
     allParser (_, args) {
       return new Promise((resolve, reject) => {
         Parser.find(args)
+          .sort({processedAt: 'asc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -29,7 +30,7 @@ module.exports = {
         })
       })
     },
-    async deleteParser (_, {id}) {
+    deleteParser (_, {id}) {
       return new Promise((resolve, reject) => {
         Parser.findOneAndDelete({_id: id})
           .exec((err, res) => {
@@ -37,7 +38,7 @@ module.exports = {
           })
       })
     },
-    async updateParser (_, {id, parser}) {
+    updateParser (_, {id, parser}) {
       return new Promise((resolve, reject) => {
         Parser.findOneAndUpdate({_id: id}, {$set: parser}, {new: true})
           .exec((err, res) => {

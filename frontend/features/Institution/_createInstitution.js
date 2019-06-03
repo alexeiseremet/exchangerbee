@@ -11,8 +11,7 @@ const CreateInstitutionForm = ({onSubmit}) => (
 const GQL_CREATE_INSTITUTION = gql`
   mutation CreateInstitution ($institution: InstitutionInput!) {
     createInstitution(institution: $institution) {
-      slug
-      name
+      id
     }
   }
 `

@@ -21,9 +21,9 @@ module.exports = `
   }
   
   type Mutation {
-    createInstitution(institution: InstitutionInput!): Institution!
-    updateInstitution(id: ID!, institution: InstitutionInput!): Institution!
-    deleteInstitution(id: ID!): Institution!
+    createInstitution(institution: InstitutionInput!): Institution
+    updateInstitution(id: ID!, institution: InstitutionInput!): Institution
+    deleteInstitution(id: ID!): Institution
   }
     
   input InstitutionInput {

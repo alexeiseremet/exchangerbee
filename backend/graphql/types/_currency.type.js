@@ -21,9 +21,9 @@ module.exports = `
   }
   
   type Mutation {
-    createCurrency(currency: CurrencyInput!): Currency!
-    updateCurrency(id: ID!, currency: CurrencyInput!): Currency!
-    deleteCurrency(id: ID!): Currency!
+    createCurrency(currency: CurrencyInput!): Currency
+    updateCurrency(id: ID!, currency: CurrencyInput!): Currency
+    deleteCurrency(id: ID!): Currency
   }
     
   input CurrencyInput {
