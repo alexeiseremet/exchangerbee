@@ -31,7 +31,7 @@ module.exports = `
   
   type Mutation {
     createQuote(quote: QuoteInput!): Quote
-    updateQuote(id: ID!, quote: QuoteInput!): Quote
+    updateQuote(where: QuoteWhereInput!, quote: QuoteInput!): Quote
     deleteQuote(id: ID!): Quote
   }
   

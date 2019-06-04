@@ -13,7 +13,7 @@ module.exports = {
     allQuote (_, args) {
       return new Promise((resolve, reject) => {
         Quote.find(args)
-          .sort({date: 'asc'})
+          .sort({'date': 'desc', 'currency.refId': 'desc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -38,9 +38,18 @@ module.exports = {
           })
       })
     },
-    updateQuote (_, {id, quote}) {
+    updateQuote (_, {where, quote}) {
       return new Promise((resolve, reject) => {
-        Quote.findOneAndUpdate({_id: id}, {$set: quote}, {new: true})
+        Quote.findOneAndUpdate(
+          where,
+          {$set: quote},
+          {
+            new: true,
+            upsert: true,
+            setDefaultsOnInsert: true,
+            omitUndefined: true,
+          }
+        )
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

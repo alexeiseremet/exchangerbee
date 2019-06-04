@@ -40,7 +40,11 @@ module.exports = {
     },
     updateParser (_, {id, parser}) {
       return new Promise((resolve, reject) => {
-        Parser.findOneAndUpdate({_id: id}, {$set: parser}, {new: true})
+        Parser.findOneAndUpdate(
+          {_id: id},
+          {$set: parser},
+          {new: true}
+        )
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

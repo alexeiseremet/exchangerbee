@@ -13,7 +13,7 @@ module.exports = {
     allInstitution (_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
-          .sort({slug: 'desc'})
+          .sort({slug: 'asc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -40,7 +40,11 @@ module.exports = {
     },
     updateInstitution (_, {id, institution}) {
       return new Promise((resolve, reject) => {
-        Institution.findOneAndUpdate({_id: id}, {$set: institution}, {new: true})
+        Institution.findOneAndUpdate(
+          {_id: id},
+          {$set: institution},
+          {new: true}
+        )
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

@@ -13,7 +13,7 @@ module.exports = {
     allCurrency (_, args) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
-          .sort({name: 'desc'})
+          .sort({name: 'asc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -40,7 +40,11 @@ module.exports = {
     },
     updateCurrency (_, {id, currency}) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndUpdate({_id: id}, {$set: currency}, {new: true})
+        Currency.findOneAndUpdate(
+          {_id: id},
+          {$set: currency},
+          {new: true}
+        )
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
