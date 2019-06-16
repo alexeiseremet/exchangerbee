@@ -27,12 +27,12 @@ const APP_ROUTES = [
     pattern: '/currencies/:slug/:action(update|delete)?',
   },
   {
-    page: 'rates',
-    pattern: '/rates/:action(create)?',
+    page: 'quotes',
+    pattern: '/quotes/:action(create)?',
   },
   {
-    page: 'rate',
-    pattern: '/rates/:id/:action(update|delete)?',
+    page: 'quote',
+    pattern: '/quotes/:id/:action(update|delete)?',
   },
   {
     page: 'parsers',

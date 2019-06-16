@@ -10,9 +10,9 @@ module.exports = {
           })
       })
     },
-    allQuote (_, args) {
+    allQuote (_, {where}) {
       return new Promise((resolve, reject) => {
-        Quote.find(args)
+        Quote.find(where)
           .sort({'date': 'desc', 'currency.refId': 'desc'})
           .exec((err, res) => {
             err ? reject(err) : resolve(res)

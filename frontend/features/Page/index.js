@@ -28,8 +28,8 @@ const Sidebar = (
         </Link>
       </li>
       <li>
-        <Link prefetch href="/rates">
-          <a>Rates</a>
+        <Link prefetch href="/quotes">
+          <a>Quotes</a>
         </Link>
       </li>
       <li>

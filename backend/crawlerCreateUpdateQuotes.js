@@ -17,10 +17,14 @@ const createUpdateQuotes = async (quotes) => {
     let cleanedQuote = {...quote}
     delete cleanedQuote.code
 
+    // whereQuote will be used for search in db.
+    // If quote exist, update it, if not - create new.
     const {institution, date, currency} = quote
     const whereQuote = {institution, currency, date}
 
+    // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
     const quoteHasError = quote.code !== quote.currency.refSlug
+    // Get current day and set hours at midnight.
     const newDate = new Date()
     newDate.setHours(0,0,0,0)
 
@@ -49,8 +53,6 @@ const createUpdateQuotes = async (quotes) => {
         error.response = response
         return Promise.reject(error)
       }
-
-      // return await response.json()
     } catch (error) {
       console.error(error)
     }

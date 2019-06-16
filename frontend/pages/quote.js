@@ -9,7 +9,7 @@ import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 import { UpdateQuote, DeleteQuote } from '../features/Quote'
 
-class RatePageMarkup extends React.Component {
+class QuotePageMarkup extends React.Component {
   static async getInitialProps ({query}) {
     return {
       namespacesRequired: ['common'],
@@ -37,7 +37,7 @@ class RatePageMarkup extends React.Component {
           {
             !action && (
               <React.Fragment>
-                <Link href={`/rate?id=${id}&action=update`} as={`/rates/${id}/update`} prefetch>
+                <Link href={`/quote?id=${id}&action=update`} as={`/quotes/${id}/update`} prefetch>
                   <a>{'Update'}</a>
                 </Link>
                 &nbsp;|&nbsp;
@@ -57,7 +57,7 @@ class RatePageMarkup extends React.Component {
 }
 
 // i18n.
-const RatePageI18N = withNamespaces('common')(RatePageMarkup)
+const QuotePageI18N = withNamespaces('common')(QuotePageMarkup)
 
 // Container.
 const GQL_QUOTE = gql`
@@ -96,4 +96,4 @@ export default compose(
       }),
     }
   )
-)(RatePageI18N)
+)(QuotePageI18N)

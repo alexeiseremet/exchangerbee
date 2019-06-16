@@ -14,8 +14,8 @@ const UpdateQuoteForm = ({onSubmit, quote}) => (
 )
 
 const GQL_UPDATE_QUOTE = gql`
-  mutation UpdateQuote ($id: ID!, $quote: QuoteInput!) {
-    updateQuote(id: $id, quote: $quote) {
+  mutation UpdateQuote ($where: QuoteWhereInput!, $quote: QuoteInput!) {
+    updateQuote(where: $where, quote: $quote) {
       id
     }
   }
@@ -31,10 +31,13 @@ export default compose(
           formValues,
           {setStatus, setSubmitting}
         ) => {
+          const {institution, currency, date} = quote
+          const whereQuote = {institution, currency, date}
+
           mutate({
             variables: {
-              id: quote.id,
-              quote: excludeKeys(formValues, ['id', '__typename']),
+              where: excludeKeys(whereQuote, ['id', '__typename']),
+              quote: excludeKeys(formValues, ['id', '__typename', 'institution', 'currency']),
             }
           })
             .then(({data: {updateQuote}}) => {

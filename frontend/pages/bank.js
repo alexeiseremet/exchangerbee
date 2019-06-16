@@ -4,6 +4,7 @@ import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
+import List from '../features/List'
 
 import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
@@ -18,7 +19,7 @@ class BankPageMarkup extends React.Component {
   }
 
   render () {
-    const {institution, query: {action}} = this.props
+    const {query: {action}, institution, allQuote} = this.props
     if (!institution) {
       return null
     }
@@ -49,6 +50,21 @@ class BankPageMarkup extends React.Component {
             )
           }
 
+          {
+            allQuote && (
+              <table>
+                {allQuote.map((quote, i) => (
+                  <tr key={i}>
+                    <td>{quote.currency.refId}</td>
+                    <td>{quote.amount}</td>
+                    <td>{quote.bid}</td>
+                    <td>{quote.ask}</td>
+                  </tr>
+                ))}
+              </table>
+            )
+          }
+
           {action && <UpdateInstitution institution={institution}/>}
         </Page>
       </Layout>
@@ -61,11 +77,19 @@ const BankPageI18N = withNamespaces('common')(BankPageMarkup)
 
 // Container.
 const GQL_INSTITUTION = gql`
-  query Institution ($slug: String!) {
+  query BankPage ($slug: String!) {
     institution(slug: $slug) {
       id
       slug
       name
+    }
+    allQuote {
+      currency {
+        refId
+      }
+      amount
+      bid
+      ask
     }
   }
 `
@@ -79,8 +103,9 @@ export default compose(
           slug: query.slug,
         },
       }),
-      props: ({data: {institution}}) => ({
-        institution
+      props: ({data: {institution, allQuote}}) => ({
+        institution,
+        allQuote,
       }),
     }
   )
