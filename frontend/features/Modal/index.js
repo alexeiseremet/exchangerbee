@@ -1,17 +1,17 @@
-import './styles.scss'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
+import './styles.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { gql } from 'apollo-boost';
+import { compose, graphql } from 'react-apollo';
 
-import Svg from '../Svg'
-import iconClose from '../../assets/images/icon-close.svg?sprite'
+import Svg from '../Svg';
+import iconClose from '../../assets/images/icon-close.svg?sprite';
 
 export class ModalMarkup extends React.Component {
-  constructor (props) {
-    super(props)
-    this.backdrop = React.createRef()
-    this.inner = React.createRef()
+  constructor(props) {
+    super(props);
+    this.backdrop = React.createRef();
+    this.inner = React.createRef();
   }
 
   /**
@@ -21,10 +21,10 @@ export class ModalMarkup extends React.Component {
    */
   handleKeyDown = (event) => {
     if (event.keyCode === 27) {
-      event.stopPropagation()
-      this.props.closeModal()
+      event.stopPropagation();
+      this.props.closeModal();
     }
-  }
+  };
 
   /**
    * Close Modal when click on backdrop element.
@@ -33,26 +33,26 @@ export class ModalMarkup extends React.Component {
    */
   handleOutsideClick = (event) => {
     if (event.target === this.backdrop.current) {
-      this.props.closeModal()
+      this.props.closeModal();
     }
-  }
+  };
 
   /**
    * Focus Modal after show to activate keyDown handler.
    */
-  componentDidUpdate () {
-    const {modal} = this.props
+  componentDidUpdate() {
+    const { modal } = this.props;
     if (modal && modal.show) {
-      this.inner.current.focus()
+      this.inner.current.focus();
     }
   }
 
-  render () {
-    const {modal, closeModal} = this.props
-    const {show, title, content} = modal
+  render() {
+    const { modal, closeModal } = this.props;
+    const { show, title, content } = modal;
 
     if (!show) {
-      return null
+      return null;
     }
 
     return ReactDOM.createPortal(
@@ -95,30 +95,30 @@ const GQL_MODAL = gql`
       content
     }
   }
-`
+`;
 
 const GQL_CLOSE_MODAL = gql`
   mutation CloseModal {
-    modalToggle(title: "", content: "") @client
+    modalToggle @client
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_MODAL,
     {
-      props: ({data}) => ({
-        modal: data.modal
-      })
+      props: ({ data: { modal } }) => ({
+        modal,
+      }),
     }
   ),
   graphql(
     GQL_CLOSE_MODAL,
     {
-      props: ({mutate}) => ({
-        closeModal: mutate
+      props: ({ mutate }) => ({
+        closeModal: mutate,
       })
     }
   ),
-)(ModalMarkup)
+)(ModalMarkup);
 

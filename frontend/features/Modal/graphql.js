@@ -1,6 +1,6 @@
-import { gql } from 'apollo-boost'
+import { gql } from 'apollo-boost';
 
-const GQL_MODAL_ID = 'modal'
+const GQL_MODAL_ID = 'modal';
 
 const query = gql`
   query Modal {
@@ -12,7 +12,7 @@ const query = gql`
       __typename
     }
   }
-`
+`;
 
 export const ModalType = `  
   type Modal {
@@ -29,7 +29,8 @@ export const ModalType = `
   extend type Mutation {
     modalToggle
   }
-`
+`;
+
 export const ModalDefaultState = {
   modal: {
     id: GQL_MODAL_ID,
@@ -38,17 +39,18 @@ export const ModalDefaultState = {
     content: '',
     __typename: 'Modal',
   }
-}
+};
 
 export const ModalResolvers = {
   Query: {
-    modal (_, __, {cache}) {
-      return cache.readQuery({query})
+    modal(_, __, { cache }) {
+      return cache.readQuery({ query })
     },
   },
   Mutation: {
-    modalToggle (_, {title, content}, {cache}) {
-      const prevModal = cache.readQuery({query})
+    modalToggle(_, variables, { cache }) {
+      const prevModal = cache.readQuery({ query });
+      const { title = '', content = '' } = variables || prevModal;
 
       cache.writeQuery({
         query,
@@ -60,12 +62,12 @@ export const ModalResolvers = {
             content,
           }
         }
-      })
+      });
 
-      return null
+      return null;
     },
   }
-}
+};
 
 // Other example.
 // modal (_, __, {cache, getCacheKey}) {

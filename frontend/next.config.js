@@ -1,27 +1,27 @@
-const withPlugins = require('next-compose-plugins')
-const optimizedImages = require('next-optimized-images')
-const sass = require('@zeit/next-sass')
+const withPlugins = require('next-compose-plugins');
+const optimizedImages = require('next-optimized-images');
+const sass = require('@zeit/next-sass');
 
 const nextConfig = {
   webpack: config => {
     // Unshift polyfills in main entrypoint.
     const {
       entry: originalEntry,
-    } = config
+    } = config;
 
     config.entry = async () => {
-      const entries = await originalEntry()
+      const entries = await originalEntry();
 
       if (entries['main.js']) {
         entries['main.js'].unshift('./polyfills.js')
       }
 
-      return entries
-    }
+      return entries;
+    };
 
-    return config
+    return config;
   },
-}
+};
 
 module.exports = withPlugins(
   [
@@ -33,7 +33,9 @@ module.exports = withPlugins(
         ]
       }
     }],
-    optimizedImages,
+    [optimizedImages, {
+      imagesFolder: './assets/images',
+    }],
   ],
   nextConfig,
-)
+);
