@@ -1,14 +1,15 @@
-import React from 'react'
-import { Link, withNamespaces } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
+import React from 'react';
+import moment from 'moment';
+import { Link, withNamespaces } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
 
-import List from '../features/List'
-import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
-import { CreateQuote } from '../features/Quote'
+import List from '../features/List';
+import { gql } from 'apollo-boost';
+import { compose, graphql } from 'react-apollo';
+import { CreateQuote } from '../features/Quote';
 
 class QuotesPageMarkup extends React.Component {
   static async getInitialProps ({query}) {
@@ -19,7 +20,7 @@ class QuotesPageMarkup extends React.Component {
   }
 
   render () {
-    const {allQuote, query: {action}} = this.props
+    const {allQuote, query: {action}} = this.props;
 
     return (
       <Layout>
@@ -40,10 +41,10 @@ class QuotesPageMarkup extends React.Component {
 
                 <List type="ordered">
                   {
-                    allQuote.map(({id, institution, currency}) => (
+                    allQuote.map(({id, institution, currency, date}) => (
                       <li key={id}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
-                          <a>{institution.refId}-{currency.refId}</a>
+                          <a>{moment(+date).format('YYYY-MM-DD')}---{institution.refId}---{currency.refId}</a>
                         </Link>
                       </li>
                     ))
@@ -61,7 +62,7 @@ class QuotesPageMarkup extends React.Component {
 }
 
 // i18n.
-const QuotesPageI18N = withNamespaces('common')(QuotesPageMarkup)
+const QuotesPageI18N = withNamespaces('common')(QuotesPageMarkup);
 
 // Container.
 const GQL_ALL_QUOTE = gql`
@@ -76,9 +77,10 @@ const GQL_ALL_QUOTE = gql`
         refId
         refSlug
       }
+      date
     }
   }
-`
+`;
 
 export default compose(
   graphql(

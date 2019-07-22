@@ -52,7 +52,7 @@ module.exports = `
     institution: QuoteRefInput
     currency: QuoteRefInput
     date: String
-    period: String
+    period: QuotePeriod
     error: String
   }
   

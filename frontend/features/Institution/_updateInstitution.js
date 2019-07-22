@@ -5,13 +5,13 @@ import excludeKeys from '../../lib/excludeKeys'
 
 import FormMarkup from './_formMarkup'
 
-const UpdateInstitutionForm = ({onSubmit, institution}) => (
+const UpdateInstitutionForm = ({ onSubmit, institution }) => (
   <FormMarkup
     action={'update'}
     onSubmit={onSubmit}
     institution={institution}
   />
-)
+);
 
 const GQL_UPDATE_INSTITUTION = gql`
   mutation UpdateInstitution ($id: ID!, $institution: InstitutionInput!) {
@@ -19,17 +19,17 @@ const GQL_UPDATE_INSTITUTION = gql`
       id
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_UPDATE_INSTITUTION,
     {
-      props: ({mutate, ownProps: {institution}}) => ({
+      props: ({ mutate, ownProps: { institution } }) => ({
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting}
+          { setStatus, setSubmitting }
         ) => {
           mutate({
             variables: {
@@ -37,14 +37,14 @@ export default compose(
               institution: excludeKeys(formValues, ['id', 'slug', '__typename']),
             }
           })
-            .then(({data: {updateInstitution}}) => {
-              console.dir(updateInstitution)
-            })
-            .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
-              console.error(err)
-            })
+          .then(({ data: { updateInstitution } }) => {
+            console.dir(updateInstitution)
+          })
+          .catch(err => {
+            setStatus('error');
+            setSubmitting(false);
+            console.error(err)
+          })
         }
       }),
       options: {

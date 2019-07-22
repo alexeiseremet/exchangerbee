@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const {Schema, model} = mongoose
+const { Schema, model } = mongoose;
 const institutionSchema = new Schema({
   slug: {
     type: String,
@@ -11,6 +11,11 @@ const institutionSchema = new Schema({
     trim: true,
   },
   name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  category: {
     type: String,
     required: true,
     trim: true,

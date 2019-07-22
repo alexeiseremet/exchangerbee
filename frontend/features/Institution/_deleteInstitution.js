@@ -4,7 +4,7 @@ import { compose, graphql } from 'react-apollo'
 
 const DeleteInstitutionButton = ({onSubmit}) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
-)
+);
 
 const GQL_DELETE_INSTITUTION = gql`
   mutation DeleteInstitution ($id: ID!) {
@@ -12,7 +12,7 @@ const GQL_DELETE_INSTITUTION = gql`
       id
     }
   }
-`
+`;
 
 export default compose(
   graphql(
@@ -20,7 +20,7 @@ export default compose(
     {
       props: ({mutate, ownProps: {institution}}) => ({
         onSubmit: (elem) => {
-          elem.preventDefault()
+          elem.preventDefault();
 
           if (window.confirm('Do you really want to detele?')) {
             mutate({

@@ -1,28 +1,28 @@
-const {Institution} = require('../../models')
+const { Institution } = require('../../models');
 
 module.exports = {
   Query: {
-    institution (_, args) {
+    institution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.findOne(args)
-          .exec((err, res) => {
-            err ? reject(err) : resolve(res)
-          })
+        .exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
       })
     },
-    allInstitution (_, args) {
+    allInstitution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
-          .sort({slug: 'asc'})
-          .exec((err, res) => {
-            err ? reject(err) : resolve(res)
-          })
+        .sort({ slug: 'asc' })
+        .exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
       })
     }
   },
   Mutation: {
-    async createInstitution (_, {institution}) {
-      const newInstitution = await new Institution(institution)
+    async createInstitution(_, { institution }) {
+      const newInstitution = await new Institution(institution);
 
       return new Promise((resolve, reject) => {
         newInstitution.save((err, res) => {
@@ -30,25 +30,25 @@ module.exports = {
         })
       })
     },
-    deleteInstitution (_, {id}) {
+    deleteInstitution(_, { id }) {
       return new Promise((resolve, reject) => {
-        Institution.findOneAndDelete({_id: id})
-          .exec((err, res) => {
-            err ? reject(err) : resolve(res)
-          })
+        Institution.findOneAndDelete({ _id: id })
+        .exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
       })
     },
-    updateInstitution (_, {id, institution}) {
+    updateInstitution(_, { id, institution }) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndUpdate(
-          {_id: id},
-          {$set: institution},
-          {new: true}
+          { _id: id },
+          { $set: institution },
+          { new: true }
         )
-          .exec((err, res) => {
-            err ? reject(err) : resolve(res)
-          })
+        .exec((err, res) => {
+          err ? reject(err) : resolve(res)
+        })
       })
     },
   },
-}
+};

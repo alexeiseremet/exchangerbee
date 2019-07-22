@@ -6,7 +6,7 @@ import FormMarkup from './_formMarkup'
 
 const CreateInstitutionForm = ({onSubmit}) => (
   <FormMarkup action={'create'} onSubmit={onSubmit}/>
-)
+);
 
 const GQL_CREATE_INSTITUTION = gql`
   mutation CreateInstitution ($institution: InstitutionInput!) {
@@ -14,7 +14,7 @@ const GQL_CREATE_INSTITUTION = gql`
       id
     }
   }
-`
+`;
 
 export default compose(
   graphql(
@@ -30,12 +30,12 @@ export default compose(
             variables: {institution: formValues}
           })
             .then(({data: {createInstitution}}) => {
-              resetForm()
+              resetForm();
               console.dir(createInstitution)
             })
             .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
+              setStatus('error');
+              setSubmitting(false);
               console.error(err)
             })
         }

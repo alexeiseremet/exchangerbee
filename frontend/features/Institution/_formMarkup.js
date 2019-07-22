@@ -20,6 +20,7 @@ const FormMarkup = (
       initialValues={{
         name: '',
         slug: '',
+        category: '',
         ...institution
       }}
       onSubmit={onSubmit}
@@ -32,6 +33,13 @@ const FormMarkup = (
         required
       />
       <Input
+        name="category"
+        id="institution-category"
+        type="text"
+        labelText="Category"
+        required
+      />
+      <Input
         name="slug"
         id="institution-slug"
         type="text"
@@ -41,6 +49,6 @@ const FormMarkup = (
       />
     </Form>
   </React.Fragment>
-)
+);
 
 export default FormMarkup
