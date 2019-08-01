@@ -2,7 +2,7 @@
 // const dotenv = require('dotenv')
 // dotenv.config()
 
-const fetch = require('isomorphic-unfetch')
+const fetch = require('isomorphic-unfetch');
 
 const GQL_UPDATE_PARSER = `
   mutation UpdateParser ($id: ID!, $parser: ParserInput!) {
@@ -10,7 +10,7 @@ const GQL_UPDATE_PARSER = `
       id
     }
   }
-`
+`;
 
 const updateParser = async (id) => {
   try {
@@ -29,18 +29,19 @@ const updateParser = async (id) => {
           }
         }
       })
-    })
+    });
 
     if (!response.ok) {
-      let error = new Error(response.statusText)
-      error.response = response
+      let error = new Error(response.statusText);
+      error.response = response;
       return Promise.reject(error)
     }
 
     return await response.json()
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error)
   }
-}
+};
 
-module.exports = updateParser
+module.exports = updateParser;

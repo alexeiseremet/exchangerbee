@@ -1,19 +1,22 @@
-const {Quote} = require('../../models')
+const { Quote } = require('../../models');
+const flattenObject = require('../../flattenObject');
 
 module.exports = {
   Query: {
-    quote (_, {id, ...args}) {
+    quote(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Quote.findOne({_id: id, ...args})
+        Quote.findOne({ _id: id, ...args })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    allQuote (_, {where}) {
+    allQuote(_, { where }) {
+      where = flattenObject(where);
+
       return new Promise((resolve, reject) => {
         Quote.find(where)
-          .sort({'date': 'desc', 'currency.refId': 'desc'})
+          .sort({ 'date': 'desc', 'currency.refId': 'desc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -21,8 +24,8 @@ module.exports = {
     }
   },
   Mutation: {
-    async createQuote (_, {quote}) {
-      const newQuote = await new Quote(quote)
+    async createQuote(_, { quote }) {
+      const newQuote = await new Quote(quote);
 
       return new Promise((resolve, reject) => {
         newQuote.save((err, res) => {
@@ -30,19 +33,19 @@ module.exports = {
         })
       })
     },
-    deleteQuote (_, {id}) {
+    deleteQuote(_, { id }) {
       return new Promise((resolve, reject) => {
-        Quote.findOneAndDelete({_id: id})
+        Quote.findOneAndDelete({ _id: id })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    updateQuote (_, {where, quote}) {
+    updateQuote(_, { where, quote }) {
       return new Promise((resolve, reject) => {
         Quote.findOneAndUpdate(
           where,
-          {$set: quote},
+          { $set: quote },
           {
             new: true,
             upsert: true,
@@ -56,4 +59,4 @@ module.exports = {
       })
     },
   },
-}
+};

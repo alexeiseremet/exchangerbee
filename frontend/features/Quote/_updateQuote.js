@@ -5,13 +5,13 @@ import { compose, graphql } from 'react-apollo'
 import excludeKeys from '../../lib/excludeKeys'
 import FormMarkup from './_formMarkup'
 
-const UpdateQuoteForm = ({onSubmit, quote}) => (
+const UpdateQuoteForm = ({ onSubmit, quote }) => (
   <FormMarkup
     action={'update'}
     onSubmit={onSubmit}
     quote={quote}
   />
-)
+);
 
 const GQL_UPDATE_QUOTE = gql`
   mutation UpdateQuote ($where: QuoteWhereInput!, $quote: QuoteInput!) {
@@ -19,20 +19,20 @@ const GQL_UPDATE_QUOTE = gql`
       id
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_UPDATE_QUOTE,
     {
-      props: ({mutate, ownProps: {quote}}) => ({
+      props: ({ mutate, ownProps: { quote } }) => ({
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting}
+          { setStatus, setSubmitting }
         ) => {
-          const {institution, currency, date} = quote
-          const whereQuote = {institution, currency, date}
+          const { institution, currency, date } = quote;
+          const whereQuote = { institution, currency, date };
 
           mutate({
             variables: {
@@ -40,12 +40,12 @@ export default compose(
               quote: excludeKeys(formValues, ['id', '__typename', 'institution', 'currency']),
             }
           })
-            .then(({data: {updateQuote}}) => {
+            .then(({ data: { updateQuote } }) => {
               console.dir(updateQuote)
             })
             .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
+              setStatus('error');
+              setSubmitting(false);
               console.error(err)
             })
         }

@@ -10,20 +10,20 @@ import { compose, graphql } from 'react-apollo'
 import { UpdateParser, DeleteParser } from '../features/Parser'
 
 class ParserPageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query,
     }
   }
 
-  render () {
-    const {parser, query: {action}} = this.props
+  render() {
+    const { query: { action }, parser } = this.props;
     if (!parser) {
       return null
     }
 
-    const {id, url} = parser
+    const { id, url } = parser;
 
     return (
       <Layout>
@@ -41,15 +41,15 @@ class ParserPageMarkup extends React.Component {
                   <a>{'Update'}</a>
                 </Link>
                 &nbsp;|&nbsp;
-                <DeleteParser parser={parser}/>
-                <hr/>
+                <DeleteParser parser={parser} />
+                <hr />
 
                 <h1>{url}</h1>
               </React.Fragment>
             )
           }
 
-          {action && <UpdateParser parser={parser}/>}
+          {action && <UpdateParser parser={parser} />}
         </Page>
       </Layout>
     )
@@ -57,7 +57,7 @@ class ParserPageMarkup extends React.Component {
 }
 
 // i18n.
-const ParserPageI18N = withNamespaces('common')(ParserPageMarkup)
+const ParserPageI18N = withNamespaces('common')(ParserPageMarkup);
 
 // Container.
 const GQL_PARSER = gql`
@@ -85,18 +85,18 @@ const GQL_PARSER = gql`
       }
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_PARSER,
     {
-      options: ({query}) => ({
+      options: ({ query }) => ({
         variables: {
           id: query.id,
         },
       }),
-      props: ({data: {parser}}) => ({
+      props: ({ data: { parser } }) => ({
         parser
       }),
     }

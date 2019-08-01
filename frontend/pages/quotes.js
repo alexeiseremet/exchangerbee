@@ -12,15 +12,15 @@ import { compose, graphql } from 'react-apollo';
 import { CreateQuote } from '../features/Quote';
 
 class QuotesPageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query
     }
   }
 
-  render () {
-    const {allQuote, query: {action}} = this.props;
+  render() {
+    const { query: { action }, allQuote } = this.props;
 
     return (
       <Layout>
@@ -37,14 +37,15 @@ class QuotesPageMarkup extends React.Component {
                 <Link href={`/quotes?action=create`} as={`/quotes/create`} prefetch>
                   <a>{'Create'}</a>
                 </Link>
-                <hr/>
+                <hr />
 
                 <List type="ordered">
                   {
-                    allQuote.map(({id, institution, currency, date}) => (
+                    allQuote.map(({ id, institution, currency, date }) => (
                       <li key={id}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
-                          <a>{moment(+date).format('YYYY-MM-DD')}---{institution.refId}---{currency.refId}</a>
+                          <a>{moment(+date)
+                            .format('YYYY-MM-DD')}---{institution.refId}---{currency.refId}</a>
                         </Link>
                       </li>
                     ))
@@ -54,7 +55,7 @@ class QuotesPageMarkup extends React.Component {
             )
           }
 
-          {action && <CreateQuote/>}
+          {action && <CreateQuote />}
         </Page>
       </Layout>
     )
@@ -86,7 +87,7 @@ export default compose(
   graphql(
     GQL_ALL_QUOTE,
     {
-      props: ({data: {allQuote}}) => ({
+      props: ({ data: { allQuote } }) => ({
         allQuote
       })
     }

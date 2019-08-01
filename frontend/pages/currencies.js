@@ -11,15 +11,15 @@ import { compose, graphql } from 'react-apollo'
 import { CreateCurrency } from '../features/Currency'
 
 class BanksPageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query
     }
   }
 
-  render () {
-    const {allCurrency, query: {action}} = this.props
+  render() {
+    const { query: { action }, allCurrency } = this.props;
 
     return (
       <Layout>
@@ -36,11 +36,11 @@ class BanksPageMarkup extends React.Component {
                 <Link href={`/currencies?action=create`} as={`/currencies/create`} prefetch>
                   <a>{'Create'}</a>
                 </Link>
-                <hr/>
+                <hr />
 
                 <List type="ordered">
                   {
-                    allCurrency.map(({id, slug, name}) => (
+                    allCurrency.map(({ id, slug, name }) => (
                       <li key={id}>
                         <Link href={`/currency?slug=${slug}`} as={`/currencies/${slug}`} prefetch>
                           <a>{name}</a>
@@ -53,7 +53,7 @@ class BanksPageMarkup extends React.Component {
             )
           }
 
-          {action && <CreateCurrency/>}
+          {action && <CreateCurrency />}
         </Page>
       </Layout>
     )
@@ -61,7 +61,7 @@ class BanksPageMarkup extends React.Component {
 }
 
 // i18n.
-const BanksPageI18N = withNamespaces('common')(BanksPageMarkup)
+const BanksPageI18N = withNamespaces('common')(BanksPageMarkup);
 
 // Container.
 const GQL_ALL_CURRENCY = gql`
@@ -72,13 +72,13 @@ const GQL_ALL_CURRENCY = gql`
       name
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_ALL_CURRENCY,
     {
-      props: ({data: {allCurrency}}) => ({
+      props: ({ data: { allCurrency } }) => ({
         allCurrency
       })
     }

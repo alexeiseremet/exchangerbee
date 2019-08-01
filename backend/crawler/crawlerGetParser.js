@@ -2,7 +2,7 @@
 // const dotenv = require('dotenv')
 // dotenv.config()
 
-const fetch = require('isomorphic-unfetch')
+const fetch = require('isomorphic-unfetch');
 
 const GQL_ALL_PARSER = `
   query AllParser {
@@ -29,7 +29,7 @@ const GQL_ALL_PARSER = `
       }
     }
   }
-`
+`;
 
 const getParser = async () => {
   try {
@@ -42,18 +42,19 @@ const getParser = async () => {
       body: JSON.stringify({
         query: GQL_ALL_PARSER
       })
-    })
+    });
 
     if (!response.ok) {
-      let error = new Error(response.statusText)
-      error.response = response
+      let error = new Error(response.statusText);
+      error.response = response;
       return Promise.reject(error)
     }
 
     return await response.json()
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error)
   }
-}
+};
 
-module.exports = getParser
+module.exports = getParser;

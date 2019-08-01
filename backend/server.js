@@ -8,7 +8,7 @@ const server = express();
 
 const mongoose = require('mongoose');
 const schema = require('./graphql');
-const runCrawler = require('./crawler');
+const runCrawler = require('./crawler/');
 
 const PORT = parseInt(process.env.PORT, 10);
 const MONGO_URL = process.env.MONGO_URL;
@@ -26,14 +26,14 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
       useNewUrlParser: true,
     }
   )
-  .then(() => {
-    console.log('MongoDB connected');
-    clearTimeout(timer);
-  })
-  .catch(err => {
-    console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
-    timer = setTimeout(connectToMongoDB, 5000);
-  })
+    .then(() => {
+      console.log('MongoDB connected');
+      clearTimeout(timer);
+    })
+    .catch(err => {
+      console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
+      timer = setTimeout(connectToMongoDB, 5000);
+    })
 }());
 
 // GraphqQL server route.

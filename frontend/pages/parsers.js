@@ -11,15 +11,15 @@ import { compose, graphql } from 'react-apollo'
 import { CreateParser } from '../features/Parser'
 
 class ParsersPageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query
     }
   }
 
-  render () {
-    const {allParser, query: {action}} = this.props
+  render() {
+    const { query: { action }, allParser } = this.props;
 
     return (
       <Layout>
@@ -36,11 +36,11 @@ class ParsersPageMarkup extends React.Component {
                 <Link href={`/parsers?action=create`} as={`/parsers/create`} prefetch>
                   <a>{'Create'}</a>
                 </Link>
-                <hr/>
+                <hr />
 
                 <List type="ordered">
                   {
-                    allParser.map(({id, url}) => (
+                    allParser.map(({ id, url }) => (
                       <li key={id}>
                         <Link href={`/parser?id=${id}`} as={`/parsers/${id}`} prefetch>
                           <a>{url}</a>
@@ -53,7 +53,7 @@ class ParsersPageMarkup extends React.Component {
             )
           }
 
-          {action && <CreateParser/>}
+          {action && <CreateParser />}
         </Page>
       </Layout>
     )
@@ -61,7 +61,7 @@ class ParsersPageMarkup extends React.Component {
 }
 
 // i18n.
-const ParsersPageI18N = withNamespaces('common')(ParsersPageMarkup)
+const ParsersPageI18N = withNamespaces('common')(ParsersPageMarkup);
 
 // Container.
 const GQL_ALL_PARSER = gql`
@@ -72,13 +72,13 @@ const GQL_ALL_PARSER = gql`
       period
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_ALL_PARSER,
     {
-      props: ({data: {allParser}}) => ({
+      props: ({ data: { allParser } }) => ({
         allParser
       })
     }

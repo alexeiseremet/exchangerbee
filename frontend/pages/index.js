@@ -1,26 +1,26 @@
-import React from 'react';
-import { withNamespaces } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
-import Metadata from '../features/Metadata';
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import ModalHandler from '../features/Modal/ModalHandler';
-import Modal from '../features/Modal';
+import React from 'react'
+import { withNamespaces } from '../lib/i18n'
+import { textIndexPage as t } from '../lib/locale'
+import Metadata from '../features/Metadata'
+import Layout from '../features/Layout'
+import Page from '../features/Page'
+import ModalHandler from '../features/Modal/ModalHandler'
+import Modal from '../features/Modal'
 
 const AnyTypeModalContent = (
-  <button style={{color: 'red'}} onClick={() => alert('hi')}>
+  <button style={{ color: 'red' }} onClick={() => alert('hi')}>
     Any type content
   </button>
 );
 
 class IndexPageMarkup extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps() {
     return {
       namespacesRequired: ['common'],
     }
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
         <Layout>
@@ -32,14 +32,14 @@ class IndexPageMarkup extends React.Component {
           />
 
           <Page>
-            <ModalHandler title="Modal title" content="modal content"/>
-            <ModalHandler title="Any type of content 1" content={AnyTypeModalContent}/>
-            <ModalHandler title="Any type of content 2" content={AnyTypeModalContent}/>
-            <ModalHandler title="Any type of content 3" content={AnyTypeModalContent}/>
-            <ModalHandler title="Any type of content 4" content={AnyTypeModalContent}/>
+            <ModalHandler title="Modal title" content="modal content" />
+            <ModalHandler title="Any type of content 1" content={AnyTypeModalContent} />
+            <ModalHandler title="Any type of content 2" content={AnyTypeModalContent} />
+            <ModalHandler title="Any type of content 3" content={AnyTypeModalContent} />
+            <ModalHandler title="Any type of content 4" content={AnyTypeModalContent} />
           </Page>
         </Layout>
-        <Modal/>
+        <Modal />
       </React.Fragment>
     )
   }

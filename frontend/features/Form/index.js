@@ -13,32 +13,31 @@ export default (
     children,
   }
 ) => (
-  <Formik
-    initialValues={initialValues}
-    onSubmit={onSubmit}
-    validationSchema={validationSchema}
-    render={props => {
-      const classes = classnames(
-        'form',
-      )
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+      render={props => {
+        const classes = classnames(
+          'form',
+        );
 
-      return (
-        <FormikForm className={classes}>
-          <Items children={children} {...props}/>
+        return (
+          <FormikForm className={classes}>
+            <Items children={children} {...props} />
 
-          <div className="form__row">
-            <Button
-              type="submit"
-              labelText="Submit"
-              disabled={props.isSubmitting}
-            />
+            <div className="form__row">
+              <Button
+                type="submit"
+                labelText="Submit"
+                disabled={props.isSubmitting}
+              />
 
-            {props.errors.name && <div>{props.errors.name}</div>}
-          </div>
-        </FormikForm>
-      )
-    }}
-    noValidate
-  />
-)
-
+              {props.errors.name && <div>{props.errors.name}</div>}
+            </div>
+          </FormikForm>
+        )
+      }}
+      noValidate
+    />
+  )

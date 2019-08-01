@@ -8,7 +8,7 @@ module.exports = `
     bid: String!
     ask: String!
     period: QuotePeriod!
-    error: String
+    error: QuoteError!
   }
   
   type QuoteRef {
@@ -43,8 +43,8 @@ module.exports = `
     amount: String
     bid: String
     ask: String
-    period: String
-    error: String
+    period: QuotePeriod
+    error: QuoteError
   }
   
   input QuoteWhereInput {
@@ -53,7 +53,7 @@ module.exports = `
     currency: QuoteRefInput
     date: String
     period: QuotePeriod
-    error: String
+    error: QuoteError
   }
   
   input QuoteRefInput {
@@ -66,6 +66,11 @@ module.exports = `
     monthly
   }
   
+  enum QuoteError {
+    yes
+    no
+  }
+  
   enum QuoteOrderByInput {
     id_ASC
     id_DESC
@@ -76,4 +81,4 @@ module.exports = `
     error_ASC
     error_DESC
   }
-`
+`;

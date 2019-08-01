@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const {Schema, model} = mongoose
+const { Schema, model } = mongoose;
 const quoteSchema = new Schema({
   institution: {
     refId: {
@@ -51,9 +51,9 @@ const quoteSchema = new Schema({
     trim: true,
   },
   error: {
-    type: Boolean,
+    type: String,
     trim: true,
   },
-})
+});
 
-module.exports = model('Quote', quoteSchema)
+module.exports = model('Quote', quoteSchema);

@@ -1,8 +1,8 @@
-const {Currency} = require('../../models')
+const { Currency } = require('../../models');
 
 module.exports = {
   Query: {
-    currency (_, args) {
+    currency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.findOne(args)
           .exec((err, res) => {
@@ -10,10 +10,10 @@ module.exports = {
           })
       })
     },
-    allCurrency (_, args) {
+    allCurrency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
-          .sort({name: 'asc'})
+          .sort({ name: 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   Mutation: {
-    async createCurrency (_, {currency}) {
+    async createCurrency(_, { currency }) {
       const newCurrency = await new Currency(currency)
 
       return new Promise((resolve, reject) => {
@@ -30,20 +30,20 @@ module.exports = {
         })
       })
     },
-    deleteCurrency (_, {id}) {
+    deleteCurrency(_, { id }) {
       return new Promise((resolve, reject) => {
-        Currency.findOneAndDelete({_id: id})
+        Currency.findOneAndDelete({ _id: id })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    updateCurrency (_, {id, currency}) {
+    updateCurrency(_, { id, currency }) {
       return new Promise((resolve, reject) => {
         Currency.findOneAndUpdate(
-          {_id: id},
-          {$set: currency},
-          {new: true}
+          { _id: id },
+          { $set: currency },
+          { new: true }
         )
           .exec((err, res) => {
             err ? reject(err) : resolve(res)

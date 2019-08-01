@@ -1,12 +1,12 @@
-import React from 'react';
-import { gql } from 'apollo-boost';
-import { compose, graphql } from 'react-apollo';
-import { Link, withNamespaces } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
-import Metadata from '../features/Metadata';
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import { UpdateInstitution, DeleteInstitution } from '../features/Institution';
+import React from 'react'
+import { gql } from 'apollo-boost'
+import { compose, graphql } from 'react-apollo'
+import { Link, withNamespaces } from '../lib/i18n'
+import { textIndexPage as t } from '../lib/locale'
+import Metadata from '../features/Metadata'
+import Layout from '../features/Layout'
+import Page from '../features/Page'
+import { UpdateInstitution, DeleteInstitution } from '../features/Institution'
 
 class BankPageMarkup extends React.Component {
   static async getInitialProps({ query }) {
@@ -37,27 +37,29 @@ class BankPageMarkup extends React.Component {
             !action && (
               <React.Fragment>
                 <Link href={`/bank?slug=${slug}&action=update`}
-                      as={`/banks/${slug}/update`}
-                      prefetch>
+                  as={`/banks/${slug}/update`}
+                  prefetch>
                   <a>{'Update'}</a>
                 </Link>
                 &nbsp;|&nbsp;
-                <DeleteInstitution institution={institution}/>
-                <hr/>
+                <DeleteInstitution institution={institution} />
+                <hr />
 
                 <h1>{name}</h1>
 
                 {
                   allQuote && (
                     <table>
-                      {allQuote.map((quote, i) => (
-                        <tr key={i}>
-                          <td>{quote.currency.refId}</td>
-                          <td>{quote.amount}</td>
-                          <td>{quote.bid}</td>
-                          <td>{quote.ask}</td>
-                        </tr>
-                      ))}
+                      <tbody>
+                        {allQuote.map((quote, i) => (
+                          <tr key={i}>
+                            <td>{quote.currency.refId}</td>
+                            <td>{quote.amount}</td>
+                            <td>{quote.bid}</td>
+                            <td>{quote.ask}</td>
+                          </tr>
+                        ))}
+                      </tbody>
                     </table>
                   )
                 }
@@ -65,7 +67,7 @@ class BankPageMarkup extends React.Component {
             )
           }
 
-          {action && <UpdateInstitution institution={institution}/>}
+          {action && <UpdateInstitution institution={institution} />}
         </Page>
       </Layout>
     )
@@ -77,16 +79,17 @@ const BankPageI18N = withNamespaces('common')(BankPageMarkup);
 
 // Container.
 const GQL_INSTITUTION = gql`
-  query BankPage ($slug: String!) {
+  query BankPage ($slug: String!, $where: QuoteWhereInput!) {
     institution(slug: $slug) {
       id
       slug
       name
       category
     }
-    allQuote {
+    allQuote (where: $where) {
       currency {
         refId
+        refSlug
       }
       amount
       bid
@@ -99,15 +102,18 @@ export default compose(
   graphql(
     GQL_INSTITUTION,
     {
-      options: ({ query }) => ({
-        variables: {
-          slug: query.slug,
-        },
-      }),
+      options: ({ query }) => {
+        return ({
+          variables: {
+            slug: query.slug,
+            where: { institution: { refSlug: query.slug } }
+          },
+        })
+      },
       props: ({ data: { institution, allQuote } }) => ({
         institution,
         allQuote,
       }),
     }
   )
-)(BankPageI18N);
+)(BankPageI18N)

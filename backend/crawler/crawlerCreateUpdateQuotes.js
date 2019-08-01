@@ -24,7 +24,7 @@ const createUpdateQuotes = async (quotes) => {
     const whereQuote = { institution, currency, date: today };
 
     // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
-    const quoteHasError = code !== currency.refSlug;
+    const quoteHasError = code === currency.refSlug ? 'no' : 'yes';
 
     // Remove property that contains the parsed value,
     // we do not save in DB as refSlug.
@@ -45,7 +45,7 @@ const createUpdateQuotes = async (quotes) => {
             quote: {
               ...cleanedQuote,
               date: String(today),
-              error: String(quoteHasError),
+              error: quoteHasError,
             }
           }
         })

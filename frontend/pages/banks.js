@@ -11,15 +11,15 @@ import { compose, graphql } from 'react-apollo'
 import { CreateInstitution } from '../features/Institution'
 
 class BanksPageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query
     }
   }
 
-  render () {
-    const {allInstitution, query: {action}} = this.props
+  render() {
+    const { query: { action }, allInstitution } = this.props;
 
     return (
       <Layout>
@@ -36,11 +36,11 @@ class BanksPageMarkup extends React.Component {
                 <Link href={`/banks?action=create`} as={`/banks/create`} prefetch>
                   <a>{'Create'}</a>
                 </Link>
-                <hr/>
+                <hr />
 
                 <List type="ordered">
                   {
-                    allInstitution.map(({id, slug, name}) => (
+                    allInstitution.map(({ id, slug, name }) => (
                       <li key={id}>
                         <Link href={`/bank?slug=${slug}`} as={`/banks/${slug}`} prefetch>
                           <a>{name}</a>
@@ -53,7 +53,7 @@ class BanksPageMarkup extends React.Component {
             )
           }
 
-          {action && <CreateInstitution/>}
+          {action && <CreateInstitution />}
         </Page>
       </Layout>
     )
@@ -61,7 +61,7 @@ class BanksPageMarkup extends React.Component {
 }
 
 // i18n.
-const BanksPageI18N = withNamespaces('common')(BanksPageMarkup)
+const BanksPageI18N = withNamespaces('common')(BanksPageMarkup);
 
 // Container.
 const GQL_ALL_INSTITUTION = gql`
@@ -72,13 +72,13 @@ const GQL_ALL_INSTITUTION = gql`
       name
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_ALL_INSTITUTION,
     {
-      props: ({data: {allInstitution}}) => ({
+      props: ({ data: { allInstitution } }) => ({
         allInstitution
       })
     }

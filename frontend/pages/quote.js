@@ -10,20 +10,20 @@ import { compose, graphql } from 'react-apollo'
 import { UpdateQuote, DeleteQuote } from '../features/Quote'
 
 class QuotePageMarkup extends React.Component {
-  static async getInitialProps ({query}) {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: ['common'],
       query,
     }
   }
 
-  render () {
-    const {quote, query: {action}} = this.props
+  render() {
+    const { query: { action }, quote } = this.props;
     if (!quote) {
       return null
     }
 
-    const {id, institution, currency} = quote
+    const { id, institution, currency } = quote;
 
     return (
       <Layout>
@@ -41,15 +41,15 @@ class QuotePageMarkup extends React.Component {
                   <a>{'Update'}</a>
                 </Link>
                 &nbsp;|&nbsp;
-                <DeleteQuote quote={quote}/>
-                <hr/>
+                <DeleteQuote quote={quote} />
+                <hr />
 
                 <h1>{institution.refId}-{currency.refId}</h1>
               </React.Fragment>
             )
           }
 
-          {action && <UpdateQuote quote={quote}/>}
+          {action && <UpdateQuote quote={quote} />}
         </Page>
       </Layout>
     )
@@ -57,7 +57,7 @@ class QuotePageMarkup extends React.Component {
 }
 
 // i18n.
-const QuotePageI18N = withNamespaces('common')(QuotePageMarkup)
+const QuotePageI18N = withNamespaces('common')(QuotePageMarkup);
 
 // Container.
 const GQL_QUOTE = gql`
@@ -80,18 +80,18 @@ const GQL_QUOTE = gql`
       error
     }
   }
-`
+`;
 
 export default compose(
   graphql(
     GQL_QUOTE,
     {
-      options: ({query}) => ({
+      options: ({ query }) => ({
         variables: {
           id: query.id,
         },
       }),
-      props: ({data: {quote}}) => ({
+      props: ({ data: { quote } }) => ({
         quote
       }),
     }

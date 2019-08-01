@@ -7,12 +7,10 @@ import _get from 'lodash/get'
 export default (
   {
     value = '',
-    values,
     required = false,
     readOnly = null,
-    type = 'text',
     name = null,
-    autocomplete = "off",
+    values,
     labelText,
     id,
   }
@@ -20,9 +18,8 @@ export default (
   const valueByName = _get(values, name);
   const classes = classnames(
     'input',
+    'input--select',
     {
-      [`input--${type}`]: type,
-      [`input--checked`]: (value !== '' && valueByName === value) || (valueByName === true),
       [`input--required`]: required,
     }
   );
@@ -36,17 +33,19 @@ export default (
       <div className="input__control">
         <Field
           className="input__element"
+          component="select"
           required={required}
           readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
-          checked={valueByName === true || valueByName === value}
-          type={type}
           value={value || valueByName}
           name={name}
           id={id}
-          autoComplete={autocomplete}
-        />
+        >
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+        </Field>
 
         <i className="input__toggle" />
       </div>
