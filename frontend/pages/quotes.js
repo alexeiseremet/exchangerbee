@@ -45,7 +45,7 @@ class QuotesPageMarkup extends React.Component {
                       <li key={id}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
                           <a>{moment(+date)
-                            .format('YYYY-MM-DD')}---{institution.refId}---{currency.refId}</a>
+                            .format('YYYY-MM-DD')}---{institution.refSlug}---{currency.refSlug}</a>
                         </Link>
                       </li>
                     ))

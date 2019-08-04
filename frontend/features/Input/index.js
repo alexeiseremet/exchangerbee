@@ -29,9 +29,13 @@ export default (
 
   return (
     <div className={classes}>
-      <label className="input__label" htmlFor={id}>
-        {labelText}
-      </label>
+      {
+        labelText && (
+          <label className="input__label" htmlFor={id}>
+            {labelText}
+          </label>
+        )
+      }
 
       <div className="input__control">
         <Field
@@ -48,7 +52,7 @@ export default (
           autoComplete={autocomplete}
         />
 
-        <i className="input__toggle" />
+        {type !== 'text' && (<i className="input__toggle" />)}
       </div>
     </div>
   )

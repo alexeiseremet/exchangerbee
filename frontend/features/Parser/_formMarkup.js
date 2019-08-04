@@ -2,6 +2,8 @@ import React from 'react'
 import { FieldArray } from 'formik'
 
 import { textAdminPage as t } from '../../lib/locale'
+import { SelectInstitution } from '../Institution'
+import { SelectCurrency } from '../Currency'
 import Form from '../Form'
 import Input from '../Input'
 import Button from '../Button'
@@ -19,13 +21,11 @@ const emptyQuote = {
   },
 };
 
-const FormMarkup = (
-  {
-    parser = null,
-    onSubmit,
-    action,
-  }
-) => (
+const FormMarkup = ({
+  parser = null,
+  onSubmit,
+  action,
+}) => (
     <React.Fragment>
       <div className="text">
         <h1>{t.parser} {action}</h1>
@@ -44,11 +44,10 @@ const FormMarkup = (
         }}
         onSubmit={onSubmit}
       >
-        <Input
-          name="institution.refId"
+        <SelectInstitution
+          name="institution"
           id="parser-institution"
-          type="text"
-          labelText="Institution"
+          readOnly={action === 'update'}
           required
         />
         <Input
@@ -81,12 +80,11 @@ const FormMarkup = (
                       labelText="Amount"
                       required
                     />
-                    <Input
-                      values={form.values}
-                      name={`quotes.${index}.currency.refId`}
-                      id={`quotes.${index}.currency.refId`}
-                      type="text"
-                      labelText="Currency"
+                    <SelectCurrency
+                      name={`quotes.${index}.currency`}
+                      id={`quotes.${index}.currency`}
+                      readOnly={action === 'update'}
+                      setFieldValue={form.setFieldValue}
                       required
                     />
                     <Input

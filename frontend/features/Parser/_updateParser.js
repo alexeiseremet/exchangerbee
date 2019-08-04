@@ -35,7 +35,7 @@ export default compose(
           mutate({
             variables: {
               id: parser.id,
-              parser: excludeKeys(formValues, ['id', '__typename']),
+              parser: excludeKeys(formValues, ['id', '__typename', 'institution']),
             }
           })
             .then(({data: {updateParser}}) => {

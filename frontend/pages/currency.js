@@ -53,7 +53,7 @@ class CurrencyPageMarkup extends React.Component {
                       <tbody>
                         {allQuote.map((quote, i) => (
                           <tr key={i}>
-                            <td>{quote.institution.refId}</td>
+                            <td>{quote.institution.refSlug}</td>
                             <td>{quote.amount}</td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>

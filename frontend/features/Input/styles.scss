@@ -73,7 +73,6 @@
   }
 
   &.input--checked .input__toggle {
-    background-size: contain;
     background-image: url(#{$img_src}/icon-checkmark.svg);
   }
 
@@ -101,8 +100,14 @@
   }
 
   .input__toggle {
-    background: url(#{$img_src}/icon-arrow-down.svg) no-repeat;
+    background-image: url(#{$img_src}/icon-arrow-down.svg);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
     pointer-events: none;
+    z-index: 1;
+    display: block;
   }
 }
 

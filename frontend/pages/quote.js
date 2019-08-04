@@ -44,7 +44,7 @@ class QuotePageMarkup extends React.Component {
                 <DeleteQuote quote={quote} />
                 <hr />
 
-                <h1>{institution.refId}-{currency.refId}</h1>
+                <h1>{institution.refSlug}-{currency.refSlug}</h1>
               </React.Fragment>
             )
           }

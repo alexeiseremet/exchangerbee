@@ -6,16 +6,16 @@ const inputDate = (date = new Date()) => (
 );
 
 import { textAdminPage as t } from '../../lib/locale'
+import { SelectInstitution } from '../Institution'
+import { SelectCurrency } from '../Currency'
 import Form from '../Form'
 import Input from '../Input'
 
-const FormMarkup = (
-  {
-    quote = null,
-    onSubmit,
-    action,
-  }
-) => (
+const FormMarkup = ({
+  quote = null,
+  onSubmit,
+  action,
+}) => (
     <React.Fragment>
       <div className="text">
         <h1>{t.quote} {action}</h1>
@@ -41,21 +41,15 @@ const FormMarkup = (
         }}
         onSubmit={onSubmit}
       >
-        <Input
-          name="institution.refId"
+        <SelectInstitution
+          name="institution"
           id="quote-institution"
-          type="text"
-          labelText="Institution"
           required
-          readOnly={action === 'update'}
         />
-        <Input
-          name="currency.refId"
+        <SelectCurrency
+          name="currency"
           id="quote-currency"
-          type="text"
-          labelText="Quote currency"
           required
-          readOnly={action === 'update'}
         />
         <Input
           name="date"
