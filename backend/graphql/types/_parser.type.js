@@ -3,7 +3,7 @@ module.exports = `
     id: ID!
     institution: ParserRef!
     url: String!
-    period: String!
+    period: ParserPeriod!
     processedAt: String
     quotes: [ParserQuote!]
   }
@@ -48,7 +48,7 @@ module.exports = `
     id: ID
     institution: ParserRefInput
     url: String
-    period: String
+    period: ParserPeriod
     processedAt: String
     quotes: [ParserQuoteInput]
   }
@@ -56,7 +56,7 @@ module.exports = `
   input ParserWhereInput {
     id: ID
     institution: ParserRefInput
-    period: String
+    period: ParserPeriod
     processedAt: String
   }
   
@@ -75,6 +75,11 @@ module.exports = `
     ask: String
     bid: String
     code: String
+  }
+
+  enum ParserPeriod {
+    daily
+    monthly
   }
   
   enum ParserOrderByInput {

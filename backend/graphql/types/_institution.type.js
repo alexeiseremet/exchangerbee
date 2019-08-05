@@ -37,7 +37,7 @@ module.exports = `
   input InstitutionWhereInput {
     id: ID
     slug: String
-    category: String
+    category: InstitutionCategory
   }
   
   enum InstitutionCategory {

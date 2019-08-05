@@ -16,7 +16,7 @@ module.exports = {
 
       return new Promise((resolve, reject) => {
         Quote.find(where)
-          .sort({ 'date': 'desc', 'currency.refId': 'desc' })
+          .sort({ 'date': 'desc', 'institution.refSlug': 'asc', 'currency.refSlug': 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

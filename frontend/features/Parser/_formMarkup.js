@@ -6,6 +6,7 @@ import { SelectInstitution } from '../Institution'
 import { SelectCurrency } from '../Currency'
 import Form from '../Form'
 import Input from '../Input'
+import Select from '../Input/select'
 import Button from '../Button'
 
 const emptyQuote = {
@@ -57,13 +58,15 @@ const FormMarkup = ({
           labelText="URL"
           required
         />
-        <Input
+        <Select
           name="period"
           id="parser-period"
-          type="text"
           labelText="Period"
           required
-        />
+        >
+          <option value="daily">daily</option>
+          <option value="monthly">monthly</option>
+        </Select>
         <FieldArray
           name="quotes"
         >
