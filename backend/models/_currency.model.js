@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const {Schema, model} = mongoose
+const { Schema, model } = mongoose;
 const currencySchema = new Schema({
   slug: {
     type: String,
@@ -25,6 +25,6 @@ const currencySchema = new Schema({
     type: String,
     trim: true,
   },
-})
+});
 
-module.exports = model('Currency', currencySchema)
+module.exports = model('Currency', currencySchema);

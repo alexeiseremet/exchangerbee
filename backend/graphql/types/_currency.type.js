@@ -45,4 +45,4 @@ module.exports = `
     slug_ASC
     slug_DESC
   }
-`
+`;

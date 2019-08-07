@@ -50,13 +50,23 @@ class BankPageMarkup extends React.Component {
                 {
                   allQuote && (
                     <table>
+                      <thead>
+                        <tr>
+                          <th>Valuta</th>
+                          <th>Unități</th>
+                          <th>Cumpărare</th>
+                          <th>Vânzare</th>
+                          <th>Variație</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {allQuote.map((quote, i) => (
                           <tr key={i}>
-                            <td>{quote.currency.refSlug}</td>
-                            <td>{quote.amount}</td>
+                            <td>{''}</td>
+                            <td>{quote.amount} {quote.currency.refSlug}</td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>
+                            <td>{''}</td>
                           </tr>
                         ))}
                       </tbody>

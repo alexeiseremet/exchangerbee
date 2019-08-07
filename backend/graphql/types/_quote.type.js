@@ -12,7 +12,7 @@ module.exports = `
   }
   
   type QuoteRef {
-    refId: ID!
+    refId: ID
     refSlug: String
   }
   

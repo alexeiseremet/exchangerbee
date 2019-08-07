@@ -28,7 +28,7 @@ module.exports = `
   }
   
   type ParserRef {
-    refId: ID!
+    refId: ID
     refSlug: String
   }
   

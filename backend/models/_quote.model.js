@@ -13,12 +13,6 @@ const quoteSchema = new Schema({
       type: String,
     }
   },
-  date: {
-    type: Date,
-    index: true,
-    required: true,
-    trim: true,
-  },
   currency: {
     refId: {
       type: String,
@@ -29,6 +23,12 @@ const quoteSchema = new Schema({
       type: String,
       index: true,
     }
+  },
+  date: {
+    type: Date,
+    index: true,
+    required: true,
+    trim: true,
   },
   amount: {
     type: String,

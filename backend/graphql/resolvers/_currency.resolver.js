@@ -18,11 +18,11 @@ module.exports = {
             err ? reject(err) : resolve(res)
           })
       })
-    }
+    },
   },
   Mutation: {
     async createCurrency(_, { currency }) {
-      const newCurrency = await new Currency(currency)
+      const newCurrency = await new Currency(currency);
 
       return new Promise((resolve, reject) => {
         newCurrency.save((err, res) => {
@@ -51,4 +51,4 @@ module.exports = {
       })
     },
   },
-}
+};

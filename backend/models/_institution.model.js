@@ -28,6 +28,6 @@ const institutionSchema = new Schema({
     type: String,
     trim: true,
   },
-})
+});
 
-module.exports = model('Institution', institutionSchema)
+module.exports = model('Institution', institutionSchema);

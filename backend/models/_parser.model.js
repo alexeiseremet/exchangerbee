@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const {Schema, model} = mongoose
+const { Schema, model } = mongoose;
 const parserSchema = new Schema({
   institution: {
     refId: {
@@ -62,6 +62,6 @@ const parserSchema = new Schema({
       },
     },
   }],
-})
+});
 
-module.exports = model('Parser', parserSchema)
+module.exports = model('Parser', parserSchema);
