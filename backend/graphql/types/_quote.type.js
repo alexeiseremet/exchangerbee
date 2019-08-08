@@ -2,7 +2,9 @@ module.exports = `
   type Quote {
     id: ID!
     institution: QuoteRef!
+    institutionVObj: Institution
     currency: QuoteRef!
+    currencyVObj: Currency
     date: String!
     amount: String!
     bid: String!

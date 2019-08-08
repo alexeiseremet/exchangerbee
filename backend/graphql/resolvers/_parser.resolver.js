@@ -18,7 +18,7 @@ module.exports = {
             err ? reject(err) : resolve(res)
           })
       })
-    }
+    },
   },
   Mutation: {
     async createParser(_, { parser }) {
@@ -51,4 +51,4 @@ module.exports = {
       })
     },
   },
-}
+};

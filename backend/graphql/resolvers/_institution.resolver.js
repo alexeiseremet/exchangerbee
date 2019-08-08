@@ -18,7 +18,7 @@ module.exports = {
             err ? reject(err) : resolve(res)
           })
       })
-    }
+    },
   },
   Mutation: {
     async createInstitution(_, { institution }) {

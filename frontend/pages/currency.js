@@ -53,7 +53,7 @@ class CurrencyPageMarkup extends React.Component {
                       <tbody>
                         {allQuote.map((quote, i) => (
                           <tr key={i}>
-                            <td>{quote.institution.refSlug}</td>
+                            <td>{quote.institutionVObj.name}</td>
                             <td>{quote.amount}</td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>
@@ -88,9 +88,9 @@ const GQL_CURRENCY = gql`
       symbol
     }
     allQuote(where: $where) {
-      institution {
-        refId
-        refSlug
+      institutionVObj {
+        name
+        slug
       }
       amount
       bid

@@ -56,4 +56,19 @@ const quoteSchema = new Schema({
   },
 });
 
+quoteSchema.virtual('currencyVObj', {
+  ref: 'Currency',
+  localField: 'currency.refId',
+  foreignField: '_id',
+  justOne: true,
+});
+
+quoteSchema.virtual('institutionVObj', {
+  ref: 'Institution',
+  localField: 'institution.refId',
+  foreignField: '_id',
+  justOne: true,
+});
+
+
 module.exports = model('Quote', quoteSchema);

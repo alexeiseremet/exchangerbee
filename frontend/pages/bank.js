@@ -62,11 +62,11 @@ class BankPageMarkup extends React.Component {
                       <tbody>
                         {allQuote.map((quote, i) => (
                           <tr key={i}>
-                            <td>{''}</td>
-                            <td>{quote.amount} {quote.currency.refSlug}</td>
+                            <td>{quote.currencyVObj.name}</td>
+                            <td>{quote.amount} {quote.currencyVObj.slug}</td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>
-                            <td>{''}</td>
+                            <td>{'current - prev'}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -97,9 +97,9 @@ const GQL_INSTITUTION = gql`
       category
     }
     allQuote (where: $where) {
-      currency {
-        refId
-        refSlug
+      currencyVObj {
+        name
+        slug
       }
       amount
       bid

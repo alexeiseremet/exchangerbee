@@ -6,6 +6,14 @@ module.exports = {
     quote(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
         Quote.findOne({ _id: id, ...args })
+          .populate({
+            'path': 'institutionVObj',
+            'select': 'name slug'
+          })
+          .populate({
+            'path': 'currencyVObj',
+            'select': 'name slug'
+          })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
@@ -16,13 +24,19 @@ module.exports = {
 
       return new Promise((resolve, reject) => {
         Quote.find(where)
-          .sort({ 'date': 'desc', 'institution.refSlug': 'asc', 'currency.refSlug': 'asc' })
-          // .populate({
-          //   path: 'currency.refId',
-          //   // options: { limit: 5 }
-          //   // Explicitly exclude `_id`, see http://bit.ly/2aEfTdB
-          //   select: 'name -_id',
-          // })
+          .populate({
+            'path': 'institutionVObj',
+            'select': 'name slug'
+          })
+          .populate({
+            'path': 'currencyVObj',
+            'select': 'name slug'
+          })
+          .sort({
+            'date': 'desc',
+            'institution.refSlug': 'asc',
+            'currency.refSlug': 'asc'
+          })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

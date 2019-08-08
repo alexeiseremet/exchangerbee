@@ -41,11 +41,12 @@ class QuotesPageMarkup extends React.Component {
 
                 <List type="ordered">
                   {
-                    allQuote.map(({ id, institution, currency, date }) => (
+                    allQuote.map(({ id, institutionVObj, currencyVObj, date }) => (
                       <li key={id}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
-                          <a>{moment(+date)
-                            .format('YYYY-MM-DD')}---{institution.refSlug}---{currency.refSlug}</a>
+                          <a>
+                            {moment(+date).format('YYYY-MM-DD')} -- {institutionVObj.name} -- {currencyVObj.name}
+                          </a>
                         </Link>
                       </li>
                     ))
@@ -70,13 +71,11 @@ const GQL_ALL_QUOTE = gql`
   query AllQuote {
     allQuote {
       id
-      institution {
-        refId
-        refSlug
+      institutionVObj {
+        name
       }
-      currency {
-        refId
-        refSlug
+      currencyVObj {
+        name
       }
       date
     }
