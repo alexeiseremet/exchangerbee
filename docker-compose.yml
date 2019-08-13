@@ -57,7 +57,7 @@ services:
 # docker exec -it 89fc7b0ff34d bash/sh
 # docker logs 89fc7b0ff34d
 
-# With Dockerfie.
+# With Dockerfile.
 # docker build --no-cache --tag=exbee_frontend_1 .
 # docker run -it --publish=3050:3050 exbee_frontend_1
 
@@ -66,3 +66,6 @@ services:
 # https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
 # docker rm $(docker ps -qa --no-trunc --filter "status=exited")
 # docker inspect -f "{{json .Mounts}}" exbee_frontend_1
+
+# Mongo
+# show dbs > use db_name > show tables > db.quotes.find().limit(2)

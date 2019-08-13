@@ -113,17 +113,16 @@ export default compose(
   graphql(
     GQL_INSTITUTION,
     {
-      options: ({ query }) => {
-        return ({
-          variables: {
-            slug: query.slug,
-            where: {
-              institution: { refSlug: query.slug },
-              date: today(),
-            }
-          },
-        })
-      },
+      options: ({ query }) => ({
+        variables: {
+          slug: query.slug,
+          where: {
+            institution: { refSlug: query.slug },
+            date: today(),
+            error: 'no',
+          }
+        },
+      }),
       props: ({ data: { institution, allQuote } }) => ({
         institution,
         allQuote,

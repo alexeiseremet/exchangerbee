@@ -8,10 +8,15 @@ import Form from '../Form'
 import Input from '../Input'
 
 const FormMarkup = ({
-  quote = null,
+  quote,
   onSubmit,
   action,
-}) => (
+}) => {
+  if (!quote.institution) {
+    return null
+  }
+
+  return (
     <React.Fragment>
       <div className="text">
         <h1>{t.quote} {action}</h1>
@@ -19,11 +24,11 @@ const FormMarkup = ({
 
       <Form
         initialValues={{
-          institution: quote ? quote.institution : {
+          institution: {
             refId: '',
             refSlug: '',
           },
-          currency: quote ? quote.currency : {
+          currency: {
             refId: '',
             refSlug: '',
           },
@@ -91,6 +96,6 @@ const FormMarkup = ({
         />
       </Form>
     </React.Fragment>
-  );
+  )};
 
 export default FormMarkup

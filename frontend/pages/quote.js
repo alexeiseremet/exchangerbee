@@ -64,8 +64,16 @@ const GQL_QUOTE = gql`
   query Quote ($id: ID!) {
     quote(id: $id) {
       id
+      institution {
+        refId
+        refSlug
+      }
       institutionVObj {
         name
+      }
+      currency {
+        refId
+        refSlug
       }
       currencyVObj {
         name

@@ -41,8 +41,8 @@ class QuotesPageMarkup extends React.Component {
 
                 <List type="ordered">
                   {
-                    allQuote.map(({ id, institutionVObj, currencyVObj, date }) => (
-                      <li key={id}>
+                    allQuote.map(({ id, institutionVObj, currencyVObj, date, error }) => (
+                      <li key={id} style={{color: error === 'yes' ? 'red' : null}}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
                           <a>
                             {localeDate(date)} -- {institutionVObj.name} -- {currencyVObj.name}
@@ -78,6 +78,7 @@ const GQL_ALL_QUOTE = gql`
         name
       }
       date
+      error
     }
   }
 `;
