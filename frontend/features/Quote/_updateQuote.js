@@ -37,7 +37,10 @@ export default compose(
           mutate({
             variables: {
               where: excludeKeys(whereQuote, ['id', '__typename']),
-              quote: excludeKeys(formValues, ['id', '__typename']),
+              quote: excludeKeys(
+                formValues,
+                ['id', '__typename', 'institutionVObj', 'currencyVObj']
+              ),
             }
           })
             .then(({ data: { updateQuote } }) => {

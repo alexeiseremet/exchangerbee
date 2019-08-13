@@ -1,11 +1,7 @@
 import React from 'react'
-import moment from 'moment'
-
-const inputDate = (date = new Date()) => (
-  moment(+date).startOf('day').format('YYYY-MM-DD')
-);
 
 import { textAdminPage as t } from '../../lib/locale'
+import { inputDate } from '../../lib/moment'
 import { SelectInstitution } from '../Institution'
 import { SelectCurrency } from '../Currency'
 import Form from '../Form'
@@ -23,11 +19,11 @@ const FormMarkup = ({
 
       <Form
         initialValues={{
-          institution: {
+          institution: quote ? quote.institution : {
             refId: '',
             refSlug: '',
           },
-          currency: {
+          currency: quote ? quote.currency : {
             refId: '',
             refSlug: '',
           },

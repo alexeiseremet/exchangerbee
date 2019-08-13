@@ -62,7 +62,7 @@ const runCrawler = async () => {
         // })
       }
 
-      result['quotes'].push(parsedItem)
+      result['quotes'].push(parsedItem);
     }
   }
   catch (e) {
@@ -77,7 +77,7 @@ const runCrawler = async () => {
   await createUpdateQuotes(result.quotes);
   await updateParser(id);
 
-  return result
+  return result;
 };
 
 module.exports = runCrawler;

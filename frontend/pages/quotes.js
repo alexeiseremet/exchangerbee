@@ -1,7 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import { Link, withNamespaces } from '../lib/i18n';
 import { textIndexPage as t } from '../lib/locale';
+import { localeDate } from '../lib/moment'
 import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
@@ -45,7 +45,7 @@ class QuotesPageMarkup extends React.Component {
                       <li key={id}>
                         <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
                           <a>
-                            {moment(+date).format('YYYY-MM-DD')} -- {institutionVObj.name} -- {currencyVObj.name}
+                            {localeDate(date)} -- {institutionVObj.name} -- {currencyVObj.name}
                           </a>
                         </Link>
                       </li>

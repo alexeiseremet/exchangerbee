@@ -3,6 +3,7 @@ import { gql } from 'apollo-boost'
 import { compose, graphql } from 'react-apollo'
 import { Link, withNamespaces } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
+import { today } from '../lib/moment'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
@@ -116,7 +117,10 @@ export default compose(
         return ({
           variables: {
             slug: query.slug,
-            where: { institution: { refSlug: query.slug } }
+            where: {
+              institution: { refSlug: query.slug },
+              date: today(),
+            }
           },
         })
       },
