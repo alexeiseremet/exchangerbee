@@ -1,8 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { gql } from 'apollo-boost';
-import { compose, graphql } from 'react-apollo';
+import { gql } from 'apollo-boost'
+import { graphql } from 'react-apollo'
+import _compose from 'lodash/flowRight'
 
 import Svg from '../Svg';
 import iconClose from '../../assets/images/icon-close.svg?sprite';
@@ -103,7 +104,7 @@ const GQL_CLOSE_MODAL = gql`
   }
 `;
 
-export default compose(
+export default _compose(
   graphql(
     GQL_MODAL,
     {

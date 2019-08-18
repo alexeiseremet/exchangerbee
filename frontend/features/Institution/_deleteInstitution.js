@@ -1,6 +1,7 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import _compose from 'lodash/flowRight'
 
 const DeleteInstitutionButton = ({onSubmit}) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
@@ -14,7 +15,7 @@ const GQL_DELETE_INSTITUTION = gql`
   }
 `;
 
-export default compose(
+export default _compose(
   graphql(
     GQL_DELETE_INSTITUTION,
     {

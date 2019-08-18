@@ -1,7 +1,8 @@
 import './styles.scss';
 import React from 'react';
-import { gql } from 'apollo-boost';
-import { compose, graphql } from 'react-apollo';
+import { gql } from 'apollo-boost'
+import { graphql } from 'react-apollo'
+import _compose from 'lodash/flowRight'
 
 import Button from '../Button';
 
@@ -19,7 +20,7 @@ const GQL_OPEN_MODAL = gql`
   }
 `;
 
-export default compose(
+export default _compose(
   graphql(
     GQL_OPEN_MODAL,
     {

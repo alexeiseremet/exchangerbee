@@ -1,14 +1,16 @@
 import React from 'react';
+import { gql } from 'apollo-boost'
+import { graphql } from 'react-apollo'
+import _compose from 'lodash/flowRight'
+
 import { Link, withNamespaces } from '../lib/i18n';
 import { textIndexPage as t } from '../lib/locale';
 import { localeDate } from '../lib/moment'
+
 import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
-
 import List from '../features/List';
-import { gql } from 'apollo-boost';
-import { compose, graphql } from 'react-apollo';
 import { CreateQuote } from '../features/Quote';
 
 class QuotesPageMarkup extends React.Component {
@@ -83,7 +85,7 @@ const GQL_ALL_QUOTE = gql`
   }
 `;
 
-export default compose(
+export default _compose(
   graphql(
     GQL_ALL_QUOTE,
     {

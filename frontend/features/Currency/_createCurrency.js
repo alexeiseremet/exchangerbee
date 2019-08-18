@@ -1,6 +1,7 @@
 import React from 'react'
 import { gql } from 'apollo-boost'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import _compose from 'lodash/flowRight'
 
 import FormMarkup from './_formMarkup'
 
@@ -14,9 +15,9 @@ const GQL_CREATE_CURRENCY = gql`
       id
     }
   }
-`
+`;
 
-export default compose(
+export default _compose(
   graphql(
     GQL_CREATE_CURRENCY,
     {
@@ -30,12 +31,12 @@ export default compose(
             variables: {currency: formValues}
           })
             .then(({data: {createCurrency}}) => {
-              resetForm()
+              resetForm();
               console.dir(createCurrency)
             })
             .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
+              setStatus('error');
+              setSubmitting(false);
               console.error(err)
             })
         }
