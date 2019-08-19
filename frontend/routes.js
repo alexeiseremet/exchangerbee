@@ -1,5 +1,5 @@
-const nextRoutes = require('next-routes')
-const routes = nextRoutes()
+const nextRoutes = require('next-routes');
+const routes = nextRoutes();
 
 const APP_ROUTES = [
   {
@@ -27,6 +27,14 @@ const APP_ROUTES = [
     pattern: '/currencies/:slug/:action(update|delete)?',
   },
   {
+    page: 'parsers',
+    pattern: '/parsers/:action(create)?',
+  },
+  {
+    page: 'parser',
+    pattern: '/parsers/:id/:action(update|delete)?',
+  },
+  {
     page: 'quotes',
     pattern: '/quotes/:action(create)?',
   },
@@ -35,15 +43,15 @@ const APP_ROUTES = [
     pattern: '/quotes/:id/:action(update|delete)?',
   },
   {
-    page: 'parsers',
-    pattern: '/parsers/:action(create)?',
+    page: 'posts',
+    pattern: '/posts/:action(create)?',
   },
   {
-    page: 'parser',
-    pattern: '/parsers/:id/:action(update|delete)?',
+    page: 'post',
+    pattern: '/posts/:id/:action(update|delete)?',
   },
-]
+];
 
-APP_ROUTES.map(route => routes.add(route))
+APP_ROUTES.map(route => routes.add(route));
 
-module.exports = routes
+module.exports = routes;

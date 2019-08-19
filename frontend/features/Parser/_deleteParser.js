@@ -3,9 +3,9 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-const DeleteParserButton = ({onSubmit}) => (
+const DeleteParserButton = ({ onSubmit }) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
-)
+);
 
 const GQL_DELETE_PARSER = gql`
   mutation DeleteParser ($id: ID!) {
@@ -19,18 +19,18 @@ export default _compose(
   graphql(
     GQL_DELETE_PARSER,
     {
-      props: ({mutate, ownProps: {parser}}) => ({
+      props: ({ mutate, ownProps: { parser } }) => ({
         onSubmit: (elem) => {
           elem.preventDefault()
 
-          if (window.confirm('Do you really want to detele?')) {
+          if (window.confirm('Do you really want to delete?')) {
             mutate({
               variables: {
                 id: parser.id,
               }
             })
-              .then(({data: {deteleParser}}) => {
-                console.dir(deteleParser)
+              .then(({ data: { deleteParser } }) => {
+                console.dir(deleteParser)
               })
               .catch(err => {
                 console.error(err)

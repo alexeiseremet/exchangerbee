@@ -5,13 +5,13 @@ import _compose from 'lodash/flowRight'
 
 import FormMarkup from './_formMarkup'
 
-const CreateParserForm = ({ onSubmit }) => (
+const CreatePostForm = ({ onSubmit }) => (
   <FormMarkup action={'create'} onSubmit={onSubmit}/>
 );
 
-const GQL_CREATE_PARSER = gql`
-  mutation CreateParser ($parser: ParserInput!) {
-    createParser(parser: $parser) {
+const GQL_CREATE_POST = gql`
+  mutation CreatePost ($post: PostInput!) {
+    createPost(post: $post) {
       id
     }
   }
@@ -19,7 +19,7 @@ const GQL_CREATE_PARSER = gql`
 
 export default _compose(
   graphql(
-    GQL_CREATE_PARSER,
+    GQL_CREATE_POST,
     {
       props: ({ mutate }) => ({
         onSubmit: (
@@ -28,24 +28,24 @@ export default _compose(
           { setStatus, setSubmitting, resetForm }
         ) => {
           mutate({
-            variables: { parser: formValues }
+            variables: { post: formValues }
           })
-            .then(({ data: { createParser } }) => {
-              resetForm()
-              console.dir(createParser)
+            .then(({ data: { createPost } }) => {
+              resetForm();
+              console.dir(createPost)
             })
             .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
+              setStatus('error');
+              setSubmitting(false);
               console.error(err)
             })
         }
       }),
       options: {
         refetchQueries: [
-          'AllParser',
+          'AllPost',
         ],
       },
     }
   )
-)(CreateParserForm)
+)(CreatePostForm)

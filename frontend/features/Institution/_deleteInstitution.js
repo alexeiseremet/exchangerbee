@@ -23,14 +23,14 @@ export default _compose(
         onSubmit: (elem) => {
           elem.preventDefault();
 
-          if (window.confirm('Do you really want to detele?')) {
+          if (window.confirm('Do you really want to delete?')) {
             mutate({
               variables: {
                 id: institution.id,
               }
             })
-              .then(({data: {deteleInstitution}}) => {
-                console.dir(deteleInstitution)
+              .then(({data: {deleteInstitution}}) => {
+                console.dir(deleteInstitution)
               })
               .catch(err => {
                 console.error(err)

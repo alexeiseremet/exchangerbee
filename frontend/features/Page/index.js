@@ -33,6 +33,11 @@ const Sidebar = (
         </Link>
       </li>
       <li>
+        <Link prefetch href="/posts">
+          <a>Posts</a>
+        </Link>
+      </li>
+      <li>
         <Link prefetch href="/admin">
           <a>Admin</a>
         </Link>

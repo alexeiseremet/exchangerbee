@@ -23,7 +23,8 @@ export const textAdminPage = {
   metaTitle: 'Admin Page',
   currency: 'Currency',
   institution: 'Institution',
-  quote: 'Quote',
   parser: 'Parser',
-}
+  quote: 'Quote',
+  post: 'Post',
+};
 

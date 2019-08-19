@@ -3,13 +3,13 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-const DeleteQuoteButton = ({onSubmit}) => (
+const DeletePostButton = ({ onSubmit }) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
 );
 
-const GQL_DELETE_QUOTE = gql`
-  mutation DeleteQuote ($id: ID!) {
-    deleteQuote(id: $id) {
+const GQL_DELETE_POST = gql`
+  mutation DeletePost ($id: ID!) {
+    deletePost(id: $id) {
       id
     }
   }
@@ -17,20 +17,20 @@ const GQL_DELETE_QUOTE = gql`
 
 export default _compose(
   graphql(
-    GQL_DELETE_QUOTE,
+    GQL_DELETE_POST,
     {
-      props: ({mutate, ownProps: {quote}}) => ({
+      props: ({ mutate, ownProps: { post } }) => ({
         onSubmit: (elem) => {
           elem.preventDefault();
 
           if (window.confirm('Do you really want to delete?')) {
             mutate({
               variables: {
-                id: quote.id,
+                id: post.id,
               }
             })
-              .then(({data: {deleteQuote}}) => {
-                console.dir(deleteQuote)
+              .then(({ data: { deletePost } }) => {
+                console.dir(deletePost)
               })
               .catch(err => {
                 console.error(err)
@@ -40,9 +40,9 @@ export default _compose(
       }),
       options: {
         refetchQueries: [
-          'AllQuote',
+          'AllPost',
         ],
       },
     }
   )
-)(DeleteQuoteButton)
+)(DeletePostButton)

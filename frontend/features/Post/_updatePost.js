@@ -2,21 +2,21 @@ import React from 'react'
 import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
-
 import excludeKeys from '../../lib/excludeKeys'
+
 import FormMarkup from './_formMarkup'
 
-const UpdateParserForm = ({ onSubmit, parser }) => (
+const UpdatePostForm = ({ onSubmit, post }) => (
   <FormMarkup
     action={'update'}
     onSubmit={onSubmit}
-    parser={parser}
+    post={post}
   />
 );
 
-const GQL_UPDATE_PARSER = gql`
-  mutation UpdateParser ($id: ID!, $parser: ParserInput!) {
-    updateParser(id: $id, parser: $parser) {
+const GQL_UPDATE_POST = gql`
+  mutation UpdatePost ($id: ID!, $post: PostInput!) {
+    updatePost(id: $id, post: $post) {
       id
     }
   }
@@ -24,9 +24,9 @@ const GQL_UPDATE_PARSER = gql`
 
 export default _compose(
   graphql(
-    GQL_UPDATE_PARSER,
+    GQL_UPDATE_POST,
     {
-      props: ({ mutate, ownProps: { parser } }) => ({
+      props: ({ mutate, ownProps: { post } }) => ({
         onSubmit: (
           // form values & actions
           formValues,
@@ -34,25 +34,25 @@ export default _compose(
         ) => {
           mutate({
             variables: {
-              id: parser.id,
-              parser: excludeKeys(formValues, ['id', '__typename', 'institution']),
+              id: post.id,
+              post: excludeKeys(formValues, ['id', 'slug', '__typename']),
             }
           })
-            .then(({ data: { updateParser } }) => {
-              console.dir(updateParser)
+            .then(({ data: { updatePost } }) => {
+              console.dir(updatePost)
             })
             .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
+              setStatus('error');
+              setSubmitting(false);
               console.error(err)
             })
         }
       }),
       options: {
         refetchQueries: [
-          'AllParser',
+          'AllPost',
         ],
       },
     }
   )
-)(UpdateParserForm)
+)(UpdatePostForm)
