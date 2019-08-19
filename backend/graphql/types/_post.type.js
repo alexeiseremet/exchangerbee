@@ -8,7 +8,7 @@ module.exports = `
   }
   
   type Query {
-    post(id: ID, slug: String): Post!
+    post(id: ID, slug: String): Post
     allPost(
       where: PostWhereInput
       orderBy: PostOrderByInput

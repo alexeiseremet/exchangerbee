@@ -5,9 +5,9 @@
  * @param {Object} o Object to put into variable.
  */
 export const addWindowVar = (n, o) => {
-  window[n] = window[n] || []
-  window[n].push(o)
-}
+  window[n] = window[n] || [];
+  window[n].push(o);
+};
 
 /**
  *  Load dynamically a JS file using Promise.
@@ -26,16 +26,16 @@ export default (id, src) => (
     // If file is already added then resolve Promise
     // and exit from function.
     if (document.getElementById(id)) {
-      resolve()
-      return true
+      resolve();
+      return true;
     }
 
-    js.id = id
-    js.src = src
-    js.async = true
-    js.onload = resolve
-    js.onerror = reject
+    js.id = id;
+    js.src = src;
+    js.async = true;
+    js.onload = resolve;
+    js.onerror = reject;
 
-    document.head.appendChild(js)
+    document.head.appendChild(js);
   })
 )

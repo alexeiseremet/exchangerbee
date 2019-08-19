@@ -13,13 +13,11 @@ import { textMetadata as t } from '../../lib/locale'
  * @param {string} ogDescription OpenGraph description.
  * @param {string} ogImage OpenGraph Image.
  */
-export default (
-  {
-    title, url, ogDescription,
-    description, keywords, ogImage
-  }
-) => {
-  url = url ? `${host}/${url}` : host
+export default ({
+  title, url, ogDescription,
+  description, keywords, ogImage
+}) => {
+  url = url ? `${host}/${url}` : host;
 
   if (!ogDescription && description) {
     ogDescription = description

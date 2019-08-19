@@ -1,7 +1,7 @@
 import React from 'react'
 import jwtoken from 'jsonwebtoken'
-import { getCookie, AUTH_COOKIE_NAME, AUTH_SECRET } from 'Lib/session'
-import redirect from 'Lib/redirect'
+import { getCookie, AUTH_COOKIE_NAME, AUTH_SECRET } from '../lib/session'
+import redirect from '../lib/redirect'
 
 /**
  * Higher Order Component that used to protect routes (pages). That'll check
@@ -21,10 +21,10 @@ export default (Page) => (
      * @returns {pageProps} Props for page.
      */
     static getInitialProps (ctx) {
-      const userJwt = getCookie(AUTH_COOKIE_NAME, ctx.req)
-      const isLoginPage = ctx.asPath.startsWith('/login')
-      const pageProps = Page.getInitialProps && Page.getInitialProps(ctx)
-      let isLogged = false
+      const userJwt = getCookie(AUTH_COOKIE_NAME, ctx.req);
+      const isLoginPage = ctx.asPath.startsWith('/admin');
+      const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
+      let isLogged = false;
 
       try {
         isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET)
@@ -33,10 +33,10 @@ export default (Page) => (
       }
 
       // Redirect if not logged and isn't login page.
-      if (!isLogged && !isLoginPage) redirect('/login', ctx)
+      if (!isLogged && !isLoginPage) redirect('/admin', ctx);
 
       // Redirect if logged and is login page.
-      if (isLogged && isLoginPage) redirect('/', ctx)
+      if (isLogged && isLoginPage) redirect('/', ctx);
 
       return pageProps
     }

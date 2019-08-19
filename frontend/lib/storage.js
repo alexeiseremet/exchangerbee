@@ -1,4 +1,4 @@
-import { storagePath } from 'Root/server.config'
+import { storagePath } from '../server.config';
 
 export default {
   postBig: image => `${storagePath}/posts/big/${image}`,

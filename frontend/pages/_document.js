@@ -5,8 +5,8 @@ import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 export default class ExbeeDocument extends Document {
   static async getInitialProps (ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    const spriteContent = sprite.stringify()
+    const initialProps = await Document.getInitialProps(ctx);
+    const spriteContent = sprite.stringify();
 
     return {
       spriteContent,

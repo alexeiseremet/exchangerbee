@@ -4,7 +4,7 @@ module.exports = {
   Query: {
     post(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Post.findOne({ _id: id, ...args })
+        Post.findOne({ $or: [{ _id: id }, args] })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })

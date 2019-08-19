@@ -4,7 +4,7 @@ import fetch from 'isomorphic-unfetch'
 import { apiBaseUrl } from '../../server.config'
 import { typeDefs, resolvers, defaultState } from '../../localSchema'
 
-let apolloClient = null
+let apolloClient = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
 if (!process.browser) {
@@ -12,7 +12,7 @@ if (!process.browser) {
 }
 
 function create (initialState) {
-  const cache = new InMemoryCache().restore(initialState || {})
+  const cache = new InMemoryCache().restore(initialState || {});
 
   cache.writeData({
     data: defaultState,

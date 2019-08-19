@@ -13,15 +13,18 @@ import Page from '../features/Page'
 import { UpdateCurrency, DeleteCurrency } from '../features/Currency'
 
 class CurrencyPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, req, asPath }) {
+    const fullPath = req ? `/${req.lng}${asPath}`: asPath;
+
     return {
       namespacesRequired: ['common'],
       query,
+      fullPath,
     }
   }
 
   render() {
-    const { query: { action }, currency, allQuote } = this.props;
+    const { query: { action }, currency, allQuote, post } = this.props;
     if (!currency) {
       return null
     }
@@ -49,7 +52,7 @@ class CurrencyPageMarkup extends React.Component {
                 <DeleteCurrency currency={currency} />
                 <hr />
 
-                <h1>{name}</h1>
+                <h1>{post && post.title || name}</h1>
 
                 {
                   allQuote && (
@@ -93,7 +96,7 @@ const CurrencyPageI18N = withNamespaces('common')(CurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY = gql`
-  query CurrencyPage ($slug: String!, $where: QuoteWhereInput!) {
+  query CurrencyPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     currency(slug: $slug) {
       id
       slug
@@ -110,6 +113,9 @@ const GQL_CURRENCY = gql`
       bid
       ask
     }
+    post(slug: $postSlug) {
+      title
+    }
   }
 `;
 
@@ -117,19 +123,21 @@ export default _compose(
   graphql(
     GQL_CURRENCY,
     {
-      options: ({ query }) => ({
+      options: ({ query, fullPath }) => ({
         variables: {
           slug: query.slug,
           where: {
             currency: { refSlug: query.slug },
             date: today(),
             error: 'no',
-          }
+          },
+          postSlug: fullPath,
         },
       }),
-      props: ({ data: { currency, allQuote } }) => ({
+      props: ({ data: { currency, allQuote, post } }) => ({
         currency,
         allQuote,
+        post,
       }),
     }
   )
