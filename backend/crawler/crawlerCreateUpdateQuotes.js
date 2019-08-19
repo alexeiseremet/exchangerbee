@@ -3,6 +3,7 @@
 // dotenv.config()
 
 const fetch = require('isomorphic-unfetch');
+const { today } = require('../lib/moment');
 
 const GQL_UDATE_QUOTE = `
   mutation UpdateQuote ($where: QuoteWhereInput!, $quote: QuoteInput!) {
@@ -15,13 +16,12 @@ const GQL_UDATE_QUOTE = `
 const createUpdateQuotes = async (quotes) => {
   for (let quote of quotes) {
     // Get current day and set hours at midnight.
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayValue = today();
 
     // whereQuote will be used for search in db.
     // If quote exist, update it, if not - create new.
     const { institution, currency, code } = quote;
-    const whereQuote = { institution, currency, date: today };
+    const whereQuote = { institution, currency, date: todayValue };
 
     // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
     const quoteHasError = code === currency.refSlug ? 'no' : 'yes';
@@ -44,7 +44,7 @@ const createUpdateQuotes = async (quotes) => {
             where: whereQuote,
             quote: {
               ...cleanedQuote,
-              date: String(today),
+              date: String(todayValue),
               error: quoteHasError,
             }
           }

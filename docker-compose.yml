@@ -56,6 +56,7 @@ services:
 # docker ps -a
 # docker exec -it 89fc7b0ff34d bash/sh
 # docker logs 89fc7b0ff34d
+# docker system prune
 
 # With Dockerfile.
 # docker build --no-cache --tag=exbee_frontend_1 .

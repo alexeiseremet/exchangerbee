@@ -62,6 +62,8 @@ module.exports = {
       })
     },
     updateQuote(_, { where, quote }) {
+      console.log('quote', quote);
+
       return new Promise((resolve, reject) => {
         Quote.findOneAndUpdate(
           where,

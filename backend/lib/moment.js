@@ -1,5 +1,5 @@
-import momentjs from 'moment-timezone';
-import { locale, timezone } from '../server.config';
+const momentjs = require('moment-timezone');
+const { locale, timezone } = require('../server.config');
 
 // Set the default locale & timezone.
 momentjs.locale(locale);
@@ -55,7 +55,7 @@ const localeDate = (date = moment()) => (
  */
 const today = () => `${moment().startOf('day').valueOf()}`;
 
-export {
+module.exports = {
   moment,
   monthToString,
   monthToIndex,
