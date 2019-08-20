@@ -1,8 +1,8 @@
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import fetch from 'isomorphic-unfetch'
 
-import { apiBaseUrl } from '../../server.config'
-import { typeDefs, resolvers, defaultState } from '../../localSchema'
+import { apiBaseUrl } from '../../server.config';
+import { typeDefs, resolvers, defaultState } from '../../localSchema';
 
 let apolloClient = null;
 

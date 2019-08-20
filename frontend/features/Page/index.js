@@ -44,7 +44,7 @@ const Sidebar = (
       </li>
     </List>
   </nav>
-)
+);
 
 const Page = ({children, top, aside = Sidebar}) => {
   const classes = classnames(
@@ -53,7 +53,7 @@ const Page = ({children, top, aside = Sidebar}) => {
       'page--has-top': top,
       'page--no-aside': aside === null
     }
-  )
+  );
 
   return (
     <div className={classes}>
@@ -80,6 +80,6 @@ const Page = ({children, top, aside = Sidebar}) => {
       </div>
     </div>
   )
-}
+};
 
 export default Page

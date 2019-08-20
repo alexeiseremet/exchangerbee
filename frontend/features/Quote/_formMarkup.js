@@ -11,12 +11,7 @@ const FormMarkup = ({
   quote,
   onSubmit,
   action,
-}) => {
-  if (!quote.institution) {
-    return null
-  }
-
-  return (
+}) => (
     <React.Fragment>
       <div className="text">
         <h1>{t.quote} {action}</h1>
@@ -96,6 +91,6 @@ const FormMarkup = ({
         />
       </Form>
     </React.Fragment>
-  )};
+  );
 
 export default FormMarkup

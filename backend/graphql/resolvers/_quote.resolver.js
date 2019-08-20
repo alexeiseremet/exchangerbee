@@ -1,5 +1,5 @@
 const { Quote } = require('../../models');
-const flattenObject = require('../../flattenObject');
+const flattenObject = require('../../lib/flattenObject');
 
 module.exports = {
   Query: {

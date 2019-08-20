@@ -5,5 +5,5 @@ RUN yarn install && yarn build \
     && chown -R node:node node_modules \
     && chown -R node:node .next
 RUN ls -la
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
 USER node
