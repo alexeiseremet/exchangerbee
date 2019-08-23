@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import { today } from '../lib/moment'
 
@@ -12,87 +12,83 @@ import Layout from '../features/Layout'
 import Page from '../features/Page'
 import { UpdateCurrency, DeleteCurrency } from '../features/Currency'
 
-class CurrencyPageMarkup extends React.Component {
-  static async getInitialProps({ query, req, asPath }) {
-    const fullPath = req ? `/${req.lng}${asPath}`: asPath;
-
-    return {
-      namespacesRequired: ['common'],
-      query,
-      fullPath,
-    }
+const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => {
+  if (!currency) {
+    return null
   }
 
-  render() {
-    const { query: { action }, currency, allQuote, post } = this.props;
-    if (!currency) {
-      return null
-    }
+  const { name, slug } = currency;
 
-    const { name, slug } = currency;
+  return (
+    <Layout>
+      <Metadata
+        title={t.metaTitle}
+        description={t.metaDescription}
+        ogTitle={t.ogTitle}
+        ogDescription={t.ogDescription}
+      />
+      <Page>
+        {
+          !action && (
+            <React.Fragment>
+              <Link href={`/currency?slug=${slug}&action=update`} as={`/currencies/${slug}/update`}>
+                <a>{'Update'}</a>
+              </Link>
+              &nbsp;|&nbsp;
+              <DeleteCurrency currency={currency}/>
+              <hr/>
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && (
-              <React.Fragment>
-                <Link href={`/currency?slug=${slug}&action=update`}
-                  as={`/currencies/${slug}/update`}
-                  prefetch>
-                  <a>{'Update'}</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteCurrency currency={currency} />
-                <hr />
+              <h1>{post && post.title || name}</h1>
 
-                <h1>{post && post.title || name}</h1>
-
-                {
-                  allQuote && (
-                    <table>
-                      <thead>
-                      <tr>
-                        <th>Banca</th>
-                        <th>Unități</th>
-                        <th>Cumpărare</th>
-                        <th>Vânzare</th>
-                        <th>Variație</th>
+              {
+                allQuote && (
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Banca</th>
+                      <th>Unități</th>
+                      <th>Cumpărare</th>
+                      <th>Vânzare</th>
+                      <th>Variație</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {allQuote.map((quote, i) => (
+                      <tr key={i}>
+                        <td>{quote.institutionVObj.name}</td>
+                        <td>{quote.amount}</td>
+                        <td>{quote.bid}</td>
+                        <td>{quote.ask}</td>
+                        <td>{'current - prev'}</td>
                       </tr>
-                      </thead>
-                      <tbody>
-                        {allQuote.map((quote, i) => (
-                          <tr key={i}>
-                            <td>{quote.institutionVObj.name}</td>
-                            <td>{quote.amount}</td>
-                            <td>{quote.bid}</td>
-                            <td>{quote.ask}</td>
-                            <td>{'current - prev'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  )
-                }
-              </React.Fragment>
-            )
-          }
+                    ))}
+                    </tbody>
+                  </table>
+                )
+              }
+            </React.Fragment>
+          )
+        }
 
-          {action && <UpdateCurrency currency={currency} />}
-        </Page>
-      </Layout>
-    )
+        {action && <UpdateCurrency currency={currency}/>}
+      </Page>
+    </Layout>
+  )
+};
+
+// getInitialProps.
+CurrencyPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+  const fullPath = req ? `/${req.lng}${asPath}` : asPath;
+
+  return {
+    namespacesRequired: ['common'],
+    query,
+    fullPath,
   }
-}
+};
 
 // i18n.
-const CurrencyPageI18N = withNamespaces('common')(CurrencyPageMarkup);
+const CurrencyPageI18N = withTranslation('common')(CurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY = gql`

@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 
 import Metadata from '../features/Metadata'
@@ -12,58 +12,51 @@ import Page from '../features/Page'
 import List from '../features/List'
 import { CreateCurrency } from '../features/Currency'
 
-class BanksPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
-    return {
-      namespacesRequired: ['common'],
-      query
-    }
-  }
+const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
+  <Layout>
+    <Metadata
+      title={t.metaTitle}
+      description={t.metaDescription}
+      ogTitle={t.ogTitle}
+      ogDescription={t.ogDescription}
+    />
+    <Page>
+      {
+        !action && allCurrency && (
+          <React.Fragment>
+            <Link href={`/currencies?action=create`} as={`/currencies/create`}>
+              <a>{'Create'}</a>
+            </Link>
+            <hr/>
 
-  render() {
-    const { query: { action }, allCurrency } = this.props;
+            <List type="ordered">
+              {
+                allCurrency.map(({ id, slug, name }) => (
+                  <li key={id}>
+                    <Link href={`/currency?slug=${slug}`} as={`/currencies/${slug}`}>
+                      <a>{name}</a>
+                    </Link>
+                  </li>
+                ))
+              }
+            </List>
+          </React.Fragment>
+        )
+      }
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && allCurrency && (
-              <React.Fragment>
-                <Link href={`/currencies?action=create`} as={`/currencies/create`} prefetch>
-                  <a>{'Create'}</a>
-                </Link>
-                <hr />
+      {action && <CreateCurrency/>}
+    </Page>
+  </Layout>
+);
 
-                <List type="ordered">
-                  {
-                    allCurrency.map(({ id, slug, name }) => (
-                      <li key={id}>
-                        <Link href={`/currency?slug=${slug}`} as={`/currencies/${slug}`} prefetch>
-                          <a>{name}</a>
-                        </Link>
-                      </li>
-                    ))
-                  }
-                </List>
-              </React.Fragment>
-            )
-          }
-
-          {action && <CreateCurrency />}
-        </Page>
-      </Layout>
-    )
-  }
-}
+// getInitialProps.
+CurrenciesPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
-const BanksPageI18N = withNamespaces('common')(BanksPageMarkup);
+const CurrenciesPageI18N = withTranslation('common')(CurrenciesPageMarkup);
 
 // Container.
 const GQL_ALL_CURRENCY = gql`
@@ -85,4 +78,4 @@ export default _compose(
       })
     }
   )
-)(BanksPageI18N)
+)(CurrenciesPageI18N)

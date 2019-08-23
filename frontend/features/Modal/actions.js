@@ -3,12 +3,12 @@ import { textModal as t } from '../../lib/locale'
 export const modalContent = {
   AUTH: 'AUTH',
   SEND: 'SEND',
-}
+};
 
 export const types = {
   SHOW_MODAL: 'SHOW_MODAL',
   HIDE_MODAL: 'HIDE_MODAL',
-}
+};
 
 /* Action creators */
 
@@ -27,12 +27,12 @@ export const showModal = name => {
           title: t.authTitle,
           content: 'LoginForm',
         }
-      }
+      };
 
     default:
       hideModal()
   }
-}
+};
 
 /**
  * Creates a Redux action that hide Modal component.
@@ -43,4 +43,4 @@ export const hideModal = () => {
   return {
     type: types.HIDE_MODAL,
   }
-}
+};

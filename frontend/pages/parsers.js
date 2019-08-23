@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 
 import Metadata from '../features/Metadata'
@@ -12,58 +12,51 @@ import Page from '../features/Page'
 import List from '../features/List'
 import { CreateParser } from '../features/Parser'
 
-class ParsersPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
-    return {
-      namespacesRequired: ['common'],
-      query
-    }
-  }
+const ParsersPageMarkup = ({ query: { action }, allParser }) => (
+  <Layout>
+    <Metadata
+      title={t.metaTitle}
+      description={t.metaDescription}
+      ogTitle={t.ogTitle}
+      ogDescription={t.ogDescription}
+    />
+    <Page>
+      {
+        !action && allParser && (
+          <React.Fragment>
+            <Link href={`/parsers?action=create`} as={`/parsers/create`}>
+              <a>{'Create'}</a>
+            </Link>
+            <hr />
 
-  render() {
-    const { query: { action }, allParser } = this.props;
+            <List type="ordered">
+              {
+                allParser.map(({ id, url }) => (
+                  <li key={id}>
+                    <Link href={`/parser?id=${id}`} as={`/parsers/${id}`}>
+                      <a>{url}</a>
+                    </Link>
+                  </li>
+                ))
+              }
+            </List>
+          </React.Fragment>
+        )
+      }
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && allParser && (
-              <React.Fragment>
-                <Link href={`/parsers?action=create`} as={`/parsers/create`} prefetch>
-                  <a>{'Create'}</a>
-                </Link>
-                <hr />
+      {action && <CreateParser />}
+    </Page>
+  </Layout>
+);
 
-                <List type="ordered">
-                  {
-                    allParser.map(({ id, url }) => (
-                      <li key={id}>
-                        <Link href={`/parser?id=${id}`} as={`/parsers/${id}`} prefetch>
-                          <a>{url}</a>
-                        </Link>
-                      </li>
-                    ))
-                  }
-                </List>
-              </React.Fragment>
-            )
-          }
-
-          {action && <CreateParser />}
-        </Page>
-      </Layout>
-    )
-  }
-}
+// getInitialProps.
+ParsersPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
-const ParsersPageI18N = withNamespaces('common')(ParsersPageMarkup);
+const ParsersPageI18N = withTranslation('common')(ParsersPageMarkup);
 
 // Container.
 const GQL_ALL_PARSER = gql`

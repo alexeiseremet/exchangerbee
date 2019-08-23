@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 
 import Metadata from '../features/Metadata'
@@ -11,55 +11,51 @@ import Layout from '../features/Layout'
 import Page from '../features/Page'
 import { UpdateParser, DeleteParser } from '../features/Parser'
 
-class ParserPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
-    return {
-      namespacesRequired: ['common'],
-      query,
-    }
+const ParserPageMarkup = ({ query: { action }, parser }) => {
+  if (!parser) {
+    return null
   }
 
-  render() {
-    const { query: { action }, parser } = this.props;
-    if (!parser) {
-      return null
-    }
+  const { id, url } = parser;
 
-    const { id, url } = parser;
+  return (
+    <Layout>
+      <Metadata
+        title={t.metaTitle}
+        description={t.metaDescription}
+        ogTitle={t.ogTitle}
+        ogDescription={t.ogDescription}
+      />
+      <Page>
+        {
+          !action && (
+            <React.Fragment>
+              <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`}>
+                <a>{'Update'}</a>
+              </Link>
+              &nbsp;|&nbsp;
+              <DeleteParser parser={parser} />
+              <hr />
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && (
-              <React.Fragment>
-                <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`} prefetch>
-                  <a>{'Update'}</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteParser parser={parser} />
-                <hr />
+              <h1>{url}</h1>
+            </React.Fragment>
+          )
+        }
 
-                <h1>{url}</h1>
-              </React.Fragment>
-            )
-          }
+        {action && <UpdateParser parser={parser} />}
+      </Page>
+    </Layout>
+  )
+};
 
-          {action && <UpdateParser parser={parser} />}
-        </Page>
-      </Layout>
-    )
-  }
-}
+// getInitialProps.
+ParserPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
-const ParserPageI18N = withNamespaces('common')(ParserPageMarkup);
+const ParserPageI18N = withTranslation('common')(ParserPageMarkup);
 
 // Container.
 const GQL_PARSER = gql`

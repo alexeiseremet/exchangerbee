@@ -1,19 +1,16 @@
 import './styles.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
 import Svg from '../Svg';
 import iconClose from '../../assets/images/icon-close.svg?sprite';
 
 export class ModalMarkup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.backdrop = React.createRef();
-    this.inner = React.createRef();
-  }
+  backdrop = React.createRef();
+  inner = React.createRef();
 
   /**
    * Close Modal on press escape keyboard.
@@ -50,6 +47,11 @@ export class ModalMarkup extends React.Component {
 
   render() {
     const { modal, closeModal } = this.props;
+
+    if (!modal) {
+      return null;
+    }
+
     const { show, title, content } = modal;
 
     if (!show) {

@@ -35,20 +35,20 @@ const APP_ROUTES = [
     pattern: '/parsers/:id/:action(update|delete)?',
   },
   {
-    page: 'quotes',
-    pattern: '/quotes/:action(create)?',
-  },
-  {
-    page: 'quote',
-    pattern: '/quotes/:id/:action(update|delete)?',
-  },
-  {
     page: 'posts',
     pattern: '/posts/:action(create)?',
   },
   {
     page: 'post',
     pattern: '/posts/:id/:action(update|delete)?',
+  },
+  {
+    page: 'quotes',
+    pattern: '/quotes/:action(create)?',
+  },
+  {
+    page: 'quote',
+    pattern: '/quotes/:id/:action(update|delete)?',
   },
 ];
 

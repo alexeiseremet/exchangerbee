@@ -8,37 +8,37 @@ const Sidebar = (
   <nav role="navigation">
     <List>
       <li>
-        <Link prefetch href='/'>
+        <Link href='/'>
           <a>Home</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/banks">
+        <Link href="/banks">
           <a>Banks</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/currencies">
+        <Link href="/currencies">
           <a>Currencies</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/parsers">
+        <Link href="/parsers">
           <a>Parsers</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/quotes">
+        <Link href="/quotes">
           <a>Quotes</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/posts">
+        <Link href="/posts">
           <a>Posts</a>
         </Link>
       </li>
       <li>
-        <Link prefetch href="/admin">
+        <Link href="/admin">
           <a>Admin</a>
         </Link>
       </li>

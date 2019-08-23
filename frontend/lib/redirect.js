@@ -1,14 +1,24 @@
-import { Router } from 'Root/routes';
+import { Router } from '../routes';
 
-export default (target, ctx = {}) => {
+const redirect = (target, ctx) => {
   // Redirect on the server.
   if (ctx.isServer) {
-    ctx.res.writeHead(303, {Location: target});
+    ctx.res.writeHead(303, { Location: target });
     ctx.res.end();
-
-    return undefined;
+  } else {
+    // Redirect in the browser.
+    Router.replaceRoute(target);
   }
 
-  // Redirect in the browser.
-  Router.replaceRoute(target);
-}
+  return undefined;
+};
+
+export const cleanUrl = ctx => {
+  if (req.path.endsWith('/') && req.path.length > 1) {
+    const newUrl = req.path.substring('/');
+
+    return redirect(newUrl, ctx);
+  }
+};
+
+export default redirect

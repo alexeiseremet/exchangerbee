@@ -3,70 +3,63 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
+import { Link, withTranslation } from '../lib/i18n'
+import { textIndexPage as t } from '../lib/locale'
 import { localeDate } from '../lib/moment'
 
-import Metadata from '../features/Metadata';
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import List from '../features/List';
-import { CreateQuote } from '../features/Quote';
+import Metadata from '../features/Metadata'
+import Layout from '../features/Layout'
+import Page from '../features/Page'
+import List from '../features/List'
+import { CreateQuote } from '../features/Quote'
 
-class QuotesPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
-    return {
-      namespacesRequired: ['common'],
-      query
-    }
-  }
+const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
+  <Layout>
+    <Metadata
+      title={t.metaTitle}
+      description={t.metaDescription}
+      ogTitle={t.ogTitle}
+      ogDescription={t.ogDescription}
+    />
+    <Page>
+      {
+        !action && allQuote && (
+          <React.Fragment>
+            <Link href={`/quotes?action=create`} as={`/quotes/create`}>
+              <a>{'Create'}</a>
+            </Link>
+            <hr />
 
-  render() {
-    const { query: { action }, allQuote } = this.props;
+            <List type="ordered">
+              {
+                allQuote.map(({ id, institutionVObj, currencyVObj, date, error }) => (
+                  <li key={id} style={{color: error === 'yes' ? 'red' : null}}>
+                    <Link href={`/quote?id=${id}`} as={`/quotes/${id}`}>
+                      <a>
+                        {localeDate(date)} -- {institutionVObj.name} -- {currencyVObj.name}
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              }
+            </List>
+          </React.Fragment>
+        )
+      }
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && allQuote && (
-              <React.Fragment>
-                <Link href={`/quotes?action=create`} as={`/quotes/create`} prefetch>
-                  <a>{'Create'}</a>
-                </Link>
-                <hr />
+      {action && <CreateQuote />}
+    </Page>
+  </Layout>
+);
 
-                <List type="ordered">
-                  {
-                    allQuote.map(({ id, institutionVObj, currencyVObj, date, error }) => (
-                      <li key={id} style={{color: error === 'yes' ? 'red' : null}}>
-                        <Link href={`/quote?id=${id}`} as={`/quotes/${id}`} prefetch>
-                          <a>
-                            {localeDate(date)} -- {institutionVObj.name} -- {currencyVObj.name}
-                          </a>
-                        </Link>
-                      </li>
-                    ))
-                  }
-                </List>
-              </React.Fragment>
-            )
-          }
-
-          {action && <CreateQuote />}
-        </Page>
-      </Layout>
-    )
-  }
-}
+// getInitialProps.
+QuotesPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
-const QuotesPageI18N = withNamespaces('common')(QuotesPageMarkup);
+const QuotesPageI18N = withTranslation('common')(QuotesPageMarkup);
 
 // Container.
 const GQL_ALL_QUOTE = gql`

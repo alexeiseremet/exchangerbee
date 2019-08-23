@@ -10,7 +10,7 @@ const initialState = {
   title: null,
   content: null,
   show: false
-}
+};
 
 /**
  * Reducer that returns the next state tree.
@@ -27,12 +27,12 @@ export default (state = initialState, {type, payload}) => {
         title: payload.title,
         content: payload.content,
         show: true
-      }
+      };
 
     case types.HIDE_MODAL:
-      return initialState
+      return initialState;
 
     default:
-      return state
+      return state;
   }
 }

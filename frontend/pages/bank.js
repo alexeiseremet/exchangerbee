@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withNamespaces } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import { today } from '../lib/moment'
 
@@ -12,84 +12,79 @@ import Layout from '../features/Layout'
 import Page from '../features/Page'
 import { UpdateInstitution, DeleteInstitution } from '../features/Institution'
 
-class BankPageMarkup extends React.Component {
-  static async getInitialProps({ query }) {
-    return {
-      namespacesRequired: ['common'],
-      query,
-    }
+const BankPageMarkup = ({ query: { action }, institution, allQuote }) => {
+  if (!institution) {
+    return null
   }
 
-  render() {
-    const { query: { action }, institution, allQuote } = this.props;
-    if (!institution) {
-      return null
-    }
+  const { name, slug } = institution;
 
-    const { name, slug } = institution;
+  return (
+    <Layout>
+      <Metadata
+        title={t.metaTitle}
+        description={t.metaDescription}
+        ogTitle={t.ogTitle}
+        ogDescription={t.ogDescription}
+      />
+      <Page>
+        {
+          !action && (
+            <React.Fragment>
+              <Link href={`/bank?slug=${slug}&action=update`}
+                    as={`/banks/${slug}/update`}>
+                <a>{'Update'}</a>
+              </Link>
+              &nbsp;|&nbsp;
+              <DeleteInstitution institution={institution}/>
+              <hr/>
 
-    return (
-      <Layout>
-        <Metadata
-          title={t.metaTitle}
-          description={t.metaDescription}
-          ogTitle={t.ogTitle}
-          ogDescription={t.ogDescription}
-        />
-        <Page>
-          {
-            !action && (
-              <React.Fragment>
-                <Link href={`/bank?slug=${slug}&action=update`}
-                  as={`/banks/${slug}/update`}
-                  prefetch>
-                  <a>{'Update'}</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteInstitution institution={institution} />
-                <hr />
+              <h1>{name}</h1>
 
-                <h1>{name}</h1>
+              {
+                allQuote && (
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Valuta</th>
+                      <th>Unități</th>
+                      <th>Cumpărare</th>
+                      <th>Vânzare</th>
+                      <th>Variație</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {allQuote.map((quote, i) => (
+                      <tr key={i}>
+                        <td>{quote.currencyVObj.name}</td>
+                        <td>{quote.amount} {quote.currencyVObj.slug}</td>
+                        <td>{quote.bid}</td>
+                        <td>{quote.ask}</td>
+                        <td>{'current - prev'}</td>
+                      </tr>
+                    ))}
+                    </tbody>
+                  </table>
+                )
+              }
+            </React.Fragment>
+          )
+        }
 
-                {
-                  allQuote && (
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Valuta</th>
-                          <th>Unități</th>
-                          <th>Cumpărare</th>
-                          <th>Vânzare</th>
-                          <th>Variație</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {allQuote.map((quote, i) => (
-                          <tr key={i}>
-                            <td>{quote.currencyVObj.name}</td>
-                            <td>{quote.amount} {quote.currencyVObj.slug}</td>
-                            <td>{quote.bid}</td>
-                            <td>{quote.ask}</td>
-                            <td>{'current - prev'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  )
-                }
-              </React.Fragment>
-            )
-          }
+        {action && <UpdateInstitution institution={institution}/>}
+      </Page>
+    </Layout>
+  )
+};
 
-          {action && <UpdateInstitution institution={institution} />}
-        </Page>
-      </Layout>
-    )
-  }
-}
+// getInitialProps.
+BankPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
-const BankPageI18N = withNamespaces('common')(BankPageMarkup);
+const BankPageI18N = withTranslation('common')(BankPageMarkup);
 
 // Container.
 const GQL_INSTITUTION = gql`

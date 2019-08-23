@@ -3,8 +3,10 @@ const { Post } = require('../../models');
 module.exports = {
   Query: {
     post(_, { id, ...args }) {
+      const fields = [{ _id: id }, args].filter(obj => Object.keys(obj).length);
+
       return new Promise((resolve, reject) => {
-        Post.findOne({ $or: [{ _id: id }, args] })
+        Post.findOne({ $or: fields })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
