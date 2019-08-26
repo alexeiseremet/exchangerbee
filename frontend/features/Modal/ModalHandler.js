@@ -6,10 +6,10 @@ import _compose from 'lodash/flowRight'
 
 import Button from '../Button';
 
-const ModalHandlerMarkup = ({ openModal }) => (
+const ModalHandlerMarkup = ({ openModal, label }) => (
   <Button
     onClick={openModal}
-    labelText="Open modal"
+    labelText={label}
   />
 );
 

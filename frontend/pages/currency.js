@@ -5,7 +5,7 @@ import _compose from 'lodash/flowRight'
 
 import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
-import { today } from '../lib/moment'
+import { today, localeDate } from '../lib/moment'
 
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
@@ -38,7 +38,21 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
               <DeleteCurrency currency={currency}/>
               <hr/>
 
-              <h1>{post && post.title || name}</h1>
+              {
+                post && (
+                  <React.Fragment>
+                    <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
+                      {post.title}
+                    </h1>
+
+                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+                  </React.Fragment>
+                )
+              }
+
+              <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
+                `Cursul oficial şi cele mai bune rate de schimb pentru ${name} oferite de băncile din Chişinău, ${localeDate()}`
+              </p>
 
               {
                 allQuote && (
@@ -53,19 +67,27 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
                     </tr>
                     </thead>
                     <tbody>
-                    {allQuote.map((quote, i) => (
-                      <tr key={i}>
-                        <td>{quote.institutionVObj.name}</td>
-                        <td>{quote.amount}</td>
-                        <td>{quote.bid}</td>
-                        <td>{quote.ask}</td>
-                        <td>{'current - prev'}</td>
-                      </tr>
-                    ))}
+                    {
+                      !!allQuote.length
+                        ? allQuote.map((quote, i) => (
+                          <tr key={i}>
+                            <td>{quote.institutionVObj.name}</td>
+                            <td>{quote.amount}</td>
+                            <td>{quote.bid}</td>
+                            <td>{quote.ask}</td>
+                            <td>{'current - prev'}</td>
+                          </tr>
+                        ))
+                        : 'Nu exista date'
+                    }
                     </tbody>
                   </table>
                 )
               }
+
+              <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
+                {`Evoluția cursului oficial pentru 1 ${name}, ${slug}/mdl`}
+              </p>
             </React.Fragment>
           )
         }
@@ -111,6 +133,8 @@ const GQL_CURRENCY = gql`
     }
     post(slug: $postSlug) {
       title
+      textFirst
+      textSecond
     }
   }
 `;

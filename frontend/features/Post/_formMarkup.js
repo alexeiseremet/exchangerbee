@@ -18,6 +18,8 @@ const FormMarkup = ({
         initialValues={{
           slug: '',
           title: '',
+          textFirst: '',
+          textSecond: '',
           ...post
         }}
         onSubmit={onSubmit}
@@ -25,7 +27,7 @@ const FormMarkup = ({
         <Input
           name="slug"
           id="post-slug"
-          type="text"
+          component="input"
           labelText="Slug"
           required
           readOnly={action === 'update'}
@@ -33,9 +35,21 @@ const FormMarkup = ({
         <Input
           name="title"
           id="post-title"
-          type="text"
+          component="input"
           labelText="Title"
           required
+        />
+        <Input
+          name="textFirst"
+          id="post-textFirst"
+          type="textarea"
+          labelText="Text first"
+        />
+        <Input
+          name="textSecond"
+          id="post-textSecond"
+          type="textarea"
+          labelText="Text second"
         />
       </Form>
     </React.Fragment>

@@ -12,12 +12,12 @@ import Layout from '../features/Layout'
 import Page from '../features/Page'
 import { UpdateInstitution, DeleteInstitution } from '../features/Institution'
 
-const BankPageMarkup = ({ query: { action }, institution, allQuote }) => {
+const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
   if (!institution) {
     return null
   }
 
-  const { name, slug } = institution;
+  const { slug } = institution;
 
   return (
     <Layout>
@@ -39,7 +39,17 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote }) => {
               <DeleteInstitution institution={institution}/>
               <hr/>
 
-              <h1>{name}</h1>
+              {
+                post && (
+                  <React.Fragment>
+                    <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
+                      {post.title}
+                    </h1>
+
+                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+                  </React.Fragment>
+                )
+              }
 
               {
                 allQuote && (
@@ -54,15 +64,19 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote }) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {allQuote.map((quote, i) => (
-                      <tr key={i}>
-                        <td>{quote.currencyVObj.name}</td>
-                        <td>{quote.amount} {quote.currencyVObj.slug}</td>
-                        <td>{quote.bid}</td>
-                        <td>{quote.ask}</td>
-                        <td>{'current - prev'}</td>
-                      </tr>
-                    ))}
+                    {
+                      !!allQuote.length
+                        ? allQuote.map((quote, i) => (
+                          <tr key={i}>
+                            <td>{quote.currencyVObj.name}</td>
+                            <td>{quote.amount} {quote.currencyVObj.slug}</td>
+                            <td>{quote.bid}</td>
+                            <td>{quote.ask}</td>
+                            <td>{'current - prev'}</td>
+                          </tr>
+                        ))
+                        : 'Nu exista date'
+                    }
                     </tbody>
                   </table>
                 )
@@ -78,22 +92,25 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote }) => {
 };
 
 // getInitialProps.
-BankPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
-  query,
-});
+BankPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+  const fullPath = req ? `/${req.lng}${asPath}` : asPath;
+
+  return {
+    namespacesRequired: ['common'],
+    query,
+    fullPath,
+  }
+};
 
 // i18n.
 const BankPageI18N = withTranslation('common')(BankPageMarkup);
 
 // Container.
 const GQL_INSTITUTION = gql`
-  query BankPage ($slug: String!, $where: QuoteWhereInput!) {
+  query BankPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     institution(slug: $slug) {
       id
       slug
-      name
-      category
     }
     allQuote (where: $where) {
       currencyVObj {
@@ -104,6 +121,11 @@ const GQL_INSTITUTION = gql`
       bid
       ask
     }
+    post(slug: $postSlug) {
+      title
+      textFirst
+      textSecond
+    }
   }
 `;
 
@@ -111,19 +133,21 @@ export default _compose(
   graphql(
     GQL_INSTITUTION,
     {
-      options: ({ query }) => ({
+      options: ({ query, fullPath }) => ({
         variables: {
           slug: query.slug,
           where: {
             institution: { refSlug: query.slug },
             date: today(),
             error: 'no',
-          }
+          },
+          postSlug: fullPath,
         },
       }),
-      props: ({ data: { institution, allQuote } }) => ({
+      props: ({ data: { institution, allQuote, post } }) => ({
         institution,
         allQuote,
+        post,
       }),
     }
   )

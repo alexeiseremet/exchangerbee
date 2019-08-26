@@ -54,7 +54,7 @@ const FormMarkup = ({
         <Input
           name="url"
           id="parser-url"
-          type="text"
+          component="input"
           labelText="URL"
           required
         />
@@ -79,7 +79,7 @@ const FormMarkup = ({
                       values={form.values}
                       name={`quotes.${index}.amount`}
                       id={`quotes.${index}.amount`}
-                      type="text"
+                      component="input"
                       labelText="Amount"
                       required
                     />
@@ -94,7 +94,7 @@ const FormMarkup = ({
                       values={form.values}
                       name={`quotes.${index}.xPaths.bid`}
                       id={`quotes.${index}.xPaths.bid`}
-                      type="text"
+                      component="input"
                       labelText="XPath Bid"
                       required
                     />
@@ -102,7 +102,7 @@ const FormMarkup = ({
                       values={form.values}
                       name={`quotes.${index}.xPaths.ask`}
                       id={`quotes.${index}.xPaths.ask`}
-                      type="text"
+                      component="input"
                       labelText="XPath Ask"
                       required
                     />
@@ -110,7 +110,7 @@ const FormMarkup = ({
                       values={form.values}
                       name={`quotes.${index}.xPaths.code`}
                       id={`quotes.${index}.xPaths.code`}
-                      type="text"
+                      component="input"
                       labelText="XPath Code"
                       required
                     />

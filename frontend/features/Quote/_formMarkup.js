@@ -50,6 +50,7 @@ const FormMarkup = ({
         <Input
           name="date"
           id="quote-date"
+          component="input"
           type="date"
           labelText="Updated at"
           required
@@ -57,35 +58,35 @@ const FormMarkup = ({
         <Input
           name="amount"
           id="quote-amount"
-          type="text"
+          component="input"
           labelText="Amount"
           required
         />
         <Input
           name="bid"
           id="quote-bid"
-          type="text"
+          component="input"
           labelText="Bid"
           required
         />
         <Input
           name="ask"
           id="quote-ask"
-          type="text"
+          component="input"
           labelText="Ask"
           required
         />
         <Input
           name="period"
           id="quote-period"
-          type="text"
+          component="input"
           labelText="Period"
           required
         />
         <Input
           name="error"
           id="quote-error"
-          type="text"
+          component="input"
           labelText="Has error"
           required
         />

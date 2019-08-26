@@ -17,9 +17,11 @@ const postSchema = new Schema({
   },
   textFirst: {
     type: String,
+    trim: true,
   },
   textSecond: {
     type: String,
+    trim: true,
   },
 });
 

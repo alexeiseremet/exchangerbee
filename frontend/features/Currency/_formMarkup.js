@@ -29,14 +29,14 @@ const FormMarkup = (
       <Input
         name="name"
         id="currency-name"
-        type="text"
+        component="input"
         labelText="Name"
         required
       />
       <Input
         name="slug"
         id="currency-slug"
-        type="text"
+        component="input"
         labelText="Slug"
         required
         readOnly={action === 'update'}
@@ -44,18 +44,18 @@ const FormMarkup = (
       <Input
         name="numCode"
         id="currency-num-code"
-        type="text"
+        component="input"
         labelText="Numeric code"
         required
       />
       <Input
         name="symbol"
         id="currency-symbol"
-        type="text"
+        component="input"
         labelText="Symbol"
       />
     </Form>
   </React.Fragment>
-)
+);
 
 export default FormMarkup

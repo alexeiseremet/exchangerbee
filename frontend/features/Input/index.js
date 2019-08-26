@@ -11,6 +11,7 @@ export default (
     required = false,
     readOnly = null,
     type = 'text',
+    component = 'input',
     name = null,
     autocomplete = "off",
     labelText,
@@ -46,6 +47,7 @@ export default (
           aria-label={labelText}
           checked={valueByName === true || valueByName === value}
           type={type}
+          component={component}
           value={value || valueByName}
           name={name}
           id={id}

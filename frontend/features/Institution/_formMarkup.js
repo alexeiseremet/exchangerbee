@@ -27,7 +27,7 @@ const FormMarkup = ({
         <Input
           name="name"
           id="institution-name"
-          type="text"
+          component="input"
           labelText="Name"
           required
         />
@@ -43,7 +43,7 @@ const FormMarkup = ({
         <Input
           name="slug"
           id="institution-slug"
-          type="text"
+          component="input"
           labelText="Slug"
           required
           readOnly={action === 'update'}

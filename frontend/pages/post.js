@@ -16,7 +16,7 @@ const PostPageMarkup = ({ query: { action }, post }) => {
     return null
   }
 
-  const { id, title } = post;
+  const { id, title, textFirst, textSecond } = post;
 
   return (
     <Layout>
@@ -37,7 +37,11 @@ const PostPageMarkup = ({ query: { action }, post }) => {
               <DeletePost post={post} />
               <hr />
 
-              <h1>{title}</h1>
+              <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>{title}</h1>
+              <p dangerouslySetInnerHTML={{__html: textFirst}}
+                 style={{ marginBottom: '10px' }}/>
+              <p dangerouslySetInnerHTML={{__html: textSecond}}
+                 style={{ marginBottom: '10px' }}/>
             </React.Fragment>
           )
         }
@@ -64,6 +68,8 @@ const GQL_POST = gql`
       id
       slug
       title
+      textFirst
+      textSecond
     }
   }
 `;

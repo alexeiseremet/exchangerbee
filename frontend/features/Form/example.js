@@ -16,7 +16,7 @@ export default () => {
       <Input
         name="text"
         id="text"
-        type="text"
+        component="input"
         labelText="Text"
         required
       />
