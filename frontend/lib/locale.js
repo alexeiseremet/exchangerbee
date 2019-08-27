@@ -1,11 +1,11 @@
 export const textMetadata = {
   siteName: 'Exchangerbee',
-}
+};
 
 export const textModal = {
   authTitle: 'authTitle',
   sendPostcardTitle: 'sendPostcardTitle',
-}
+};
 
 /*
  Pages
@@ -17,7 +17,7 @@ export const textIndexPage = {
   ogTitle: 'ogTitle',
   ogDescription: 'ogDescription',
   pageTitle: 'pageTitle',
-}
+};
 
 export const textAdminPage = {
   metaTitle: 'Admin Page',

@@ -26,6 +26,8 @@ const IndexPageMarkup = ({ post }) => (
             </h1>
 
             <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+
+            <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
           </React.Fragment>
         )}
       </Page>

@@ -17,8 +17,6 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
     return null
   }
 
-  const { name, slug } = currency;
-
   return (
     <Layout>
       <Metadata
@@ -31,7 +29,8 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
         {
           !action && (
             <React.Fragment>
-              <Link href={`/currency?slug=${slug}&action=update`} as={`/currencies/${slug}/update`}>
+              <Link href={`/currency?slug=${currency.slug}&action=update`}
+                    as={`/currencies/${currency.slug}/update`}>
                 <a>{'Update'}</a>
               </Link>
               &nbsp;|&nbsp;
@@ -51,7 +50,7 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
               }
 
               <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
-                `Cursul oficial şi cele mai bune rate de schimb pentru ${name} oferite de băncile din Chişinău, ${localeDate()}`
+                {`Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} oferite de băncile din Chişinău, ${localeDate()}`}
               </p>
 
               {
@@ -86,8 +85,14 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
               }
 
               <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
-                {`Evoluția cursului oficial pentru 1 ${name}, ${slug}/mdl`}
+                {`Evoluția cursului oficial pentru 1 ${currency.name}, ${currency.slug}/mdl`}
               </p>
+
+              {
+                post && post.textSecond && (
+                  <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+                )
+              }
             </React.Fragment>
           )
         }
