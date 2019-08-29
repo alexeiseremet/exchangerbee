@@ -45,7 +45,7 @@ const inputDate = (date = moment()) => (
  * @returns {string} Date in locale format.
  */
 const localeDate = (date = moment()) => (
-  moment(+date).format('DD MMM YYYY HH:mm:ss')
+  moment(+date).format('DD MMM YYYY')
 );
 
 /**

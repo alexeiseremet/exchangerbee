@@ -118,7 +118,7 @@ CurrencyPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
 const CurrencyPageI18N = withTranslation('common')(CurrencyPageMarkup);
 
 // Container.
-const GQL_CURRENCY = gql`
+const GQL_CURRENCY_PAGE = gql`
   query CurrencyPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     currency(slug: $slug) {
       id
@@ -146,7 +146,7 @@ const GQL_CURRENCY = gql`
 
 export default _compose(
   graphql(
-    GQL_CURRENCY,
+    GQL_CURRENCY_PAGE,
     {
       options: ({ query, fullPath }) => ({
         variables: {

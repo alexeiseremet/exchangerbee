@@ -1,52 +1,16 @@
 import './styles.scss'
 import React from 'react'
 import classnames from 'classnames'
-import { Link } from '../../lib/i18n'
-import List from '../List'
+import MainMenu from '../MainMenu'
 
-const Sidebar = (
-  <nav role="navigation">
-    <List>
-      <li>
-        <Link href='/'>
-          <a>Home</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/banks">
-          <a>Banks</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/currencies">
-          <a>Currencies</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/parsers">
-          <a>Parsers</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/quotes">
-          <a>Quotes</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/posts">
-          <a>Posts</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/admin">
-          <a>Admin</a>
-        </Link>
-      </li>
-    </List>
-  </nav>
+
+const DefaultSidebar = (
+  <React.Fragment>
+    <MainMenu/>
+  </React.Fragment>
 );
 
-const Page = ({children, top, aside = Sidebar}) => {
+const Page = ({ children, top, aside = DefaultSidebar }) => {
   const classes = classnames(
     'page',
     {

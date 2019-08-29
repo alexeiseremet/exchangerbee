@@ -42,6 +42,54 @@ module.exports = {
           })
       })
     },
+    bestTodayQuote(_, { currencies, centralBankSlug }) {
+      return new Promise((resolve, reject) => {
+        Quote.aggregate([
+          { $sort: { date: -1, bid: -1 } },
+          {
+            $match: {
+              $and: [
+                { 'currency.refSlug': { $in: currencies } },
+                { 'institution.refSlug': { $ne: centralBankSlug } },
+                { 'error': 'no' },
+              ]
+            }
+          },
+          {
+            $group: {
+              '_id': '$currency.refSlug',
+              'quote': { $first: '$_id' }
+            }
+          },
+        ])
+          .exec(async (err, res) => {
+            if (err) {
+              reject(err);
+              return undefined;
+            }
+
+            try {
+              const ids = res.map(item => item.quote);
+              const quotes = (
+                await Quote.find({ '_id': { $in: ids } })
+                  .populate({
+                    'path': 'institutionVObj',
+                    'select': 'name slug'
+                  })
+                  .populate({
+                    'path': 'currencyVObj',
+                    'select': 'name slug'
+                  })
+              );
+
+              resolve(quotes);
+            }
+            catch (error) {
+              console.error(error);
+            }
+          });
+      })
+    },
   },
   Mutation: {
     async createQuote(_, { quote }) {

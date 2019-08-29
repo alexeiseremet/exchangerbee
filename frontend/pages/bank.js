@@ -106,7 +106,7 @@ BankPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
 const BankPageI18N = withTranslation('common')(BankPageMarkup);
 
 // Container.
-const GQL_INSTITUTION = gql`
+const GQL_BANK_PAGE = gql`
   query BankPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     institution(slug: $slug) {
       id
@@ -131,7 +131,7 @@ const GQL_INSTITUTION = gql`
 
 export default _compose(
   graphql(
-    GQL_INSTITUTION,
+    GQL_BANK_PAGE,
     {
       options: ({ query, fullPath }) => ({
         variables: {

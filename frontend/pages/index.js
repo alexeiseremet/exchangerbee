@@ -8,30 +8,38 @@ import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
+import { today } from '../lib/moment';
 
-const IndexPageMarkup = ({ post }) => (
-    <Layout>
-      <Metadata
-        title={t.metaTitle}
-        description={t.metaDescription}
-        ogTitle={t.ogTitle}
-        ogDescription={t.ogDescription}
-      />
+const IndexPageMarkup = ({ post, bestTodayQuote }) => (
+  <Layout>
+    <Metadata
+      title={t.metaTitle}
+      description={t.metaDescription}
+      ogTitle={t.ogTitle}
+      ogDescription={t.ogDescription}
+    />
 
-      <Page>
-        {post && (
-          <React.Fragment>
-            <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
-              {post.title}
-            </h1>
+    <Page>
+      {post && (
+        <React.Fragment>
+          <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
+            {post.title}
+          </h1>
 
-            <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
 
-            <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
-          </React.Fragment>
-        )}
-      </Page>
-    </Layout>
+          <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+        </React.Fragment>
+      )}
+
+      <div>
+        USD
+        Buy 17.77 Moldova Agroindbank
+        Sell 17.94 Moldova Agroindbank
+        BNM 17.9361
+      </div>
+    </Page>
+  </Layout>
 
 );
 
@@ -49,8 +57,21 @@ IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {
 const IndexPageI18N = withTranslation('common')(IndexPageMarkup);
 
 // Container.
-const GQL_CURRENCY = gql`
-  query IndexPage ($postSlug: String!) {
+const GQL_INDEX_PAGE = gql`
+  query IndexPage ($currencies: [String!]!, $postSlug: String!, $centralBankSlug: String!) {
+    bestTodayQuote (currencies: $currencies, centralBankSlug: $centralBankSlug) {
+      institutionVObj {
+        name
+        slug
+      }
+      currencyVObj {
+        name
+        slug
+      }
+      amount
+      bid
+      ask
+    }
     post(slug: $postSlug) {
       title
       textFirst
@@ -61,15 +82,18 @@ const GQL_CURRENCY = gql`
 
 export default _compose(
   graphql(
-    GQL_CURRENCY,
+    GQL_INDEX_PAGE,
     {
       options: ({ fullPath }) => ({
         variables: {
+          currencies: ['usd', 'eur'],
+          centralBankSlug: 'bnm',
           postSlug: fullPath,
         },
       }),
-      props: ({ data: { post } }) => ({
+      props: ({ data: { post, bestTodayQuote } }) => ({
         post,
+        bestTodayQuote,
       }),
     }
   )

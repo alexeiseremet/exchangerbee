@@ -46,3 +46,19 @@
     @include flex-width(300px);
   }
 }
+
+
+// Main navigation.
+.main-nav {
+  display: inline-flex;
+  flex-flow: column wrap;
+}
+
+.main-nav__item {
+  margin: .2rem 0;
+}
+
+.main-nav__link {
+  display: inline-block;
+  font-size: 1.6rem;
+}

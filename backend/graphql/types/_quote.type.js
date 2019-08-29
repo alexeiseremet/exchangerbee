@@ -29,6 +29,10 @@ module.exports = `
       first: Int
       last: Int
     ): [Quote!]!
+    bestTodayQuote(
+      currencies: [String!]!, 
+      centralBankSlug: String!
+    ): [Quote!]!
   }
   
   type Mutation {
