@@ -1,0 +1,65 @@
+@import "root";
+
+.best-quotes {
+}
+
+.best-quotes__item {
+}
+
+.best-quotes__card {
+  @extend %flex-column;
+  @extend %link-with-bg;
+  padding: $small-spacing $small-spacing 0 $small-spacing;
+
+  @include mappy-bp(small) {
+    @include flex-row;
+    align-items: flex-end;
+  }
+}
+
+.best-quotes__slug {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 1rem;
+
+  @include mappy-bp(small) {
+    flex-basis: 26%;
+    min-width: 26%;
+  }
+}
+
+.best-quotes__rate {
+  line-height: 1.2;
+  margin-bottom: $small-spacing;
+
+  @include mappy-bp(small) {
+    padding-left: $xsmall-spacing;
+    flex-basis: 26%;
+    min-width: 26%;
+  }
+}
+
+.best-quotes__rate--central {
+  @include mappy-bp(small) {
+    flex-basis: 22%;
+    min-width: 22%;
+  }
+}
+
+.best-quotes__rate-value {
+  font-size: 2rem;
+  margin-bottom: .5rem;
+  display: block;
+  font-weight: 500;
+}
+
+.best-quotes__rate-diff {
+  display: block;
+  font-weight: 400;
+}
+
+.best-quotes__rate-info {
+  display: block;
+  font-size: 1.2rem;
+}

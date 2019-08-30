@@ -30,8 +30,10 @@ module.exports = `
       last: Int
     ): [Quote!]!
     bestTodayQuote(
-      currencies: [String!]!, 
-      centralBankSlug: String!
+      currencies: [String!]
+      excludeBanks: [String!]
+      includeBanks: [String!]
+      type: String
     ): [Quote!]!
   }
   

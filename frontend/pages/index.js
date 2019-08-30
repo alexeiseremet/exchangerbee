@@ -3,14 +3,15 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { withTranslation } from '../lib/i18n'
+import { Link, withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
+import { centralBank, baseCurrenciesArr } from '../server.config'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
-import { today } from '../lib/moment';
+import BestQuotes from '../features/BestQuotes'
 
-const IndexPageMarkup = ({ post, bestTodayQuote }) => (
+const IndexPageMarkup = ({ post, centralQuote, bestBidQuote, bestAskQuote }) => (
   <Layout>
     <Metadata
       title={t.metaTitle}
@@ -27,17 +28,19 @@ const IndexPageMarkup = ({ post, bestTodayQuote }) => (
           </h1>
 
           <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-
-          <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
         </React.Fragment>
       )}
 
-      <div>
-        USD
-        Buy 17.77 Moldova Agroindbank
-        Sell 17.94 Moldova Agroindbank
-        BNM 17.9361
-      </div>
+      <BestQuotes bestAskQuote={bestAskQuote}
+                  bestBidQuote={bestBidQuote}
+                  centralQuote={centralQuote}
+      />
+
+      {
+        post && post.textSecond && (
+          <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+        )
+      }
     </Page>
   </Layout>
 
@@ -58,8 +61,8 @@ const IndexPageI18N = withTranslation('common')(IndexPageMarkup);
 
 // Container.
 const GQL_INDEX_PAGE = gql`
-  query IndexPage ($currencies: [String!]!, $postSlug: String!, $centralBankSlug: String!) {
-    bestTodayQuote (currencies: $currencies, centralBankSlug: $centralBankSlug) {
+  query IndexPage ($currencies: [String!]!, $postSlug: String! $excludeBanks: [String!], $includeBanks: [String!]) {
+    centralQuote: bestTodayQuote (currencies: $currencies, includeBanks: $includeBanks) {
       institutionVObj {
         name
         slug
@@ -67,6 +70,35 @@ const GQL_INDEX_PAGE = gql`
       currencyVObj {
         name
         slug
+        numCode
+      }
+      amount
+      bid
+      ask
+    }
+    bestBidQuote: bestTodayQuote (currencies: $currencies, excludeBanks: $excludeBanks) {
+      institutionVObj {
+        name
+        slug
+      }
+      currencyVObj {
+        name
+        slug
+        numCode
+      }
+      amount
+      bid
+      ask
+    }
+    bestAskQuote: bestTodayQuote (currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
+      institutionVObj {
+        name
+        slug
+      }
+      currencyVObj {
+        name
+        slug
+        numCode
       }
       amount
       bid
@@ -86,14 +118,17 @@ export default _compose(
     {
       options: ({ fullPath }) => ({
         variables: {
-          currencies: ['usd', 'eur'],
-          centralBankSlug: 'bnm',
           postSlug: fullPath,
+          currencies: baseCurrenciesArr,
+          excludeBanks: [centralBank],
+          includeBanks: [centralBank],
         },
       }),
-      props: ({ data: { post, bestTodayQuote } }) => ({
+      props: ({ data: { post, centralQuote, bestBidQuote, bestAskQuote } }) => ({
         post,
-        bestTodayQuote,
+        centralQuote,
+        bestBidQuote,
+        bestAskQuote,
       }),
     }
   )

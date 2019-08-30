@@ -19,7 +19,7 @@ const FormMarkup = ({
         initialValues={{
           name: '',
           slug: '',
-          category: '',
+          category: 'commercial',
           ...institution
         }}
         onSubmit={onSubmit}

@@ -10,30 +10,8 @@
 }
 
 .main-memu__link {
-  color: $base-color;
-  padding: 0 .2rem;
+  @extend %link-with-bg;
+  padding: 0 .4rem;
   display: inline-block;
   font-size: 1.6rem;
-  text-decoration: none;
-  background-image: linear-gradient(
-                  transparent 0%,
-                  transparent calc(50% - .16rem),
-                  rgba($primary-background, 0.5) calc(50% - .16rem),
-                  rgba($primary-background, 0.5) 100%
-  );
-  transition: $base-animation;
-  background-size: 100% 200%;
-  background-position: 0 0;
-
-  &:hover,
-  .is-active {
-    color: $white;
-    background-image: linear-gradient(
-                    transparent 0%,
-                    transparent calc(50% - .16rem),
-                    rgba($primary-background, .75) calc(50% - .16rem),
-                    rgba($primary-background, .75) 100%
-    );
-    background-position: 0 100%;
-  }
 }

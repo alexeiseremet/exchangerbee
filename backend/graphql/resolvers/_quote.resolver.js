@@ -34,23 +34,34 @@ module.exports = {
           })
           .sort({
             'date': 'desc',
-            'institution.refSlug': 'asc',
-            'currency.refSlug': 'asc'
+            'currency.refId': 'asc',
+            'bid': 'desc',
+            'ask': 'asc',
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res)
           })
       })
     },
-    bestTodayQuote(_, { currencies, centralBankSlug }) {
+    bestTodayQuote(_, { currencies, excludeBanks, includeBanks, type }) {
       return new Promise((resolve, reject) => {
         Quote.aggregate([
-          { $sort: { date: -1, bid: -1 } },
+          {
+            $sort: {
+              date: -1,
+              ...(type === 'ask' ? { ask: 1 } : { bid: -1 })
+            }
+          },
           {
             $match: {
               $and: [
                 { 'currency.refSlug': { $in: currencies } },
-                { 'institution.refSlug': { $ne: centralBankSlug } },
+                {
+                  'institution.refSlug': {
+                    ...(excludeBanks ? { $nin: excludeBanks } : { $ne: '*' }),
+                    ...(includeBanks ? { $in: includeBanks } : { $ne: '*' })
+                  }
+                },
                 { 'error': 'no' },
               ]
             }
@@ -78,7 +89,7 @@ module.exports = {
                   })
                   .populate({
                     'path': 'currencyVObj',
-                    'select': 'name slug'
+                    'select': 'name slug numCode'
                   })
               );
 
@@ -110,8 +121,6 @@ module.exports = {
       })
     },
     updateQuote(_, { where, quote }) {
-      console.log('quote', quote);
-
       return new Promise((resolve, reject) => {
         Quote.findOneAndUpdate(
           where,

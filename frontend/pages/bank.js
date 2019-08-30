@@ -111,6 +111,7 @@ const GQL_BANK_PAGE = gql`
     institution(slug: $slug) {
       id
       slug
+      name
     }
     allQuote (where: $where) {
       currencyVObj {
