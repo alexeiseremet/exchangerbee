@@ -1,20 +1,22 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
-import { today, localeDate } from '../lib/moment'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
+import { today, localeDate } from '../lib/moment';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import { UpdateCurrency, DeleteCurrency } from '../features/Currency'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import { UpdateCurrency, DeleteCurrency } from '../features/Currency';
 
-const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => {
+const CurrencyPageMarkup = ({
+  query: { action }, currency, allQuote, post,
+}) => {
   if (!currency) {
-    return null
+    return null;
   }
 
   return (
@@ -28,24 +30,26 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
       <Page>
         {
           !action && (
-            <React.Fragment>
-              <Link href={`/currency?slug=${currency.slug}&action=update`}
-                    as={`/currencies/${currency.slug}/update`}>
-                <a>{'Update'}</a>
+            <>
+              <Link
+                href={`/currency?slug=${currency.slug}&action=update`}
+                as={`/currencies/${currency.slug}/update`}
+              >
+                <a>Update</a>
               </Link>
               &nbsp;|&nbsp;
-              <DeleteCurrency currency={currency}/>
-              <hr/>
+              <DeleteCurrency currency={currency} />
+              <hr />
 
               {
                 post && (
-                  <React.Fragment>
+                  <>
                     <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
                       {post.title}
                     </h1>
 
-                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-                  </React.Fragment>
+                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
+                  </>
                 )
               }
 
@@ -57,16 +61,16 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
                 allQuote && (
                   <table>
                     <thead>
-                    <tr>
-                      <th>Banca</th>
-                      <th>Unități</th>
-                      <th>Cumpărare</th>
-                      <th>Vânzare</th>
-                      <th>Variație</th>
-                    </tr>
+                      <tr>
+                        <th>Banca</th>
+                        <th>Unități</th>
+                        <th>Cumpărare</th>
+                        <th>Vânzare</th>
+                        <th>Variație</th>
+                      </tr>
                     </thead>
                     <tbody>
-                    {
+                      {
                       allQuote.length
                         ? allQuote.map((quote, i) => (
                           <tr key={i}>
@@ -74,7 +78,7 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
                             <td>{quote.amount}</td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>
-                            <td>{'current - prev'}</td>
+                            <td>current - prev</td>
                           </tr>
                         ))
                         : 'Nu exista date'
@@ -90,17 +94,17 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
 
               {
                 post && post.textSecond && (
-                  <p dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+                  <p dangerouslySetInnerHTML={{ __html: post.textSecond }} />
                 )
               }
-            </React.Fragment>
+            </>
           )
         }
 
-        {action && <UpdateCurrency currency={currency}/>}
+        {action && <UpdateCurrency currency={currency} />}
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.
@@ -111,7 +115,7 @@ CurrencyPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
     namespacesRequired: ['common'],
     query,
     fullPath,
-  }
+  };
 };
 
 // i18n.
@@ -164,6 +168,6 @@ export default _compose(
         allQuote,
         post,
       }),
-    }
-  )
-)(CurrencyPageI18N)
+    },
+  ),
+)(CurrencyPageI18N);

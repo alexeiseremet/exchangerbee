@@ -1,14 +1,14 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
-import excludeKeys from '../../lib/excludeKeys'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
+import excludeKeys from '../../lib/excludeKeys';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
 const UpdatePostForm = ({ onSubmit, post }) => (
   <FormMarkup
-    action={'update'}
+    action="update"
     onSubmit={onSubmit}
     post={post}
   />
@@ -30,29 +30,29 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting }
+          { setStatus, setSubmitting },
         ) => {
           mutate({
             variables: {
               id: post.id,
               post: excludeKeys(formValues, ['id', 'slug', '__typename']),
-            }
+            },
           })
             .then(({ data: { updatePost } }) => {
-              console.dir(updatePost)
+              console.dir(updatePost);
             })
-            .catch(err => {
+            .catch((err) => {
               setStatus('error');
               setSubmitting(false);
-              console.error(err)
-            })
-        }
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllPost',
         ],
       },
-    }
-  )
-)(UpdatePostForm)
+    },
+  ),
+)(UpdatePostForm);

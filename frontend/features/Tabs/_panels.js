@@ -1,7 +1,7 @@
-import './styles.scss'
-import React from 'react'
+import './styles.scss';
+import React from 'react';
 
-export default ({items, activeIndex}) => (
+export default ({ items, activeIndex }) => (
   items.map((tab, index) => (
     <div
       id={tab.id}
@@ -14,4 +14,4 @@ export default ({items, activeIndex}) => (
       {tab.content}
     </div>
   ))
-)
+);

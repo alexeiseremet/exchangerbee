@@ -1,10 +1,10 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
 const DeleteParserButton = ({ onSubmit }) => (
-  <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
+  <button onClick={(elem) => onSubmit(elem)}>Delete</button>
 );
 
 const GQL_DELETE_PARSER = gql`
@@ -21,28 +21,28 @@ export default _compose(
     {
       props: ({ mutate, ownProps: { parser } }) => ({
         onSubmit: (elem) => {
-          elem.preventDefault()
+          elem.preventDefault();
 
           if (window.confirm('Do you really want to delete?')) {
             mutate({
               variables: {
                 id: parser.id,
-              }
+              },
             })
               .then(({ data: { deleteParser } }) => {
-                console.dir(deleteParser)
+                console.dir(deleteParser);
               })
-              .catch(err => {
-                console.error(err)
-              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
-        }
+        },
       }),
       options: {
         refetchQueries: [
           'AllParser',
         ],
       },
-    }
-  )
-)(DeleteParserButton)
+    },
+  ),
+)(DeleteParserButton);

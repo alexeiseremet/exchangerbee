@@ -1,16 +1,16 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import CurrencyCard from '../features/CurrencyCard'
-import { CreateCurrency } from '../features/Currency'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import CurrencyCard from '../features/CurrencyCard';
+import { CreateCurrency } from '../features/Currency';
 
 const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
   <Layout>
@@ -23,22 +23,22 @@ const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
     <Page>
       {
         !action && allCurrency && (
-          <React.Fragment>
-            <Link href={`/currencies?action=create`} as={`/currencies/create`}>
-              <a>{'Create'}</a>
+          <>
+            <Link href="/currencies?action=create" as="/currencies/create">
+              <a>Create</a>
             </Link>
-            <hr/>
+            <hr />
 
             <section>
               {
-                allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency}/>)
+                allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency} />)
               }
             </section>
-          </React.Fragment>
+          </>
         )
       }
 
-      {action && <CreateCurrency/>}
+      {action && <CreateCurrency />}
     </Page>
   </Layout>
 );
@@ -68,8 +68,8 @@ export default _compose(
     GQL_ALL_CURRENCY,
     {
       props: ({ data: { allCurrency } }) => ({
-        allCurrency
-      })
-    }
-  )
-)(CurrenciesPageI18N)
+        allCurrency,
+      }),
+    },
+  ),
+)(CurrenciesPageI18N);

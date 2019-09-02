@@ -3,23 +3,26 @@ const optimizedImages = require('next-optimized-images');
 const sass = require('@zeit/next-sass');
 
 const nextConfig = {
-  webpack: config => {
+  webpack: (config) => {
     // Unshift polyfills in main entrypoint.
     const {
       entry: originalEntry,
     } = config;
 
-    config.entry = async () => {
+    const newEntry = async () => {
       const entries = await originalEntry();
 
       if (entries['main.js']) {
-        entries['main.js'].unshift('./polyfills.js')
+        entries['main.js'].unshift('./polyfills.js');
       }
 
       return entries;
     };
 
-    return config;
+    return {
+      ...config,
+      entry: newEntry,
+    };
   },
 };
 
@@ -30,8 +33,8 @@ module.exports = withPlugins(
         includePaths: [
           './assets/scss',
           './node_modules',
-        ]
-      }
+        ],
+      },
     }],
     [optimizedImages, {
       imagesFolder: './assets/images',

@@ -1,19 +1,19 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import { UpdateParser, DeleteParser } from '../features/Parser'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import { UpdateParser, DeleteParser } from '../features/Parser';
 
 const ParserPageMarkup = ({ query: { action }, parser }) => {
   if (!parser) {
-    return null
+    return null;
   }
 
   const { id, url } = parser;
@@ -29,23 +29,23 @@ const ParserPageMarkup = ({ query: { action }, parser }) => {
       <Page>
         {
           !action && (
-            <React.Fragment>
+            <>
               <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`}>
-                <a>{'Update'}</a>
+                <a>Update</a>
               </Link>
               &nbsp;|&nbsp;
               <DeleteParser parser={parser} />
               <hr />
 
               <h1>{url}</h1>
-            </React.Fragment>
+            </>
           )
         }
 
         {action && <UpdateParser parser={parser} />}
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.
@@ -95,8 +95,8 @@ export default _compose(
         },
       }),
       props: ({ data: { parser } }) => ({
-        parser
+        parser,
       }),
-    }
-  )
-)(ParserPageI18N)
+    },
+  ),
+)(ParserPageI18N);

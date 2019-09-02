@@ -1,5 +1,5 @@
-import React from 'react'
-import Select from '../Input/select'
+import React from 'react';
+import Select from '../Input/select';
 
 export default (
   {
@@ -9,28 +9,32 @@ export default (
     labelText,
     readOnly,
     required,
-    setFieldValue
-  }
+    setFieldValue,
+  },
 ) => (
-    <Select
-      id={`${id}-refId`}
-      name={`${name}.refId`}
-      required={required}
-      readOnly={readOnly}
-      labelText={labelText}
-      onChange={refEl => {
-        const { value } = refEl.currentTarget;
-        const selectedItem = items.filter(obj => obj.id === value)[0];
-        const { id, slug } = selectedItem;
+  <Select
+    id={`${id}-refId`}
+    name={`${name}.refId`}
+    required={required}
+    readOnly={readOnly}
+    labelText={labelText}
+    onChange={(refEl) => {
+      const { value } = refEl.currentTarget;
+      const selectedItem = items.filter((obj) => obj.id === value)[0];
+      const { id: selectedItemId, slug } = selectedItem;
 
-        setFieldValue(`${name}.refId`, id);
-        setFieldValue(`${name}.refSlug`, slug);
-      }}
-    >
-      {
-        items && items.map(({ id, slug, name }) => (
-          <option key={slug} value={id}>{slug} {name}</option>
+      setFieldValue(`${name}.refId`, selectedItemId);
+      setFieldValue(`${name}.refSlug`, slug);
+    }}
+  >
+    {
+        items && items.map((item) => (
+          <option key={item.slug} value={item.id}>
+            {item.slug}
+            {' '}
+            {item.name}
+          </option>
         ))
       }
-    </Select>
-  )
+  </Select>
+);

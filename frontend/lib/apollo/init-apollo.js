@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
-import fetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch';
 
 import { apiBaseUrl } from '../../server.config';
 import { typeDefs, resolvers, defaultState } from '../../localSchema';
@@ -8,10 +8,10 @@ let apolloClient = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
 if (!process.browser) {
-  global.fetch = fetch
+  global.fetch = fetch;
 }
 
-function create (initialState) {
+function create(initialState) {
   const cache = new InMemoryCache().restore(initialState || {});
 
   cache.writeData({
@@ -24,25 +24,25 @@ function create (initialState) {
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
       uri: apiBaseUrl, // Server URL (must be absolute)
-      credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
+      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     }),
     cache,
     resolvers,
     typeDefs,
-  })
+  });
 }
 
-export default function initApollo (initialState) {
+export default function initApollo(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
-    return create(initialState)
+    return create(initialState);
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState)
+    apolloClient = create(initialState);
   }
 
-  return apolloClient
+  return apolloClient;
 }

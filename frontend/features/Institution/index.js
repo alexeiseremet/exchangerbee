@@ -1,8 +1,8 @@
-import CreateInstitution from './_createInstitution'
-import UpdateInstitution from './_updateInstitution'
-import DeleteInstitution from './_deleteInstitution'
-import SelectInstitution from './_selectInstitution'
-import GetInstitution from './_getInstitution'
+import CreateInstitution from './_createInstitution';
+import UpdateInstitution from './_updateInstitution';
+import DeleteInstitution from './_deleteInstitution';
+import SelectInstitution from './_selectInstitution';
+import GetInstitution from './_getInstitution';
 
 export {
   CreateInstitution,
@@ -10,4 +10,4 @@ export {
   DeleteInstitution,
   SelectInstitution,
   GetInstitution,
-}
+};

@@ -1,10 +1,10 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
 const DeletePostButton = ({ onSubmit }) => (
-  <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
+  <button onClick={(elem) => onSubmit(elem)}>Delete</button>
 );
 
 const GQL_DELETE_POST = gql`
@@ -27,22 +27,22 @@ export default _compose(
             mutate({
               variables: {
                 id: post.id,
-              }
+              },
             })
               .then(({ data: { deletePost } }) => {
-                console.dir(deletePost)
+                console.dir(deletePost);
               })
-              .catch(err => {
-                console.error(err)
-              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
-        }
+        },
       }),
       options: {
         refetchQueries: [
           'AllPost',
         ],
       },
-    }
-  )
-)(DeletePostButton)
+    },
+  ),
+)(DeletePostButton);

@@ -1,12 +1,12 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
 const CreateParserForm = ({ onSubmit }) => (
-  <FormMarkup action={'create'} onSubmit={onSubmit}/>
+  <FormMarkup action="create" onSubmit={onSubmit} />
 );
 
 const GQL_CREATE_PARSER = gql`
@@ -25,27 +25,27 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting, resetForm }
+          { setStatus, setSubmitting, resetForm },
         ) => {
           mutate({
-            variables: { parser: formValues }
+            variables: { parser: formValues },
           })
             .then(({ data: { createParser } }) => {
-              resetForm()
-              console.dir(createParser)
+              resetForm();
+              console.dir(createParser);
             })
-            .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
-              console.error(err)
-            })
-        }
+            .catch((err) => {
+              setStatus('error');
+              setSubmitting(false);
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllParser',
         ],
       },
-    }
-  )
-)(CreateParserForm)
+    },
+  ),
+)(CreateParserForm);

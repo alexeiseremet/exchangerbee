@@ -1,7 +1,7 @@
-import React from 'react'
-import jwtoken from 'jsonwebtoken'
-import { getCookie, AUTH_COOKIE_NAME, AUTH_SECRET } from '../lib/session'
-import redirect from '../lib/redirect'
+import React from 'react';
+import jwtoken from 'jsonwebtoken';
+import { getCookie, AUTH_COOKIE_NAME, AUTH_SECRET } from './session';
+import redirect from './redirect';
 
 /**
  * Higher Order Component that used to protect routes (pages). That'll check
@@ -20,16 +20,16 @@ export default (Page) => (
      * @param ctx More about this param https://github.com/zeit/next.js/#fetching-data-and-component-lifecycle.
      * @returns {pageProps} Props for page.
      */
-    static getInitialProps (ctx) {
+    static getInitialProps(ctx) {
       const userJwt = getCookie(AUTH_COOKIE_NAME, ctx.req);
       const isLoginPage = ctx.asPath.startsWith('/admin');
       const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
       let isLogged = false;
 
       try {
-        isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET)
+        isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
 
       // Redirect if not logged and isn't login page.
@@ -38,11 +38,11 @@ export default (Page) => (
       // Redirect if logged and is login page.
       if (isLogged && isLoginPage) redirect('/', ctx);
 
-      return pageProps
+      return pageProps;
     }
 
-    render () {
-      return <Page {...this.props} />
+    render() {
+      return <Page {...this.props} />;
     }
   }
-)
+);

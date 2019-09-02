@@ -1,12 +1,12 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
-const CreateInstitutionForm = ({onSubmit}) => (
-  <FormMarkup action={'create'} onSubmit={onSubmit}/>
+const CreateInstitutionForm = ({ onSubmit }) => (
+  <FormMarkup action="create" onSubmit={onSubmit} />
 );
 
 const GQL_CREATE_INSTITUTION = gql`
@@ -21,31 +21,31 @@ export default _compose(
   graphql(
     GQL_CREATE_INSTITUTION,
     {
-      props: ({mutate}) => ({
+      props: ({ mutate }) => ({
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting, resetForm}
+          { setStatus, setSubmitting, resetForm },
         ) => {
           mutate({
-            variables: {institution: formValues}
+            variables: { institution: formValues },
           })
-            .then(({data: {createInstitution}}) => {
+            .then(({ data: { createInstitution } }) => {
               resetForm();
-              console.dir(createInstitution)
+              console.dir(createInstitution);
             })
-            .catch(err => {
+            .catch((err) => {
               setStatus('error');
               setSubmitting(false);
-              console.error(err)
-            })
-        }
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllInstitution',
         ],
       },
-    }
-  )
-)(CreateInstitutionForm)
+    },
+  ),
+)(CreateInstitutionForm);

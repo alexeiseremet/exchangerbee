@@ -1,16 +1,16 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import List from '../features/List'
-import { CreatePost } from '../features/Post'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import List from '../features/List';
+import { CreatePost } from '../features/Post';
 
 const PostsPageMarkup = ({ query: { action }, allPost }) => (
   <Layout>
@@ -23,9 +23,9 @@ const PostsPageMarkup = ({ query: { action }, allPost }) => (
     <Page>
       {
         !action && allPost && (
-          <React.Fragment>
-            <Link href={`/posts?action=create`} as={`/posts/create`}>
-              <a>{'Create'}</a>
+          <>
+            <Link href="/posts?action=create" as="/posts/create">
+              <a>Create</a>
             </Link>
             <hr />
 
@@ -40,7 +40,7 @@ const PostsPageMarkup = ({ query: { action }, allPost }) => (
                 ))
               }
             </List>
-          </React.Fragment>
+          </>
         )
       }
 
@@ -74,8 +74,8 @@ export default _compose(
     GQL_ALL_POST,
     {
       props: ({ data: { allPost } }) => ({
-        allPost
-      })
-    }
-  )
-)(PostsPageI18N)
+        allPost,
+      }),
+    },
+  ),
+)(PostsPageI18N);

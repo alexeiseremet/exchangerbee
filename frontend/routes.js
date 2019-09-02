@@ -1,4 +1,5 @@
 const nextRoutes = require('next-routes');
+
 const routes = nextRoutes();
 
 const APP_ROUTES = [
@@ -52,6 +53,6 @@ const APP_ROUTES = [
   },
 ];
 
-APP_ROUTES.map(route => routes.add(route));
+APP_ROUTES.map((route) => routes.add(route));
 
 module.exports = routes;

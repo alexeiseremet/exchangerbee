@@ -1,14 +1,14 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import excludeKeys from '../../lib/excludeKeys'
-import FormMarkup from './_formMarkup'
+import excludeKeys from '../../lib/excludeKeys';
+import FormMarkup from './_formMarkup';
 
 const UpdateQuoteForm = ({ onSubmit, quote }) => (
   <FormMarkup
-    action={'update'}
+    action="update"
     onSubmit={onSubmit}
     quote={quote}
   />
@@ -30,7 +30,7 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting }
+          { setStatus, setSubmitting },
         ) => {
           const { institution, currency, date } = quote;
           const whereQuote = { institution, currency, date };
@@ -40,25 +40,25 @@ export default _compose(
               where: excludeKeys(whereQuote, ['id', '__typename']),
               quote: excludeKeys(
                 formValues,
-                ['id', '__typename', 'institutionVObj', 'currencyVObj']
+                ['id', '__typename', 'institutionVObj', 'currencyVObj'],
               ),
-            }
+            },
           })
             .then(({ data: { updateQuote } }) => {
-              console.dir(updateQuote)
+              console.dir(updateQuote);
             })
-            .catch(err => {
+            .catch((err) => {
               setStatus('error');
               setSubmitting(false);
-              console.error(err)
-            })
-        }
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllQuote',
         ],
       },
-    }
-  )
-)(UpdateQuoteForm)
+    },
+  ),
+)(UpdateQuoteForm);

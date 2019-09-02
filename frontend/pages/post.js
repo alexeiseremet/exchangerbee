@@ -1,22 +1,24 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import { UpdatePost, DeletePost } from '../features/Post'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import { UpdatePost, DeletePost } from '../features/Post';
 
 const PostPageMarkup = ({ query: { action }, post }) => {
   if (!post) {
-    return null
+    return null;
   }
 
-  const { id, title, textFirst, textSecond } = post;
+  const {
+    id, title, textFirst, textSecond,
+  } = post;
 
   return (
     <Layout>
@@ -29,27 +31,31 @@ const PostPageMarkup = ({ query: { action }, post }) => {
       <Page>
         {
           !action && (
-            <React.Fragment>
+            <>
               <Link href={`/post?id=${id}&action=update`} as={`/posts/${id}/update`}>
-                <a>{'Update'}</a>
+                <a>Update</a>
               </Link>
               &nbsp;|&nbsp;
               <DeletePost post={post} />
               <hr />
 
               <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>{title}</h1>
-              <p dangerouslySetInnerHTML={{__html: textFirst}}
-                 style={{ marginBottom: '10px' }}/>
-              <p dangerouslySetInnerHTML={{__html: textSecond}}
-                 style={{ marginBottom: '10px' }}/>
-            </React.Fragment>
+              <p
+                dangerouslySetInnerHTML={{ __html: textFirst }}
+                style={{ marginBottom: '10px' }}
+              />
+              <p
+                dangerouslySetInnerHTML={{ __html: textSecond }}
+                style={{ marginBottom: '10px' }}
+              />
+            </>
           )
         }
 
         {action && <UpdatePost post={post} />}
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.
@@ -84,8 +90,8 @@ export default _compose(
         },
       }),
       props: ({ data: { post } }) => ({
-        post
+        post,
       }),
-    }
-  )
-)(PostPageI18N)
+    },
+  ),
+)(PostPageI18N);

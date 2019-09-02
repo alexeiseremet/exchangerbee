@@ -1,13 +1,13 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
 import Loading from '../Loading';
 
-const GetInstitution = ({ institution }) => {
-  return institution ? <div>{institution.name}</div> : <Loading/>
-};
+const GetInstitution = ({ institution }) => (
+  institution ? <div>{institution.name}</div> : <Loading />
+);
 
 // Container.
 const GQL_INSTITUTION = gql`
@@ -23,16 +23,14 @@ export default _compose(
   graphql(
     GQL_INSTITUTION,
     {
-      options: ({ slug }) => {
-        return ({
-          variables: {
-            slug
-          },
-        })
-      },
+      options: ({ slug }) => ({
+        variables: {
+          slug,
+        },
+      }),
       props: ({ data: { institution } }) => ({
-        institution
-      })
-    }
-  )
-)(GetInstitution)
+        institution,
+      }),
+    },
+  ),
+)(GetInstitution);

@@ -1,7 +1,7 @@
-import React from 'react'
-import Head from 'next/head'
-import { host, locale } from '../../server.config'
-import { textMetadata as t } from '../../lib/locale'
+import React from 'react';
+import Head from 'next/head';
+import { host, locale } from '../../server.config';
+import { textMetadata as t } from '../../lib/locale';
 
 /**
  * Component to render Metadata.
@@ -15,29 +15,25 @@ import { textMetadata as t } from '../../lib/locale'
  */
 export default ({
   title, url, ogDescription,
-  description, keywords, ogImage
+  description, keywords, ogImage,
 }) => {
-  url = url ? `${host}/${url}` : host;
-
-  if (!ogDescription && description) {
-    ogDescription = description
-  }
+  const newUrl = url ? `${host}/${url}` : host;
 
   return (
     <Head>
       <title>{title}</title>
-      <link rel="canonical" href={url}/>
-      {description && <meta name="description" content={description}/>}
-      {keywords && <meta name="keywords" content={keywords}/>}
+      <link rel="canonical" href={newUrl} />
+      {description && <meta name="description" content={description} />}
+      {keywords && <meta name="keywords" content={keywords} />}
 
       {/* Open Graph properties */}
-      {ogImage && <meta property="og:image" content={ogImage}/>}
-      {ogDescription && <meta property="og:description" content={ogDescription}/>}
-      <meta property="og:title" content={title}/>
-      <meta property="og:url" content={url}/>
-      <meta property="og:locale" content={locale}/>
-      <meta property="og:site_name" content={t.siteName}/>
-      <meta property="og:type" content="website"/>
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      {ogDescription && <meta property="og:description" content={ogDescription || description} />}
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={newUrl} />
+      <meta property="og:locale" content={locale} />
+      <meta property="og:site_name" content={t.siteName} />
+      <meta property="og:type" content="website" />
     </Head>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import SelectReference from '../SelectReference'
+import SelectReference from '../SelectReference';
 
 const SelectCurrency = ({
   allCurrency,
@@ -11,7 +11,7 @@ const SelectCurrency = ({
   id,
   readOnly,
   required,
-  setFieldValue
+  setFieldValue,
 }) => (
   <SelectReference
     items={allCurrency}
@@ -41,8 +41,8 @@ export default _compose(
     GQL_ALL_CURRENCY,
     {
       props: ({ data: { allCurrency } }) => ({
-        allCurrency
-      })
-    }
-  )
-)(SelectCurrency)
+        allCurrency,
+      }),
+    },
+  ),
+)(SelectCurrency);

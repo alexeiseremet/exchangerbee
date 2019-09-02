@@ -1,9 +1,9 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-const DeleteCurrencyButton = ({onSubmit}) => (
+const DeleteCurrencyButton = ({ onSubmit }) => (
   <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
 );
 
@@ -19,7 +19,7 @@ export default _compose(
   graphql(
     GQL_DELETE_CURRENCY,
     {
-      props: ({mutate, ownProps: {currency}}) => ({
+      props: ({ mutate, ownProps: { currency } }) => ({
         onSubmit: (elem) => {
           elem.preventDefault();
 
@@ -27,22 +27,22 @@ export default _compose(
             mutate({
               variables: {
                 id: currency.id,
-              }
+              },
             })
-              .then(({data: {deleteCurrency}}) => {
-                console.dir(deleteCurrency)
+              .then(({ data: { deleteCurrency } }) => {
+                console.dir(deleteCurrency);
               })
-              .catch(err => {
-                console.error(err)
-              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
-        }
+        },
       }),
       options: {
         refetchQueries: [
           'AllCurrency',
         ],
       },
-    }
-  )
-)(DeleteCurrencyButton)
+    },
+  ),
+)(DeleteCurrencyButton);

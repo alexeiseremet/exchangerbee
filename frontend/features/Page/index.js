@@ -1,13 +1,13 @@
-import './styles.scss'
-import React from 'react'
-import classnames from 'classnames'
-import MainMenu from '../MainMenu'
+import './styles.scss';
+import React from 'react';
+import classnames from 'classnames';
+import MainMenu from '../MainMenu';
 
 
 const DefaultSidebar = (
-  <React.Fragment>
-    <MainMenu/>
-  </React.Fragment>
+  <>
+    <MainMenu />
+  </>
 );
 
 const Page = ({ children, top, aside = DefaultSidebar }) => {
@@ -15,8 +15,8 @@ const Page = ({ children, top, aside = DefaultSidebar }) => {
     'page',
     {
       'page--has-top': top,
-      'page--no-aside': aside === null
-    }
+      'page--no-aside': aside === null,
+    },
   );
 
   return (
@@ -43,7 +43,7 @@ const Page = ({ children, top, aside = DefaultSidebar }) => {
         }
       </div>
     </div>
-  )
+  );
 };
 
-export default Page
+export default Page;

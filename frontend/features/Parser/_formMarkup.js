@@ -1,13 +1,13 @@
-import React from 'react'
-import { FieldArray } from 'formik'
+import React from 'react';
+import { FieldArray } from 'formik';
 
-import { textAdminPage as t } from '../../lib/locale'
-import { SelectInstitution } from '../Institution'
-import { SelectCurrency } from '../Currency'
-import Form from '../Form'
-import Input from '../Input'
-import Select from '../Input/select'
-import Button from '../Button'
+import { textAdminPage as t } from '../../lib/locale';
+import { SelectInstitution } from '../Institution';
+import { SelectCurrency } from '../Currency';
+import Form from '../Form';
+import Input from '../Input';
+import Select from '../Input/select';
+import Button from '../Button';
 
 const emptyQuote = {
   amount: '1',
@@ -27,52 +27,56 @@ const FormMarkup = ({
   onSubmit,
   action,
 }) => (
-    <React.Fragment>
-      <div className="text">
-        <h1>{t.parser} {action}</h1>
-      </div>
+  <>
+    <div className="text">
+      <h1>
+        {t.parser}
+        {' '}
+        {action}
+      </h1>
+    </div>
 
-      <Form
-        initialValues={{
-          institution: {
-            refId: '',
-            refSlug: '',
-          },
-          url: '',
-          period: 'daily',
-          quotes: [emptyQuote],
-          ...parser
-        }}
-        onSubmit={onSubmit}
+    <Form
+      initialValues={{
+        institution: {
+          refId: '',
+          refSlug: '',
+        },
+        url: '',
+        period: 'daily',
+        quotes: [emptyQuote],
+        ...parser,
+      }}
+      onSubmit={onSubmit}
+    >
+      <SelectInstitution
+        name="institution"
+        id="parser-institution"
+        readOnly={action === 'update'}
+        required
+      />
+      <Input
+        name="url"
+        id="parser-url"
+        component="input"
+        labelText="URL"
+        required
+      />
+      <Select
+        name="period"
+        id="parser-period"
+        labelText="Period"
+        required
       >
-        <SelectInstitution
-          name="institution"
-          id="parser-institution"
-          readOnly={action === 'update'}
-          required
-        />
-        <Input
-          name="url"
-          id="parser-url"
-          component="input"
-          labelText="URL"
-          required
-        />
-        <Select
-          name="period"
-          id="parser-period"
-          labelText="Period"
-          required
-        >
-          <option value="daily">daily</option>
-          <option value="monthly">monthly</option>
-        </Select>
-        <FieldArray
-          name="quotes"
-        >
-          {({ form, push, /* remove */ }) => (
-            <React.Fragment>
-              {
+        <option value="daily">daily</option>
+        <option value="monthly">monthly</option>
+      </Select>
+      <FieldArray
+        name="quotes"
+      >
+        {({ form, push /* remove */ }) => (
+          <>
+            {
                 form.values.quotes.map((item, index) => (
                   <div className="flex" key={index}>
                     <Input
@@ -117,17 +121,17 @@ const FormMarkup = ({
                   </div>
                 ))
               }
-              <Button
-                type="button"
-                labelText="Add new currency"
-                onClick={() => push(emptyQuote)}
-              />
+            <Button
+              type="button"
+              labelText="Add new currency"
+              onClick={() => push(emptyQuote)}
+            />
 
-            </React.Fragment>
-          )}
-        </FieldArray>
-      </Form>
-    </React.Fragment>
-  );
+          </>
+        )}
+      </FieldArray>
+    </Form>
+  </>
+);
 
-export default FormMarkup
+export default FormMarkup;

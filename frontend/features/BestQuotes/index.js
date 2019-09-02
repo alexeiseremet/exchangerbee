@@ -1,16 +1,17 @@
-import './styles.scss'
-import React from 'react'
-import { Link } from '../../lib/i18n'
-import { baseCurrenciesArr, centralBank } from '../../server.config'
-import RateCard from '../RateCard'
+import './styles.scss';
+import React from 'react';
+import { Link } from '../../lib/i18n';
+import { baseCurrenciesArr, centralBank } from '../../server.config';
+import RateCard from '../RateCard';
 
 const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
   <section className="best-quotes">
     {
       centralQuote && baseCurrenciesArr.map((slug, i) => (
         <article key={i} className="best-quotes__item">
-          <Link href={`/currency?slug=${slug}`}
-                as={`/currencies/${slug}`}
+          <Link
+            href={`/currency?slug=${slug}`}
+            as={`/currencies/${slug}`}
           >
             <a className="best-quotes__card">
               <h6 className="best-quotes__slug">
@@ -18,52 +19,52 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
               </h6>
 
               {
-                centralQuote.map((quote, i) => {
+                centralQuote.map((quote, j) => {
                   if (quote.currencyVObj.slug !== slug) {
                     return null;
                   }
 
                   return (
-                    <div key={i} className="best-quotes__rate best-quotes__rate--central">
-                      <RateCard value={quote.bid} label={'+1.003'} info={centralBank.slug}/>
+                    <div key={j} className="best-quotes__rate best-quotes__rate--central">
+                      <RateCard value={quote.bid} label="+1.003" info={centralBank.slug} />
                     </div>
                   );
                 })
               }
 
               {
-                bestBidQuote && bestBidQuote.map((quote, i) => {
+                bestBidQuote && bestBidQuote.map((quote, j) => {
                   if (quote.currencyVObj.slug !== slug) {
                     return null;
                   }
 
                   return (
-                    <div key={i} className="best-quotes__rate">
+                    <div key={j} className="best-quotes__rate">
                       <RateCard
                         value={quote.bid}
                         label={quote.institutionVObj.name}
-                        info={'cumpărare'}
+                        info="cumpărare"
                       />
                     </div>
-                  )
+                  );
                 })
               }
 
               {
-                bestAskQuote && bestAskQuote.map((quote, i) => {
+                bestAskQuote && bestAskQuote.map((quote, j) => {
                   if (quote.currencyVObj.slug !== slug) {
                     return null;
                   }
 
                   return (
-                    <div key={i} className="best-quotes__rate">
+                    <div key={j} className="best-quotes__rate">
                       <RateCard
                         value={quote.ask}
                         label={quote.institutionVObj.name}
-                        info={'vânzare'}
+                        info="vânzare"
                       />
                     </div>
-                  )
+                  );
                 })
               }
             </a>
@@ -74,4 +75,4 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
   </section>
 );
 
-export default BestQuotes
+export default BestQuotes;

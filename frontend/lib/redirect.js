@@ -13,12 +13,14 @@ const redirect = (target, ctx) => {
   return undefined;
 };
 
-export const cleanUrl = ctx => {
+export const cleanUrl = (ctx) => {
   if (ctx.req.path.endsWith('/') && ctx.req.path.length > 1) {
     const newUrl = ctx.req.path.substring('/');
 
     return redirect(newUrl, ctx);
   }
+
+  return undefined;
 };
 
-export default redirect
+export default redirect;

@@ -1,7 +1,7 @@
 module.exports = {
   'root': true,
   'parser': 'babel-eslint',
-  'extends': ["eslint:recommended", "plugin:react/recommended"],
+  'extends': ['eslint:recommended', 'plugin:react/recommended', 'airbnb-base'],
   'env': {
     'es6': true,
     'browser': true,
@@ -10,11 +10,21 @@ module.exports = {
   'rules': {
     'react/prop-types': 0,
     'react/display-name': 0,
+    'react/no-danger': 0,
+    'jsx-a11y/href-no-hash': 0,
+    'react/jsx-filename-extension': ['warn', {
+      'extensions': ['.js']
+    }],
   },
   'settings': {
     'react': {
       'pragma': 'React',
       'version': 'detect',
+    },
+    "import/resolver": {
+      "node": {
+        "path": ["./assets"]
+      }
     }
   },
 };

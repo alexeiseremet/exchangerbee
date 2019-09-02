@@ -1,8 +1,8 @@
-import './styles.scss'
-import React from 'react'
-import classnames from 'classnames'
-import { Field } from 'formik'
-import _get from 'lodash/get'
+import './styles.scss';
+import React from 'react';
+import classnames from 'classnames';
+import { Field } from 'formik';
+import _get from 'lodash/get';
 
 export default (
   {
@@ -13,19 +13,19 @@ export default (
     type = 'text',
     component = 'input',
     name = null,
-    autocomplete = "off",
+    autocomplete = 'off',
     labelText,
     id,
-  }
+  },
 ) => {
   const valueByName = _get(values, name);
   const classes = classnames(
     'input',
     {
       [`input--${type}`]: type,
-      [`input--checked`]: (value !== '' && valueByName === value) || (valueByName === true),
-      [`input--required`]: required,
-    }
+      'input--checked': (value !== '' && valueByName === value) || (valueByName === true),
+      'input--required': required,
+    },
   );
 
   return (
@@ -57,5 +57,5 @@ export default (
         {type !== 'text' && (<i className="input__toggle" />)}
       </div>
     </div>
-  )
-}
+  );
+};

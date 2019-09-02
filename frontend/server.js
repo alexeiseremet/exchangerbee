@@ -7,7 +7,7 @@ const proxy = require('http-proxy-middleware');
 const next = require('next');
 
 const PORT = parseInt(process.env.PORT, 10) || 3050;
-const API_HOST = process.env.API_HOST|| 'http://localhost:3010';
+const API_HOST = process.env.API_HOST || 'http://localhost:3010';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 const nextI18NextMiddleware = require('next-i18next/middleware').default;
@@ -15,6 +15,7 @@ const nextI18next = require('./lib/i18n');
 
 const app = next({ dev: !IS_PRODUCTION });
 const routes = require('./routes');
+
 const handler = routes.getRequestHandler(app);
 const { apiPath, storagePath } = require('./server.config');
 
@@ -30,7 +31,7 @@ const { apiPath, storagePath } = require('./server.config');
     changeOrigin: true,
     router: {
       [storagePath]: 'http://exchangerbee.com',
-    }
+    },
   });
 
   // Serve static files.
@@ -43,13 +44,13 @@ const { apiPath, storagePath } = require('./server.config');
     .use(nextI18NextMiddleware(nextI18next))
     .use(handler);
 
-  await server.listen(PORT, err => {
-      if (err) {
-        throw err;
-      }
+  await server.listen(PORT, (err) => {
+    if (err) {
+      throw err;
+    }
 
-      console.log(`🎉  Ready on http://localhost:${PORT}`);
-    });
+    console.log(`🎉  Ready on http://localhost:${PORT}`);
+  });
 })();
 
 //

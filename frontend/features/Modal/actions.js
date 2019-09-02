@@ -1,4 +1,4 @@
-import { textModal as t } from '../../lib/locale'
+import { textModal as t } from '../../lib/locale';
 
 export const modalContent = {
   AUTH: 'AUTH',
@@ -10,6 +10,15 @@ export const types = {
   HIDE_MODAL: 'HIDE_MODAL',
 };
 
+/**
+ * Creates a Redux action that hide Modal component.
+ *
+ * @returns {{type: string, payload: Object}} Return type of action & data.
+ */
+export const hideModal = () => ({
+  type: types.HIDE_MODAL,
+});
+
 /* Action creators */
 
 /**
@@ -18,7 +27,7 @@ export const types = {
  * @param {string} name Name of content which is show in Modal.
  * @returns {{type: string, payload: {title: string, content: XML}}} Return type of action & data.
  */
-export const showModal = name => {
+export const showModal = (name) => {
   switch (name) {
     case modalContent.AUTH:
       return {
@@ -26,21 +35,11 @@ export const showModal = name => {
         payload: {
           title: t.authTitle,
           content: 'LoginForm',
-        }
+        },
       };
 
     default:
-      hideModal()
-  }
-};
-
-/**
- * Creates a Redux action that hide Modal component.
- *
- * @returns {{type: string, payload: Object}} Return type of action & data.
- */
-export const hideModal = () => {
-  return {
-    type: types.HIDE_MODAL,
+      hideModal();
+      return undefined;
   }
 };

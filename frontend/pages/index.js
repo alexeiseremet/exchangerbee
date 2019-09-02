@@ -1,17 +1,19 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
-import { centralBank, baseCurrenciesArr } from '../server.config'
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import BestQuotes from '../features/BestQuotes'
+import { withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
+import { centralBank, baseCurrenciesArr } from '../server.config';
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import BestQuotes from '../features/BestQuotes';
 
-const IndexPageMarkup = ({ post, centralQuote, bestBidQuote, bestAskQuote }) => (
+const IndexPageMarkup = ({
+  post, centralQuote, bestBidQuote, bestAskQuote,
+}) => (
   <Layout>
     <Metadata
       title={t.metaTitle}
@@ -22,23 +24,24 @@ const IndexPageMarkup = ({ post, centralQuote, bestBidQuote, bestAskQuote }) => 
 
     <Page>
       {post && (
-        <React.Fragment>
+        <>
           <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
             {post.title}
           </h1>
 
-          <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-        </React.Fragment>
+          <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
+        </>
       )}
 
-      <BestQuotes bestAskQuote={bestAskQuote}
-                  bestBidQuote={bestBidQuote}
-                  centralQuote={centralQuote}
+      <BestQuotes
+        bestAskQuote={bestAskQuote}
+        bestBidQuote={bestBidQuote}
+        centralQuote={centralQuote}
       />
 
       {
         post && post.textSecond && (
-          <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+          <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
         )
       }
     </Page>
@@ -53,7 +56,7 @@ IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {
   return {
     namespacesRequired: ['common'],
     fullPath,
-  }
+  };
 };
 
 // i18n.
@@ -124,12 +127,16 @@ export default _compose(
           includeBanks: [centralBank.slug],
         },
       }),
-      props: ({ data: { post, centralQuote, bestBidQuote, bestAskQuote } }) => ({
+      props: ({
+        data: {
+          post, centralQuote, bestBidQuote, bestAskQuote,
+        },
+      }) => ({
         post,
         centralQuote,
         bestBidQuote,
         bestAskQuote,
       }),
-    }
-  )
-)(IndexPageI18N)
+    },
+  ),
+)(IndexPageI18N);

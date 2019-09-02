@@ -1,6 +1,6 @@
-import './styles.scss'
-import React from 'react'
-import { Link } from '../../lib/i18n'
+import './styles.scss';
+import React from 'react';
+import { Link } from '../../lib/i18n';
 
 const CurrencyCard = ({ currency }) => (
   <article className="currency-card">
@@ -13,4 +13,4 @@ const CurrencyCard = ({ currency }) => (
   </article>
 );
 
-export default CurrencyCard
+export default CurrencyCard;

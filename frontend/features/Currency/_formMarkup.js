@@ -1,19 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-import { textAdminPage as t } from '../../lib/locale'
-import Form from '../Form'
-import Input from '../Input'
+import { textAdminPage as t } from '../../lib/locale';
+import Form from '../Form';
+import Input from '../Input';
 
 const FormMarkup = (
   {
     currency = null,
     onSubmit,
     action,
-  }
+  },
 ) => (
-  <React.Fragment>
+  <>
     <div className="text">
-      <h1>{t.currency} {action}</h1>
+      <h1>
+        {t.currency}
+        {' '}
+        {action}
+      </h1>
     </div>
 
     <Form
@@ -22,7 +26,7 @@ const FormMarkup = (
         slug: '',
         numCode: '',
         symbol: '',
-        ...currency
+        ...currency,
       }}
       onSubmit={onSubmit}
     >
@@ -55,7 +59,7 @@ const FormMarkup = (
         labelText="Symbol"
       />
     </Form>
-  </React.Fragment>
+  </>
 );
 
-export default FormMarkup
+export default FormMarkup;

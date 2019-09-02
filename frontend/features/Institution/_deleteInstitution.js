@@ -1,10 +1,10 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-const DeleteInstitutionButton = ({onSubmit}) => (
-  <a href="#" onClick={(elem) => onSubmit(elem)}>Delete</a>
+const DeleteInstitutionButton = ({ onSubmit }) => (
+  <button onClick={(elem) => onSubmit(elem)}>Delete</button>
 );
 
 const GQL_DELETE_INSTITUTION = gql`
@@ -19,7 +19,7 @@ export default _compose(
   graphql(
     GQL_DELETE_INSTITUTION,
     {
-      props: ({mutate, ownProps: {institution}}) => ({
+      props: ({ mutate, ownProps: { institution } }) => ({
         onSubmit: (elem) => {
           elem.preventDefault();
 
@@ -27,22 +27,22 @@ export default _compose(
             mutate({
               variables: {
                 id: institution.id,
-              }
+              },
             })
-              .then(({data: {deleteInstitution}}) => {
-                console.dir(deleteInstitution)
+              .then(({ data: { deleteInstitution } }) => {
+                console.dir(deleteInstitution);
               })
-              .catch(err => {
-                console.error(err)
-              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
-        }
+        },
       }),
       options: {
         refetchQueries: [
           'AllInstitution',
         ],
       },
-    }
-  )
-)(DeleteInstitutionButton)
+    },
+  ),
+)(DeleteInstitutionButton);

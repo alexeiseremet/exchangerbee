@@ -1,14 +1,14 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import excludeKeys from '../../lib/excludeKeys'
-import FormMarkup from './_formMarkup'
+import excludeKeys from '../../lib/excludeKeys';
+import FormMarkup from './_formMarkup';
 
 const UpdateParserForm = ({ onSubmit, parser }) => (
   <FormMarkup
-    action={'update'}
+    action="update"
     onSubmit={onSubmit}
     parser={parser}
   />
@@ -30,29 +30,29 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting }
+          { setStatus, setSubmitting },
         ) => {
           mutate({
             variables: {
               id: parser.id,
               parser: excludeKeys(formValues, ['id', '__typename', 'institution']),
-            }
+            },
           })
             .then(({ data: { updateParser } }) => {
-              console.dir(updateParser)
+              console.dir(updateParser);
             })
-            .catch(err => {
-              setStatus('error')
-              setSubmitting(false)
-              console.error(err)
-            })
-        }
+            .catch((err) => {
+              setStatus('error');
+              setSubmitting(false);
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllParser',
         ],
       },
-    }
-  )
-)(UpdateParserForm)
+    },
+  ),
+)(UpdateParserForm);

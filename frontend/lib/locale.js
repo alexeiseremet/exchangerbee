@@ -27,4 +27,3 @@ export const textAdminPage = {
   quote: 'Quote',
   post: 'Post',
 };
-

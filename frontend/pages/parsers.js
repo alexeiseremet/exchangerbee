@@ -1,16 +1,16 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import List from '../features/List'
-import { CreateParser } from '../features/Parser'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import List from '../features/List';
+import { CreateParser } from '../features/Parser';
 
 const ParsersPageMarkup = ({ query: { action }, allParser }) => (
   <Layout>
@@ -23,9 +23,9 @@ const ParsersPageMarkup = ({ query: { action }, allParser }) => (
     <Page>
       {
         !action && allParser && (
-          <React.Fragment>
-            <Link href={`/parsers?action=create`} as={`/parsers/create`}>
-              <a>{'Create'}</a>
+          <>
+            <Link href="/parsers?action=create" as="/parsers/create">
+              <a>Create</a>
             </Link>
             <hr />
 
@@ -40,7 +40,7 @@ const ParsersPageMarkup = ({ query: { action }, allParser }) => (
                 ))
               }
             </List>
-          </React.Fragment>
+          </>
         )
       }
 
@@ -74,8 +74,8 @@ export default _compose(
     GQL_ALL_PARSER,
     {
       props: ({ data: { allParser } }) => ({
-        allParser
-      })
-    }
-  )
-)(ParsersPageI18N)
+        allParser,
+      }),
+    },
+  ),
+)(ParsersPageI18N);

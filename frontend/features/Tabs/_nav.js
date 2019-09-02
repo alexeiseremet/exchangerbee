@@ -1,8 +1,8 @@
-import './styles.scss'
-import React from 'react'
-import classnames from 'classnames'
+import './styles.scss';
+import React from 'react';
+import classnames from 'classnames';
 
-export default ({items, activeIndex, onClick}) => (
+export default ({ items, activeIndex, onClick }) => (
   items.map((nav, index) => (
     <button
       className={
@@ -25,6 +25,4 @@ export default ({items, activeIndex, onClick}) => (
       <span className="tabs__nav-label">{nav.label}</span>
     </button>
   ))
-)
-
-
+);

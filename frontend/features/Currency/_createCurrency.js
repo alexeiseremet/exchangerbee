@@ -1,13 +1,13 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
-const CreateCurrencyForm = ({onSubmit}) => (
-  <FormMarkup action={'create'} onSubmit={onSubmit}/>
-)
+const CreateCurrencyForm = ({ onSubmit }) => (
+  <FormMarkup action="create" onSubmit={onSubmit} />
+);
 
 const GQL_CREATE_CURRENCY = gql`
   mutation CreateCurrency ($currency: CurrencyInput!) {
@@ -21,31 +21,31 @@ export default _compose(
   graphql(
     GQL_CREATE_CURRENCY,
     {
-      props: ({mutate}) => ({
+      props: ({ mutate }) => ({
         onSubmit: (
           // form values & actions
           formValues,
-          {setStatus, setSubmitting, resetForm}
+          { setStatus, setSubmitting, resetForm },
         ) => {
           mutate({
-            variables: {currency: formValues}
+            variables: { currency: formValues },
           })
-            .then(({data: {createCurrency}}) => {
+            .then(({ data: { createCurrency } }) => {
               resetForm();
-              console.dir(createCurrency)
+              console.dir(createCurrency);
             })
-            .catch(err => {
+            .catch((err) => {
               setStatus('error');
               setSubmitting(false);
-              console.error(err)
-            })
-        }
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllCurrency',
         ],
       },
-    }
-  )
-)(CreateCurrencyForm)
+    },
+  ),
+)(CreateCurrencyForm);

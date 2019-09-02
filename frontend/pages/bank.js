@@ -1,20 +1,22 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
-import { today } from '../lib/moment'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
+import { today } from '../lib/moment';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import { UpdateInstitution, DeleteInstitution } from '../features/Institution'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import { UpdateInstitution, DeleteInstitution } from '../features/Institution';
 
-const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
+const BankPageMarkup = ({
+  query: { action }, institution, allQuote, post,
+}) => {
   if (!institution) {
-    return null
+    return null;
   }
 
   const { slug } = institution;
@@ -30,24 +32,26 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
       <Page>
         {
           !action && (
-            <React.Fragment>
-              <Link href={`/bank?slug=${slug}&action=update`}
-                    as={`/banks/${slug}/update`}>
-                <a>{'Update'}</a>
+            <>
+              <Link
+                href={`/bank?slug=${slug}&action=update`}
+                as={`/banks/${slug}/update`}
+              >
+                <a>Update</a>
               </Link>
               &nbsp;|&nbsp;
-              <DeleteInstitution institution={institution}/>
-              <hr/>
+              <DeleteInstitution institution={institution} />
+              <hr />
 
               {
                 post && (
-                  <React.Fragment>
+                  <>
                     <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
                       {post.title}
                     </h1>
 
-                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-                  </React.Fragment>
+                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
+                  </>
                 )
               }
 
@@ -55,24 +59,28 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
                 allQuote && (
                   <table>
                     <thead>
-                    <tr>
-                      <th>Valuta</th>
-                      <th>Unități</th>
-                      <th>Cumpărare</th>
-                      <th>Vânzare</th>
-                      <th>Variație</th>
-                    </tr>
+                      <tr>
+                        <th>Valuta</th>
+                        <th>Unități</th>
+                        <th>Cumpărare</th>
+                        <th>Vânzare</th>
+                        <th>Variație</th>
+                      </tr>
                     </thead>
                     <tbody>
-                    {
+                      {
                       allQuote.length
                         ? allQuote.map((quote, i) => (
                           <tr key={i}>
                             <td>{quote.currencyVObj.name}</td>
-                            <td>{quote.amount} {quote.currencyVObj.slug}</td>
+                            <td>
+                              {quote.amount}
+                              {' '}
+                              {quote.currencyVObj.slug}
+                            </td>
                             <td>{quote.bid}</td>
                             <td>{quote.ask}</td>
-                            <td>{'current - prev'}</td>
+                            <td>current - prev</td>
                           </tr>
                         ))
                         : 'Nu exista date'
@@ -81,14 +89,14 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
                   </table>
                 )
               }
-            </React.Fragment>
+            </>
           )
         }
 
-        {action && <UpdateInstitution institution={institution}/>}
+        {action && <UpdateInstitution institution={institution} />}
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.
@@ -99,7 +107,7 @@ BankPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
     namespacesRequired: ['common'],
     query,
     fullPath,
-  }
+  };
 };
 
 // i18n.
@@ -150,6 +158,6 @@ export default _compose(
         allQuote,
         post,
       }),
-    }
-  )
-)(BankPageI18N)
+    },
+  ),
+)(BankPageI18N);

@@ -1,7 +1,7 @@
-import './styles.scss'
-import React from 'react'
-import { Link } from '../../lib/i18n'
-import { country } from '../../server.config'
+import './styles.scss';
+import React from 'react';
+import { Link } from '../../lib/i18n';
+import { country } from '../../server.config';
 
 const menu = [
   { url: '/banks', label: 'Banks' },
@@ -13,9 +13,9 @@ const menu = [
 ];
 
 const MainMenu = () => (
-  <React.Fragment>
+  <>
     <Link href="/">
-      <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem'}}>{country}</a>
+      <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem' }}>{country}</a>
     </Link>
 
     <nav role="navigation">
@@ -33,7 +33,7 @@ const MainMenu = () => (
         }
       </ul>
     </nav>
-  </React.Fragment>
+  </>
 );
 
-export default MainMenu
+export default MainMenu;

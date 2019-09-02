@@ -38,13 +38,13 @@ export const ModalDefaultState = {
     title: '',
     content: '',
     __typename: 'Modal',
-  }
+  },
 };
 
 export const ModalResolvers = {
   Query: {
     modal(_, __, { cache }) {
-      return cache.readQuery({ query })
+      return cache.readQuery({ query });
     },
   },
   Mutation: {
@@ -60,13 +60,13 @@ export const ModalResolvers = {
             show: !prevModal.modal.show,
             title,
             content,
-          }
-        }
+          },
+        },
       });
 
       return null;
     },
-  }
+  },
 };
 
 // Other example.

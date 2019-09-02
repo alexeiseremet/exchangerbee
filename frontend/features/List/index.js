@@ -1,5 +1,5 @@
-import './styles.scss'
-import React from 'react'
+import './styles.scss';
+import React from 'react';
 
 export default ({ type, children }) => {
   switch (type) {
@@ -19,5 +19,4 @@ export default ({ type, children }) => {
         <ul className="unordered-list">{children}</ul>
       );
   }
-}
-
+};

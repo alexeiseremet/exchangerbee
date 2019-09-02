@@ -21,13 +21,13 @@ export const addWindowVar = (n, o) => {
  */
 export default (id, src) => (
   new Promise((resolve, reject) => {
-    let js = document.createElement('script')
+    const js = document.createElement('script');
 
     // If file is already added then resolve Promise
     // and exit from function.
     if (document.getElementById(id)) {
       resolve();
-      return true;
+      return undefined;
     }
 
     js.id = id;
@@ -37,5 +37,7 @@ export default (id, src) => (
     js.onerror = reject;
 
     document.head.appendChild(js);
+
+    return undefined;
   })
-)
+);

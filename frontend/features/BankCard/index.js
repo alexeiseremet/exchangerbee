@@ -1,6 +1,6 @@
-import './styles.scss'
-import React from 'react'
-import { Link } from '../../lib/i18n'
+import './styles.scss';
+import React from 'react';
+import { Link } from '../../lib/i18n';
 
 const BankCard = ({ bank }) => (
   <article className="bank-card">
@@ -13,4 +13,4 @@ const BankCard = ({ bank }) => (
   </article>
 );
 
-export default BankCard
+export default BankCard;

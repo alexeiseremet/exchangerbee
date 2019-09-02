@@ -1,16 +1,16 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n'
-import { textIndexPage as t } from '../lib/locale'
+import { Link, withTranslation } from '../lib/i18n';
+import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata'
-import Layout from '../features/Layout'
-import Page from '../features/Page'
-import BankCard from '../features/BankCard'
-import { CreateInstitution } from '../features/Institution'
+import Metadata from '../features/Metadata';
+import Layout from '../features/Layout';
+import Page from '../features/Page';
+import BankCard from '../features/BankCard';
+import { CreateInstitution } from '../features/Institution';
 
 const BanksPageMarkup = ({ query: { action }, allInstitution }) => (
   <Layout>
@@ -23,22 +23,22 @@ const BanksPageMarkup = ({ query: { action }, allInstitution }) => (
     <Page>
       {
         !action && allInstitution && (
-          <React.Fragment>
-            <Link href={`/currencies?action=create`} as={`/banks/create`}>
-              <a>{'Create'}</a>
+          <>
+            <Link href="/currencies?action=create" as="/banks/create">
+              <a>Create</a>
             </Link>
-            <hr/>
+            <hr />
 
             <section>
               {
-                allInstitution.map((bank, i) => <BankCard key={i} bank={bank}/>)
+                allInstitution.map((bank, i) => <BankCard key={i} bank={bank} />)
               }
             </section>
-          </React.Fragment>
+          </>
         )
       }
 
-      {action && <CreateInstitution/>}
+      {action && <CreateInstitution />}
     </Page>
   </Layout>
 );
@@ -68,8 +68,8 @@ export default _compose(
     GQL_ALL_INSTITUTION,
     {
       props: ({ data: { allInstitution } }) => ({
-        allInstitution
-      })
-    }
-  )
-)(BanksPageI18N)
+        allInstitution,
+      }),
+    },
+  ),
+)(BanksPageI18N);

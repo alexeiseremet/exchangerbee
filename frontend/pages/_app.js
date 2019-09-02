@@ -10,17 +10,17 @@ import withApolloClient from '../lib/apollo/with-apollo-client';
 import { appWithTranslation } from '../lib/i18n';
 
 class ExbeeApp extends App {
-  render () {
-    const {Component, pageProps, apolloClient} = this.props;
+  render() {
+    const { Component, pageProps, apolloClient } = this.props;
 
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
-          <Component {...pageProps}/>
+          <Component {...pageProps} />
         </ApolloProvider>
       </Container>
-    )
+    );
   }
 }
 
-export default withApolloClient(appWithTranslation(ExbeeApp))
+export default withApolloClient(appWithTranslation(ExbeeApp));

@@ -1,9 +1,9 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import SelectReference from '../SelectReference'
+import SelectReference from '../SelectReference';
 
 const SelectInstitution = ({
   allInstitution,
@@ -11,18 +11,18 @@ const SelectInstitution = ({
   id,
   readOnly,
   required,
-  setFieldValue
+  setFieldValue,
 }) => (
-    <SelectReference
-      items={allInstitution}
-      id={id}
-      name={name}
-      required={required}
-      readOnly={readOnly}
-      setFieldValue={setFieldValue}
-      labelText="Institution"
-    />
-  )
+  <SelectReference
+    items={allInstitution}
+    id={id}
+    name={name}
+    required={required}
+    readOnly={readOnly}
+    setFieldValue={setFieldValue}
+    labelText="Institution"
+  />
+);
 
 // Container.
 const GQL_ALL_INSTITUTION = gql`
@@ -40,8 +40,8 @@ export default _compose(
     GQL_ALL_INSTITUTION,
     {
       props: ({ data: { allInstitution } }) => ({
-        allInstitution
-      })
-    }
-  )
-)(SelectInstitution)
+        allInstitution,
+      }),
+    },
+  ),
+)(SelectInstitution);

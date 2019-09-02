@@ -1,8 +1,8 @@
 import './styles.scss';
 import React from 'react';
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
 import Button from '../Button';
 
@@ -32,7 +32,6 @@ export default _compose(
           },
         }),
       }),
-    }
+    },
   ),
 )(ModalHandlerMarkup);
-

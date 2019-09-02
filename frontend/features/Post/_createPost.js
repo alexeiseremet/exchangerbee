@@ -1,12 +1,12 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
 const CreatePostForm = ({ onSubmit }) => (
-  <FormMarkup action={'create'} onSubmit={onSubmit}/>
+  <FormMarkup action="create" onSubmit={onSubmit} />
 );
 
 const GQL_CREATE_POST = gql`
@@ -25,27 +25,27 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting, resetForm }
+          { setStatus, setSubmitting, resetForm },
         ) => {
           mutate({
-            variables: { post: formValues }
+            variables: { post: formValues },
           })
             .then(({ data: { createPost } }) => {
               resetForm();
-              console.dir(createPost)
+              console.dir(createPost);
             })
-            .catch(err => {
+            .catch((err) => {
               setStatus('error');
               setSubmitting(false);
-              console.error(err)
-            })
-        }
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllPost',
         ],
       },
-    }
-  )
-)(CreatePostForm)
+    },
+  ),
+)(CreatePostForm);

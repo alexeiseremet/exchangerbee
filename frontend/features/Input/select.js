@@ -1,7 +1,7 @@
-import './styles.scss'
-import React from 'react'
-import classnames from 'classnames'
-import { Field } from 'formik'
+import './styles.scss';
+import React from 'react';
+import classnames from 'classnames';
+import { Field } from 'formik';
 
 export default (
   {
@@ -12,14 +12,14 @@ export default (
     name = null,
     labelText,
     id,
-  }
+  },
 ) => {
   const classes = classnames(
     'input',
     'input--select',
     {
-      [`input--required`]: required,
-    }
+      'input--required': required,
+    },
   );
 
   return (
@@ -50,5 +50,5 @@ export default (
         <i className="input__toggle" />
       </div>
     </div>
-  )
-}
+  );
+};

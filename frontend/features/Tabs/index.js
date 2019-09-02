@@ -1,26 +1,26 @@
-import React from 'react'
-import TabsNav from './_nav'
-import TabsPanels from './_panels'
+import React from 'react';
+import TabsNav from './_nav';
+import TabsPanels from './_panels';
 
 class Tabs extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       activeIndex: props.activeIndex || 0,
-    }
+    };
   }
 
-  handlerOnClick = index => {
-    this.setState({activeIndex: index})
+  handlerOnClick = (index) => {
+    this.setState({ activeIndex: index });
   }
 
-  render () {
-    const {items} = this.props
-    const {activeIndex} = this.state
+  render() {
+    const { items } = this.props;
+    const { activeIndex } = this.state;
 
     if (items && !items.length) {
-      return null
+      return null;
     }
 
     return (
@@ -40,8 +40,8 @@ class Tabs extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Tabs
+export default Tabs;

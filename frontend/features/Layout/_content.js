@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export default ({children}) => (
+export default ({ children }) => (
   <main className="layout__content-wrapper" role="main">
     <div className="layout__content">
       <div className="layout__content-inner">
@@ -8,4 +8,4 @@ export default ({children}) => (
       </div>
     </div>
   </main>
-)
+);

@@ -6,10 +6,12 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import Svg from '../Svg';
+// eslint-disable-next-line
 import iconClose from '../../assets/images/icon-close.svg?sprite';
 
 export class ModalMarkup extends React.Component {
   backdrop = React.createRef();
+
   inner = React.createRef();
 
   /**
@@ -60,22 +62,25 @@ export class ModalMarkup extends React.Component {
 
     return ReactDOM.createPortal(
       <div className="modal">
-        <div className="modal__backdrop"
-             ref={this.backdrop}
-             onClick={this.handleOutsideClick}
+        <div
+          className="modal__backdrop"
+          ref={this.backdrop}
+          onClick={this.handleOutsideClick}
         >
-          <div className="modal__inner"
-               ref={this.inner}
-               onKeyDown={this.handleKeyDown}
-               tabIndex="-1"
+          <div
+            className="modal__inner"
+            ref={this.inner}
+            onKeyDown={this.handleKeyDown}
+            tabIndex="-1"
           >
             <div className="modal__header">
               <h3 className="modal__title">{title}</h3>
-              <button className="modal__btn-close"
-                      type="button"
-                      onClick={closeModal}
+              <button
+                className="modal__btn-close"
+                type="button"
+                onClick={closeModal}
               >
-                <Svg glyph={iconClose.id}/>
+                <Svg glyph={iconClose.id} />
               </button>
             </div>
             <div className="modal__content">
@@ -84,8 +89,8 @@ export class ModalMarkup extends React.Component {
           </div>
         </div>
       </div>,
-      document.getElementById('modal-portal')
-    )
+      document.getElementById('modal-portal'),
+    );
   }
 }
 
@@ -113,15 +118,14 @@ export default _compose(
       props: ({ data: { modal } }) => ({
         modal,
       }),
-    }
+    },
   ),
   graphql(
     GQL_CLOSE_MODAL,
     {
       props: ({ mutate }) => ({
         closeModal: mutate,
-      })
-    }
+      }),
+    },
   ),
 )(ModalMarkup);
-

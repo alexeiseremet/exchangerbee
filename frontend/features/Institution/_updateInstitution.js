@@ -1,14 +1,14 @@
-import React from 'react'
-import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
-import _compose from 'lodash/flowRight'
-import excludeKeys from '../../lib/excludeKeys'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import _compose from 'lodash/flowRight';
+import excludeKeys from '../../lib/excludeKeys';
 
-import FormMarkup from './_formMarkup'
+import FormMarkup from './_formMarkup';
 
 const UpdateInstitutionForm = ({ onSubmit, institution }) => (
   <FormMarkup
-    action={'update'}
+    action="update"
     onSubmit={onSubmit}
     institution={institution}
   />
@@ -30,29 +30,29 @@ export default _compose(
         onSubmit: (
           // form values & actions
           formValues,
-          { setStatus, setSubmitting }
+          { setStatus, setSubmitting },
         ) => {
           mutate({
             variables: {
               id: institution.id,
               institution: excludeKeys(formValues, ['id', 'slug', '__typename']),
-            }
+            },
           })
-          .then(({ data: { updateInstitution } }) => {
-            console.dir(updateInstitution)
-          })
-          .catch(err => {
-            setStatus('error');
-            setSubmitting(false);
-            console.error(err)
-          })
-        }
+            .then(({ data: { updateInstitution } }) => {
+              console.dir(updateInstitution);
+            })
+            .catch((err) => {
+              setStatus('error');
+              setSubmitting(false);
+              console.error(err);
+            });
+        },
       }),
       options: {
         refetchQueries: [
           'AllInstitution',
         ],
       },
-    }
-  )
-)(UpdateInstitutionForm)
+    },
+  ),
+)(UpdateInstitutionForm);
