@@ -148,8 +148,8 @@
     background-image: linear-gradient(
                     transparent 0%,
                     transparent calc(50% - .16rem),
-                    rgba($primary-background, .75) calc(50% - .16rem),
-                    rgba($primary-background, .75) 100%
+                    rgba($primary-background, 1) calc(50% - .16rem),
+                    rgba($primary-background, 1) 100%
     );
     background-position: 0 100%;
   }

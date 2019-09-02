@@ -120,8 +120,8 @@ export default _compose(
         variables: {
           postSlug: fullPath,
           currencies: baseCurrenciesArr,
-          excludeBanks: [centralBank],
-          includeBanks: [centralBank],
+          excludeBanks: [centralBank.slug],
+          includeBanks: [centralBank.slug],
         },
       }),
       props: ({ data: { post, centralQuote, bestBidQuote, bestAskQuote } }) => ({

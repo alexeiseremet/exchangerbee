@@ -1,0 +1,34 @@
+@import "root";
+
+.currency-card {
+  position: relative;
+}
+
+.currency-card__inner {
+  @extend %flex-row;
+  @extend %link-with-bg;
+  padding: $small-spacing;
+  align-items: flex-end;
+}
+
+.currency-card__name {
+  padding-right: $small-spacing;
+  flex-grow: 1;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 300;
+
+  @include mappy-bp(small) {
+    padding-right: $base-spacing;
+    font-size: 4rem;
+  }
+}
+
+.currency-card__slug {
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  @include mappy-bp(small) {
+    font-size: 1.8rem;
+  }
+}

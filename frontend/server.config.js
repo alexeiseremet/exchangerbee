@@ -13,7 +13,10 @@ module.exports = {
     numCode: '498',
     symbol: 'leu',
   },
-  centralBank: 'bnm',
+  centralBank: {
+    name: 'Banca Naţională a Moldovei',
+    slug: 'bnm'
+  },
   baseCurrenciesArr: ['usd', 'eur', 'ron', 'rub', 'uah'],
   storagePath,
   apiPath,

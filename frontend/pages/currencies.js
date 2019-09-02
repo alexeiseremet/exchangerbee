@@ -9,7 +9,7 @@ import { textIndexPage as t } from '../lib/locale'
 import Metadata from '../features/Metadata'
 import Layout from '../features/Layout'
 import Page from '../features/Page'
-import List from '../features/List'
+import CurrencyCard from '../features/CurrencyCard'
 import { CreateCurrency } from '../features/Currency'
 
 const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
@@ -29,17 +29,11 @@ const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
             </Link>
             <hr/>
 
-            <List type="ordered">
+            <section>
               {
-                allCurrency.map(({ id, slug, name }) => (
-                  <li key={id}>
-                    <Link href={`/currency?slug=${slug}`} as={`/currencies/${slug}`}>
-                      <a>{name}</a>
-                    </Link>
-                  </li>
-                ))
+                allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency}/>)
               }
-            </List>
+            </section>
           </React.Fragment>
         )
       }

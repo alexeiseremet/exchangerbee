@@ -2,8 +2,9 @@ import './styles.scss'
 import React from 'react'
 import { Link } from '../../lib/i18n'
 import { baseCurrenciesArr, centralBank } from '../../server.config'
+import RateCard from '../RateCard'
 
-const BestQuotes = ({centralQuote, bestBidQuote, bestAskQuote}) => (
+const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
   <section className="best-quotes">
     {
       centralQuote && baseCurrenciesArr.map((slug, i) => (
@@ -23,11 +24,9 @@ const BestQuotes = ({centralQuote, bestBidQuote, bestAskQuote}) => (
                   }
 
                   return (
-                    <p key={i} className="best-quotes__rate best-quotes__rate--central">
-                      <b className="best-quotes__rate-value">{quote.bid}</b>
-                      <strong className="best-quotes__rate-diff">+1.003</strong>
-                      <i className="best-quotes__rate-info">{centralBank}</i>
-                    </p>
+                    <div key={i} className="best-quotes__rate best-quotes__rate--central">
+                      <RateCard value={quote.bid} label={'+1.003'} info={centralBank.slug}/>
+                    </div>
                   );
                 })
               }
@@ -39,11 +38,13 @@ const BestQuotes = ({centralQuote, bestBidQuote, bestAskQuote}) => (
                   }
 
                   return (
-                    <p key={i} className="best-quotes__rate">
-                      <b className="best-quotes__rate-value">{quote.bid}</b>
-                      <strong className="best-quotes__rate-diff">{quote.institutionVObj.name}</strong>
-                      <i className="best-quotes__rate-info">{'cumpărare'}</i>
-                    </p>
+                    <div key={i} className="best-quotes__rate">
+                      <RateCard
+                        value={quote.bid}
+                        label={quote.institutionVObj.name}
+                        info={'cumpărare'}
+                      />
+                    </div>
                   )
                 })
               }
@@ -55,11 +56,13 @@ const BestQuotes = ({centralQuote, bestBidQuote, bestAskQuote}) => (
                   }
 
                   return (
-                    <p key={i} className="best-quotes__rate">
-                      <b className="best-quotes__rate-value">{quote.ask}</b>
-                      <strong className="best-quotes__rate-diff">{quote.institutionVObj.name}</strong>
-                      <i className="best-quotes__rate-info">{'vânzare'}</i>
-                    </p>
+                    <div key={i} className="best-quotes__rate">
+                      <RateCard
+                        value={quote.ask}
+                        label={quote.institutionVObj.name}
+                        info={'vânzare'}
+                      />
+                    </div>
                   )
                 })
               }

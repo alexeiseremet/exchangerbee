@@ -1,0 +1,24 @@
+@import "root";
+
+.rate-card {
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+.rate-card__value {
+  font-size: 2rem;
+  margin-bottom: .5rem;
+  display: block;
+  font-weight: 500;
+}
+
+.rate-card__label {
+  display: block;
+  font-weight: 400;
+}
+
+.rate-card__info {
+  display: block;
+  font-size: 1.2rem;
+}
+
