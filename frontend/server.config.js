@@ -15,7 +15,7 @@ module.exports = {
   },
   centralBank: {
     name: 'Banca Naţională a Moldovei',
-    slug: 'bnm'
+    slug: 'bnm',
   },
   baseCurrenciesArr: ['usd', 'eur', 'ron', 'rub', 'uah'],
   storagePath,

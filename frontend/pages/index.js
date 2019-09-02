@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
 import _compose from 'lodash/flowRight'
 
-import { Link, withTranslation } from '../lib/i18n'
+import { withTranslation } from '../lib/i18n'
 import { textIndexPage as t } from '../lib/locale'
 import { centralBank, baseCurrenciesArr } from '../server.config'
 import Metadata from '../features/Metadata'

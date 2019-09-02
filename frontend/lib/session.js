@@ -73,7 +73,7 @@ const getCookieFromServer = (key, req) => {
 export const loadUserCookie = (req = null) => {
   const userJwt = getCookie(AUTH_COOKIE_NAME, req);
 
-  if (!!userJwt) {
+  if (userJwt) {
     return jwtoken.verify(userJwt, AUTH_SECRET);
   }
 
@@ -100,7 +100,7 @@ export const updateUserCookie = newUserData => {
 
   try {
     for (let key in newUserData) {
-      if (userData.user.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(userData.user, key)) {
         userData.user[key] = newUserData[key];
       }
     }

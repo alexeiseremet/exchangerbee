@@ -70,7 +70,7 @@ const FormMarkup = ({
         <FieldArray
           name="quotes"
         >
-          {({ form, push, remove }) => (
+          {({ form, push, /* remove */ }) => (
             <React.Fragment>
               {
                 form.values.quotes.map((item, index) => (

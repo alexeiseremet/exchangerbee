@@ -65,7 +65,7 @@ const BankPageMarkup = ({ query: { action }, institution, allQuote, post }) => {
                     </thead>
                     <tbody>
                     {
-                      !!allQuote.length
+                      allQuote.length
                         ? allQuote.map((quote, i) => (
                           <tr key={i}>
                             <td>{quote.currencyVObj.name}</td>

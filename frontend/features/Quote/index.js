@@ -1,4 +1,3 @@
-import React from 'react'
 import CreateQuote from './_createQuote'
 import UpdateQuote from './_updateQuote'
 import DeleteQuote from './_deleteQuote'

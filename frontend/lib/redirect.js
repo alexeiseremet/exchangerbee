@@ -14,8 +14,8 @@ const redirect = (target, ctx) => {
 };
 
 export const cleanUrl = ctx => {
-  if (req.path.endsWith('/') && req.path.length > 1) {
-    const newUrl = req.path.substring('/');
+  if (ctx.req.path.endsWith('/') && ctx.req.path.length > 1) {
+    const newUrl = ctx.req.path.substring('/');
 
     return redirect(newUrl, ctx);
   }

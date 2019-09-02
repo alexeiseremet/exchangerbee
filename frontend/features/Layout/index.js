@@ -11,9 +11,9 @@ class Layout extends React.Component {
    * Scroll page to #layout or to element with id === hash.
    */
   triggerScroll = () => {
-    const {hash} = window.location
+    const {hash} = window.location;
 
-    if (!!hash) {
+    if (hash) {
       document
         .querySelector(hash)
         .scrollIntoView({
@@ -23,7 +23,7 @@ class Layout extends React.Component {
     } else {
       document.querySelector('#layout').scrollTop = 0
     }
-  }
+  };
 
   componentDidMount () {
     // Add event listener on route change.
@@ -36,7 +36,7 @@ class Layout extends React.Component {
   }
 
   render () {
-    const {children} = this.props
+    const {children} = this.props;
 
     return (
       <div className="layout" id="layout">

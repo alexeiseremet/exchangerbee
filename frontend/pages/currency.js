@@ -67,7 +67,7 @@ const CurrencyPageMarkup = ({ query: { action }, currency, allQuote, post }) => 
                     </thead>
                     <tbody>
                     {
-                      !!allQuote.length
+                      allQuote.length
                         ? allQuote.map((quote, i) => (
                           <tr key={i}>
                             <td>{quote.institutionVObj.name}</td>

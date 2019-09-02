@@ -24,7 +24,7 @@ export default (
 
         return (
           <FormikForm className={classes}>
-            <Items children={children} {...props} />
+            <Items {...props}>{children}</Items>
 
             <div className="form__row">
               <Button
