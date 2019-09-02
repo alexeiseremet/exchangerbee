@@ -1,14 +1,20 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Text,
+  Image,
   View,
+  Text,
+  Dimensions,
 } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
 class ProductDetail extends React.Component {
   state = {
     items: [],
     isLoading: true,
+    viewport: {
+      width: Dimensions.get('window').width,
+    }
   };
 
   async componentDidMount() {
@@ -29,7 +35,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    const { data, isLoading } = this.state;
+    const { data, isLoading, viewport} = this.state;
 
     return (
       <View>
@@ -37,7 +43,25 @@ class ProductDetail extends React.Component {
           isLoading
             ? <ActivityIndicator size="large"/>
             : (
-              <View><Text>{JSON.stringify(data.gallery)}</Text></View>
+              <>
+                <Carousel
+                  data={data.gallery}
+                  renderItem={({ item }) => (
+                    <View style={{ marginTop: 20 }}>
+                      <Image
+                        style={{ width: viewport.width - 48, height: viewport.width - 48 }}
+                        source={{ uri: `https://cdna.altex.ro${item.file}` }}
+                      />
+                    </View>
+                  )}
+                  sliderWidth={viewport.width - 48}
+                  itemWidth={viewport.width - 48}
+                />
+
+                <View style={{ marginTop: 20 }}>
+                  <Text>{data.short_description}</Text>
+                </View>
+              </>
             )
         }
       </View>
