@@ -17,13 +17,15 @@ const runCrawler = async () => {
   const {
     id, institution, period, url, quotes,
   } = allParser[0] || {};
-  const result = {
-    quotes: [],
-  };
 
   if (!url) {
     return null;
   }
+
+  const result = {
+    quotes: [],
+    time: '0s',
+  };
 
   const browser = await puppeteer.connect({
     browserWSEndpoint: process.env.WSS_BROWSER,
@@ -44,29 +46,37 @@ const runCrawler = async () => {
   try {
     await page.goto(url, { waitUntil: 'networkidle2' });
 
-    quotes.forEach((quote) => {
+    const getXPathValue = async (key, xPath, quoteIndex) => {
+      const handle = await page.$x(xPath);
+
+      result.quotes[quoteIndex][key] = (
+        await page.evaluate((el) => el.textContent.toLowerCase(), handle[0])
+      );
+
+      // Take screenshot.
+      // const fileName = url.replace(/([-=.:/%?#])/g, '_')
+      // await handle[0].screenshot({
+      //   path: `${__dirname}/screenshots/${fileName}_${currency.refSlug}_${key}.jpeg`
+      // })
+    };
+
+    let promiseAllxPaths = [];
+
+    quotes.forEach((quote, quoteIndex) => {
       const { amount, currency, xPaths } = quote;
-      const listOfKeys = Object.keys(xPaths);
-      const parsedItem = {
+      const xPathsKeys = Object.keys(xPaths);
+
+      result.quotes[quoteIndex] = {
         institution,
         currency,
         amount,
         period,
       };
 
-      listOfKeys.forEach(async (key) => {
-        const handle = await page.$x(xPaths[key]);
-        parsedItem[key] = await page.evaluate((el) => el.textContent.toLowerCase(), handle[0]);
-
-        // Take screenshot.
-        // const fileName = url.replace(/([-=.:/%?#])/g, '_')
-        // await handle[0].screenshot({
-        //   path: `${__dirname}/screenshots/${fileName}_${currency.refSlug}_${key}.jpeg`
-        // })
-      });
-
-      result.quotes.push(parsedItem);
+      promiseAllxPaths = xPathsKeys.map((key) => getXPathValue(key, xPaths[key], quoteIndex));
     });
+
+    await Promise.all(promiseAllxPaths);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`An error occurred on ${url}`);
