@@ -7,50 +7,52 @@ module.exports = {
       return new Promise((resolve, reject) => {
         Quote.findOne({ _id: id, ...args })
           .populate({
-            'path': 'institutionVObj',
-            'select': 'name slug'
+            path: 'institutionVObj',
+            select: 'name slug',
           })
           .populate({
-            'path': 'currencyVObj',
-            'select': 'name slug'
+            path: 'currencyVObj',
+            select: 'name slug',
           })
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
     allQuote(_, { where }) {
-      where = flattenObject(where);
+      const flattenWhere = flattenObject(where);
 
       return new Promise((resolve, reject) => {
-        Quote.find(where)
+        Quote.find(flattenWhere)
           .populate({
-            'path': 'institutionVObj',
-            'select': 'name slug'
+            path: 'institutionVObj',
+            select: 'name slug',
           })
           .populate({
-            'path': 'currencyVObj',
-            'select': 'name slug'
+            path: 'currencyVObj',
+            select: 'name slug',
           })
           .sort({
-            'date': 'desc',
+            date: 'desc',
             'currency.refId': 'asc',
-            'bid': 'desc',
-            'ask': 'asc',
+            bid: 'desc',
+            ask: 'asc',
           })
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
-    bestTodayQuote(_, { currencies, excludeBanks, includeBanks, type }) {
+    bestTodayQuote(_, {
+      currencies, excludeBanks, includeBanks, type,
+    }) {
       return new Promise((resolve, reject) => {
         Quote.aggregate([
           {
             $sort: {
               date: -1,
-              ...(type === 'ask' ? { ask: 1 } : { bid: -1 })
-            }
+              ...(type === 'ask' ? { ask: 1 } : { bid: -1 }),
+            },
           },
           {
             $match: {
@@ -59,18 +61,18 @@ module.exports = {
                 {
                   'institution.refSlug': {
                     ...(excludeBanks ? { $nin: excludeBanks } : { $ne: '*' }),
-                    ...(includeBanks ? { $in: includeBanks } : { $ne: '*' })
-                  }
+                    ...(includeBanks ? { $in: includeBanks } : { $ne: '*' }),
+                  },
                 },
-                { 'error': 'no' },
-              ]
-            }
+                { error: 'no' },
+              ],
+            },
           },
           {
             $group: {
-              '_id': '$currency.refSlug',
-              'quote': { $first: '$_id' }
-            }
+              _id: '$currency.refSlug',
+              quote: { $first: '$_id' },
+            },
           },
         ])
           .exec(async (err, res) => {
@@ -80,27 +82,28 @@ module.exports = {
             }
 
             try {
-              const ids = res.map(item => item.quote);
+              const ids = res.map((item) => item.quote);
               const quotes = (
-                await Quote.find({ '_id': { $in: ids } })
+                await Quote.find({ _id: { $in: ids } })
                   .populate({
-                    'path': 'institutionVObj',
-                    'select': 'name slug'
+                    path: 'institutionVObj',
+                    select: 'name slug',
                   })
                   .populate({
-                    'path': 'currencyVObj',
-                    'select': 'name slug numCode'
+                    path: 'currencyVObj',
+                    select: 'name slug numCode',
                   })
               );
 
               resolve(quotes);
-            }
-            catch (error) {
+            } catch (error) {
               // eslint-disable-next-line no-console
               console.error(error);
             }
+
+            return undefined;
           });
-      })
+      });
     },
   },
   Mutation: {
@@ -108,18 +111,18 @@ module.exports = {
       const newQuote = await new Quote(quote);
 
       return new Promise((resolve, reject) => {
-        newQuote.save((err, res) => {
+        newQuote.save((err, res) => (
           err ? reject(err) : resolve(res)
-        })
-      })
+        ));
+      });
     },
     deleteQuote(_, { id }) {
       return new Promise((resolve, reject) => {
         Quote.findOneAndDelete({ _id: id })
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
     updateQuote(_, { where, quote }) {
       return new Promise((resolve, reject) => {
@@ -131,12 +134,12 @@ module.exports = {
             upsert: true,
             setDefaultsOnInsert: true,
             omitUndefined: true,
-          }
+          },
         )
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
   },
 };

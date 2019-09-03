@@ -11,7 +11,7 @@ const quoteSchema = new Schema({
     },
     refSlug: {
       type: String,
-    }
+    },
   },
   currency: {
     refId: {
@@ -22,7 +22,7 @@ const quoteSchema = new Schema({
     refSlug: {
       type: String,
       index: true,
-    }
+    },
   },
   date: {
     type: Date,

@@ -37,25 +37,26 @@ const getParser = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
-        query: GQL_ALL_PARSER
-      })
+        query: GQL_ALL_PARSER,
+      }),
     });
 
     if (!response.ok) {
-      let error = new Error(response.statusText);
+      const error = new Error(response.statusText);
       error.response = response;
-      return Promise.reject(error)
+      return Promise.reject(error);
     }
 
-    return await response.json()
-  }
-  catch (error) {
+    return await response.json();
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(error)
+    console.error(error);
   }
+
+  return undefined;
 };
 
 module.exports = getParser;

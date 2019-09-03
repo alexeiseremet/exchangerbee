@@ -21,10 +21,5 @@ module.exports = {
       'pragma': 'React',
       'version': 'detect',
     },
-    "import/resolver": {
-      "node": {
-        "path": ["./assets"]
-      }
-    }
   },
 };

@@ -1,21 +1,21 @@
-const _isPlainObject = require('lodash/isPlainObject');
+const isPlainObject = require('lodash/isPlainObject');
 
 function flattenObject(obj) {
-  let flatten = {};
+  const flatten = {};
 
-  for (let o in obj) {
-    if (obj.hasOwnProperty(o) && _isPlainObject(obj[o])) {
-      let subObj = flattenObject(obj[o]);
+  Object.keys(obj).forEach((o) => {
+    if (Object.prototype.hasOwnProperty.call(obj, o) && isPlainObject(obj[o])) {
+      const subObj = flattenObject(obj[o]);
 
-      for (let so in subObj) {
-        if (subObj.hasOwnProperty(so)) {
-          flatten[o + '.' + so] = subObj[so];
+      Object.keys(subObj).forEach((so) => {
+        if (Object.prototype.hasOwnProperty.call(subObj, so)) {
+          flatten[`${o}.${so}`] = subObj[so];
         }
-      }
+      });
     } else {
       flatten[o] = obj[o];
     }
-  }
+  });
 
   return flatten;
 }

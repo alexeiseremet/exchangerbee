@@ -4,6 +4,7 @@
 
 const express = require('express');
 const expressGraphql = require('express-graphql');
+
 const server = express();
 
 const mongoose = require('mongoose');
@@ -11,7 +12,7 @@ const schema = require('./graphql');
 const runCrawler = require('./crawler/');
 
 const PORT = parseInt(process.env.PORT, 10);
-const MONGO_URL = process.env.MONGO_URL;
+const { MONGO_URL } = process.env;
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 // mongoose.Promise = global.Promise
@@ -24,18 +25,18 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
     {
       useCreateIndex: true,
       useNewUrlParser: true,
-    }
+    },
   )
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('MongoDB connected');
       clearTimeout(timer);
     })
-    .catch(err => {
+    .catch(() => {
       // eslint-disable-next-line no-console
       console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
       timer = setTimeout(connectToMongoDB, 5000);
-    })
+    });
 }());
 
 // GraphqQL server route.
@@ -46,7 +47,7 @@ server.use(
     context: { startTime: Date.now() },
     graphiql: !IS_PRODUCTION,
     pretty: true,
-  })
+  }),
 );
 
 // Crawler server route.
@@ -56,16 +57,15 @@ server.use(
     try {
       const data = await runCrawler();
       res.json(data);
-    }
-    catch (error) {
+    } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
-server.listen(PORT, err => {
+server.listen(PORT, (err) => {
   if (err) {
-    throw err
+    throw err;
   }
   // eslint-disable-next-line no-console
   console.log(`🎉  Ready on http://localhost:${PORT}`);

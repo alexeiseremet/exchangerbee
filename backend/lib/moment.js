@@ -13,7 +13,7 @@ const moment = momentjs;
  * @param index Index of month.
  * @returns {string} Month value as string.
  */
-const monthToString = index => {
+const monthToString = (index) => {
   let value = index + 1;
   if (value < 10) value = `0${value}`;
 
@@ -26,7 +26,7 @@ const monthToString = index => {
  * @param str Month value as string.
  * @returns {number} Index of month.
  */
-const monthToIndex = str => (+str - 1);
+const monthToIndex = (str) => (+str - 1);
 
 /**
  * Convert date from Timestamp to input[type=date] format or

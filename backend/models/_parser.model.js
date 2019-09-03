@@ -11,7 +11,7 @@ const parserSchema = new Schema({
     },
     refSlug: {
       type: String,
-    }
+    },
   },
   url: {
     type: String,
@@ -43,7 +43,7 @@ const parserSchema = new Schema({
       },
       refSlug: {
         type: String,
-      }
+      },
     },
     xPaths: {
       ask: {

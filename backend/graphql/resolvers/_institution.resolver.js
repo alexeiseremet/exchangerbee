@@ -5,19 +5,19 @@ module.exports = {
     institution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.findOne(args)
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
     allInstitution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
           .sort({ slug: 'asc' })
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
   },
   Mutation: {
@@ -25,30 +25,30 @@ module.exports = {
       const newInstitution = await new Institution(institution);
 
       return new Promise((resolve, reject) => {
-        newInstitution.save((err, res) => {
+        newInstitution.save((err, res) => (
           err ? reject(err) : resolve(res)
-        })
-      })
+        ));
+      });
     },
     deleteInstitution(_, { id }) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndDelete({ _id: id })
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
     updateInstitution(_, { id, institution }) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndUpdate(
           { _id: id },
           { $set: institution },
-          { new: true }
+          { new: true },
         )
-          .exec((err, res) => {
+          .exec((err, res) => (
             err ? reject(err) : resolve(res)
-          })
-      })
+          ));
+      });
     },
   },
 };

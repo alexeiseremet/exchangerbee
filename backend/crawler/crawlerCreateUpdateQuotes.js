@@ -13,8 +13,8 @@ const GQL_UDATE_QUOTE = `
   }
 `;
 
-const createUpdateQuotes = async (quotes) => {
-  for (let quote of quotes) {
+const createUpdateQuotes = (quotes) => {
+  quotes.forEach(async (quote) => {
     // Get current day and set hours at midnight.
     const todayValue = today();
 
@@ -28,7 +28,7 @@ const createUpdateQuotes = async (quotes) => {
 
     // Remove property that contains the parsed value,
     // we do not save in DB as refSlug.
-    let cleanedQuote = { ...quote };
+    const cleanedQuote = { ...quote };
     delete cleanedQuote.code;
 
     try {
@@ -36,7 +36,7 @@ const createUpdateQuotes = async (quotes) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           query: GQL_UDATE_QUOTE,
@@ -46,22 +46,23 @@ const createUpdateQuotes = async (quotes) => {
               ...cleanedQuote,
               date: String(todayValue),
               error: quoteHasError,
-            }
-          }
-        })
+            },
+          },
+        }),
       });
 
       if (!response.ok) {
-        let error = new Error(response.statusText);
+        const error = new Error(response.statusText);
         error.response = response;
-        return Promise.reject(error)
+        return Promise.reject(error);
       }
-    }
-    catch (error) {
+    } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error)
+      console.error(error);
     }
-  }
+
+    return undefined;
+  });
 };
 
 module.exports = createUpdateQuotes;
