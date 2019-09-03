@@ -45,11 +45,13 @@ export default _compose(
             },
           })
             .then(({ data: { updateQuote } }) => {
+              // eslint-disable-next-line no-console
               console.dir(updateQuote);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },

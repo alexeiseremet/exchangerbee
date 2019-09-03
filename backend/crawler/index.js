@@ -66,6 +66,7 @@ const runCrawler = async () => {
     }
   }
   catch (e) {
+    // eslint-disable-next-line no-console
     console.error(`An error occurred on ${url}`)
   } finally {
     await page.close()

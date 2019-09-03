@@ -39,11 +39,13 @@ export default _compose(
             },
           })
             .then(({ data: { updateInstitution } }) => {
+              // eslint-disable-next-line no-console
               console.dir(updateInstitution);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },

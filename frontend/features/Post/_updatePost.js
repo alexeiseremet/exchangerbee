@@ -39,11 +39,13 @@ export default _compose(
             },
           })
             .then(({ data: { updatePost } }) => {
+              // eslint-disable-next-line no-console
               console.dir(updatePost);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },

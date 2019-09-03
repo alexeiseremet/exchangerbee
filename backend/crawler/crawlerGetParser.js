@@ -53,6 +53,7 @@ const getParser = async () => {
     return await response.json()
   }
   catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error)
   }
 };

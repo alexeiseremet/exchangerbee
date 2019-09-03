@@ -23,6 +23,7 @@ export default _compose(
         onSubmit: (elem) => {
           elem.preventDefault();
 
+          // eslint-disable-next-line no-alert
           if (window.confirm('Do you really want to delete?')) {
             mutate({
               variables: {
@@ -30,9 +31,11 @@ export default _compose(
               },
             })
               .then(({ data: { deleteInstitution } }) => {
+                // eslint-disable-next-line no-console
                 console.dir(deleteInstitution);
               })
               .catch((err) => {
+                // eslint-disable-next-line no-console
                 console.error(err);
               });
           }

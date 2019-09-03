@@ -39,11 +39,13 @@ export default _compose(
             },
           })
             .then(({ data: { updateCurrency } }) => {
+              // eslint-disable-next-line no-console
               console.dir(updateCurrency);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },

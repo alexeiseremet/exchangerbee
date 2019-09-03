@@ -27,10 +27,12 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
     }
   )
     .then(() => {
+      // eslint-disable-next-line no-console
       console.log('MongoDB connected');
       clearTimeout(timer);
     })
     .catch(err => {
+      // eslint-disable-next-line no-console
       console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
       timer = setTimeout(connectToMongoDB, 5000);
     })
@@ -65,7 +67,7 @@ server.listen(PORT, err => {
   if (err) {
     throw err
   }
-
+  // eslint-disable-next-line no-console
   console.log(`🎉  Ready on http://localhost:${PORT}`);
 });
 

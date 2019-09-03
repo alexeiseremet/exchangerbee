@@ -32,11 +32,13 @@ export default _compose(
           })
             .then(({ data: { createParser } }) => {
               resetForm();
+              // eslint-disable-next-line no-console
               console.dir(createParser);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },

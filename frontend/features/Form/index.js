@@ -7,7 +7,7 @@ import Items from './_items';
 
 export default (
   {
-    onSubmit = (values) => console.log(values),
+    onSubmit = (values) => console.log(values), // eslint-disable-line no-console
     initialValues,
     validationSchema,
     children,

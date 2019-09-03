@@ -29,6 +29,7 @@ export default (Page) => (
       try {
         isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error(err);
       }
 

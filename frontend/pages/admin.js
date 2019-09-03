@@ -14,6 +14,7 @@ import Modal from '../features/Modal';
 import ModalHandler from '../features/Modal/ModalHandler';
 
 const AnyTypeModalContent = (
+  // eslint-disable-next-line no-alert
   <button style={{ color: 'red' }} onClick={() => alert('hi')}>
     Any type content
   </button>

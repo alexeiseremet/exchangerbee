@@ -103,6 +103,7 @@ export const updateUserCookie = (newUserData) => {
       }
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 

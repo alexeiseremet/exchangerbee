@@ -32,11 +32,13 @@ export default _compose(
           })
             .then(({ data: { createInstitution } }) => {
               resetForm();
+              // eslint-disable-next-line no-console
               console.dir(createInstitution);
             })
             .catch((err) => {
               setStatus('error');
               setSubmitting(false);
+              // eslint-disable-next-line no-console
               console.error(err);
             });
         },
