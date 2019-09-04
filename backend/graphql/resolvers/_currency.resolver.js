@@ -5,18 +5,18 @@ module.exports = {
     currency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.findOne(args)
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     allCurrency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
           .sort({ name: 'asc' })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },
@@ -25,17 +25,17 @@ module.exports = {
       const newCurrency = await new Currency(currency);
 
       return new Promise((resolve, reject) => {
-        newCurrency.save((err, res) => (
-          err ? reject(err) : resolve(res)
-        ));
+        newCurrency.save((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
       });
     },
     deleteCurrency(_, { id }) {
       return new Promise((resolve, reject) => {
         Currency.findOneAndDelete({ _id: id })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     updateCurrency(_, { id, currency }) {
@@ -45,9 +45,9 @@ module.exports = {
           { $set: currency },
           { new: true },
         )
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },

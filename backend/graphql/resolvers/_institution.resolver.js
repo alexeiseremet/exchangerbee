@@ -5,18 +5,18 @@ module.exports = {
     institution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.findOne(args)
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     allInstitution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
           .sort({ slug: 'asc' })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },
@@ -25,17 +25,17 @@ module.exports = {
       const newInstitution = await new Institution(institution);
 
       return new Promise((resolve, reject) => {
-        newInstitution.save((err, res) => (
-          err ? reject(err) : resolve(res)
-        ));
+        newInstitution.save((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
       });
     },
     deleteInstitution(_, { id }) {
       return new Promise((resolve, reject) => {
         Institution.findOneAndDelete({ _id: id })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     updateInstitution(_, { id, institution }) {
@@ -45,9 +45,9 @@ module.exports = {
           { $set: institution },
           { new: true },
         )
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },

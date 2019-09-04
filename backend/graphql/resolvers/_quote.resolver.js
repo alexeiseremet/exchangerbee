@@ -14,9 +14,9 @@ module.exports = {
             path: 'currencyVObj',
             select: 'name slug',
           })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     allQuote(_, { where }) {
@@ -38,9 +38,9 @@ module.exports = {
             'bid': 'desc',
             'ask': 'asc',
           })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     bestTodayQuote(_, {
@@ -111,17 +111,17 @@ module.exports = {
       const newQuote = await new Quote(quote);
 
       return new Promise((resolve, reject) => {
-        newQuote.save((err, res) => (
-          err ? reject(err) : resolve(res)
-        ));
+        newQuote.save((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
       });
     },
     deleteQuote(_, { id }) {
       return new Promise((resolve, reject) => {
         Quote.findOneAndDelete({ _id: id })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     updateQuote(_, { where, quote }) {
@@ -136,9 +136,9 @@ module.exports = {
             omitUndefined: true,
           },
         )
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },

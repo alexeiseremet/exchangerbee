@@ -7,18 +7,18 @@ module.exports = {
 
       return new Promise((resolve, reject) => {
         Post.findOne({ $or: fields })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     allPost(_, args) {
       return new Promise((resolve, reject) => {
         Post.find(args)
           .sort({ slug: 'asc' })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },
@@ -27,17 +27,17 @@ module.exports = {
       const newPost = await new Post(post);
 
       return new Promise((resolve, reject) => {
-        newPost.save((err, res) => (
-          err ? reject(err) : resolve(res)
-        ));
+        newPost.save((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
       });
     },
     deletePost(_, { id }) {
       return new Promise((resolve, reject) => {
         Post.findOneAndDelete({ _id: id })
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
     updatePost(_, { id, post }) {
@@ -47,9 +47,9 @@ module.exports = {
           { $set: post },
           { new: true },
         )
-          .exec((err, res) => (
-            err ? reject(err) : resolve(res)
-          ));
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
       });
     },
   },

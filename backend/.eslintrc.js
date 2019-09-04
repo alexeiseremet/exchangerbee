@@ -8,6 +8,10 @@ module.exports = {
     'node': true,
   },
   'rules': {
-    'quote-props': ['warn', 'consistent'],
+    'quote-props': [1, 'consistent'],
+    'no-unused-expressions': [1, {
+      'allowShortCircuit': true,
+      'allowTernary': true
+    }],
   },
 };
