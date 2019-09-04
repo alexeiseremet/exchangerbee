@@ -38,13 +38,7 @@ const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
                   <li key={id} style={{ color: error === 'yes' ? 'red' : null }}>
                     <Link href={`/quote?id=${id}`} as={`/quotes/${id}`}>
                       <a>
-                        {localeDate(date)}
-                        {' '}
---
-                        {institutionVObj.name}
-                        {' '}
---
-                        {currencyVObj.name}
+                        {`${localeDate(date)} -- ${institutionVObj.name} -- ${currencyVObj.name}`}
                       </a>
                     </Link>
                   </li>

@@ -15,6 +15,7 @@ module.exports = {
     'react/jsx-filename-extension': ['warn', {
       'extensions': ['.js']
     }],
+    'quote-props': ['warn', 'consistent'],
   },
   'settings': {
     'react': {

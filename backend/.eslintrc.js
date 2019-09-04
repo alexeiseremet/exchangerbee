@@ -7,4 +7,7 @@ module.exports = {
     'browser': true,
     'node': true,
   },
+  'rules': {
+    'quote-props': ['warn', 'consistent'],
+  },
 };

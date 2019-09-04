@@ -33,10 +33,10 @@ module.exports = {
             select: 'name slug',
           })
           .sort({
-            date: 'desc',
+            'date': 'desc',
             'currency.refId': 'asc',
-            bid: 'desc',
-            ask: 'asc',
+            'bid': 'desc',
+            'ask': 'asc',
           })
           .exec((err, res) => (
             err ? reject(err) : resolve(res)
