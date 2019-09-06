@@ -6,20 +6,14 @@ import {
 import List from './List'
 
 class ProductListScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`
-  });
-
   render() {
-    const { navigation } = this.props;
-
     return (
       <ScrollView
         // centerContent
         style={{ backgroundColor: '#e1e1e1' }}
         contentInsetAdjustmentBehavior="automatic"
       >
-        <List categoryId={navigation.state.params.categoryId}/>
+        <List categoryId={this.props.categoryId}/>
       </ScrollView>
     )
   };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigation } from 'react-native-navigation';
 import {
   StyleSheet,
   ScrollView,
@@ -6,28 +7,14 @@ import {
   Text,
 } from 'react-native';
 import Menu from './Menu';
-import { Navigation } from 'react-native-navigation';
 
 class CatalogScreen extends React.Component {
-  componentDidAppear() {
-    console.log('==============' , 'DidAppear');
-
-    // try {
-    //   const res = await fetch('https://fenrir.altex.ro/promo/campaign/854/categories');
-    //   const resJSON = await res.json();
-    //
-    //   this.setState({
-    //     items: resJSON.categories,
-    //     isLoading: false,
-    //   });
-    //
-    //   console.log(resJSON);
-    // }
-    // catch (error) {
-    //   // eslint-disable-next-line no-console
-    //   console.error(error);
-    // }
+  componentDidMount() {
+    Navigation.events().registerBottomTabSelectedListener(({ selectedTabIndex }) => {
+      console.log('pppppppp', selectedTabIndex)
+    });
   }
+
   render() {
     return (
       <ScrollView

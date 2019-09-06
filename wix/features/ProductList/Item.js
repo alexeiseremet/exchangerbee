@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigation } from 'react-native-navigation'
 import {
   StyleSheet,
   TouchableHighlight,
@@ -6,12 +7,27 @@ import {
   Image,
   View,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
-const ProductListItem = ({ image, name, sku, navigation }) => (
+const onClickPush = async (props) => {
+  await Navigation.push('CatalogScreen', {
+    component: {
+      name: 'ProductScreen',
+      passProps: props,
+      options: {
+        topBar: {
+          title: {
+            text: props.name
+          },
+        }
+      }
+    }
+  });
+};
+
+const ProductListItem = ({ image, name, sku }) => (
   <TouchableHighlight
     onPress={() => {
-      navigation.navigate({ routeName: 'Product', params: { name, productSku: sku } })
+      onClickPush({ name, productSku: sku })
     }}
     underlayColor="#eaeaea">
     <View style={styles.item}>
@@ -39,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ProductListItem)
+export default ProductListItem

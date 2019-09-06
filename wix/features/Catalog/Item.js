@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigation } from 'react-native-navigation';
 import {
   StyleSheet,
   TouchableHighlight,
@@ -7,24 +8,45 @@ import {
   View,
 } from 'react-native';
 
-const CatalogMenuItem = ({ id, name, properties }) => (
-  <TouchableHighlight
-    onPress={() => ({ routeName: 'ProductList', params: { name, categoryId: id } })}
-    underlayColor="#dadada"
-  >
-    <View style={styles.item}>
-      <View>
-        <Image
-          style={{ width: 32, height: 32 }}
-          source={{ uri: `https://cdna.altex.ro${properties.icon_image}` }}
-        />
-      </View>
-      <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap', paddingLeft: 10 }}>
-        <Text>{name}</Text>
-      </View>
-    </View>
-  </TouchableHighlight>
-);
+class CatalogMenuItem extends React.Component {
+  onClickItem = () =>  {
+    const { id, name } = this.props;
+
+    Navigation.push('CatalogScreen', {
+      component: {
+        name: 'ProductListScreen',
+        passProps: { categoryId: id },
+        options: {
+          topBar: {
+            title: {
+              text: name
+            },
+          }
+        }
+      }
+    });
+  };
+
+  render() {
+    const { id, name, properties } = this.props;
+
+    return (
+      <TouchableHighlight onPress={this.onClickItem} underlayColor="#dadada">
+        <View style={styles.item}>
+          <View>
+            <Image
+              style={{ width: 32, height: 32 }}
+              source={{ uri: `https://cdna.altex.ro${properties.icon_image}` }}
+            />
+          </View>
+          <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap', paddingLeft: 10 }}>
+            <Text>{name}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   item: {

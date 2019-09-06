@@ -17,10 +17,10 @@ class ProductScreen extends React.Component {
       >
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
-            {this.props.params.name}
+            {this.props.name}
           </Text>
 
-          <Detail productSku={this.props.params.productSku}/>
+          <Detail productSku={this.props.productSku}/>
         </View>
       </ScrollView>
     )

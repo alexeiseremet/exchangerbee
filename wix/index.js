@@ -6,17 +6,19 @@ import React from 'react';
 import { Navigation } from "react-native-navigation";
 import HomeScreen from './features/HomeScreen';
 import CatalogScreen from './features/Catalog/Screen';
+import ProductListScreen from './features/ProductList/Screen';
 import ProductScreen from './features/Product/Screen';
 
 Navigation.registerComponent(`HomeScreen`, () => HomeScreen);
 Navigation.registerComponent(`CatalogScreen`, () => CatalogScreen);
+Navigation.registerComponent(`ProductListScreen`, () => ProductListScreen);
 Navigation.registerComponent(`ProductScreen`, () => ProductScreen);
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setDefaultOptions({
     topBar: {
       background: {
-        color: '#039893'
+        color: '#d71440'
       },
       title: {
         color: 'white',
@@ -50,6 +52,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
+              id: 'HomeScreen',
               name: 'HomeScreen',
               options: {
                 bottomTab: {
@@ -59,15 +62,23 @@ Navigation.events().registerAppLaunchedListener(async () => {
             }
           },
           {
-            component: {
-              name: 'CatalogScreen',
-              options: {
-                bottomTab: {
-                  text: 'Catalog',
+            stack: {
+              children: [{
+                component: {
+                  id: 'CatalogScreen',
+                  name: 'CatalogScreen',
+                  options: {
+                    bottomTab: {
+                      text: 'Catalog',
+                    },
+                    topBar: {
+                      visible: false,
+                    },
+                  }
                 }
-              }
-            }
-          },
+              }]
+            },
+          }
         ],
       }
     }
