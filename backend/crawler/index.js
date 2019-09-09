@@ -13,7 +13,7 @@ const updateParser = require('./crawlerUpdateParser');
 
 const runCrawler = async () => {
   const startDate = new Date().getTime();
-  const { data: { allParser } } = await getParser();
+  const { data: { allParser } } = await getParser() || {};
   const {
     id, institution, period, url, quotes,
   } = allParser[0] || {};

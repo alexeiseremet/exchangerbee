@@ -6,7 +6,7 @@ const CurrencyCard = ({ currency }) => (
   <article className="currency-card">
     <Link href={`/currency?slug=${currency.slug}`} as={`/currencies/${currency.slug}`}>
       <a className="currency-card__inner">
-        <h3 className="currency-card__name">{currency.name}</h3>
+        <h3 className="currency-card__label">{currency.name}</h3>
         <span className="currency-card__slug">{currency.slug}</span>
       </a>
     </Link>

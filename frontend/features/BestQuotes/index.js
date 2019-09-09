@@ -1,76 +1,70 @@
 import './styles.scss';
 import React from 'react';
-import { Link } from '../../lib/i18n';
 import { baseCurrenciesArr, centralBank } from '../../server.config';
 import RateCard from '../RateCard';
+import QuoteCard from '../QuoteCard';
 
 const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
   <section className="best-quotes">
     {
-      centralQuote && baseCurrenciesArr.map((slug, i) => (
-        <article key={i} className="best-quotes__item">
-          <Link
-            href={`/currency?slug=${slug}`}
-            as={`/currencies/${slug}`}
+      centralQuote ? (
+        baseCurrenciesArr.map((slug) => (
+          <QuoteCard
+            key={slug}
+            label={slug}
+            centralBankItem={0}
+            link={{
+              href: `/currency?slug=${slug}`,
+              as: `/currencies/${slug}`,
+            }}
           >
-            <a className="best-quotes__card">
-              <h6 className="best-quotes__slug">
-                {slug}
-              </h6>
-
+            <>
               {
-                centralQuote.map((quote, j) => {
-                  if (quote.currencyVObj.slug !== slug) {
-                    return null;
-                  }
-
-                  return (
-                    <div key={j} className="best-quotes__rate best-quotes__rate--central">
-                      <RateCard value={quote.bid} label="+1.003" info={centralBank.slug} />
-                    </div>
-                  );
-                })
+                centralQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="central"
+                      value={quote.bid}
+                      label="+1.003"
+                      info={centralBank.slug}
+                    />
+                  )
+                ))
               }
+            </>
 
+            <>
               {
-                bestBidQuote && bestBidQuote.map((quote, j) => {
-                  if (quote.currencyVObj.slug !== slug) {
-                    return null;
-                  }
-
-                  return (
-                    <div key={j} className="best-quotes__rate">
-                      <RateCard
-                        value={quote.bid}
-                        label={quote.institutionVObj.name}
-                        info="cumpărare"
-                      />
-                    </div>
-                  );
-                })
+                bestBidQuote && bestBidQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="bid"
+                      value={quote.bid}
+                      label={quote.institutionVObj.name}
+                      info="cumpărare"
+                    />
+                  )
+                ))
               }
+            </>
 
+            <>
               {
-                bestAskQuote && bestAskQuote.map((quote, j) => {
-                  if (quote.currencyVObj.slug !== slug) {
-                    return null;
-                  }
-
-                  return (
-                    <div key={j} className="best-quotes__rate">
-                      <RateCard
-                        value={quote.ask}
-                        label={quote.institutionVObj.name}
-                        info="vânzare"
-                      />
-                    </div>
-                  );
-                })
+                bestAskQuote && bestAskQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="ask"
+                      value={quote.ask}
+                      label={quote.institutionVObj.name}
+                      info="vânzare"
+                    />
+                  )
+                ))
               }
-            </a>
-          </Link>
-        </article>
-      ))
+            </>
+          </QuoteCard>
+        ))
+      ) : 'Nu exista date'
     }
   </section>
 );

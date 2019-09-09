@@ -11,8 +11,11 @@
   align-items: flex-end;
 }
 
-.bank-card__name {
+.bank-card__label {
+  @include heading-italic-bold;
   padding-right: $small-spacing;
+  text-transform: lowercase;
+  letter-spacing: -0.1rem;
   flex-grow: 1;
   font-size: 2.2rem;
   line-height: 1.2;
@@ -20,15 +23,11 @@
 
   @include mappy-bp(small) {
     padding-right: $base-spacing;
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
 .bank-card__slug {
   font-size: 1.2rem;
-  font-weight: 500;
-
-  @include mappy-bp(small) {
-    font-size: 1.8rem;
-  }
+  text-transform: uppercase;
 }

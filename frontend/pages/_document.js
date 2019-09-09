@@ -22,10 +22,6 @@ export default class ExbeeDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           {/* <meta name="google-site-verification" content={googleSiteVerification}/> */}
           {/* <meta name="yandex-verification" content={yandexSiteVerification}/> */}
-          <link
-            href="//fonts.googleapis.com/css?family=Montserrat+Alternates:400,700&amp;subset=cyrillic"
-            rel="stylesheet"
-          />
         </Head>
         <body itemScope itemType="http://schema.org/WebPage">
           <Main />

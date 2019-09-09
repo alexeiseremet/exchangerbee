@@ -3,6 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
+import { centralBank } from '../server.config';
 import { Link, withTranslation } from '../lib/i18n';
 import { textIndexPage as t } from '../lib/locale';
 import { today, localeDate } from '../lib/moment';
@@ -11,6 +12,8 @@ import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import { UpdateCurrency, DeleteCurrency } from '../features/Currency';
+import QuoteCard from '../features/QuoteCard';
+import RateCard from '../features/RateCard';
 
 const CurrencyPageMarkup = ({
   query: { action }, currency, allQuote, post,
@@ -53,48 +56,51 @@ const CurrencyPageMarkup = ({
                 )
               }
 
-              <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
+              <p>
                 {`Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} oferite de băncile din Chişinău, ${localeDate()}`}
               </p>
 
-              {
-                allQuote && (
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Banca</th>
-                        <th>Unități</th>
-                        <th>Cumpărare</th>
-                        <th>Vânzare</th>
-                        <th>Variație</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                      allQuote.length
-                        ? allQuote.map((quote, i) => (
-                          <tr key={i}>
-                            <td>{quote.institutionVObj.name}</td>
-                            <td>{quote.amount}</td>
-                            <td>{quote.bid}</td>
-                            <td>{quote.ask}</td>
-                            <td>current - prev</td>
-                          </tr>
-                        ))
-                        : 'Nu exista date'
-                    }
-                    </tbody>
-                  </table>
-                )
-              }
+              <h2>
+                {`Ratele de shimb pentru ${currency.name} (${currency.slug}) afişate la băncile din Chişinău`}
+              </h2>
 
-              <p style={{ textTransform: 'uppercase', fontSize: '13px', fontWeight: '700' }}>
-                {`Evoluția cursului oficial pentru 1 ${currency.name}, ${currency.slug}/mdl`}
+
+              <section className="quote-list">
+                {
+                  allQuote && allQuote.length ? (
+                    allQuote.map((quote, i) => quote.institutionVObj.slug !== centralBank.slug && (
+                      <QuoteCard
+                        key={i}
+                        label={quote.institutionVObj.name}
+                        link={{
+                          href: `/bank?slug=${quote.institutionVObj.slug}`,
+                          as: `/banks/${quote.institutionVObj.slug}`,
+                        }}
+                      >
+                        <RateCard
+                          key="bid"
+                          value={quote.bid}
+                          info="cumpărare"
+                        />
+
+                        <RateCard
+                          key="ask"
+                          value={quote.ask}
+                          info="vânzare"
+                        />
+                      </QuoteCard>
+                    ))
+                  ) : 'Nu a fost găsit niciun rezultat.'
+                }
+              </section>
+
+              <p>
+                {`Evoluția cursului oficial pentru ${currency.name}, ${currency.slug}/mdl`}
               </p>
 
               {
                 post && post.textSecond && (
-                  <p dangerouslySetInnerHTML={{ __html: post.textSecond }} />
+                  <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
                 )
               }
             </>

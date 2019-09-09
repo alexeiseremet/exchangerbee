@@ -40,3 +40,9 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@mixin heading-italic-bold {
+  font-family: $font-primary-regular;
+  font-weight: 700;
+  font-style: italic;
+}

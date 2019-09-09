@@ -3,9 +3,10 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
+import { centralBank, baseCurrenciesArr } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { textIndexPage as t } from '../lib/locale';
-import { centralBank, baseCurrenciesArr } from '../server.config';
+
 import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
@@ -25,9 +26,9 @@ const IndexPageMarkup = ({
     <Page>
       {post && (
         <>
-          <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
-            {post.title}
-          </h1>
+          <div className="page-heading">
+            <h1>{post.title}</h1>
+          </div>
 
           <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
         </>

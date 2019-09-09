@@ -31,7 +31,7 @@ const ParsersPageMarkup = ({ query: { action }, allParser }) => (
 
             <List type="ordered">
               {
-                allParser.map(({ id, url }) => (
+                allParser.length && allParser.map(({ id, url }) => (
                   <li key={id}>
                     <Link href={`/parser?id=${id}`} as={`/parsers/${id}`}>
                       <a>{url}</a>

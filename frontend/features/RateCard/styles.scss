@@ -6,19 +6,22 @@
 }
 
 .rate-card__value {
+  @include base-regular;
   font-size: 2rem;
   margin-bottom: .5rem;
   display: block;
-  font-weight: 500;
 }
 
 .rate-card__label {
+  @include base-regular;
   display: block;
-  font-weight: 400;
 }
 
 .rate-card__info {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-style: normal;
+  opacity: .65;
 }
 

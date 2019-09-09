@@ -59,6 +59,7 @@ const GQL_ALL_CURRENCY = gql`
       id
       slug
       name
+      numCode
     }
   }
 `;

@@ -1,0 +1,51 @@
+@import "root";
+
+.quote-card {
+  @extend %link-with-bg;
+  display: block;
+}
+
+.quote-card__inner {
+  @extend %flex-column;
+  padding: $small-spacing $small-spacing 0 $small-spacing;
+
+  @include mappy-bp(small) {
+    @include flex-row;
+    align-items: flex-end;
+  }
+}
+
+.quote-card__label {
+  @include heading-italic-bold;
+  padding-right: $xsmall-spacing;
+  text-transform: lowercase;
+  letter-spacing: -0.1rem;
+  flex-grow: 1;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 300;
+  margin-bottom: 1rem;
+
+  @include mappy-bp(small) {
+    padding-right: $base-spacing;
+    font-size: 3rem;
+  }
+}
+
+.quote-card__rate {
+  margin-bottom: $small-spacing;
+  line-height: 1.2;
+
+  @include mappy-bp(small) {
+    padding-left: $xsmall-spacing;
+    flex-basis: 26%;
+    min-width: 26%;
+  }
+}
+
+.quote-card__rate--central {
+  @include mappy-bp(small) {
+    flex-basis: 22%;
+    min-width: 22%;
+  }
+}

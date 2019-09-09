@@ -15,7 +15,9 @@ const menu = [
 const MainMenu = () => (
   <>
     <Link href="/">
-      <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem' }}>{country}</a>
+      <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem' }}>
+        {country}
+      </a>
     </Link>
 
     <nav role="navigation">
