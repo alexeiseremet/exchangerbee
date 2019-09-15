@@ -12,7 +12,7 @@ import Page from '../features/Page';
 import BankCard from '../features/BankCard';
 import { CreateInstitution } from '../features/Institution';
 
-const BanksPageMarkup = ({ query: { action }, allInstitution }) => (
+const BanksPageMarkup = ({ query: { action }, allInstitution, post }) => (
   <Layout>
     <Metadata
       title={t.metaTitle}
@@ -28,6 +28,18 @@ const BanksPageMarkup = ({ query: { action }, allInstitution }) => (
               <a>Create</a>
             </Link>
             <hr />
+
+            {
+              <div className="page-heading">
+                <h1>
+                  {
+                    post
+                      ? post.title
+                      : `Cursul valutar la băncile din Moldova`
+                  }
+                </h1>
+              </div>
+            }
 
             <section>
               {

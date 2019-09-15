@@ -13,7 +13,7 @@ module.exports = {
     allCurrency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
-          .sort({ name: 'asc' })
+          .sort({ id: 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });

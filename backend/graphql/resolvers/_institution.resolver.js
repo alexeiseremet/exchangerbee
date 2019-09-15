@@ -13,7 +13,7 @@ module.exports = {
     allInstitution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
-          .sort({ slug: 'asc' })
+          .sort({ id: 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });

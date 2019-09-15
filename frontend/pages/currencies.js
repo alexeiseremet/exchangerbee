@@ -12,7 +12,7 @@ import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
 import { CreateCurrency } from '../features/Currency';
 
-const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
+const CurrenciesPageMarkup = ({ query: { action }, allCurrency, post }) => (
   <Layout>
     <Metadata
       title={t.metaTitle}
@@ -28,6 +28,18 @@ const CurrenciesPageMarkup = ({ query: { action }, allCurrency }) => (
               <a>Create</a>
             </Link>
             <hr />
+
+            {
+              <div className="page-heading">
+                <h1>
+                  {
+                    post
+                      ? post.title
+                      : `Lista valutelor negociate la băncile din Moldova`
+                  }
+                </h1>
+              </div>
+            }
 
             <section>
               {

@@ -44,14 +44,20 @@ const BankPageMarkup = ({
               <hr/>
 
               {
-                post && (
-                  <>
-                    <div className="page-heading">
-                      <h1>{post.title}</h1>
-                    </div>
+                <div className="page-heading">
+                  <h1>
+                    {
+                      post
+                        ? post.title
+                        : `Cursul valutar la ${institution.name}`
+                    }
+                  </h1>
+                </div>
+              }
 
-                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-                  </>
+              {
+                post && post.textFirst && (
+                  <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
                 )
               }
 

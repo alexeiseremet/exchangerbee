@@ -7,7 +7,7 @@ module.exports = {
   locale: 'ro',
   timezone: 'Europe/Chisinau',
   country: 'Moldova',
-  currency: {
+  baseCurrency: {
     slug: 'mdl',
     name: 'Leu moldovenesc',
     numCode: '498',

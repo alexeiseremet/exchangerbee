@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank } from '../server.config';
+import { centralBank, baseCurrency } from '../server.config';
 import { Link, withTranslation } from '../lib/i18n';
 import { textIndexPage as t } from '../lib/locale';
 import { today, localeDate } from '../lib/moment';
@@ -45,14 +45,20 @@ const CurrencyPageMarkup = ({
               <hr />
 
               {
-                post && (
-                  <>
-                    <h1 style={{ marginBottom: '10px', fontSize: '18px' }}>
-                      {post.title}
-                    </h1>
+                <div className="page-heading">
+                  <h1>
+                    {
+                      post
+                        ? post.title
+                        : `Curs ${String(currency.name).toLowerCase()} (${String(currency.slug).toUpperCase()})`
+                    }
+                  </h1>
+                </div>
+              }
 
-                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
-                  </>
+              {
+                post && post.textFirst && (
+                  <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
                 )
               }
 
@@ -61,7 +67,7 @@ const CurrencyPageMarkup = ({
               </p>
 
               <h2>
-                {`Ratele de shimb pentru ${currency.name} (${currency.slug}) afişate la băncile din Chişinău`}
+                {`Ratele de shimb pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişate la băncile din Chişinău`}
               </h2>
 
 
@@ -95,7 +101,7 @@ const CurrencyPageMarkup = ({
               </section>
 
               <p>
-                {`Evoluția cursului oficial pentru ${currency.name}, ${currency.slug}/mdl`}
+                {`Evoluția cursului oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`}
               </p>
 
               {

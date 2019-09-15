@@ -69,4 +69,5 @@ services:
 # docker inspect -f "{{json .Mounts}}" exbee_frontend_1
 
 # Mongo
-# show dbs > use db_name > show tables > db.quotes.find().limit(2)
+# mongod -u db_user -p db_password > show dbs > use db_name > show tables
+# > db.quotes.find().limit(2) || db.quotes.remove({"currency.refId": ""})

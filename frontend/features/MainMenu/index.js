@@ -4,8 +4,9 @@ import { Link } from '../../lib/i18n';
 import { country } from '../../server.config';
 
 const menu = [
-  { url: '/banks', label: 'Banks' },
-  { url: '/currencies', label: 'Currencies' },
+  // { url: '/converter', label: 'Convertor valutar' },
+  { url: '/banks', label: 'Cursul la bănci' },
+  { url: '/currencies', label: 'Lista valute' },
   { url: '/parsers', label: 'Parsers' },
   { url: '/quotes', label: 'Quotes' },
   { url: '/posts', label: 'Posts' },

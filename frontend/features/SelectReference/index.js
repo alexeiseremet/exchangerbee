@@ -27,6 +27,7 @@ export default (
       setFieldValue(`${name}.refSlug`, slug);
     }}
   >
+    <option value="" selected disabled>Select an option</option>
     {
         items && items.map((item) => (
           <option key={item.slug} value={item.id}>
