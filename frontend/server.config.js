@@ -6,7 +6,10 @@ module.exports = {
   apiBaseUrl: `${host}${apiPath}`,
   locale: 'ro',
   timezone: 'Europe/Chisinau',
-  country: 'Moldova',
+  baseCountry: {
+    slug: 'md',
+    name: 'Moldova',
+  },
   baseCurrency: {
     slug: 'mdl',
     name: 'Leu moldovenesc',

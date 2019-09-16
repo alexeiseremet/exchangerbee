@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 import { Link } from '../../lib/i18n';
-import { country } from '../../server.config';
+import { baseCountry } from '../../server.config';
 
 const menu = [
   // { url: '/converter', label: 'Convertor valutar' },
@@ -17,7 +17,7 @@ const MainMenu = () => (
   <>
     <Link href="/">
       <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem' }}>
-        {country}
+        {`Curs valutar (${String(baseCountry.slug).toUpperCase()})`}
       </a>
     </Link>
 
