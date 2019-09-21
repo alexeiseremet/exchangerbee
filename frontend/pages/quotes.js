@@ -4,10 +4,8 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 import { localeDate } from '../lib/moment';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import List from '../features/List';
@@ -15,41 +13,39 @@ import { CreateQuote } from '../features/Quote';
 
 const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
   <Layout>
-    <Metadata
-      title={t.metaTitle}
-      description={t.metaDescription}
-      ogTitle={t.ogTitle}
-      ogDescription={t.ogDescription}
-    />
     <Page>
       {
-        !action && allQuote && (
-          <>
-            <Link href="/quotes?action=create" as="/quotes/create">
-              <a>Create</a>
-            </Link>
-            <hr />
+        action
+          ? <CreateQuote/>
+          : (
+            <>
+              <Link href="/quotes?action=create" as="/quotes/create">
+                <a>Create</a>
+              </Link>
+              <hr/>
 
-            <List type="ordered">
               {
-                allQuote.map(({
-                  id, institutionVObj, currencyVObj, date, error,
-                }) => (
-                  <li key={id} style={{ color: error === 'yes' ? 'red' : null }}>
-                    <Link href={`/quote?id=${id}`} as={`/quotes/${id}`}>
-                      <a>
-                        {`${localeDate(date)} -- ${institutionVObj.name} -- ${currencyVObj.name}`}
-                      </a>
-                    </Link>
-                  </li>
-                ))
+                allQuote && allQuote.length && (
+                  <List type="ordered">
+                    {
+                      allQuote.map(({
+                        id, institutionVObj, currencyVObj, date, error,
+                      }) => (
+                        <li key={id} style={{ color: error === 'yes' ? 'red' : null }}>
+                          <Link href={`/quote?id=${id}`} as={`/quotes/${id}`}>
+                            <a>
+                              {`${localeDate(date)} -- ${institutionVObj.name} -- ${currencyVObj.name}`}
+                            </a>
+                          </Link>
+                        </li>
+                      ))
+                    }
+                  </List>
+                )
               }
-            </List>
-          </>
-        )
+            </>
+          )
       }
-
-      {action && <CreateQuote />}
     </Page>
   </Layout>
 );

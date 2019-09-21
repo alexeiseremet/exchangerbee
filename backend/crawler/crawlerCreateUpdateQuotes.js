@@ -20,15 +20,23 @@ const createUpdateQuotes = (quotes) => {
 
     // whereQuote will be used for search in db.
     // If quote exist, update it, if not - create new.
-    const { institution, currency, code } = quote;
+    let { code, bid, ask } = quote;
+    const { institution, currency } = quote;
     const whereQuote = { institution, currency, date: todayValue };
 
-    // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
-    const quoteHasError = code.trim() === currency.refSlug ? 'no' : 'yes';
+    code = code.trim();
+    bid = bid.trim();
+    ask = ask.trim();
 
-    // Remove property that contains the parsed value,
-    // we do not save in DB as refSlug.
-    const cleanedQuote = { ...quote };
+    if (Number.isNaN(bid) || Number.isNaN(ask) || +bid <= 0 || +ask <= 0) {
+      return undefined;
+    }
+
+    // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
+    const quoteHasError = code === currency.refSlug ? 'no' : 'yes';
+
+    // Create cleaned Quote object.
+    const cleanedQuote = { ...quote, bid, ask };
     delete cleanedQuote.code;
 
     try {

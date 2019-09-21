@@ -5,50 +5,51 @@ import _compose from 'lodash/flowRight';
 
 import { centralBank, baseCurrenciesArr } from '../server.config';
 import { withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
 
 const IndexPageMarkup = ({
-  post, centralQuote, bestBidQuote, bestAskQuote,
-}) => (
-  <Layout>
-    <Metadata
-      title={t.metaTitle}
-      description={t.metaDescription}
-      ogTitle={t.ogTitle}
-      ogDescription={t.ogDescription}
-    />
+  centralQuote, bestBidQuote, bestAskQuote, post,
+}) => {
+  if (!post) {
+    return null;
+  }
 
-    <Page>
-      {post && (
-        <>
-          <div className="page-heading">
-            <h1>{post.title}</h1>
-          </div>
+  return (
+    <Layout metadata={{
+      title: '',
+      description: '',
+      ogTitle: '',
+      ogDescription: '',
+    }}>
+      <Page>
+        <div className="page-heading">
+          <h1>{post.title}</h1>
+        </div>
 
-          <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
-        </>
-      )}
+        {
+          post.textFirst && (
+            <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
 
-      <BestQuotes
-        bestAskQuote={bestAskQuote}
-        bestBidQuote={bestBidQuote}
-        centralQuote={centralQuote}
-      />
+        <BestQuotes
+          bestAskQuote={bestAskQuote}
+          bestBidQuote={bestBidQuote}
+          centralQuote={centralQuote}
+        />
 
-      {
-        post && post.textSecond && (
-          <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
-        )
-      }
-    </Page>
-  </Layout>
-
-);
+        {
+          post.textSecond && (
+            <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
+          )
+        }
+      </Page>
+    </Layout>
+  );
+};
 
 // getInitialProps.
 IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {

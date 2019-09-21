@@ -13,12 +13,7 @@ module.exports = {
     'react/no-danger': 0,
     'jsx-a11y/href-no-hash': 0,
     'react/jsx-filename-extension': [2, {
-      'extensions': ['.js']
-    }],
-    'quote-props': [1, 'consistent'],
-    'no-unused-expressions': [1, {
-      'allowShortCircuit': true,
-      'allowTernary': true
+      'extensions': ['.js'],
     }],
   },
   'settings': {

@@ -35,13 +35,19 @@
   font-style: normal;
 }
 
+@mixin heading-regular-italic {
+  font-family: $font-primary-regular;
+  font-weight: 400;
+  font-style: italic;
+}
+
 @mixin heading-bold {
   font-family: $font-primary-regular;
   font-weight: 700;
   font-style: normal;
 }
 
-@mixin heading-italic-bold {
+@mixin heading-bold-italic {
   font-family: $font-primary-regular;
   font-weight: 700;
   font-style: italic;

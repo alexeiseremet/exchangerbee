@@ -4,9 +4,7 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
@@ -14,43 +12,41 @@ import { CreateCurrency } from '../features/Currency';
 
 const CurrenciesPageMarkup = ({ query: { action }, allCurrency, post }) => (
   <Layout>
-    <Metadata
-      title={t.metaTitle}
-      description={t.metaDescription}
-      ogTitle={t.ogTitle}
-      ogDescription={t.ogDescription}
-    />
     <Page>
       {
-        !action && allCurrency && (
-          <>
-            <Link href="/currencies?action=create" as="/currencies/create">
-              <a>Create</a>
-            </Link>
-            <hr />
+        action
+          ? <CreateCurrency/>
+          : (
+            <>
+              <Link href="/currencies?action=create" as="/currencies/create">
+                <a>Create</a>
+              </Link>
+              <hr/>
 
-            {
-              <div className="page-heading">
-                <h1>
-                  {
-                    post
-                      ? post.title
-                      : `Lista valutelor negociate la băncile din Moldova`
-                  }
-                </h1>
-              </div>
-            }
-
-            <section>
               {
-                allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency} />)
+                <div className="page-heading">
+                  <h1>
+                    {
+                      post
+                        ? post.title
+                        : 'Lista valutelor negociate la băncile din Moldova'
+                    }
+                  </h1>
+                </div>
               }
-            </section>
-          </>
-        )
-      }
 
-      {action && <CreateCurrency />}
+              {
+                allCurrency && (
+                  <section>
+                    {
+                      allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency}/>)
+                    }
+                  </section>
+                )
+              }
+            </>
+          )
+      }
     </Page>
   </Layout>
 );

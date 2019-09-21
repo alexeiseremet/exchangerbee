@@ -35,8 +35,7 @@ module.exports = {
           .sort({
             'date': 'desc',
             'currency.refId': 'asc',
-            'bid': 'desc',
-            'ask': 'asc',
+            'institution.refId': 'asc',
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);

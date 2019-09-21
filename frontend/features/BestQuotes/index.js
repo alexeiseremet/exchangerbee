@@ -1,6 +1,6 @@
 import './styles.scss';
 import React from 'react';
-import { baseCurrenciesArr, centralBank } from '../../server.config';
+import { baseCurrenciesArr, baseCurrency, centralBank } from '../../server.config';
 import RateCard from '../RateCard';
 import QuoteCard from '../QuoteCard';
 
@@ -25,8 +25,8 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                     <RateCard
                       key="central"
                       value={quote.bid}
-                      label="+1.003"
-                      info={centralBank.slug}
+                      label={String(centralBank.slug).toUpperCase()}
+                      info={String(baseCurrency.slug).toUpperCase()}
                     />
                   )
                 ))

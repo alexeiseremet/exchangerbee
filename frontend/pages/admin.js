@@ -5,8 +5,7 @@ import '../assets/scss/typography.scss';
 
 import React from 'react';
 import { withTranslation } from '../lib/i18n';
-import { textAdminPage as t } from '../lib/locale';
-import Metadata from '../features/Metadata';
+
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import Tabs from '../features/Tabs';
@@ -24,7 +23,6 @@ const AnyTypeModalContent = (
 const AdminPageMarkup = () => (
   <>
     <Layout>
-      <Metadata title={t.metaTitle} />
       <Page>
         <Tabs
           activeIndex={0}

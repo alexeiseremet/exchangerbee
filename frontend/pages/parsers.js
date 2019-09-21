@@ -4,9 +4,7 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import List from '../features/List';
@@ -14,37 +12,35 @@ import { CreateParser } from '../features/Parser';
 
 const ParsersPageMarkup = ({ query: { action }, allParser }) => (
   <Layout>
-    <Metadata
-      title={t.metaTitle}
-      description={t.metaDescription}
-      ogTitle={t.ogTitle}
-      ogDescription={t.ogDescription}
-    />
     <Page>
       {
-        !action && allParser && (
-          <>
-            <Link href="/parsers?action=create" as="/parsers/create">
-              <a>Create</a>
-            </Link>
-            <hr />
+        action
+          ? <CreateParser/>
+          : (
+            <>
+              <Link href="/parsers?action=create" as="/parsers/create">
+                <a>Create</a>
+              </Link>
+              <hr />
 
-            <List type="ordered">
               {
-                allParser.length && allParser.map(({ id, url }) => (
-                  <li key={id}>
-                    <Link href={`/parser?id=${id}`} as={`/parsers/${id}`}>
-                      <a>{url}</a>
-                    </Link>
-                  </li>
-                ))
+                allParser && allParser.length && (
+                  <List type="ordered">
+                    {
+                      allParser.map(({ id, url }) => (
+                        <li key={id}>
+                          <Link href={`/parser?id=${id}`} as={`/parsers/${id}`}>
+                            <a>{url}</a>
+                          </Link>
+                        </li>
+                      ))
+                    }
+                  </List>
+                )
               }
-            </List>
-          </>
-        )
+            </>
+          )
       }
-
-      {action && <CreateParser />}
     </Page>
   </Layout>
 );

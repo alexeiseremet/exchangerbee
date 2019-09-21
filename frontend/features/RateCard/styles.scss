@@ -15,13 +15,17 @@
 .rate-card__label {
   @include base-regular;
   display: block;
+  margin-bottom: .2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .rate-card__info {
   display: block;
-  font-size: 1rem;
   text-transform: uppercase;
   font-style: normal;
+  font-size: .8rem;
   opacity: .65;
 }
 

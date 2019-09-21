@@ -4,9 +4,7 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import { UpdateQuote, DeleteQuote } from '../features/Quote';
@@ -20,35 +18,23 @@ const QuotePageMarkup = ({ query: { action }, quote }) => {
 
   return (
     <Layout>
-      <Metadata
-        title={t.metaTitle}
-        description={t.metaDescription}
-        ogTitle={t.ogTitle}
-        ogDescription={t.ogDescription}
-      />
       <Page>
         {
-          !action && (
-            <>
-              <Link href={`/quote?id=${id}&action=update`} as={`/quotes/${id}/update`}>
-                <a>Update</a>
-              </Link>
-              &nbsp;|&nbsp;
-              <DeleteQuote quote={quote} />
-              <hr />
+          action
+            ? <UpdateQuote quote={quote}/>
+            : (
+              <>
+                <Link href={`/quote?id=${id}&action=update`} as={`/quotes/${id}/update`}>
+                  <a>Update</a>
+                </Link>
+                &nbsp;|&nbsp;
+                <DeleteQuote quote={quote}/>
+                <hr/>
 
-              <h1>
-                {institutionVObj.name}
-                {' '}
---
-                {' '}
-                {currencyVObj.name}
-              </h1>
-            </>
-          )
+                <h1>{`${institutionVObj.name} -- ${currencyVObj.name}`}</h1>
+              </>
+            )
         }
-
-        {action && <UpdateQuote quote={quote} />}
       </Page>
     </Layout>
   );

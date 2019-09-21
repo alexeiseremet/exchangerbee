@@ -4,9 +4,7 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import { UpdateParser, DeleteParser } from '../features/Parser';
@@ -20,29 +18,23 @@ const ParserPageMarkup = ({ query: { action }, parser }) => {
 
   return (
     <Layout>
-      <Metadata
-        title={t.metaTitle}
-        description={t.metaDescription}
-        ogTitle={t.ogTitle}
-        ogDescription={t.ogDescription}
-      />
       <Page>
         {
-          !action && (
-            <>
-              <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`}>
-                <a>Update</a>
-              </Link>
-              &nbsp;|&nbsp;
-              <DeleteParser parser={parser} />
-              <hr />
+          action
+            ? <UpdateParser parser={parser}/>
+            : (
+              <>
+                <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`}>
+                  <a>Update</a>
+                </Link>
+                &nbsp;|&nbsp;
+                <DeleteParser parser={parser}/>
+                <hr/>
 
-              <h1>{url}</h1>
-            </>
-          )
+                <h1>{url}</h1>
+              </>
+            )
         }
-
-        {action && <UpdateParser parser={parser} />}
       </Page>
     </Layout>
   );

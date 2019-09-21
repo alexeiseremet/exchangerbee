@@ -2,6 +2,8 @@ import './styles.scss';
 import React from 'react';
 import Router from 'next/router';
 
+import Metadata from '../Metadata';
+
 import Header from './_header';
 import Content from './_content';
 import Footer from './_footer';
@@ -36,14 +38,18 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, metadata } = this.props;
 
     return (
-      <div className="layout" id="layout">
-        <Header />
-        <Content>{children}</Content>
-        <Footer />
-      </div>
+      <>
+        {metadata && (<Metadata {...metadata} />)}
+
+        <div className="layout" id="layout">
+          <Header />
+          <Content>{children}</Content>
+          <Footer />
+        </div>
+      </>
     );
   }
 }

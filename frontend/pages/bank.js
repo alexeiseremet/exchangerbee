@@ -3,11 +3,10 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
+import { centralBank, baseCurrency } from '../server.config';
 import { Link, withTranslation } from '../lib/i18n';
-import { textIndexPage as t } from '../lib/locale';
 import { today } from '../lib/moment';
 
-import Metadata from '../features/Metadata';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import { UpdateInstitution, DeleteInstitution } from '../features/Institution';
@@ -23,85 +22,92 @@ const BankPageMarkup = ({
 
   return (
     <Layout>
-      <Metadata
-        title={t.metaTitle}
-        description={t.metaDescription}
-        ogTitle={t.ogTitle}
-        ogDescription={t.ogDescription}
-      />
       <Page>
         {
-          !action && (
-            <>
-              <Link
-                href={`/bank?slug=${institution.slug}&action=update`}
-                as={`/banks/${institution.slug}/update`}
-              >
-                <a>Update</a>
-              </Link>
-              &nbsp;|&nbsp;
-              <DeleteInstitution institution={institution}/>
-              <hr/>
+          action
+            ? <UpdateInstitution institution={institution}/>
+            : (
+              <>
+                <Link
+                  href={`/bank?slug=${institution.slug}&action=update`}
+                  as={`/banks/${institution.slug}/update`}
+                >
+                  <a>Update</a>
+                </Link>
+                &nbsp;|&nbsp;
+                <DeleteInstitution institution={institution}/>
+                <hr/>
 
-              {
-                <div className="page-heading">
-                  <h1>
-                    {
-                      post
-                        ? post.title
-                        : `Cursul valutar la ${institution.name}`
-                    }
-                  </h1>
-                </div>
-              }
-
-              {
-                post && post.textFirst && (
-                  <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
-                )
-              }
-
-              <section className="quote-list">
                 {
-                  allQuote && allQuote.length ? (
-                    allQuote.map(
-                      (quote, i) => (
-                        <QuoteCard
-                          key={i}
-                          label={quote.currencyVObj.name}
-                          link={{
-                            href: `/currency?slug=${quote.currencyVObj.slug}`,
-                            as: `/currencies/${quote.currencyVObj.slug}`,
-                          }}
-                        >
-                          <RateCard
-                            key="bid"
-                            value={quote.bid}
-                            info="cumpărare"
-                          />
-
-                          <RateCard
-                            key="ask"
-                            value={quote.ask}
-                            info="vânzare"
-                          />
-                        </QuoteCard>
-                      ),
-                    )
-                  ) : 'Nu a fost găsit niciun rezultat.'
+                  <div className="page-heading">
+                    <h1>
+                      {
+                        post
+                          ? post.title
+                          : `Cursul valutar la ${institution.name}`
+                      }
+                    </h1>
+                  </div>
                 }
-              </section>
 
-              {
-                post && post.textSecond && (
-                  <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
-                )
-              }
-            </>
-          )
+                {
+                  post && post.textFirst && (
+                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+                  )
+                }
+
+                <section className="quote-list">
+                  {
+                    allQuote && allQuote.length ? (
+                      allQuote.map(
+                        (quote, i) => (
+                          <QuoteCard
+                            key={i}
+                            label={quote.currencyVObj.name}
+                            link={{
+                              href: `/currency?slug=${quote.currencyVObj.slug}`,
+                              as: `/currencies/${quote.currencyVObj.slug}`,
+                            }}
+                          >
+                            <>
+                              {institution.slug !== centralBank.slug && (
+                                <RateCard
+                                  key="bid"
+                                  value={quote.bid}
+                                  info={
+                                    institution.slug === centralBank.slug
+                                      ? String(baseCurrency.slug).toUpperCase()
+                                      : 'cumpărare'
+                                  }
+                                />
+                              )}
+                            </>
+
+                            <RateCard
+                              key="ask"
+                              value={quote.ask}
+                              info={
+                                institution.slug === centralBank.slug
+                                  ? String(baseCurrency.slug).toUpperCase()
+                                  : 'vânzare'
+                              }
+                            />
+                          </QuoteCard>
+                        ),
+                      )
+                    ) : 'Nu a fost găsit niciun rezultat.'
+                  }
+                </section>
+
+                {
+                  post && post.textSecond && (
+                    <p style={{ marginTop: '3rem' }}
+                       dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+                  )
+                }
+              </>
+            )
         }
-
-        {action && <UpdateInstitution institution={institution}/>}
       </Page>
     </Layout>
   );
