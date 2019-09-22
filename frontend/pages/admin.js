@@ -22,7 +22,7 @@ const AnyTypeModalContent = (
 
 const AdminPageMarkup = () => (
   <>
-    <Layout>
+    <Layout metadata={{ title: 'Admin' }}>
       <Page>
         <Tabs
           activeIndex={0}

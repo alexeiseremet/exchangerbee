@@ -19,7 +19,7 @@ const PostPageMarkup = ({ query: { action }, post }) => {
   } = post;
 
   return (
-    <Layout>
+    <Layout metadata={{ title: 'Post' }}>
       <Page>
         {
           action

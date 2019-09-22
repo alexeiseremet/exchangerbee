@@ -11,7 +11,7 @@ import List from '../features/List';
 import { CreatePost } from '../features/Post';
 
 const PostsPageMarkup = ({ query: { action }, allPost }) => (
-  <Layout>
+  <Layout metadata={{ title: 'Posts' }}>
     <Page>
       {
         action

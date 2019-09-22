@@ -3,16 +3,18 @@ const apiPath = '/graphql';
 const storagePath = '/storage';
 
 module.exports = {
+  siteName: 'xezoom.com',
   apiBaseUrl: `${host}${apiPath}`,
   locale: 'ro',
   timezone: 'Europe/Chisinau',
   baseCountry: {
     slug: 'md',
     name: 'Moldova',
+    flag: '🇲🇩',
   },
   baseCurrency: {
     slug: 'mdl',
-    name: 'Leu moldovenesc',
+    name: 'Leul moldovenesc',
     numCode: '498',
     symbol: 'leu',
   },

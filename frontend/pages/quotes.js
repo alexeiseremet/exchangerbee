@@ -12,7 +12,7 @@ import List from '../features/List';
 import { CreateQuote } from '../features/Quote';
 
 const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
-  <Layout>
+  <Layout metadata={{ title: 'Quotes' }}>
     <Page>
       {
         action

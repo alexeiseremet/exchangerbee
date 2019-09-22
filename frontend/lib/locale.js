@@ -1,7 +1,3 @@
-export const textMetadata = {
-  siteName: 'Exchangerbee',
-};
-
 export const textModal = {
   authTitle: 'authTitle',
   sendPostcardTitle: 'sendPostcardTitle',

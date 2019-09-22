@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import { host, locale } from '../../server.config';
-import { textMetadata as t } from '../../lib/locale';
+import {
+  host, locale, siteName, baseCountry,
+} from '../../server.config';
 
 /**
  * Component to render Metadata.
@@ -21,7 +22,7 @@ export default ({
 
   return (
     <Head>
-      <title>{title}</title>
+      <title>{title} {baseCountry.flag}</title>
       <link rel="canonical" href={newUrl} />
       {description && <meta name="description" content={description} />}
       {keywords && <meta name="keywords" content={keywords} />}
@@ -32,7 +33,7 @@ export default ({
       <meta property="og:title" content={title} />
       <meta property="og:url" content={newUrl} />
       <meta property="og:locale" content={locale} />
-      <meta property="og:site_name" content={t.siteName} />
+      <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
     </Head>
   );

@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrenciesArr } from '../server.config';
+import { centralBank, baseCurrenciesArr, baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
@@ -19,10 +19,8 @@ const IndexPageMarkup = ({
 
   return (
     <Layout metadata={{
-      title: '',
-      description: '',
-      ogTitle: '',
-      ogDescription: '',
+      title: 'Curs valutar',
+      description: `Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.`,
     }}>
       <Page>
         <div className="page-heading">

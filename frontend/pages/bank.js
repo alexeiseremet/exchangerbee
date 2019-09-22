@@ -21,7 +21,10 @@ const BankPageMarkup = ({
   }
 
   return (
-    <Layout>
+    <Layout metadata={{
+      title: `${institution.name} — curs valutar ${String(institution.slug).toUpperCase()}`,
+      description: '',
+    }}>
       <Page>
         {
           action
@@ -95,7 +98,7 @@ const BankPageMarkup = ({
                           </QuoteCard>
                         ),
                       )
-                    ) : 'Nu a fost găsit niciun rezultat.'
+                    ) : <p>Nu a fost găsit niciun rezultat.</p>
                   }
                 </section>
 

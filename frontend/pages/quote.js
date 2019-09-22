@@ -17,7 +17,7 @@ const QuotePageMarkup = ({ query: { action }, quote }) => {
   const { id, institutionVObj, currencyVObj } = quote;
 
   return (
-    <Layout>
+    <Layout metadata={{ title: 'Quote' }}>
       <Page>
         {
           action

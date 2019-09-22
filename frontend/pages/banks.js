@@ -3,6 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
+import { baseCountry } from '../server.config';
 import { Link, withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
@@ -11,7 +12,10 @@ import BankCard from '../features/BankCard';
 import { CreateInstitution } from '../features/Institution';
 
 const BanksPageMarkup = ({ query: { action }, allInstitution, post }) => (
-  <Layout>
+  <Layout metadata={{
+    title: 'Cursul la bănci',
+    description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
+  }}>
     <Page>
       {
         action
@@ -29,7 +33,7 @@ const BanksPageMarkup = ({ query: { action }, allInstitution, post }) => (
                     {
                       post
                         ? post.title
-                        : 'Cursul valutar la băncile din Moldova'
+                        : `Cursul valutar la băncile din ${baseCountry.name}`
                     }
                   </h1>
                 </div>

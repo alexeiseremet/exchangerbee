@@ -36,10 +36,8 @@ const CurrencyPageMarkup = ({
 
   return (
     <Layout metadata={{
-      title: '',
-      description: '',
-      ogTitle: '',
-      ogDescription: '',
+      title: `${currency.name} — curs valutar ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
+      description: `Curs ${String(currency.name).toLowerCase()} în raport cu ${String(baseCurrency.name).toLowerCase()}.`,
     }}>
       <Page>
         {
@@ -58,11 +56,10 @@ const CurrencyPageMarkup = ({
               {
                 <div className="page-heading">
                   <h1>
-                    {
-                      post
-                        ? post.title
-                        : `Curs ${String(currency.name).toLowerCase()} (${String(currency.slug).toUpperCase()})`
-                    }
+                    {`
+                      Curs ${String(currency.name).toLowerCase()} 
+                      în raport cu ${String(baseCurrency.name).toLowerCase()} 
+                    `}
                   </h1>
                 </div>
               }
@@ -82,17 +79,23 @@ const CurrencyPageMarkup = ({
                     borderRadius: '.6rem',
                   }}>
                     <table>
-                      <caption>
-                        {`Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} oferite de băncile din ${baseCountry.name}, ${localeDate()}`}
-                      </caption>
+                      <caption dangerouslySetInnerHTML={{
+                        __html: `
+                          Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} 
+                          oferite de băncile din ${baseCountry.name}, ${localeDate()}
+                        `,
+                      }}/>
                       <tbody>
                       <tr>
                         <th style={{ verticalAlign: 'bottom' }}>
-                          <strong className="label-primary" style={{
-                            fontFamily: 'Georgia, Lucida Bright, serif',
-                            fontStyle: 'italic',
-                            fontSize: '3rem',
-                          }}>
+                          <strong
+                            title={currency.name}
+                            style={{
+                              fontFamily: 'Georgia, Lucida Bright, serif',
+                              fontStyle: 'italic',
+                              fontSize: '3rem',
+                            }}
+                          >
                             {currency.slug}
                           </strong>
                         </th>
@@ -127,44 +130,49 @@ const CurrencyPageMarkup = ({
                 )
               }
 
-              <section className="quote-list">
-                {
-                  allQuoteNoCentral.length ? (
-                    allQuoteNoCentral.map((quote, i) => (
-                      <QuoteCard
-                        key={i}
-                        label={quote.institutionVObj.name}
-                        link={{
-                          href: `/bank?slug=${quote.institutionVObj.slug}`,
-                          as: `/banks/${quote.institutionVObj.slug}`,
-                        }}
-                      >
-                        <RateCard
-                          key="bid"
-                          value={quote.bid}
-                          info="cumpărare"
-                        />
+              {
+                allQuoteNoCentral.length ? (
+                  <section className="quote-list">
+                    {
+                      allQuoteNoCentral.map((quote, i) => (
+                        <QuoteCard
+                          key={i}
+                          label={quote.institutionVObj.name}
+                          link={{
+                            href: `/bank?slug=${quote.institutionVObj.slug}`,
+                            as: `/banks/${quote.institutionVObj.slug}`,
+                          }}
+                        >
+                          <RateCard
+                            key="bid"
+                            value={quote.bid}
+                            info="cumpărare"
+                          />
 
-                        <RateCard
-                          key="ask"
-                          value={quote.ask}
-                          info="vânzare"
-                        />
-                      </QuoteCard>
-                    ))
-                  ) : 'Nu a fost găsit niciun rezultat.'
-                }
-              </section>
+                          <RateCard
+                            key="ask"
+                            value={quote.ask}
+                            info="vânzare"
+                          />
+                        </QuoteCard>
+                      ))
+                    }
 
-              <p style={{
-                marginTop: '.5rem',
-                fontSize: '1.2rem',
-                textAlign: 'center',
-                fontStyle: 'italic',
-                opacity: '0.65',
-              }}>
-                  {`Ratele de shimb pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişate la băncile din ${baseCountry.name}`}
-              </p>
+                    <p style={{
+                      marginTop: '.5rem',
+                      fontSize: '1.2rem',
+                      textAlign: 'center',
+                      fontStyle: 'italic',
+                      opacity: '0.65',
+                    }} dangerouslySetInnerHTML={{
+                      __html: `
+                        Ratele de shimb pentru <strong>${currency.name}</strong> (${String(currency.slug).toUpperCase()})
+                        afişate la băncile din ${baseCountry.name}
+                      `,
+                    }}/>
+                  </section>
+                ) : <p>Nu a fost găsit niciun rezultat.</p>
+              }
 
               {
                 /*

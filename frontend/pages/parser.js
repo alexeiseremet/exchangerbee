@@ -17,7 +17,7 @@ const ParserPageMarkup = ({ query: { action }, parser }) => {
   const { id, url } = parser;
 
   return (
-    <Layout>
+    <Layout metadata={{ title: 'Parser' }}>
       <Page>
         {
           action
