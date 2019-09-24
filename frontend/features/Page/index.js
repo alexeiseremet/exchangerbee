@@ -1,21 +1,22 @@
 import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
+import { siteMenu, adminMenu } from '../../server.config';
+
 import MainMenu from '../MainMenu';
 
-
-const DefaultSidebar = (
-  <>
-    <MainMenu />
-  </>
+const renderSidebar = (type) => (
+  <MainMenu items={type === 'admin' ? adminMenu : siteMenu}/>
 );
 
-const Page = ({ children, top, aside = DefaultSidebar }) => {
+const Page = ({
+  children, top, type, aside = true,
+}) => {
   const classes = classnames(
     'page',
     {
       'page--has-top': top,
-      'page--no-aside': aside === null,
+      'page--no-aside': !aside,
     },
   );
 
@@ -37,7 +38,7 @@ const Page = ({ children, top, aside = DefaultSidebar }) => {
         {
           aside && (
             <aside className="page__aside">
-              {aside}
+              {renderSidebar(type)}
             </aside>
           )
         }

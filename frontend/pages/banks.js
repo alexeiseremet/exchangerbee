@@ -4,53 +4,32 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { baseCountry } from '../server.config';
-import { Link, withTranslation } from '../lib/i18n';
+import { withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BankCard from '../features/BankCard';
-import { CreateInstitution } from '../features/Institution';
 
-const BanksPageMarkup = ({ query: { action }, allInstitution, post }) => (
+const BanksPageMarkup = ({ allInstitution }) => (
   <Layout metadata={{
     title: 'Cursul la bănci',
     description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
     <Page>
+      <div className="page-heading">
+        <h1>
+          {`Cursul valutar la băncile din ${baseCountry.name}`}
+        </h1>
+      </div>
+
       {
-        action
-          ? <CreateInstitution/>
-          : (
-            <>
-              <Link href="/currencies?action=create" as="/banks/create">
-                <a>Create</a>
-              </Link>
-              <hr/>
-
-              {
-                <div className="page-heading">
-                  <h1>
-                    {
-                      post
-                        ? post.title
-                        : `Cursul valutar la băncile din ${baseCountry.name}`
-                    }
-                  </h1>
-                </div>
-              }
-
-              {
-                allInstitution && (
-                  <section>
-                    {
-                      allInstitution.map((bank, i) => <BankCard key={i} bank={bank}/>)
-                    }
-                  </section>
-                )
-              }
-
-            </>
-          )
+        allInstitution && (
+          <section className="bank-list">
+            {
+              allInstitution.map((b, i) => <BankCard key={i} bank={b}/>)
+            }
+          </section>
+        )
       }
     </Page>
   </Layout>
@@ -69,7 +48,6 @@ const BanksPageI18N = withTranslation('common')(BanksPageMarkup);
 const GQL_ALL_INSTITUTION = gql`
   query AllInstitution {
     allInstitution {
-      id
       slug
       name
     }

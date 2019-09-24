@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 const DeleteInstitutionButton = ({ onSubmit }) => (
-  <button onClick={(elem) => onSubmit(elem)}>Delete</button>
+  <button onClick={onSubmit}>Delete</button>
 );
 
 const GQL_DELETE_INSTITUTION = gql`

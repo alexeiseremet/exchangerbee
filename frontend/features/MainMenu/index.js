@@ -3,28 +3,22 @@ import React from 'react';
 import { Link } from '../../lib/i18n';
 import { baseCountry } from '../../server.config';
 
-const menu = [
-  // { url: '/converter', label: 'Convertor valutar' },
-  { url: '/banks', label: 'Cursul la bănci' },
-  { url: '/currencies', label: 'Lista valute' },
-  { url: '/parsers', label: 'Parsers' },
-  { url: '/quotes', label: 'Quotes' },
-  { url: '/posts', label: 'Posts' },
-  { url: '/admin', label: 'Admin' },
-];
-
-const MainMenu = () => (
+const MainMenu = ({ items }) => (
   <>
     <Link href="/">
-      <a role="brand" style={{ display: 'inline-block', marginBottom: '2rem' }}>
-        {`Curs valutar (${String(baseCountry.slug).toUpperCase()})`}
-      </a>
+      <a role="brand"
+         dangerouslySetInnerHTML={{
+           __html: (`Curs valutar (${String(baseCountry.slug).toUpperCase()})`),
+         }}
+         style={{ display: 'inline-block', marginBottom: '2rem' }}
+         title={siteName}
+      />
     </Link>
 
     <nav role="navigation">
       <ul className="main-memu">
         {
-          menu.map((item, i) => (
+          items.map((item, i) => (
             <li className="main-memu__item" key={i}>
               <Link href={item.url}>
                 <a className="main-memu__link">

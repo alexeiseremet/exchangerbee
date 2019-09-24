@@ -8,48 +8,61 @@ const APP_ROUTES = [
     pattern: '/',
   },
   {
-    page: 'admin',
-    pattern: '/admin',
-  },
-  {
     page: 'banks',
-    pattern: '/banks/:action(create)?',
+    pattern: '/banks',
   },
   {
     page: 'bank',
-    pattern: '/banks/:slug/:action(update|delete)?',
+    pattern: '/banks/:slug',
   },
   {
     page: 'currencies',
-    pattern: '/currencies/:action(create)?',
+    pattern: '/currencies',
   },
   {
     page: 'currency',
-    pattern: '/currencies/:slug/:action(update|delete)?',
+    pattern: '/currencies/:slug',
+  },
+  // Admin's pages.
+  {
+    page: 'admin/banks',
+    pattern: '/admin/banks/:action(create)?',
   },
   {
-    page: 'parsers',
+    page: 'admin/bank',
+    pattern: '/admin/banks/:slug',
+  },
+  {
+    page: 'admin/currencies',
+    pattern: '/admin/currencies/:action(create)?',
+  },
+  {
+    page: 'admin/currency',
+    pattern: '/admin/currencies/:slug',
+  },
+  {
+    page: 'admin/parsers',
     pattern: '/parsers/:action(create)?',
   },
   {
-    page: 'parser',
-    pattern: '/parsers/:id/:action(update|delete)?',
+    page: 'admin/parser',
+    pattern: '/parsers/:id',
   },
   {
-    page: 'posts',
+    page: 'admin/posts',
     pattern: '/posts/:action(create)?',
   },
   {
-    page: 'post',
-    pattern: '/posts/:id/:action(update|delete)?',
+    page: 'admin/post',
+    pattern: '/posts/:id',
   },
   {
-    page: 'quotes',
+    page: 'admin/quotes',
     pattern: '/quotes/:action(create)?',
   },
   {
-    page: 'quote',
-    pattern: '/quotes/:id/:action(update|delete)?',
+    page: 'admin/quote',
+    pattern: '/quotes/:id',
   },
 ];
 

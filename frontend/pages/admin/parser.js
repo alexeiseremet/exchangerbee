@@ -3,38 +3,24 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n';
+import { withTranslation } from '../../lib/i18n';
+import securePage from '../../lib/securePage';
 
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import { UpdateParser, DeleteParser } from '../features/Parser';
+import Layout from '../../features/Layout';
+import Page from '../../features/Page';
+import { UpdateParser, DeleteParser } from '../../features/Parser';
 
-const ParserPageMarkup = ({ query: { action }, parser }) => {
+const ParserPageMarkup = ({ parser }) => {
   if (!parser) {
     return null;
   }
 
-  const { id, url } = parser;
-
   return (
-    <Layout metadata={{ title: 'Parser' }}>
-      <Page>
-        {
-          action
-            ? <UpdateParser parser={parser}/>
-            : (
-              <>
-                <Link href={`/parser?id=${id}&action=update`} as={`/parsers/${id}/update`}>
-                  <a>Update</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteParser parser={parser}/>
-                <hr/>
-
-                <h1>{url}</h1>
-              </>
-            )
-        }
+    <Layout metadata={{ title: parser.url }}>
+      <Page type="admin">
+        <DeleteParser parser={parser}/>
+        <hr/>
+        <UpdateParser parser={parser}/>
       </Page>
     </Layout>
   );
@@ -77,7 +63,7 @@ const GQL_PARSER = gql`
   }
 `;
 
-export default _compose(
+const ParserPageGQL = _compose(
   graphql(
     GQL_PARSER,
     {
@@ -92,3 +78,5 @@ export default _compose(
     },
   ),
 )(ParserPageI18N);
+
+export default securePage(ParserPageGQL);

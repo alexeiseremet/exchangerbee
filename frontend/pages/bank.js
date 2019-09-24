@@ -4,18 +4,15 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { centralBank, baseCurrency } from '../server.config';
-import { Link, withTranslation } from '../lib/i18n';
+import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
-import { UpdateInstitution, DeleteInstitution } from '../features/Institution';
 import RateCard from '../features/RateCard';
 import QuoteCard from '../features/QuoteCard';
 
-const BankPageMarkup = ({
-  query: { action }, institution, allQuote, post,
-}) => {
+const BankPageMarkup = ({ institution, allQuote, post }) => {
   if (!institution) {
     return null;
   }
@@ -23,93 +20,71 @@ const BankPageMarkup = ({
   return (
     <Layout metadata={{
       title: `${institution.name} — curs valutar ${String(institution.slug).toUpperCase()}`,
-      description: '',
+      description: `Cursul valutar la ${institution.name}`,
     }}>
       <Page>
+        <div className="page-heading">
+          <h1>
+            {`Cursul valutar la ${institution.name}`}
+          </h1>
+        </div>
+
         {
-          action
-            ? <UpdateInstitution institution={institution}/>
-            : (
-              <>
-                <Link
-                  href={`/bank?slug=${institution.slug}&action=update`}
-                  as={`/banks/${institution.slug}/update`}
-                >
-                  <a>Update</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteInstitution institution={institution}/>
-                <hr/>
+          post && post.textFirst && (
+            <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
 
-                {
-                  <div className="page-heading">
-                    <h1>
+        <section className="quote-list">
+          {
+            allQuote && allQuote.length ? (
+              allQuote.map(
+                (quote, i) => (
+                  <QuoteCard
+                    key={i}
+                    label={quote.currencyVObj.name}
+                    link={{
+                      href: `/currency?slug=${quote.currencyVObj.slug}`,
+                      as: `/currencies/${quote.currencyVObj.slug}`,
+                    }}
+                  >
+                    <>
                       {
-                        post
-                          ? post.title
-                          : `Cursul valutar la ${institution.name}`
+                        institution.slug !== centralBank.slug && (
+                          <RateCard
+                            key="bid"
+                            value={quote.bid}
+                            info={
+                              institution.slug === centralBank.slug
+                                ? String(baseCurrency.slug).toUpperCase()
+                                : 'cumpărare'
+                            }
+                          />
+                        )
                       }
-                    </h1>
-                  </div>
-                }
+                    </>
 
-                {
-                  post && post.textFirst && (
-                    <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-                  )
-                }
+                    <RateCard
+                      key="ask"
+                      value={quote.ask}
+                      info={
+                        institution.slug === centralBank.slug
+                          ? String(baseCurrency.slug).toUpperCase()
+                          : 'vânzare'
+                      }
+                    />
+                  </QuoteCard>
+                ),
+              )
+            ) : <p>Nu a fost găsit niciun rezultat.</p>
+          }
+        </section>
 
-                <section className="quote-list">
-                  {
-                    allQuote && allQuote.length ? (
-                      allQuote.map(
-                        (quote, i) => (
-                          <QuoteCard
-                            key={i}
-                            label={quote.currencyVObj.name}
-                            link={{
-                              href: `/currency?slug=${quote.currencyVObj.slug}`,
-                              as: `/currencies/${quote.currencyVObj.slug}`,
-                            }}
-                          >
-                            <>
-                              {institution.slug !== centralBank.slug && (
-                                <RateCard
-                                  key="bid"
-                                  value={quote.bid}
-                                  info={
-                                    institution.slug === centralBank.slug
-                                      ? String(baseCurrency.slug).toUpperCase()
-                                      : 'cumpărare'
-                                  }
-                                />
-                              )}
-                            </>
-
-                            <RateCard
-                              key="ask"
-                              value={quote.ask}
-                              info={
-                                institution.slug === centralBank.slug
-                                  ? String(baseCurrency.slug).toUpperCase()
-                                  : 'vânzare'
-                              }
-                            />
-                          </QuoteCard>
-                        ),
-                      )
-                    ) : <p>Nu a fost găsit niciun rezultat.</p>
-                  }
-                </section>
-
-                {
-                  post && post.textSecond && (
-                    <p style={{ marginTop: '3rem' }}
-                       dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
-                  )
-                }
-              </>
-            )
+        {
+          post && post.textSecond && (
+            <p style={{ marginTop: '3rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+          )
         }
       </Page>
     </Layout>
@@ -134,7 +109,6 @@ const BankPageI18N = withTranslation('common')(BankPageMarkup);
 const GQL_BANK_PAGE = gql`
   query BankPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     institution(slug: $slug) {
-      id
       slug
       name
     }

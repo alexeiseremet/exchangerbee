@@ -128,3 +128,17 @@ export const removeUserCookie = () => {
 
   return undefined;
 };
+
+export const isUserLogged = (req) => {
+  const userJwt = getCookie(AUTH_COOKIE_NAME, req);
+  let isLogged = false;
+
+  try {
+    isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  }
+
+  return isLogged;
+};

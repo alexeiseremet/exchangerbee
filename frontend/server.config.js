@@ -4,6 +4,16 @@ const storagePath = '/storage';
 
 module.exports = {
   siteName: 'xezoom.com',
+  siteMenu: [
+    // { url: '/converter', label: 'Convertor valutar' },
+    { url: '/banks', label: 'Cursul la bănci' },
+    { url: '/currencies', label: 'Lista valute' },
+  ],
+  adminMenu: [
+    { url: '/admin/parsers', label: 'Parsers' },
+    { url: '/admin/quotes', label: 'Quotes' },
+    { url: '/admin/posts', label: 'Posts' },
+  ],
   apiBaseUrl: `${host}${apiPath}`,
   locale: 'ro',
   timezone: 'Europe/Chisinau',

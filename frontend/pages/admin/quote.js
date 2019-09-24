@@ -3,38 +3,24 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n';
+import { withTranslation } from '../../lib/i18n';
+import securePage from '../../lib/securePage';
 
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import { UpdateQuote, DeleteQuote } from '../features/Quote';
+import Layout from '../../features/Layout';
+import Page from '../../features/Page';
+import { UpdateQuote, DeleteQuote } from '../../features/Quote';
 
-const QuotePageMarkup = ({ query: { action }, quote }) => {
+const QuotePageMarkup = ({ quote }) => {
   if (!quote) {
     return null;
   }
 
-  const { id, institutionVObj, currencyVObj } = quote;
-
   return (
     <Layout metadata={{ title: 'Quote' }}>
-      <Page>
-        {
-          action
-            ? <UpdateQuote quote={quote}/>
-            : (
-              <>
-                <Link href={`/quote?id=${id}&action=update`} as={`/quotes/${id}/update`}>
-                  <a>Update</a>
-                </Link>
-                &nbsp;|&nbsp;
-                <DeleteQuote quote={quote}/>
-                <hr/>
-
-                <h1>{`${institutionVObj.name} -- ${currencyVObj.name}`}</h1>
-              </>
-            )
-        }
+      <Page type="admin">
+        <DeleteQuote quote={quote}/>
+        <hr/>
+        <UpdateQuote quote={quote}/>
       </Page>
     </Layout>
   );
@@ -78,7 +64,7 @@ const GQL_QUOTE = gql`
   }
 `;
 
-export default _compose(
+const QuotePageGQL = _compose(
   graphql(
     GQL_QUOTE,
     {
@@ -93,3 +79,5 @@ export default _compose(
     },
   ),
 )(QuotePageI18N);
+
+export default securePage(QuotePageGQL);

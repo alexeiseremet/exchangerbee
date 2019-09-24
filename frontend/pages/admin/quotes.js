@@ -3,23 +3,24 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n';
-import { localeDate } from '../lib/moment';
+import { Link, withTranslation } from '../../lib/i18n';
+import { localeDate } from '../../lib/moment';
+import securePage from '../../lib/securePage';
 
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import List from '../features/List';
-import { CreateQuote } from '../features/Quote';
+import Layout from '../../features/Layout';
+import Page from '../../features/Page';
+import List from '../../features/List';
+import { CreateQuote } from '../../features/Quote';
 
 const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
   <Layout metadata={{ title: 'Quotes' }}>
-    <Page>
+    <Page type="admin">
       {
         action
           ? <CreateQuote/>
           : (
             <>
-              <Link href="/quotes?action=create" as="/quotes/create">
+              <Link href="/admin/quotes?action=create" as="/admin/quotes/create">
                 <a>Create</a>
               </Link>
               <hr/>
@@ -32,7 +33,7 @@ const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
                         id, institutionVObj, currencyVObj, date, error,
                       }) => (
                         <li key={id} style={{ color: error === 'yes' ? 'red' : null }}>
-                          <Link href={`/quote?id=${id}`} as={`/quotes/${id}`}>
+                          <Link href={`/admin/quote?id=${id}`} as={`/admin/quotes/${id}`}>
                             <a>
                               {`${localeDate(date)} -- ${institutionVObj.name} -- ${currencyVObj.name}`}
                             </a>
@@ -76,7 +77,7 @@ const GQL_ALL_QUOTE = gql`
   }
 `;
 
-export default _compose(
+const QuotesPageGQL = _compose(
   graphql(
     GQL_ALL_QUOTE,
     {
@@ -86,3 +87,5 @@ export default _compose(
     },
   ),
 )(QuotesPageI18N);
+
+export default securePage(QuotesPageGQL);

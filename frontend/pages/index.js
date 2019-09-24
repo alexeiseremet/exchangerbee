@@ -11,7 +11,7 @@ import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
 
 const IndexPageMarkup = ({
-  centralQuote, bestBidQuote, bestAskQuote, post,
+  post, centralQuote, bestBidQuote, bestAskQuote,
 }) => {
   if (!post) {
     return null;
@@ -24,7 +24,9 @@ const IndexPageMarkup = ({
     }}>
       <Page>
         <div className="page-heading">
-          <h1>{post.title}</h1>
+          <h1 dangerouslySetInnerHTML={{
+            __html: (`Curs valutar (${String(baseCountry.slug).toUpperCase()})`),
+          }}/>
         </div>
 
         {
@@ -41,7 +43,9 @@ const IndexPageMarkup = ({
 
         {
           post.textSecond && (
-            <p style={{ marginTop: '3rem' }} dangerouslySetInnerHTML={{ __html: post.textSecond }} />
+            <p style={{ marginTop: '3rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}
+            />
           )
         }
       </Page>

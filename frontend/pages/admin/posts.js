@@ -3,22 +3,23 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n';
+import { Link, withTranslation } from '../../lib/i18n';
+import securePage from '../../lib/securePage';
 
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import List from '../features/List';
-import { CreatePost } from '../features/Post';
+import Layout from '../../features/Layout';
+import Page from '../../features/Page';
+import List from '../../features/List';
+import { CreatePost } from '../../features/Post';
 
 const PostsPageMarkup = ({ query: { action }, allPost }) => (
   <Layout metadata={{ title: 'Posts' }}>
-    <Page>
+    <Page type="admin">
       {
         action
           ? <CreatePost />
           : (
             <>
-              <Link href="/posts?action=create" as="/posts/create">
+              <Link href="/admin/posts?action=create" as="/admin/posts/create">
                 <a>Create</a>
               </Link>
               <hr/>
@@ -29,7 +30,7 @@ const PostsPageMarkup = ({ query: { action }, allPost }) => (
                     {
                       allPost.map(({ id, slug }) => (
                         <li key={id}>
-                          <Link href={`/post?id=${id}`} as={`/posts/${id}`}>
+                          <Link href={`/admin/post?id=${id}`} as={`/admin/posts/${id}`}>
                             <a>{slug}</a>
                           </Link>
                         </li>
@@ -65,7 +66,7 @@ const GQL_ALL_POST = gql`
   }
 `;
 
-export default _compose(
+const PostsPageGQL = _compose(
   graphql(
     GQL_ALL_POST,
     {
@@ -75,3 +76,5 @@ export default _compose(
     },
   ),
 )(PostsPageI18N);
+
+export default securePage(PostsPageGQL);

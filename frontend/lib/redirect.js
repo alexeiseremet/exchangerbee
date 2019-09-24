@@ -1,13 +1,15 @@
 import { Router } from '../routes';
 
 const redirect = (target, ctx) => {
+  const isServer = !!ctx.req;
+
   // Redirect on the server.
-  if (ctx.isServer) {
+  if (isServer) {
     ctx.res.writeHead(303, { Location: target });
     ctx.res.end();
   } else {
     // Redirect in the browser.
-    Router.replaceRoute(target);
+    Router.push(target);
   }
 
   return undefined;

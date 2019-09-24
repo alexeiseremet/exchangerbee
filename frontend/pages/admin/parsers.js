@@ -3,25 +3,26 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { Link, withTranslation } from '../lib/i18n';
+import { Link, withTranslation } from '../../lib/i18n';
+import securePage from '../../lib/securePage';
 
-import Layout from '../features/Layout';
-import Page from '../features/Page';
-import List from '../features/List';
-import { CreateParser } from '../features/Parser';
+import Layout from '../../features/Layout';
+import Page from '../../features/Page';
+import List from '../../features/List';
+import { CreateParser } from '../../features/Parser';
 
 const ParsersPageMarkup = ({ query: { action }, allParser }) => (
   <Layout metadata={{ title: 'Parsers' }}>
-    <Page>
+    <Page type="admin">
       {
         action
           ? <CreateParser/>
           : (
             <>
-              <Link href="/parsers?action=create" as="/parsers/create">
+              <Link href="/admin/parsers?action=create" as="/admin/parsers/create">
                 <a>Create</a>
               </Link>
-              <hr />
+              <hr/>
 
               {
                 allParser && allParser.length && (
@@ -29,7 +30,7 @@ const ParsersPageMarkup = ({ query: { action }, allParser }) => (
                     {
                       allParser.map(({ id, url }) => (
                         <li key={id}>
-                          <Link href={`/parser?id=${id}`} as={`/parsers/${id}`}>
+                          <Link href={`/admin/parser?id=${id}`} as={`/admin/parsers/${id}`}>
                             <a>{url}</a>
                           </Link>
                         </li>
@@ -65,7 +66,7 @@ const GQL_ALL_PARSER = gql`
   }
 `;
 
-export default _compose(
+const ParsersPageGQL = _compose(
   graphql(
     GQL_ALL_PARSER,
     {
@@ -75,3 +76,5 @@ export default _compose(
     },
   ),
 )(ParsersPageI18N);
+
+export default securePage(ParsersPageGQL);

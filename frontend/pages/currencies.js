@@ -4,52 +4,32 @@ import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
 import { baseCountry } from '../server.config';
-import { Link, withTranslation } from '../lib/i18n';
+import { withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
-import { CreateCurrency } from '../features/Currency';
 
-const CurrenciesPageMarkup = ({ query: { action }, allCurrency, post }) => (
+const CurrenciesPageMarkup = ({ allCurrency }) => (
   <Layout metadata={{
     title: 'Lista valute',
     description: `Lista valutelor negociate la băncile din ${baseCountry.name}`,
   }}>
     <Page>
+      <div className="page-heading">
+        <h1>
+          {`Lista valutelor negociate la băncile din ${baseCountry.name}`}
+        </h1>
+      </div>
+
       {
-        action
-          ? <CreateCurrency/>
-          : (
-            <>
-              <Link href="/currencies?action=create" as="/currencies/create">
-                <a>Create</a>
-              </Link>
-              <hr/>
-
-              {
-                <div className="page-heading">
-                  <h1>
-                    {
-                      post
-                        ? post.title
-                        : `Lista valutelor negociate la băncile din ${baseCountry.name}`
-                    }
-                  </h1>
-                </div>
-              }
-
-              {
-                allCurrency && (
-                  <section>
-                    {
-                      allCurrency.map((currency, i) => <CurrencyCard key={i} currency={currency}/>)
-                    }
-                  </section>
-                )
-              }
-            </>
-          )
+        allCurrency && (
+          <section className="currency-list">
+            {
+              allCurrency.map((c, i) => <CurrencyCard key={i} currency={c}/>)
+            }
+          </section>
+        )
       }
     </Page>
   </Layout>
@@ -68,10 +48,8 @@ const CurrenciesPageI18N = withTranslation('common')(CurrenciesPageMarkup);
 const GQL_ALL_CURRENCY = gql`
   query AllCurrency {
     allCurrency {
-      id
       slug
       name
-      numCode
     }
   }
 `;
