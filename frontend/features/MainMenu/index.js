@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 import { Link } from '../../lib/i18n';
-import { baseCountry } from '../../server.config';
+import { siteName, baseCountry } from '../../server.config';
 
 const MainMenu = ({ items }) => (
   <>
