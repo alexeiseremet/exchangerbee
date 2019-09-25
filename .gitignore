@@ -12,3 +12,4 @@
 node_modules
 backend/screenshots
 database/db
+database/data

@@ -9,7 +9,7 @@ services:
     - "27017:27017"
     restart: always
     volumes:
-    - ./database/db:/data/db
+    - ./database/data:/data
 
   backend:
     build: ./backend
@@ -69,5 +69,6 @@ services:
 # docker inspect -f "{{json .Mounts}}" exbee_frontend_1
 
 # Mongo
-# mongod -u db_user -p db_password > show dbs > use db_name > show tables
+# mongo -u db_user -p db_password > show dbs > use db_name > show tables
 # > db.quotes.find().limit(2) || db.quotes.remove({"currency.refId": ""})
+# mongodump -u "db_user" -p "db_password" -d "db_name" --authenticationDatabase "admin"
