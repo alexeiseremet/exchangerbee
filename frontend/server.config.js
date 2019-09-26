@@ -1,9 +1,9 @@
-const host = 'http://md.xezoom.com:3050';
+const host = 'http://md.xezoom.com';
 const apiPath = '/graphql';
 const storagePath = '/storage';
 
 module.exports = {
-  siteName: 'xezoom.com',
+  siteName: 'md.xezoom.com',
   siteMenu: [
     // { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },

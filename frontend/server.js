@@ -17,7 +17,7 @@ const app = next({ dev: !IS_PRODUCTION });
 const routes = require('./routes');
 
 const handler = routes.getRequestHandler(app);
-const { apiPath, storagePath, host } = require('./server.config');
+const { apiPath, storagePath } = require('./server.config');
 
 (async () => {
   await app.prepare();
@@ -30,7 +30,7 @@ const { apiPath, storagePath, host } = require('./server.config');
     cookiePathRewrite: apiPath,
     changeOrigin: true,
     router: {
-      [storagePath]: 'http://exchangerbee.com',
+      [storagePath]: 'http://xezoom.com',
     },
   });
 
@@ -49,7 +49,7 @@ const { apiPath, storagePath, host } = require('./server.config');
       throw err;
     }
     // eslint-disable-next-line no-console
-    console.log(`🎉  Ready on ${host}`);
+    console.log(`🎉  Ready on http://localhost:${PORT}`);
   });
 })();
 
