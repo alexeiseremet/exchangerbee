@@ -5,4 +5,4 @@ RUN yarn install \
     && chown -R node:node node_modules \
     && ls -la
 CMD ["yarn", "dev"]
-USER node
+USER node:node

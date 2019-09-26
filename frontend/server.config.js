@@ -1,4 +1,4 @@
-const host = 'http://localhost:3050';
+const host = 'http://md.xezoom.local:3050';
 const apiPath = '/graphql';
 const storagePath = '/storage';
 

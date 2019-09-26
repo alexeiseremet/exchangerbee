@@ -7,4 +7,4 @@ RUN yarn install \
     && chown -R node:node .next \
     && ls -la
 CMD ["yarn", "start"]
-USER node
+USER node:node
