@@ -13,7 +13,7 @@ const QuoteCard = ({
 
       {
         React.Children.map(children, (child, i) => (
-          <div className={`quote-card__rate ${centralBankItem === i ? 'quote-card__rate--central' : ''}`}>
+          <div className={`quote-card__rate quote-card__rate--${centralBankItem === i ? 'central' : 'commercial'}`}>
             {React.cloneElement(child)}
           </div>
         ))

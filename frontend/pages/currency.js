@@ -47,16 +47,10 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
         </div>
 
         {
-          post && post.textFirst && (
-            <p dangerouslySetInnerHTML={{ __html: post.textFirst }} />
-          )
-        }
-
-        {
           centralQuote && (
             <section style={{
-              margin: '3rem 0',
-              padding: '1rem 2rem',
+              marginTop: '3rem',
+              padding: '1rem',
               backgroundColor: '#eaeaea',
               borderRadius: '.6rem',
             }}>
@@ -112,7 +106,7 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
           )
         }
 
-        <section className="quote-list">
+        <section className="quote-list" style={{ marginTop: '3rem' }}>
           {
             allQuoteNoCentral.length ? (
               <>
@@ -145,6 +139,7 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
                   style={{
                     marginTop: '.5rem',
                     fontSize: '1.2rem',
+                    lineHeight: '1.3',
                     textAlign: 'center',
                     fontStyle: 'italic',
                     opacity: '0.65',
@@ -166,6 +161,13 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
           {`Evoluția cursului oficial pentru ${currency.name},
           ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`}
           */
+        }
+
+        {
+          post && post.textFirst && (
+            <p style={{ marginTop: '3rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }} />
+          )
         }
 
         {

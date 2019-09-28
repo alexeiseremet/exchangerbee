@@ -50,6 +50,10 @@
 .page-heading {
   @include heading-bold;
   margin-bottom: $base-spacing;
-  font-size: 2.6rem;
+  font-size: 2rem;
   line-height: 1.2;
+
+  @include mappy-bp(small) {
+    font-size: 2.6rem;
+  }
 }

@@ -73,4 +73,4 @@ services:
 # mongo -u db_user -p db_password > show dbs > use db_name > show tables
 # > db.quotes.find().limit(2) || db.quotes.remove({"currency.refId": ""})
 # mongodump -u "db_user" -p "db_password" -d "db_name" --authenticationDatabase "admin"
-#mongoimport -u "db_user" -p "db_password" --authenticationDatabase admin -d "db_name" --collection quotes --file /data/dump/quotes.json
+# mongoimport -u "db_user" -p "db_password" --authenticationDatabase "admin" -d "db_name" --collection quotes --file /data/dump/quotes.json

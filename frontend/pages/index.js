@@ -29,12 +29,6 @@ const IndexPageMarkup = ({
           }}/>
         </div>
 
-        {
-          post.textFirst && (
-            <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-          )
-        }
-
         <BestQuotes
           bestAskQuote={bestAskQuote}
           bestBidQuote={bestBidQuote}
@@ -42,8 +36,15 @@ const IndexPageMarkup = ({
         />
 
         {
-          post.textSecond && (
+          post.textFirst && (
             <p style={{ marginTop: '3rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
+
+        {
+          post.textSecond && (
+            <p style={{ marginTop: '1rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}
             />
           )

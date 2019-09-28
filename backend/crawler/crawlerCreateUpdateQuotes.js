@@ -28,7 +28,7 @@ const createUpdateQuotes = (quotes) => {
     bid = bid.trim();
     ask = ask.trim();
 
-    if (Number.isNaN(bid) || Number.isNaN(ask) || +bid <= 0 || +ask <= 0) {
+    if (!parseFloat(bid) || !parseFloat(ask) || +bid <= 0 || +ask <= 0) {
       return undefined;
     }
 

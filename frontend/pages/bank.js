@@ -29,12 +29,6 @@ const BankPageMarkup = ({ institution, allQuote, post }) => {
           </h1>
         </div>
 
-        {
-          post && post.textFirst && (
-            <p dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-          )
-        }
-
         <section className="quote-list">
           {
             allQuote && allQuote.length ? (
@@ -81,8 +75,15 @@ const BankPageMarkup = ({ institution, allQuote, post }) => {
         </section>
 
         {
-          post && post.textSecond && (
+          post && post.textFirst && (
             <p style={{ marginTop: '3rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
+
+        {
+          post && post.textSecond && (
+            <p style={{ marginTop: '1rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
           )
         }

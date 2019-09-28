@@ -22,7 +22,7 @@ export default ({
 
   return (
     <Head>
-      <title>{title} {baseCountry.flag}</title>
+      <title>{baseCountry.flag} {title}</title>
       <link rel="canonical" href={newUrl} />
       {description && <meta name="description" content={description} />}
       {keywords && <meta name="keywords" content={keywords} />}

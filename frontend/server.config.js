@@ -1,9 +1,8 @@
 const host = 'http://md.xezoom.com';
 const apiPath = '/graphql';
-const storagePath = '/storage';
 
 module.exports = {
-  siteName: 'md.xezoom.com',
+  siteName: 'xezoom.com',
   siteMenu: [
     // { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },
@@ -15,6 +14,7 @@ module.exports = {
     { url: '/admin/posts', label: 'Posts' },
   ],
   apiBaseUrl: `${host}${apiPath}`,
+  storagePath: '/storage',
   locale: 'ro',
   timezone: 'Europe/Chisinau',
   baseCountry: {
@@ -33,7 +33,6 @@ module.exports = {
     slug: 'bnm',
   },
   baseCurrenciesArr: ['usd', 'eur', 'ron', 'rub', 'uah'],
-  storagePath,
   apiPath,
   host,
 };

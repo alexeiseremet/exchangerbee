@@ -1,12 +1,18 @@
 @import "root";
 
 .main-memu {
-  display: inline-flex;
-  flex-flow: column wrap;
+  @include flex-row;
+  flex-wrap: wrap;
+  margin-bottom: $base-spacing;
+
+  @include mappy-bp(small) {
+    display: inline-flex;
+    flex-direction: column;
+  }
 }
 
 .main-memu__item {
-  margin: .2rem 0;
+  margin: .2rem $base-spacing .2rem 0;
 }
 
 .main-memu__link {

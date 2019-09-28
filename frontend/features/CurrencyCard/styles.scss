@@ -7,7 +7,7 @@
 .currency-card__inner {
   @extend %flex-row;
   @extend %link-with-bg;
-  padding: $small-spacing;
+  padding: $small-spacing $xsmall-spacing;
   align-items: flex-end;
 }
 
@@ -17,12 +17,13 @@
   text-transform: lowercase;
   letter-spacing: -0.1rem;
   flex-grow: 1;
-  font-size: 3rem;
+  font-size: 2.2rem;
   line-height: 1.2;
   font-weight: 300;
 
   @include mappy-bp(small) {
     padding-right: $base-spacing;
+    font-size: 3rem;
   }
 }
 
