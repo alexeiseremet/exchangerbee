@@ -9,12 +9,12 @@ $breakpoints: (
         'xsmall': 0px,
         'small': 576px,
         'medium': 768px,
-        'large': 992px,
-        'xlarge': 1200px
+        'large': 992px
 );
 
 // Container.
-$container-width: 120rem !default;
+$container-width-large: 106.8rem !default;
+$container-width-medium: 76.8rem !default;
 
 // Grid.
 $grid-columns: 12 !default;

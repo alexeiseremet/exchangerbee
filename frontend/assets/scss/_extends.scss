@@ -7,8 +7,12 @@
   padding: 0 $grid-gutter-sm;
   width: 100%;
 
-  @include mappy-bp(medium) {
-    max-width: $container-width;
+  @include mappy-bp(small) {
+    max-width: $container-width-medium;
+  }
+
+  @include mappy-bp(large) {
+    max-width: $container-width-large;
   }
 }
 

@@ -10,26 +10,22 @@
 }
 
 .page__top {
-  @include flex-width(100%);
-  padding-bottom: 20px;
+  @include flex-width();
+  padding-bottom: $base-spacing;
 }
 
 .page__content {
-  @include flex-width(100%);
+  @include flex-width();
   order: 2;
 
-  @include mappy-bp(medium) {
-    @include flex-width(calc(100% - 280px));
-    margin: 0 auto;
-  }
-
   @include mappy-bp(large) {
-    @include flex-width(calc(100% - 300px));
+    @include flex-width(calc(100% - 30rem));
+    margin: 0 auto;
   }
 
   .page--no-aside & {
     @include mappy-bp(max-width large) {
-      @include flex-width(100%);
+      @include flex-width();
     }
   }
 }
@@ -37,13 +33,9 @@
 .page__aside {
   @include flex-width(100%);
 
-  @include mappy-bp(medium) {
-    @include flex-width(280px);
-    padding-right: 20px;
-  }
-
   @include mappy-bp(large) {
-    @include flex-width(300px);
+    @include flex-width(30rem);
+    padding-right: $large-spacing;
   }
 }
 
