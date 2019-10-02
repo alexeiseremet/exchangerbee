@@ -58,7 +58,7 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
                 <caption dangerouslySetInnerHTML={{
                   __html: `
                     Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} 
-                    oferite de băncile din ${baseCountry.name}, ${localeDate()}
+                    oferite de băncile din <span style="white-space: nowrap">${baseCountry.name}, ${localeDate()}</span>
                   `,
                 }}/>
                 <tbody>

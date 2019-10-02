@@ -70,7 +70,3 @@
 @include mappy-bp(large) {
   @include griddle($suffix: 'large');
 }
-
-@include mappy-bp(xlarge) {
-  @include griddle($suffix: 'xlarge');
-}

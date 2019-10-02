@@ -7,11 +7,12 @@
 .bank-card__inner {
   @extend %flex-row;
   @extend %link-with-bg;
-  padding: $small-spacing;
+  padding: $small-spacing $xsmall-spacing;
   align-items: flex-end;
 }
 
 .bank-card__label {
+  @include flex-width();
   @include heading-bold-italic;
   padding-right: $small-spacing;
   text-transform: lowercase;
