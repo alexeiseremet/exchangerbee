@@ -23,10 +23,10 @@
   padding-right: $xsmall-spacing;
   text-transform: lowercase;
   letter-spacing: -0.1rem;
-  flex-grow: 1;
   font-size: 2.2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  flex-shrink: 99;
 
   @include mappy-bp(max small) {
     @include flex-width;
@@ -41,6 +41,7 @@
 .quote-card__rate {
   margin-bottom: $small-spacing;
   line-height: 1.2;
+  flex-grow: 99;
 
   @include mappy-bp(small) {
     padding-left: $xsmall-spacing;

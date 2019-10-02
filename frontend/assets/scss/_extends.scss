@@ -4,11 +4,16 @@
 
 %container {
   margin:0 auto;
-  padding: 0 $grid-gutter-sm;
+  padding: 0 $grid-gutter;
   width: 100%;
 
-  @include mappy-bp(medium) {
-    max-width: $container-width;
+  @include mappy-bp(small) {
+    padding: 0 $grid-gutter-sm;
+    max-width: $container-width-medium;
+  }
+
+  @include mappy-bp(large) {
+    max-width: $container-width-large;
   }
 }
 
@@ -150,6 +155,32 @@
                     transparent calc(50% - .16rem),
                     rgba($primary-background, 1) calc(50% - .16rem),
                     rgba($primary-background, 1) 100%
+    );
+    background-position: 0 100%;
+  }
+}
+
+%link-with-bg-inverse {
+  color: $white;
+  text-decoration: none;
+  background-image: linear-gradient(
+                  transparent 0%,
+                  transparent calc(50% - .16rem),
+                  rgba($white, 0.5) calc(50% - .16rem),
+                  rgba($white, 0.5) 100%
+  );
+  transition: $base-animation;
+  background-size: 100% 200%;
+  background-position: 0 0;
+
+  &:hover,
+  .is-active {
+    color: $action-color;
+    background-image: linear-gradient(
+                    transparent 0%,
+                    transparent calc(50% - .16rem),
+                    rgba($white, 1) calc(50% - .16rem),
+                    rgba($white, 1) 100%
     );
     background-position: 0 100%;
   }

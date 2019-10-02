@@ -18,27 +18,32 @@ $container-width: 120rem !default;
 
 // Grid.
 $grid-columns: 12 !default;
+$grid-gutter: 1.4rem !default;
 $grid-gutter-sm: 2rem !default;
 $grid-gutter-lg: 6rem !default;
 
 // Colors.
-$dark-gray: #414141;
-$medium-gray: #999;
-$light-gray: #ddd;
+$black: #111;
+$gray: #aaa;
+$silver: #ddd;
 $white: #fff;
-$blue: #0d28ff;
+$blue: #0074d9;
+$green: #2ecc40;
+$red: #ff4136;
+$yellow: #ffdc00;
+$olive: #3d9970;
 
-$base-color: $dark-gray !default;
+$base-color: $black !default;
 $primary-color: $white !default;
-$secondary-color: $medium-gray !default;
+$secondary-color: $gray !default;
 
 $base-background: $white !default;
-$primary-background: $blue !default;
-$secondary-background: $light-gray !default;
+$primary-background: $olive !default;
+$secondary-background: $silver !default;
 
-$action-color: $blue !default;
-$action-active-color: $dark-gray !default;
-$action-disabled-color: $medium-gray !default;
+$action-color: $olive !default;
+$action-active-color: $black !default;
+$action-disabled-color: $gray !default;
 
 // Typography.
 $font-base: Verdana, Arial, sans-serif !default;
@@ -46,7 +51,7 @@ $font-primary-regular: Georgia, Lucida Bright, serif !default;
 
 $base-font-family: $font-base !default;
 $base-font-size: 1.4rem !default;
-$base-font-color: $dark-gray !default;
+$base-font-color: $black !default;
 $base-line-height: 1.7 !default;
 $heading-font-size: ($base-font-size * 2.6) !default;
 $heading-font-family: $font-primary-regular !default;
@@ -60,7 +65,7 @@ $small-spacing: $base-spacing / 2 !default;
 $xsmall-spacing: $small-spacing / 2 !default;
 
 // Border.
-$base-border-color: $light-gray !default;
+$base-border-color: $silver !default;
 $base-border: .1rem solid $base-border-color !default;
 $base-border-transparent: .1rem solid transparent !default;
 
@@ -81,7 +86,7 @@ $footer-background: $white !default;
 // Breadcrumb.
 $breadcrumb-color: $action-color !default;
 $breadcrumb-color-hover: lighten($breadcrumb-color, 10%) !default;
-$breadcrumb-color-active: $medium-gray !default;
+$breadcrumb-color-active: $gray !default;
 
 // Messages.
 $message-alert-color: #fff6bf !default;

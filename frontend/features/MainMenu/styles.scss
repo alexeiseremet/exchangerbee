@@ -2,22 +2,79 @@
 
 .main-memu {
   @include flex-row;
-  flex-wrap: wrap;
-  margin-bottom: $base-spacing;
 
-  @include mappy-bp(small) {
+  @include mappy-bp(large) {
+    margin: $small-spacing 0;
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: wrap;
   }
 }
 
 .main-memu__item {
-  margin: .2rem $base-spacing .2rem 0;
+  margin: 0 .5rem;
 }
 
 .main-memu__link {
-  @extend %link-with-bg;
-  padding: 0 .4rem;
+  @extend %link-with-bg-inverse;
+  padding: .4rem;
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  @include mappy-bp(medium) {
+    font-size: $base-font-size;
+    text-transform: none;
+  }
+
+  @include mappy-bp(large) {
+    margin: .3rem 0;
+  }
 }
+
+.header {
+  @include flex-row;
+  padding: $xsmall-spacing 0;
+  background: $primary-background;
+  position: fixed;
+  height: 6rem;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @include mappy-bp(large) {
+    @include flex-column;
+    padding: $base-spacing;
+    height: auto;
+    align-items: flex-start;
+    position: absolute;
+  }
+}
+
+.header__brand {
+  padding-left: $xsmall-spacing;
+}
+
+
+.header__menu {
+  padding: 0 $xsmall-spacing;
+}
+
+.brand {
+  display: block;
+  width: 5.1rem;
+  height: 4rem;
+
+  svg {
+    fill: $white;
+  }
+}
+
+.brand__slag {
+  @include visually-hidden;
+}
+
+
+

@@ -2,20 +2,26 @@ import './styles.scss';
 import React from 'react';
 import { Link } from '../../lib/i18n';
 import { siteName, baseCountry } from '../../server.config';
+import Svg from '../Svg';
+import iconClose from '../../assets/images/logo.svg?sprite';
 
 const MainMenu = ({ items }) => (
-  <>
-    <Link href="/">
-      <a role="brand"
-         dangerouslySetInnerHTML={{
-           __html: (`Curs valutar (${String(baseCountry.slug).toUpperCase()})`),
-         }}
-         style={{ display: 'inline-block', marginBottom: '2rem' }}
-         title={siteName}
-      />
-    </Link>
+  <div className="header">
+    <div className="header__brand">
+      <Link href="/">
+        <a role="brand"
+           className="brand"
+           title={siteName}
+        >
+          <Svg glyph={iconClose.id} />
+          <span className="brand__slag">
+            {`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}
+          </span>
+        </a>
+      </Link>
+    </div>
 
-    <nav role="navigation">
+    <nav className="header__menu" role="navigation">
       <ul className="main-memu">
         {
           items.map((item, i) => (
@@ -30,7 +36,7 @@ const MainMenu = ({ items }) => (
         }
       </ul>
     </nav>
-  </>
+  </div>
 );
 
 export default MainMenu;

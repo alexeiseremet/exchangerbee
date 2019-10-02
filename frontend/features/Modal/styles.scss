@@ -11,7 +11,7 @@
 
 .modal__backdrop {
   @extend %absolute-cover;
-  background: rgba($dark-gray, .9);
+  background: rgba($black, .9);
   padding: $large-spacing 0;
   overflow-y: auto;
 }
@@ -27,12 +27,12 @@
 }
 
 .modal__header {
-  background: $light-gray;
+  background: $silver;
 }
 
 .modal__title {
   @include heading-bold;
-  color: $dark-gray;
+  color: $black;
   padding: $small-spacing;
   padding-right: 4rem;
   line-height: 1.2;
@@ -48,11 +48,11 @@
   padding: 0;
 
   svg {
-    fill: $medium-gray;
+    fill: $gray;
   }
 
   &:hover svg{
-    fill: $dark-gray;
+    fill: $black;
   }
 }
 

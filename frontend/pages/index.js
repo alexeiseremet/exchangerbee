@@ -25,7 +25,7 @@ const IndexPageMarkup = ({
       <Page>
         <div className="page-heading">
           <h1 dangerouslySetInnerHTML={{
-            __html: (`Curs valutar (${String(baseCountry.slug).toUpperCase()})`),
+            __html: (`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`),
           }}/>
         </div>
 
