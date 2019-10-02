@@ -52,7 +52,6 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
               marginTop: '3rem',
               padding: '1rem',
               backgroundColor: '#eaeaea',
-              borderRadius: '.6rem',
             }}>
               <table>
                 <caption dangerouslySetInnerHTML={{
@@ -160,6 +159,10 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
           /*
           {`Evoluția cursului oficial pentru ${currency.name},
           ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`}
+
+          Evoluția cursului oficial pentru 1 Dolar american, USD/MDL
+          Utilizați graficul evoluției și urmăriți dinamica dolarului american (USD),
+          în diferite perioade de timp: pe săptămână, lună, an, zi.
           */
         }
 

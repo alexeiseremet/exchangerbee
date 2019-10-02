@@ -20,9 +20,17 @@ export default class ExbeeDocument extends Document {
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-          {/* <meta name="google-site-verification" content={googleSiteVerification}/> */}
-          {/* <meta name="yandex-verification" content={yandexSiteVerification}/> */}
+
+          {/* Global site tag (gtag.js) - Google Analytics */}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTFEZD3BQX"/>
+          <script dangerouslySetInnerHTML={{__html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments)}
+            gtag('js', new Date());
+            gtag('config', 'G-FTFEZD3BQX');
+          `}} />
         </Head>
+
         <body itemScope itemType="http://schema.org/WebPage">
           <Main />
           <div id="modal-portal" />
