@@ -12,13 +12,14 @@ import Page from '../features/Page';
 import RateCard from '../features/RateCard';
 import QuoteCard from '../features/QuoteCard';
 
-const BankPageMarkup = ({ institution, allQuote, post }) => {
+const BankPageMarkup = ({ institution, allQuote, post, fullPath }) => {
   if (!institution) {
     return null;
   }
 
   return (
     <Layout metadata={{
+      url: `${fullPath}`,
       title: `${institution.name} — curs valutar ${String(institution.slug).toUpperCase()}`,
       description: `Cursul valutar la ${institution.name}`,
     }}>

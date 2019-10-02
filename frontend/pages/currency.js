@@ -15,7 +15,7 @@ import Page from '../features/Page';
 import QuoteCard from '../features/QuoteCard';
 import RateCard from '../features/RateCard';
 
-const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
+const CurrencyPageMarkup = ({ currency, allQuote, post, fullPath }) => {
   if (!currency) {
     return null;
   }
@@ -33,6 +33,7 @@ const CurrencyPageMarkup = ({ currency, allQuote, post }) => {
 
   return (
     <Layout metadata={{
+      url: `${fullPath}`,
       title: `${currency.name} — curs valutar ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
       description: `Curs ${String(currency.name).toLowerCase()} în raport cu ${String(baseCurrency.name).toLowerCase()}.`,
     }}>

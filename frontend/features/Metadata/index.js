@@ -18,7 +18,7 @@ export default ({
   title, url, ogDescription,
   description, keywords, ogImage,
 }) => {
-  const newUrl = url ? `${host}/${url}` : host;
+  const newUrl = url ? `${host}${url}` : host;
 
   return (
     <Head>

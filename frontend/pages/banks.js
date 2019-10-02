@@ -10,8 +10,9 @@ import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BankCard from '../features/BankCard';
 
-const BanksPageMarkup = ({ allInstitution }) => (
+const BanksPageMarkup = ({ allInstitution, fullPath }) => (
   <Layout metadata={{
+    url: `${fullPath}`,
     title: 'Cursul la bănci',
     description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
@@ -36,10 +37,15 @@ const BanksPageMarkup = ({ allInstitution }) => (
 );
 
 // getInitialProps.
-BanksPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
-  query,
-});
+BanksPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+  const fullPath = req ? `/${req.lng}${asPath}` : asPath;
+
+  return {
+    namespacesRequired: ['common'],
+    query,
+    fullPath,
+  };
+};
 
 // i18n.
 const BanksPageI18N = withTranslation('common')(BanksPageMarkup);
