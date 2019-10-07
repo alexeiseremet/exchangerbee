@@ -3,9 +3,10 @@ const apiPath = '/graphql';
 
 module.exports = {
   siteName: 'xezoom.com',
+  siteGtagId: 'G-FTFEZD3BQX',
   siteMenu: [
-    // { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },
+    { url: '/converter', label: 'Convertor valutar' },
     { url: '/currencies', label: 'Lista valute' },
   ],
   adminMenu: [
@@ -27,6 +28,8 @@ module.exports = {
     name: 'Leul moldovenesc',
     numCode: '498',
     symbol: 'leu',
+    bid: '1',
+    ask: '1',
   },
   centralBank: {
     name: 'Banca Naţională a Moldovei',

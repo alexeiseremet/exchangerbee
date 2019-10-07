@@ -1,17 +1,15 @@
 import React from 'react';
 import Select from '../Input/select';
 
-export default (
-  {
-    items,
-    name,
-    id,
-    labelText,
-    readOnly,
-    required,
-    setFieldValue,
-  },
-) => (
+export default ({
+  items,
+  name,
+  id,
+  labelText,
+  readOnly,
+  required,
+  setFieldValue,
+}) => (
   <Select
     id={`${id}-refId`}
     name={`${name}.refId`}
@@ -27,7 +25,7 @@ export default (
       setFieldValue(`${name}.refSlug`, slug);
     }}
   >
-    <option value="" selected disabled>Select an option</option>
+    <option value="" disabled>Select an option</option>
     {
         items && items.map((item) => (
           <option key={item.slug} value={item.id}>

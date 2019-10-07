@@ -16,13 +16,7 @@ const BanksPageMarkup = ({ allInstitution, fullPath }) => (
     title: 'Cursul la bănci',
     description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
-    <Page>
-      <div className="page-heading">
-        <h1>
-          {`Cursul valutar la băncile din ${baseCountry.name}`}
-        </h1>
-      </div>
-
+    <Page heading={`Cursul valutar la băncile din ${baseCountry.name}`}>
       {
         allInstitution && (
           <section className="bank-list">

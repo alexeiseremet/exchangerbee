@@ -10,7 +10,7 @@ const renderSidebar = (type) => (
 );
 
 const Page = ({
-  children, top, type, aside = true,
+  children, top, type, aside = true, heading,
 }) => {
   const classes = classnames(
     'page',
@@ -32,6 +32,14 @@ const Page = ({
         }
 
         <main className="page__content">
+          {
+            heading && (
+              <div className="page-heading">
+                <h1 dangerouslySetInnerHTML={{ __html: heading }}/>
+              </div>
+            )
+          }
+
           {children}
         </main>
 

@@ -12,6 +12,7 @@ const SelectCurrency = ({
   readOnly,
   required,
   setFieldValue,
+  labelText = 'Currency',
 }) => (
   <SelectReference
     items={allCurrency}
@@ -20,7 +21,7 @@ const SelectCurrency = ({
     required={required}
     readOnly={readOnly}
     setFieldValue={setFieldValue}
-    labelText="Currency"
+    labelText={labelText}
   />
 );
 

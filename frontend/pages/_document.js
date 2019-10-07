@@ -1,7 +1,8 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-// import { googleSiteVerification, yandexSiteVerification } from '../server.config'
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
+
+import { siteGtagId } from '../server.config';
 
 export default class ExbeeDocument extends Document {
   static async getInitialProps(ctx) {
@@ -22,13 +23,15 @@ export default class ExbeeDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTFEZD3BQX"/>
-          <script dangerouslySetInnerHTML={{__html: `
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}/>
+          <script dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments)}
             gtag('js', new Date());
-            gtag('config', 'G-FTFEZD3BQX');
-          `}} />
+            gtag('config', '${siteGtagId}');
+          `,
+          }} />
         </Head>
 
         <body itemScope itemType="http://schema.org/WebPage">

@@ -12,7 +12,9 @@ import Page from '../features/Page';
 import RateCard from '../features/RateCard';
 import QuoteCard from '../features/QuoteCard';
 
-const BankPageMarkup = ({ institution, allQuote, post, fullPath }) => {
+const BankPageMarkup = ({
+  institution, allQuote, post, fullPath,
+}) => {
   if (!institution) {
     return null;
   }
@@ -23,13 +25,7 @@ const BankPageMarkup = ({ institution, allQuote, post, fullPath }) => {
       title: `${institution.name} — curs valutar ${String(institution.slug).toUpperCase()}`,
       description: `Cursul valutar la ${institution.name}`,
     }}>
-      <Page>
-        <div className="page-heading">
-          <h1>
-            {`Cursul valutar la ${institution.name}`}
-          </h1>
-        </div>
-
+      <Page heading={`Cursul valutar la ${institution.name}`}>
         <section className="quote-list">
           {
             allQuote && allQuote.length ? (
@@ -71,7 +67,7 @@ const BankPageMarkup = ({ institution, allQuote, post, fullPath }) => {
                   </QuoteCard>
                 ),
               )
-            ) : <p>Nu a fost găsit niciun rezultat.</p>
+            ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
           }
         </section>
 

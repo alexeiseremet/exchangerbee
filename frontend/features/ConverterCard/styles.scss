@@ -1,0 +1,99 @@
+@import "root";
+
+.converter-card {
+  @extend %button-link;
+  display: block;
+  position: relative;
+  padding: 0;
+  width: 100%;
+}
+
+.converter-card__inner {
+  @extend %link-with-bg;
+  @extend %flex-row;
+  align-items: center;
+  padding: $small-spacing $xsmall-spacing;
+
+  @include mappy-bp(max small) {
+    flex-wrap: wrap;
+  }
+}
+
+.converter-card__label {
+  @include flex-width();
+  @include heading-regular-italic;
+  padding-right: $small-spacing;
+  text-transform: lowercase;
+  letter-spacing: -0.1rem;
+  font-size: 2.2rem;
+  line-height: 1.2;
+
+  @include mappy-bp(small) {
+    padding-right: $base-spacing;
+    font-size: 3rem;
+  }
+}
+
+.converter-card__value-wrapper {
+  @extend %flex-row;
+  @include flex-width();
+  justify-content: space-between;
+  align-items: center;
+
+  @include mappy-bp(small) {
+    @include flex-width(40%);
+  }
+}
+
+.converter-card__input,
+.converter-card__value,
+.converter-card__slug {
+  @include base-regular;
+  border: .1rem dashed transparent;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.6rem;
+  width: 100%;
+
+  @include mappy-bp(small) {
+    font-size: 2rem;
+  }
+}
+
+.converter-card__input,
+.converter-card__value {
+  color: $base-font-color;
+  border-color: $form-input-border-color;
+  padding: 0 $form-input-padding;
+  background-color: transparent;
+  -webkit-appearance: none;
+
+  .converter-card:hover &,
+  .is-active & {
+    color: $white;
+    border-color: $white;
+    background-color: transparent;
+    outline: none;
+  }
+
+  @include mappy-bp(small) {
+    font-size: 2rem;
+  }
+}
+
+.converter-card__slug {
+  margin-left: $small-spacing;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border-color: transparent;
+  width: auto;
+
+  .converter-card:hover &,
+  .is-active & {
+    color: $white;
+  }
+}
+
+
+
+

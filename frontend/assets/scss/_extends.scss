@@ -83,6 +83,7 @@
   &:focus,
   &:hover {
     color: lighten($action-color, 10%);
+    outline: none;
   }
 }
 
@@ -148,7 +149,7 @@
   background-position: 0 0;
 
   &:hover,
-  .is-active {
+  &.is-active {
     color: $white;
     background-image: linear-gradient(
                     transparent 0%,

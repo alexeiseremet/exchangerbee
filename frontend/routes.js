@@ -23,6 +23,10 @@ const APP_ROUTES = [
     page: 'currency',
     pattern: '/currencies/:slug',
   },
+  {
+    page: 'converter',
+    pattern: '/converter',
+  },
   // Admin's pages.
   {
     page: 'admin/banks',

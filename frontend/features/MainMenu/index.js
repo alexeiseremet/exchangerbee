@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from '../../lib/i18n';
 import { siteName, baseCountry } from '../../server.config';
 import Svg from '../Svg';
+// eslint-disable-next-line
 import iconClose from '../../assets/images/logo.svg?sprite';
 
 const MainMenu = ({ items }) => (

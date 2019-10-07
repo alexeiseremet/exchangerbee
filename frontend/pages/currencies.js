@@ -16,13 +16,7 @@ const CurrenciesPageMarkup = ({ allCurrency, fullPath }) => (
     title: 'Lista valute',
     description: `Lista valutelor negociate la băncile din ${baseCountry.name}`,
   }}>
-    <Page>
-      <div className="page-heading">
-        <h1>
-          {`Lista valutelor negociate la băncile din ${baseCountry.name}`}
-        </h1>
-      </div>
-
+    <Page heading={`Lista valutelor negociate la băncile din ${baseCountry.name}`}>
       {
         allCurrency && (
           <section className="currency-list">

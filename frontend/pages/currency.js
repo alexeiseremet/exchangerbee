@@ -15,7 +15,9 @@ import Page from '../features/Page';
 import QuoteCard from '../features/QuoteCard';
 import RateCard from '../features/RateCard';
 
-const CurrencyPageMarkup = ({ currency, allQuote, post, fullPath }) => {
+const CurrencyPageMarkup = ({
+  currency, allQuote, post, fullPath,
+}) => {
   if (!currency) {
     return null;
   }
@@ -37,16 +39,12 @@ const CurrencyPageMarkup = ({ currency, allQuote, post, fullPath }) => {
       title: `${currency.name} — curs valutar ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
       description: `Curs ${String(currency.name).toLowerCase()} în raport cu ${String(baseCurrency.name).toLowerCase()}.`,
     }}>
-      <Page>
-        <div className="page-heading">
-          <h1>
-            {`
-              Curs ${String(currency.name).toLowerCase()} 
-              în raport cu ${String(baseCurrency.name).toLowerCase()} 
-            `}
-          </h1>
-        </div>
-
+      <Page
+        heading={`
+          Curs ${String(currency.name).toLowerCase()} 
+          în raport cu ${String(baseCurrency.name).toLowerCase()} 
+        `}
+      >
         {
           centralQuote && (
             <section style={{
@@ -152,7 +150,7 @@ const CurrencyPageMarkup = ({ currency, allQuote, post, fullPath }) => {
                     ),
                   }}/>
               </>
-            ) : <p>Nu a fost găsit niciun rezultat.</p>
+            ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
           }
         </section>
 

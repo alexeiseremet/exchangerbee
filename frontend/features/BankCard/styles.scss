@@ -13,14 +13,13 @@
 
 .bank-card__label {
   @include flex-width();
-  @include heading-bold-italic;
+  @include heading-regular-italic;
   padding-right: $small-spacing;
   text-transform: lowercase;
   letter-spacing: -0.1rem;
   flex-grow: 1;
   font-size: 2.2rem;
   line-height: 1.2;
-  font-weight: 300;
 
   @include mappy-bp(small) {
     padding-right: $base-spacing;

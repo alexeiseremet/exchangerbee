@@ -10,5 +10,6 @@
 .button__label {
   @extend %text-truncate;
   @include base-bold;
+  cursor: pointer;
   z-index: 1;
 }

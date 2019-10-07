@@ -22,13 +22,7 @@ const IndexPageMarkup = ({
       title: 'Curs valutar',
       description: `Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.`,
     }}>
-      <Page>
-        <div className="page-heading">
-          <h1 dangerouslySetInnerHTML={{
-            __html: (`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`),
-          }}/>
-        </div>
-
+      <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}>
         <BestQuotes
           bestAskQuote={bestAskQuote}
           bestBidQuote={bestBidQuote}
