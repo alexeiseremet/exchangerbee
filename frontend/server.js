@@ -12,7 +12,6 @@ const {
   API_KEY = 'browser',
   NODE_ENV,
 } = process.env;
-
 const IS_PRODUCTION = NODE_ENV === 'production';
 
 const nextI18NextMiddleware = require('next-i18next/middleware').default;

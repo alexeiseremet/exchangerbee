@@ -11,7 +11,12 @@ const mongoose = require('mongoose');
 const schema = require('./graphql');
 const runCrawler = require('./crawler/');
 
-const { PORT, MONGO_URL, JWT_SECRET_SERVER, NODE_ENV } = process.env;
+const {
+  PORT,
+  MONGO_URL,
+  JWT_SECRET_SERVER,
+  NODE_ENV
+} = process.env;
 const IS_PRODUCTION = NODE_ENV === 'production';
 
 // mongoose.Promise = global.Promise

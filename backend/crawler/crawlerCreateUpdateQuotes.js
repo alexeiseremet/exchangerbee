@@ -45,6 +45,7 @@ const createUpdateQuotes = (quotes) => {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'x-api-key': process.env.JWT_SECRET_SERVER
         },
         body: JSON.stringify({
           query: GQL_UDATE_QUOTE,
