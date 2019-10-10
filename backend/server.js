@@ -45,7 +45,7 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 
 // Check server token.
 server.use((req, res, next) => {
-  const apiKey = req.headers['x-api-key'];
+  const apiKey = req.headers['X-API-Key'];
   const decodedToken = apiKey === JWT_SECRET_SERVER;
 
   if (!decodedToken) {

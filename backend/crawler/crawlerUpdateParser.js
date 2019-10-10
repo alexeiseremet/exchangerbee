@@ -20,7 +20,8 @@ const updateParser = async (id) => {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'x-api-key': process.env.JWT_SECRET_SERVER
+        'Authorization': `Bearer ${process.env.JWT_SECRET_ADMIN}`,
+        'X-API-Key': `${process.env.JWT_SECRET_SERVER}`,
       },
       body: JSON.stringify({
         query: GQL_UPDATE_PARSER,
