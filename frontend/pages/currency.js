@@ -78,7 +78,7 @@ const CurrencyPageMarkup = ({
                       key="central"
                       value={centralQuote.bid}
                       label={String(centralBank.slug).toUpperCase()}
-                      info={String(baseCurrency.slug).toUpperCase()}
+                      info={baseCurrency.symbol}
                     />
                   </td>
                   <td>
@@ -86,7 +86,7 @@ const CurrencyPageMarkup = ({
                       key="bid"
                       value={bestBid.bid}
                       label={bestBid.institutionVObj.name}
-                      info="cumpărare"
+                      info={`cumpără`}
                     />
                   </td>
                   <td>
@@ -94,7 +94,7 @@ const CurrencyPageMarkup = ({
                       key="ask"
                       value={bestAsk.ask}
                       label={bestAsk.institutionVObj.name}
-                      info="vânzare"
+                      info={`vinde`}
                     />
                   </td>
                 </tr>
@@ -121,13 +121,13 @@ const CurrencyPageMarkup = ({
                       <RateCard
                         key="bid"
                         value={quote.bid}
-                        info="cumpărare"
+                        info={`cumpără`}
                       />
 
                       <RateCard
                         key="ask"
                         value={quote.ask}
-                        info="vânzare"
+                        info={`vinde`}
                       />
                     </QuoteCard>
                   ))
@@ -143,11 +143,11 @@ const CurrencyPageMarkup = ({
                     opacity: '0.65',
                   }}
                   dangerouslySetInnerHTML={{
-                    __html: (
-                      `Ratele de shimb pentru 
+                    __html: (`
+                      Ratele de shimb pentru
                       <strong>${currency.name}</strong> (${String(currency.slug).toUpperCase()})
-                      afişate la băncile din ${baseCountry.name}`
-                    ),
+                      afişate la băncile din ${baseCountry.name}
+                    `),
                   }}/>
               </>
             ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>

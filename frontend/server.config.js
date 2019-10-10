@@ -27,7 +27,7 @@ module.exports = {
     slug: 'mdl',
     name: 'Leul moldovenesc',
     numCode: '498',
-    symbol: 'leu',
+    symbol: 'lei',
     bid: '1',
     ask: '1',
   },

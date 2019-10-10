@@ -8,7 +8,7 @@ module.exports = `
   }
   
   type Query {
-    currency(slug: String!): Currency!
+    currency(slug: String!): Currency
     allCurrency(
       where: CurrencyWhereInput
       orderBy: CurrencyOrderByInput
@@ -17,13 +17,13 @@ module.exports = `
       before: String
       first: Int
       last: Int
-    ): [Currency!]!
+    ): [Currency!]
   }
   
   type Mutation {
-    createCurrency(currency: CurrencyInput!): Currency
-    updateCurrency(id: ID!, currency: CurrencyInput!): Currency
-    deleteCurrency(id: ID!): Currency
+    createCurrency(currency: CurrencyInput!): Currency @auth(requires: ADMIN)
+    updateCurrency(id: ID!, currency: CurrencyInput!): Currency @auth(requires: ADMIN)
+    deleteCurrency(id: ID!): Currency @auth(requires: ADMIN)
   }
     
   input CurrencyInput {

@@ -47,8 +47,8 @@ const BankPageMarkup = ({
                             value={quote.bid}
                             info={
                               institution.slug === centralBank.slug
-                                ? String(baseCurrency.slug).toUpperCase()
-                                : 'cumpărare'
+                                ? baseCurrency.symbol
+                                : `cumpărare`
                             }
                           />
                         )
@@ -60,8 +60,8 @@ const BankPageMarkup = ({
                       value={quote.ask}
                       info={
                         institution.slug === centralBank.slug
-                          ? String(baseCurrency.slug).toUpperCase()
-                          : 'vânzare'
+                          ? baseCurrency.symbol
+                          : `vânzare`
                       }
                     />
                   </QuoteCard>

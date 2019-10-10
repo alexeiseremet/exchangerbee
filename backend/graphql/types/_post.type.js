@@ -17,13 +17,13 @@ module.exports = `
       before: String
       first: Int
       last: Int
-    ): [Post!]!
+    ): [Post!] @auth(requires: ADMIN)
   }
   
   type Mutation {
-    createPost(post: PostInput!): Post
-    updatePost(id: ID!, post: PostInput!): Post
-    deletePost(id: ID!): Post
+    createPost(post: PostInput!): Post @auth(requires: ADMIN)
+    updatePost(id: ID!, post: PostInput!): Post @auth(requires: ADMIN)
+    deletePost(id: ID!): Post @auth(requires: ADMIN)
   }
     
   input PostInput {

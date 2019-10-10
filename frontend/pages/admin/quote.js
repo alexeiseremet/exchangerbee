@@ -16,7 +16,7 @@ const QuotePageMarkup = ({ quote }) => {
   }
 
   return (
-    <Layout metadata={{ title: 'Quote' }}>
+    <Layout metadata={{ title: quote.institutionVObj.name }}>
       <Page type="admin">
         <DeleteQuote quote={quote}/>
         <hr/>

@@ -1,62 +1,26 @@
-// Import temporary.
-import '../../assets/scss/helper.scss';
-import '../../assets/scss/tables.scss';
-import '../../assets/scss/typography.scss';
-
 import React from 'react';
 import { withTranslation } from '../../lib/i18n';
-import securePage from '../../lib/securePage';
 
 import Layout from '../../features/Layout';
 import Page from '../../features/Page';
-import Tabs from '../../features/Tabs';
-import Modal from '../../features/Modal';
-import ModalHandler from '../../features/Modal/ModalHandler';
+import LoginForm from '../../features/LoginForm';
 
-const AnyTypeModalContent = (
-  // eslint-disable-next-line no-alert
-  <button style={{ color: 'red' }} onClick={() => alert('hi')}>
-    Any type content
-  </button>
-);
-
-
-const AdminPageMarkup = () => (
+const LoginPageMarkup = () => (
   <>
-    <Layout metadata={{ title: 'Admin' }}>
-      <Page type="admin">
-        <Tabs
-          activeIndex={0}
-          items={[
-            {
-              id: 'tab-1',
-              label: 'Tab item 1',
-              content: (
-                <ModalHandler label="Open modal 1" title="Modal title" content="modal content"/>
-              ),
-            },
-            {
-              id: 'tab-2',
-              label: 'Tab item 2',
-              content: (
-                <ModalHandler label="Open modal 2" title="Any type of content 1"
-                              content={AnyTypeModalContent}/>
-              ),
-            },
-          ]}
-        />
+    <Layout metadata={{ title: 'Login' }}>
+      <Page type="admin" aside={false}>
+        <LoginForm/>
       </Page>
     </Layout>
-    <Modal />
   </>
 );
 
 // getInitialProps.
-AdminPageMarkup.getInitialProps = async () => ({
+LoginPageMarkup.getInitialProps = async () => ({
   namespacesRequired: ['common'],
 });
 
 // i18n.
-const AdminPageI18N = withTranslation('common')(AdminPageMarkup);
+const LoginPageI18N = withTranslation('common')(LoginPageMarkup);
 
-export default securePage(AdminPageI18N);
+export default LoginPageI18N;

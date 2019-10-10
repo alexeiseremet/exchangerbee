@@ -11,9 +11,8 @@ const mongoose = require('mongoose');
 const schema = require('./graphql');
 const runCrawler = require('./crawler/');
 
-const PORT = parseInt(process.env.PORT, 10);
-const { MONGO_URL } = process.env;
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const { PORT, MONGO_URL, JWT_SECRET_SERVER, NODE_ENV } = process.env;
+const IS_PRODUCTION = NODE_ENV === 'production';
 
 // mongoose.Promise = global.Promise
 // Connect to MongoDB with Mongoose.
@@ -39,15 +38,31 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
     });
 }());
 
+// Check server token.
+server.use((req, res, next) => {
+  const apiKey = req.headers['x-api-key'];
+  const decodedToken = apiKey === JWT_SECRET_SERVER;
+
+  if (!decodedToken) {
+    res.status(401).send();
+    return undefined;
+  }
+
+  next();
+});
+
 // GraphqQL server route.
 server.use(
   '/graphql',
-  expressGraphql({
+  expressGraphql((req) => ({
     schema,
-    context: { startTime: Date.now() },
+    context: {
+      startTime: Date.now(),
+      req
+    },
     graphiql: !IS_PRODUCTION,
     pretty: true,
-  }),
+  })),
 );
 
 // Crawler server route.

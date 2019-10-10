@@ -27,7 +27,7 @@ export default (Page) => (
       // Redirect if not logged.
       if (!isLogged) {
         const { lng } = ctx.req || ctx.query;
-        redirect(`/${lng}`, ctx);
+        redirect(`/${lng}/admin/login`, ctx);
       }
 
       return pageProps;

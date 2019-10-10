@@ -16,7 +16,7 @@ const PostPageMarkup = ({ post }) => {
   }
 
   return (
-    <Layout metadata={{ title: 'Post' }}>
+    <Layout metadata={{ title: post.slug }}>
       <Page type="admin">
         <DeletePost post={post} />
         <hr/>

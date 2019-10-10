@@ -19,7 +19,7 @@ module.exports = `
   }
   
   type Query {
-    quote(id: ID): Quote!
+    quote(id: ID): Quote
     allQuote(
       where: QuoteWhereInput
       orderBy: QuoteOrderByInput
@@ -28,19 +28,19 @@ module.exports = `
       before: String
       first: Int
       last: Int
-    ): [Quote!]!
+    ): [Quote!]
     bestTodayQuote(
       currencies: [String!]
       excludeBanks: [String!]
       includeBanks: [String!]
       type: String
-    ): [Quote!]!
+    ): [Quote!]
   }
   
   type Mutation {
-    createQuote(quote: QuoteInput!): Quote
-    updateQuote(where: QuoteWhereInput!, quote: QuoteInput!): Quote
-    deleteQuote(id: ID!): Quote
+    createQuote(quote: QuoteInput!): Quote @auth(requires: ADMIN)
+    updateQuote(where: QuoteWhereInput!, quote: QuoteInput!): Quote @auth(requires: ADMIN)
+    deleteQuote(id: ID!): Quote @auth(requires: ADMIN)
   }
   
   input QuoteInput {

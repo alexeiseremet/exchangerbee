@@ -1,8 +1,8 @@
-import cookie from 'js-cookie';
-import jwtoken from 'jsonwebtoken';
+const cookie = require('js-cookie');
+const jwtoken = require('jsonwebtoken');
 
-export const AUTH_SECRET = 'browser';
-export const AUTH_COOKIE_NAME = 'userData';
+const AUTH_SECRET = process.env.JWT_SECRET || 'browser';
+const AUTH_COOKIE_NAME = 'xeUserData';
 
 /**
  * Set cookies from the browser.
@@ -11,7 +11,7 @@ export const AUTH_COOKIE_NAME = 'userData';
  * @param {string} value Cookie value.
  * @param {number} day Cookie life time.
  */
-export const setCookie = (key, value, day = 1) => {
+const setCookie = (key, value, day = 1) => {
   if (process.browser) {
     cookie.set(key, value, {
       expires: day,
@@ -31,15 +31,17 @@ const getCookieFromServer = (key, req) => {
   if (!req.headers.cookie) {
     return undefined;
   }
+
   const rawCookie = req.headers.cookie;
+  const cookieByKey = (
+    rawCookie.split(';').find((c) => c.trim().startsWith(`${key}=`))
+  );
 
-  rawCookie.split(';').find((c) => c.trim().startsWith(`${key}=`));
-
-  if (!rawCookie) {
+  if (!cookieByKey) {
     return undefined;
   }
 
-  return rawCookie.split('=')[1];
+  return cookieByKey.split('=')[1];
 };
 
 /**
@@ -47,7 +49,7 @@ const getCookieFromServer = (key, req) => {
  *
  * @param {string} key Cookie name.
  */
-export const removeCookie = (key) => (
+const removeCookie = (key) => (
   process.browser && cookie.remove(key)
 );
 
@@ -58,9 +60,11 @@ export const removeCookie = (key) => (
  * @param {Object} req Received server request.
  * @returns {string} Return cookie.
  */
-export const getCookie = (key, req) => (process.browser
-  ? cookie.get(key)
-  : getCookieFromServer(key, req));
+const getCookie = (key, req) => (
+  process.browser
+    ? cookie.get(key)
+    : getCookieFromServer(key, req)
+);
 
 /**
  * Load User data from Cookie.
@@ -68,7 +72,7 @@ export const getCookie = (key, req) => (process.browser
  * @param {Object} req Received server request.
  * @returns Object} User data.
  */
-export const loadUserCookie = (req = null) => {
+const getUserCookie = (req = null) => {
   const userJwt = getCookie(AUTH_COOKIE_NAME, req);
 
   if (userJwt) {
@@ -83,7 +87,7 @@ export const loadUserCookie = (req = null) => {
  *
  * @param {Object} data User data to save.
  */
-export const saveUserCookie = (data) => {
+const setUserCookie = (data) => {
   const dataJwt = jwtoken.sign(data, AUTH_SECRET, { expiresIn: '30d' });
   setCookie(AUTH_COOKIE_NAME, dataJwt, 30);
 };
@@ -93,8 +97,8 @@ export const saveUserCookie = (data) => {
  *
  * @param {Object} newUserData Updated user data.
  */
-export const updateUserCookie = (newUserData) => {
-  const userData = { ...loadUserCookie() };
+const updateUserCookie = (newUserData) => {
+  const userData = { ...getUserCookie() };
 
   try {
     Object.keys(newUserData).forEach((key) => {
@@ -107,7 +111,7 @@ export const updateUserCookie = (newUserData) => {
     console.error(err);
   }
 
-  saveUserCookie({ jwt: userData.jwt, user: userData.user });
+  setUserCookie(userData);
   // Reload page after cookie update.
   if (process.browser) {
     window.location.reload();
@@ -119,7 +123,7 @@ export const updateUserCookie = (newUserData) => {
 /**
  * Remove User Cookie.
  */
-export const removeUserCookie = () => {
+const removeUserCookie = () => {
   removeCookie(AUTH_COOKIE_NAME);
   // Reload page after logout.
   if (process.browser) {
@@ -129,7 +133,7 @@ export const removeUserCookie = () => {
   return undefined;
 };
 
-export const isUserLogged = (req) => {
+const isUserLogged = (req) => {
   const userJwt = getCookie(AUTH_COOKIE_NAME, req);
   let isLogged = false;
 
@@ -141,4 +145,15 @@ export const isUserLogged = (req) => {
   }
 
   return isLogged;
+};
+
+module.exports = {
+  setCookie,
+  getCookie,
+  removeCookie,
+  setUserCookie,
+  getUserCookie,
+  updateUserCookie,
+  removeUserCookie,
+  isUserLogged,
 };

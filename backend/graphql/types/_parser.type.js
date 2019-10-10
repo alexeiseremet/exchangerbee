@@ -9,7 +9,7 @@ module.exports = `
   }
   
   type Query {
-    parser(id: ID!): Parser!
+    parser(id: ID!): Parser @auth(requires: ADMIN)
     allParser(
       where: ParserWhereInput
       orderBy: ParserOrderByInput
@@ -18,7 +18,7 @@ module.exports = `
       before: String
       first: Int
       last: Int
-    ): [Parser!]!
+    ): [Parser!] @auth(requires: ADMIN)
   }
   
   type ParserQuote {
@@ -39,9 +39,9 @@ module.exports = `
   }
   
   type Mutation {
-    createParser(parser: ParserInput!): Parser
-    updateParser(id: ID!, parser: ParserInput!): Parser
-    deleteParser(id: ID!): Parser
+    createParser(parser: ParserInput!): Parser @auth(requires: ADMIN)
+    updateParser(id: ID!, parser: ParserInput!): Parser @auth(requires: ADMIN)
+    deleteParser(id: ID!): Parser @auth(requires: ADMIN)
   }
   
   input ParserInput {

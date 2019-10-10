@@ -1,10 +1,12 @@
 module.exports = {
   locale: 'ro',
   timezone: 'Europe/Chisinau',
-  currency: {
+  baseCurrency: {
     slug: 'mdl',
-    name: 'Leu moldovenesc',
+    name: 'Leul moldovenesc',
     numCode: '498',
-    symbol: 'leu',
+    symbol: 'lei',
+    bid: '1',
+    ask: '1',
   },
 };

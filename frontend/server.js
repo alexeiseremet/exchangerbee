@@ -1,14 +1,19 @@
 // Load server variables from .env file.
-// const dotenv = require('dotenv')
-// dotenv.config()
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 const next = require('next');
 
-const PORT = parseInt(process.env.PORT, 10) || 3050;
-const API_HOST = process.env.API_HOST || 'http://localhost:3010';
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const {
+  PORT = 3050,
+  API_HOST = 'http://localhost:3010',
+  API_KEY = 'browser',
+  NODE_ENV,
+} = process.env;
+
+const IS_PRODUCTION = NODE_ENV === 'production';
 
 const nextI18NextMiddleware = require('next-i18next/middleware').default;
 const nextI18next = require('./lib/i18n');
@@ -18,6 +23,7 @@ const routes = require('./routes');
 
 const handler = routes.getRequestHandler(app);
 const { apiPath, storagePath } = require('./server.config');
+const { getUserCookie } = require('./lib/session');
 
 (async () => {
   await app.prepare();
@@ -31,6 +37,15 @@ const { apiPath, storagePath } = require('./server.config');
     changeOrigin: true,
     router: {
       [storagePath]: 'http://xezoom.com',
+    },
+    onProxyReq(proxyReq, req) {
+      const user = getUserCookie(req);
+
+      if (user) {
+        proxyReq.setHeader('authorization', `Bearer ${user.token}`);
+      }
+
+      proxyReq.setHeader('x-api-key', API_KEY);
     },
   });
 

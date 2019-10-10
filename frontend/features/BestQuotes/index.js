@@ -26,7 +26,7 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="central"
                       value={quote.bid}
                       label={String(centralBank.slug).toUpperCase()}
-                      info={String(baseCurrency.slug).toUpperCase()}
+                      info={baseCurrency.symbol}
                     />
                   )
                 ))
@@ -41,7 +41,7 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="bid"
                       value={quote.bid}
                       label={quote.institutionVObj.name}
-                      info="cumpărare"
+                      info={`cumpără`}
                     />
                   )
                 ))
@@ -56,7 +56,7 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="ask"
                       value={quote.ask}
                       label={quote.institutionVObj.name}
-                      info="vânzare"
+                      info={`vinde`}
                     />
                   )
                 ))

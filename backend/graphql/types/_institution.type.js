@@ -9,7 +9,7 @@ module.exports = `
   }
   
   type Query {
-    institution(slug: String!): Institution!
+    institution(slug: String!): Institution
     allInstitution(
       where: InstitutionWhereInput
       orderBy: InstitutionOrderByInput
@@ -18,13 +18,13 @@ module.exports = `
       before: String
       first: Int
       last: Int
-    ): [Institution!]!
+    ): [Institution!]
   }
   
   type Mutation {
-    createInstitution(institution: InstitutionInput!): Institution
-    updateInstitution(id: ID!, institution: InstitutionInput!): Institution
-    deleteInstitution(id: ID!): Institution
+    createInstitution(institution: InstitutionInput!): Institution @auth(requires: ADMIN)
+    updateInstitution(id: ID!, institution: InstitutionInput!): Institution @auth(requires: ADMIN)
+    deleteInstitution(id: ID!): Institution @auth(requires: ADMIN)
   }
     
   input InstitutionInput {
