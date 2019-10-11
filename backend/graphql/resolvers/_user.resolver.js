@@ -4,7 +4,7 @@ module.exports = {
   Mutation: {
     login(_, { password }) {
       return new Promise((resolve, reject) => {
-        password === jwt
+        password === jwtAdmin
           ? resolve({ token: jwtAdmin })
           : reject('You are wrong.');
       });
