@@ -46,27 +46,27 @@ const APP_ROUTES = [
   },
   {
     page: 'admin/parsers',
-    pattern: '/parsers/:action(create)?',
+    pattern: '/admin/parsers/:action(create)?',
   },
   {
     page: 'admin/parser',
-    pattern: '/parsers/:id',
+    pattern: '/admin/parsers/:id',
   },
   {
     page: 'admin/posts',
-    pattern: '/posts/:action(create)?',
+    pattern: '/admin/posts/:action(create)?',
   },
   {
     page: 'admin/post',
-    pattern: '/posts/:id',
+    pattern: '/admin/posts/:id',
   },
   {
     page: 'admin/quotes',
-    pattern: '/quotes/:action(create)?',
+    pattern: '/admin/quotes/:action(create)?',
   },
   {
     page: 'admin/quote',
-    pattern: '/quotes/:id',
+    pattern: '/admin/quotes/:id',
   },
 ];
 
