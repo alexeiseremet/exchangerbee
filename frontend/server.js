@@ -41,10 +41,10 @@ const { getUserCookie } = require('./lib/session');
       const user = getUserCookie(req);
 
       if (user) {
-        proxyReq.setHeader('Authorization', `Bearer ${user.token}`);
+        proxyReq.setHeader('authorization', `Bearer ${user.token}`);
       }
 
-      proxyReq.setHeader('X-API-Key', API_KEY);
+      proxyReq.setHeader('x-api-key', API_KEY);
     },
   });
 
