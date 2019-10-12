@@ -3,23 +3,28 @@ import React from 'react';
 import InputValue from './InputValue';
 
 class ConverterCard extends React.Component {
-  isCardActive = () => {
-    const { quote, payCurrencySlug } = this.props;
-
-    return (
-      quote.slug === payCurrencySlug
-    );
-  };
+  payValue = 100;
 
   handlerCardSelect = () => {
     const { selectCurrency, quote } = this.props;
     selectCurrency(quote.slug);
   };
 
+  componentDidMount() {
+    const { quote, currencyChange, payCurrencySlug } = this.props;
+
+    if (quote.slug === payCurrencySlug) {
+      currencyChange({
+        payValue: this.payValue,
+        bid: quote.bid,
+      });
+    }
+  }
+
   render() {
-    const { baseAmount, quote, handlerCurrencyChange } = this.props;
+    const { baseAmount, quote, currencyChange, selectedCurrencySlug } = this.props;
     const resultValue = Number(baseAmount / quote.bid).toFixed(2);
-    const isActive = this.isCardActive();
+    const isActive = quote.slug === selectedCurrencySlug;
 
     return (
       <button
@@ -35,8 +40,8 @@ class ConverterCard extends React.Component {
                   <InputValue
                     defaultValue={resultValue}
                     onChange={(target) => {
-                      handlerCurrencyChange({
-                        value: target.currentTarget.value,
+                      currencyChange({
+                        payValue: target.currentTarget.value,
                         bid: quote.bid,
                       });
                     }}

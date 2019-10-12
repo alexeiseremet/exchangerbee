@@ -18,6 +18,7 @@ class InputValue extends React.Component {
     }
   };
 
+
   componentDidMount() {
     this.handlerInputSelect();
   }

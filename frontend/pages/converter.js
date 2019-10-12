@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrency, baseCurrenciesArr } from '../server.config';
+import { centralBank, baseCurrency, baseCurrenciesArr, baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
@@ -15,59 +15,32 @@ class ConverterPageMarkup extends React.Component {
   state = {
     baseAmount: null,
     payCurrencySlug: baseCurrenciesArr[0],
-    payValue: 100,
-    payBid: null,
-    payAsk: null,
+    selectedCurrencySlug: null,
   };
 
-  selectCurrency = (slug) => {
+  handlerSelectCurrency = (slug) => {
     this.setState({
-      payCurrencySlug: slug,
+      selectedCurrencySlug: slug,
     });
   };
 
-  initAmounts = () => {
-    const { allQuote } = this.props;
-    const { payCurrencySlug, payValue } = this.state;
-
-    if (!allQuote) {
-      return undefined;
-    }
-
-    allQuote.forEach(({ currencyVObj, bid }) => {
-      if (currencyVObj.slug === payCurrencySlug) {
-        this.handlerCurrencyChange({
-          value: payValue,
-          bid,
-        });
-      }
-    });
-
-    return undefined;
-  };
-
-  handlerCurrencyChange = ({ value, bid }) => {
+  handlerCurrencyChange = ({ payValue, bid }) => {
     this.setState({
-      baseAmount: Number(value * bid).toFixed(2),
-      payValue: value,
+      baseAmount: Number(payValue * bid).toFixed(2),
     });
   };
-
-  componentDidMount() {
-    this.initAmounts();
-  }
 
   render() {
-    const { payCurrencySlug, baseAmount } = this.state;
+    const { payCurrencySlug, baseAmount, selectedCurrencySlug } = this.state;
     const { allQuote, post, fullPath } = this.props;
 
     return (
       <Layout metadata={{
         url: `${fullPath}`,
-        title: 'Convertor valutar',
-        description: 'Convertor valutar',
+        title: `Convertor valutar — ${baseCountry.name}`,
+        description: `Convertor valutar`,
       }}>
-        <Page heading={'Convertor valutar'}>
+        <Page heading={`Convertor valutar`}>
           <section className="converter">
             {
               allQuote && allQuote.length ? (
@@ -76,8 +49,9 @@ class ConverterPageMarkup extends React.Component {
                     baseAmount={baseAmount}
                     quote={{ ...baseCurrency }}
                     payCurrencySlug={payCurrencySlug}
-                    handlerCurrencyChange={this.handlerCurrencyChange}
-                    selectCurrency={this.selectCurrency}
+                    selectedCurrencySlug={selectedCurrencySlug}
+                    currencyChange={this.handlerCurrencyChange}
+                    selectCurrency={this.handlerSelectCurrency}
                   />
 
                   {
@@ -91,8 +65,9 @@ class ConverterPageMarkup extends React.Component {
                           bid: quote.bid,
                         }}
                         payCurrencySlug={payCurrencySlug}
-                        handlerCurrencyChange={this.handlerCurrencyChange}
-                        selectCurrency={this.selectCurrency}
+                        selectedCurrencySlug={selectedCurrencySlug}
+                        currencyChange={this.handlerCurrencyChange}
+                        selectCurrency={this.handlerSelectCurrency}
                       />
                     ))
                   }

@@ -19,7 +19,7 @@ const IndexPageMarkup = ({
 
   return (
     <Layout metadata={{
-      title: 'Curs valutar',
+      title: `Curs valutar — ${baseCountry.name}`,
       description: `Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.`,
     }}>
       <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}>
