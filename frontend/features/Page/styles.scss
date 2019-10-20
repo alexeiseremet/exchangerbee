@@ -12,33 +12,13 @@
 .page__top {
   @include flex-width();
   padding-bottom: $base-spacing;
+  position: relative;
 }
 
 .page__content {
   @include flex-width();
-  padding: 9rem 0 4rem;
+  margin: 0 auto;
   order: 2;
-
-  @include mappy-bp(large) {
-    @include flex-width(calc(100% - 30rem));
-    padding-top: $large-spacing;
-    padding-left: $large-spacing;
-  }
-
-  .page--no-aside & {
-    @include mappy-bp(max-width large) {
-      @include flex-width();
-    }
-  }
-}
-
-.page__aside {
-  @include flex-width();
-  position: relative;
-
-  @include mappy-bp(large) {
-    @include flex-width(30rem);
-  }
 }
 
 .page-heading {

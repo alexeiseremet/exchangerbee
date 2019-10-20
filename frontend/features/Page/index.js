@@ -5,18 +5,17 @@ import { siteMenu, adminMenu } from '../../server.config';
 
 import MainMenu from '../MainMenu';
 
-const renderSidebar = (type) => (
+const renderTop = (type) => (
   <MainMenu items={type === 'admin' ? adminMenu : siteMenu}/>
 );
 
 const Page = ({
-  children, top, type, aside = true, heading,
+  children, top = true, type, heading,
 }) => {
   const classes = classnames(
     'page',
     {
       'page--has-top': top,
-      'page--no-aside': !aside,
     },
   );
 
@@ -26,7 +25,7 @@ const Page = ({
         {
           top && (
             <section className="page__top">
-              {top}
+              {renderTop(type)}
             </section>
           )
         }
@@ -42,14 +41,6 @@ const Page = ({
 
           {children}
         </main>
-
-        {
-          aside && (
-            <aside className="page__aside">
-              {renderSidebar(type)}
-            </aside>
-          )
-        }
       </div>
     </div>
   );

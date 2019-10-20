@@ -2,13 +2,6 @@
 
 .main-memu {
   @include flex-row;
-
-  @include mappy-bp(large) {
-    margin: $small-spacing 0;
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
 }
 
 .main-memu__item {
@@ -27,34 +20,26 @@
     font-size: $base-font-size;
     text-transform: none;
   }
-
-  @include mappy-bp(large) {
-    margin: .3rem 0;
-  }
 }
 
 .header {
-  @include flex-row;
-  padding: $xsmall-spacing 0;
   background: $primary-background;
   position: fixed;
-  height: 6rem;
-  align-items: center;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 100;
+}
 
-  @include mappy-bp(large) {
-    @include flex-column;
-    padding: $base-spacing;
-    height: auto;
-    align-items: flex-start;
-    position: absolute;
-  }
+.header__inner {
+  @extend %container;
+  @include flex-row;
+  align-items: center;
+  height: 6rem;
 }
 
 .header__brand {
-  padding-left: $xsmall-spacing;
+  padding-right: $xsmall-spacing;
 }
 
 .header__menu {
