@@ -16,8 +16,8 @@ const AdminCurrencyPageMarkup = ({ currency }) => {
   }
 
   return (
-    <Layout metadata={{ title: currency.name }}>
-      <Page type="admin">
+    <Layout metadata={{ title: currency.name }} type="admin">
+      <Page>
         <DeleteCurrency currency={currency}/>
         <hr/>
         <UpdateCurrency currency={currency}/>

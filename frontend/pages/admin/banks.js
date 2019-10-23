@@ -8,8 +8,8 @@ import Page from '../../features/Page';
 import { CreateInstitution } from '../../features/Institution';
 
 const AdminBanksPageMarkup = () => (
-  <Layout metadata={{ title: 'Create Institution' }}>
-    <Page type="admin">
+  <Layout metadata={{ title: 'Create Institution' }} type="admin">
+    <Page>
       <CreateInstitution/>
     </Page>
   </Layout>

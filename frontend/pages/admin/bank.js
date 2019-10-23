@@ -16,8 +16,8 @@ const AdminBankPageMarkup = ({ institution }) => {
   }
 
   return (
-    <Layout metadata={{ title: institution.name }}>
-      <Page type="admin">
+    <Layout metadata={{ title: institution.name }} type="admin">
+      <Page>
         <DeleteInstitution institution={institution}/>
         <hr/>
         <UpdateInstitution institution={institution}/>

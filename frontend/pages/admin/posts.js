@@ -12,8 +12,8 @@ import List from '../../features/List';
 import { CreatePost } from '../../features/Post';
 
 const PostsPageMarkup = ({ query: { action }, allPost }) => (
-  <Layout metadata={{ title: 'Posts' }}>
-    <Page type="admin">
+  <Layout metadata={{ title: 'Posts' }} type="admin">
+    <Page>
       {
         action
           ? <CreatePost />

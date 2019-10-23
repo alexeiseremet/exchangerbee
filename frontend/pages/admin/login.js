@@ -7,8 +7,8 @@ import LoginForm from '../../features/LoginForm';
 
 const LoginPageMarkup = () => (
   <>
-    <Layout metadata={{ title: 'Login' }}>
-      <Page type="admin">
+    <Layout metadata={{ title: 'Login' }} type="admin">
+      <Page>
         <LoginForm/>
       </Page>
     </Layout>

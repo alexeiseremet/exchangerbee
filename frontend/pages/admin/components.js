@@ -17,8 +17,8 @@ const AnyTypeModalContent = (
 
 const ComponentsPageMarkup = () => (
   <>
-    <Layout metadata={{ title: 'Components' }}>
-      <Page type="admin">
+    <Layout metadata={{ title: 'Components' }} type="admin">
+      <Page>
         <Tabs
           activeIndex={0}
           items={[

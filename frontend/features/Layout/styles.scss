@@ -5,8 +5,14 @@
   position: relative;
 }
 
-html {
+html,
+body,
+#__next {
   height: 100%;
+  width: 100%;
+}
+
+html {
   // All the REM measurements are based on 10px sizing. So basically 1.5rem = 15px :)
   font-size: 62.5%;
   box-sizing: border-box;
@@ -21,13 +27,7 @@ body {
   line-height: $base-line-height;
   color: $base-font-color;
   background-color: $base-background;
-  padding-top: 8rem;
   margin: 0;
-}
-
-#__next {
-  height: 100vh;
-  width: 100%;
 }
 
 [tabindex="-1"]:focus {
@@ -46,7 +46,6 @@ body {
 .layout {
   @extend %flex-column;
   height: 100%;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
   &.no-yscroll {
@@ -60,6 +59,8 @@ body {
 }
 
 .layout__header-wrapper {
+  user-select: none;
+
   &.is-fixed {
     position: fixed;
     top: 0;
@@ -82,6 +83,8 @@ body {
 .layout__content-wrapper {
   overflow-x: hidden;
   flex-grow: 1;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
 }
 
 .layout__content {

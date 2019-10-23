@@ -12,8 +12,8 @@ import List from '../../features/List';
 import { CreateParser } from '../../features/Parser';
 
 const ParsersPageMarkup = ({ query: { action }, allParser }) => (
-  <Layout metadata={{ title: 'Parsers' }}>
-    <Page type="admin">
+  <Layout metadata={{ title: 'Parsers' }} type="admin">
+    <Page>
       {
         action
           ? <CreateParser/>

@@ -16,8 +16,8 @@ const ParserPageMarkup = ({ parser }) => {
   }
 
   return (
-    <Layout metadata={{ title: parser.url }}>
-      <Page type="admin">
+    <Layout metadata={{ title: parser.url }} type="admin">
+      <Page>
         <DeleteParser parser={parser}/>
         <hr/>
         <UpdateParser parser={parser}/>

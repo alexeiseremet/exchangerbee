@@ -8,8 +8,8 @@ import Page from '../../features/Page';
 import { CreateCurrency } from '../../features/Currency';
 
 const AdminCurrenciesPageMarkup = () => (
-  <Layout metadata={{ title: 'Create Currency' }}>
-    <Page type="admin">
+  <Layout metadata={{ title: 'Create Currency' }} type="admin">
+    <Page>
       <CreateCurrency/>
     </Page>
   </Layout>

@@ -11,8 +11,12 @@
 
 .page__top {
   @include flex-width();
-  padding-bottom: $base-spacing;
+  padding-bottom: $xsmall-spacing;
   position: relative;
+
+  @include mappy-bp(small) {
+    padding-bottom: $base-spacing;
+  }
 }
 
 .page__content {
@@ -23,7 +27,6 @@
 
 .page-heading {
   @include heading-bold;
-  margin-bottom: $base-spacing;
   font-size: 2rem;
   line-height: 1.2;
 

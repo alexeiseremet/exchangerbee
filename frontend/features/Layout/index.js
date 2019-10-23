@@ -3,6 +3,7 @@ import React from 'react';
 import Router from 'next/router';
 
 import Metadata from '../Metadata';
+import MainMenu from '../MainMenu';
 
 import Header from './_header';
 import Content from './_content';
@@ -38,14 +39,16 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children, metadata } = this.props;
+    const { children, metadata, type } = this.props;
 
     return (
       <>
         {metadata && (<Metadata {...metadata} />)}
 
         <div className="layout" id="layout">
-          <Header />
+          <Header>
+            <MainMenu type={type}/>
+          </Header>
           <Content>{children}</Content>
           <Footer />
         </div>

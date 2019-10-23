@@ -5,8 +5,8 @@ module.exports = {
   siteName: 'xezoom.com',
   siteGtagId: 'G-FTFEZD3BQX',
   siteMenu: [
-    { url: '/banks', label: 'Cursul la bănci' },
     { url: '/converter', label: 'Convertor valutar' },
+    { url: '/banks', label: 'Cursul la bănci' },
     { url: '/currencies', label: 'Lista valute' },
   ],
   adminMenu: [
