@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from '../../lib/i18n';
 
 const QuoteCard = ({
-  label, centralBankItem, link, children,
+  label, centralBankItem, link, children, style
 }) => {
   const renderInner = () => (
     <article className="quote-card__inner">
@@ -23,7 +23,7 @@ const QuoteCard = ({
 
   if (!link) {
     return (
-      <section className="quote-card">
+      <section className="quote-card" style={style}>
         {renderInner()}
       </section>
     );
@@ -31,7 +31,7 @@ const QuoteCard = ({
 
   return (
     <Link {...link}>
-      <a className="quote-card quote-card--link">
+      <a className="quote-card quote-card--link" style={style}>
         {renderInner()}
       </a>
     </Link>

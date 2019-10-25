@@ -26,7 +26,6 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="central"
                       value={quote.bid}
                       label={String(centralBank.slug).toUpperCase()}
-                      info={baseCurrency.symbol}
                     />
                   )
                 ))

@@ -38,32 +38,35 @@ const BankPageMarkup = ({
                       href: `/currency?slug=${quote.currencyVObj.slug}`,
                       as: `/currencies/${quote.currencyVObj.slug}`,
                     }}
+                    style={{ marginTop: '.5rem' }}
                   >
-                    <>
-                      {
-                        institution.slug !== centralBank.slug && (
-                          <RateCard
-                            key="bid"
-                            value={quote.bid}
-                            info={
-                              institution.slug === centralBank.slug
-                                ? baseCurrency.symbol
-                                : `cumpărare`
-                            }
-                          />
-                        )
-                      }
-                    </>
+                    <div className="flex flex--gutter-sm">
+                      <>
+                        {
+                          institution.slug !== centralBank.slug && (
+                            <RateCard
+                              key="bid"
+                              value={quote.bid}
+                              info={
+                                institution.slug === centralBank.slug
+                                  ? baseCurrency.symbol
+                                  : `cumpărare`
+                              }
+                            />
+                          )
+                        }
+                      </>
 
-                    <RateCard
-                      key="ask"
-                      value={quote.ask}
-                      info={
-                        institution.slug === centralBank.slug
-                          ? baseCurrency.symbol
-                          : `vânzare`
-                      }
-                    />
+                      <RateCard
+                        key="ask"
+                        value={quote.ask}
+                        info={
+                          institution.slug === centralBank.slug
+                            ? baseCurrency.symbol
+                            : `vânzare`
+                        }
+                      />
+                    </div>
                   </QuoteCard>
                 ),
               )

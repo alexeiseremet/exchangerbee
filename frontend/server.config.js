@@ -10,6 +10,7 @@ module.exports = {
     { url: '/currencies', label: 'Lista valute' },
   ],
   adminMenu: [
+    { url: '/admin/banks', label: 'Banks' },
     { url: '/admin/parsers', label: 'Parsers' },
     { url: '/admin/quotes', label: 'Quotes' },
     { url: '/admin/posts', label: 'Posts' },

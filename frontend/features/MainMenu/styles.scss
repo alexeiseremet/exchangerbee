@@ -10,6 +10,7 @@
 
 .main-memu__link {
   @extend %link-with-bg-inverse;
+  border-bottom: .1rem solid rgba($white, .65);
   padding: .4rem;
   display: inline-block;
   font-size: 1.1rem;
@@ -33,17 +34,17 @@
 }
 
 .header__brand {
-  padding-right: $xsmall-spacing;
+  margin-right: $small-spacing;
 }
 
 .header__menu {
-  padding: 0 $xsmall-spacing;
+  position: relative;
 }
 
 .brand {
   display: block;
-  width: 5.1rem;
-  height: 4rem;
+  width: 4.2rem;
+  height: 2rem;
 
   svg {
     fill: $white;

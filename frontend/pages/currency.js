@@ -48,7 +48,6 @@ const CurrencyPageMarkup = ({
         {
           centralQuote && (
             <section style={{
-              marginTop: '3rem',
               padding: '1rem',
               backgroundColor: '#eaeaea',
             }}>
@@ -104,34 +103,42 @@ const CurrencyPageMarkup = ({
           )
         }
 
-        <section className="quote-list" style={{ marginTop: '3rem' }}>
+        <section style={{ marginTop: '3rem' }}>
           {
             allQuoteNoCentral.length ? (
               <>
-                {
-                  allQuoteNoCentral.map((quote, i) => (
-                    <QuoteCard
-                      key={i}
-                      label={quote.institutionVObj.name}
-                      link={{
-                        href: `/bank?slug=${quote.institutionVObj.slug}`,
-                        as: `/banks/${quote.institutionVObj.slug}`,
-                      }}
-                    >
-                      <RateCard
-                        key="bid"
-                        value={quote.bid}
-                        info={`cumpără`}
-                      />
+                <div className="">
+                  {
+                    allQuoteNoCentral.map((quote, i) => (
+                      <QuoteCard
+                        key={i}
+                        label={quote.institutionVObj.name}
+                        link={{
+                          href: `/bank?slug=${quote.institutionVObj.slug}`,
+                          as: `/banks/${quote.institutionVObj.slug}`,
+                        }}
+                        style={{
+                          marginTop: '.5rem',
+                        }}
+                      >
+                        <div className="flex flex--gutter-sm">
+                          <RateCard
+                            key="bid"
+                            value={quote.bid}
+                            info={`cumpără`}
+                          />
 
-                      <RateCard
-                        key="ask"
-                        value={quote.ask}
-                        info={`vinde`}
-                      />
-                    </QuoteCard>
-                  ))
-                }
+                          <RateCard
+                            key="ask"
+                            value={quote.ask}
+                            info={`vinde`}
+                          />
+                        </div>
+                      </QuoteCard>
+                    ))
+                  }
+                </div>
+
 
                 <p
                   style={{

@@ -34,14 +34,14 @@ $yellow: #ffdc00;
 $olive: #3d9970;
 
 $base-color: $black !default;
-$primary-color: $white !default;
+$primary-color: $olive !default;
 $secondary-color: $gray !default;
 
 $base-background: $white !default;
 $primary-background: $olive !default;
 $secondary-background: $silver !default;
 
-$action-color: $olive !default;
+$action-color: $black !default;
 $action-active-color: $black !default;
 $action-disabled-color: $gray !default;
 
@@ -57,7 +57,7 @@ $heading-font-size: ($base-font-size * 2.6) !default;
 $heading-font-family: $font-primary-regular !default;
 
 // Sizes.
-$base-border-radius: 0 !default;
+$base-border-radius: .4rem !default;
 $base-size: $base-line-height * $base-font-size !default;
 $base-spacing: $base-size !default;
 $large-spacing: $base-spacing * 2 !default;
@@ -65,7 +65,7 @@ $small-spacing: $base-spacing / 2 !default;
 $xsmall-spacing: $small-spacing / 2 !default;
 
 // Border.
-$base-border-color: $silver !default;
+$base-border-color: $gray !default;
 $base-border: .1rem solid $base-border-color !default;
 $base-border-transparent: .1rem solid transparent !default;
 

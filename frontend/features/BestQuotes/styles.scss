@@ -1,5 +1,13 @@
 @import "root";
 
 .best-quotes {
+  @include flex-row;
+  flex-wrap: wrap;
   position: relative;
+  margin-left: -$xsmall-spacing;
+
+  .quote-card {
+    @include flex-width(calc(100%/5));
+    padding-left: $xsmall-spacing;
+  }
 }

@@ -2,66 +2,43 @@
 
 .quote-card {
   display: block;
+}
 
-  &--link {
+.quote-card__inner {
+  padding: $small-spacing;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  overflow: hidden;
+
+  .quote-card--link & {
     @extend %link-with-bg;
   }
 }
 
-.quote-card__inner {
-  @include flex-row;
-  align-items: flex-end;
-  padding: $small-spacing $xsmall-spacing 0;
-
-  @include mappy-bp(max small) {
-    flex-wrap: wrap;
-  }
-}
-
 .quote-card__label {
-  @include flex-width();
-  @include heading-regular-italic;
-  padding-right: $xsmall-spacing;
+  @include heading-bold-italic;
   text-transform: lowercase;
   letter-spacing: -0.1rem;
   font-size: 2.2rem;
-  line-height: 1.2;
+  line-height: 1;
   margin-bottom: 1rem;
-  flex-shrink: 99;
-
-  @include mappy-bp(small) {
-    padding-right: $base-spacing;
-    font-size: 3rem;
-  }
 }
 
 .quote-card__rate {
-  margin-bottom: $small-spacing;
-  padding-left: $xsmall-spacing;
+  margin-top: $small-spacing;
   line-height: 1.2;
-  flex-grow: 99;
 
   &:empty {
     display: none;
   }
 
-  &:first-of-type {
-    padding-left: 0;
-  }
 }
 
 .quote-card__rate--central {
-  @include flex-width(28%);
-
-  @include mappy-bp(small) {
-    @include flex-width(22%);
+  .rate-card__value {
+    font-size: 2rem;
   }
 }
 
 .quote-card__rate--commercial {
-  @include flex-width(36%);
-
-  @include mappy-bp(small) {
-    @include flex-width(26%);
-  }
 }

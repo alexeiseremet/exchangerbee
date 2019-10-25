@@ -138,51 +138,25 @@
 %link-with-bg {
   color: $base-color;
   text-decoration: none;
-  background-image: linear-gradient(
-                  transparent 0%,
-                  transparent calc(50% - .16rem),
-                  rgba($primary-background, 0.5) calc(50% - .16rem),
-                  rgba($primary-background, 0.5) 100%
-  );
+  background-color: $white;
   transition: $base-animation;
-  background-size: 100% 200%;
-  background-position: 0 0;
 
   &:hover,
   &.is-active {
     color: $white;
-    background-image: linear-gradient(
-                    transparent 0%,
-                    transparent calc(50% - .16rem),
-                    rgba($primary-background, 1) calc(50% - .16rem),
-                    rgba($primary-background, 1) 100%
-    );
-    background-position: 0 100%;
+    background-color: $primary-background;
   }
 }
 
 %link-with-bg-inverse {
   color: $white;
   text-decoration: none;
-  background-image: linear-gradient(
-                  transparent 0%,
-                  transparent calc(50% - .16rem),
-                  rgba($white, 0.5) calc(50% - .16rem),
-                  rgba($white, 0.5) 100%
-  );
+  background-color: $primary-background;
   transition: $base-animation;
-  background-size: 100% 200%;
-  background-position: 0 0;
 
   &:hover,
   .is-active {
     color: $action-color;
-    background-image: linear-gradient(
-                    transparent 0%,
-                    transparent calc(50% - .16rem),
-                    rgba($white, 1) calc(50% - .16rem),
-                    rgba($white, 1) 100%
-    );
-    background-position: 0 100%;
+    background-color: $white
   }
 }

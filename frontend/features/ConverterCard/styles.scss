@@ -11,8 +11,9 @@
 .converter-card__inner {
   @extend %link-with-bg;
   @extend %flex-row;
-  align-items: center;
+  border-bottom: $base-border;
   padding: $small-spacing $xsmall-spacing;
+  align-items: center;
 
   @include mappy-bp(max small) {
     flex-wrap: wrap;
@@ -27,11 +28,6 @@
   letter-spacing: -0.1rem;
   font-size: 2.2rem;
   line-height: 1.2;
-
-  @include mappy-bp(small) {
-    padding-right: $base-spacing;
-    font-size: 3rem;
-  }
 }
 
 .converter-card__value-wrapper {
