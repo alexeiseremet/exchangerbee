@@ -43,7 +43,7 @@ module.exports = {
       });
     },
     bestTodayQuote(_, {
-      currencies, excludeBanks, includeBanks, type,
+      date, currencies, excludeBanks, includeBanks, type,
     }) {
       return new Promise((resolve, reject) => {
         Quote.aggregate([
@@ -64,6 +64,7 @@ module.exports = {
                   },
                 },
                 { error: 'no' },
+                { date: { $eq: new Date(+date) } }
               ],
             },
           },

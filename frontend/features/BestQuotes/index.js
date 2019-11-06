@@ -1,6 +1,6 @@
 import './styles.scss';
 import React from 'react';
-import { baseCurrenciesArr, baseCurrency, centralBank } from '../../server.config';
+import { baseCurrenciesArr, centralBank } from '../../server.config';
 import RateCard from '../RateCard';
 import QuoteCard from '../QuoteCard';
 

@@ -1,0 +1,34 @@
+@import "root";
+
+.currency-top {
+  position: relative;
+  padding: $xsmall-spacing;
+  background: rgba($secondary-color, .4);
+  box-shadow: 0 .2rem .4rem -.1rem rgba($primary-background, .4);
+  border-radius: $base-border-radius;
+}
+
+.currency-top__label {
+  line-height: 1;
+  vertical-align: bottom;
+}
+
+@include mappy-bp(max small) {
+  .currency-top__rate {
+    display: inline-block;
+    width: 36%;
+  }
+
+  .currency-top__rate--commercial {
+    display: inline-block;
+    width: 32%;
+  }
+}
+
+@include mappy-bp(small) {
+  .currency-top {
+    position: relative;
+    padding-left: $small-spacing;
+    padding-right: $small-spacing;
+  }
+}

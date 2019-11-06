@@ -14,6 +14,7 @@ import Layout from '../features/Layout';
 import Page from '../features/Page';
 import QuoteCard from '../features/QuoteCard';
 import RateCard from '../features/RateCard';
+import CurrencyTop from '../features/CurrencyTop';
 
 const CurrencyPageMarkup = ({
   currency, allQuote, post, fullPath,
@@ -47,59 +48,12 @@ const CurrencyPageMarkup = ({
       >
         {
           centralQuote && (
-            <section style={{
-              padding: '1rem',
-              backgroundColor: '#eaeaea',
-            }}>
-              <table>
-                <caption dangerouslySetInnerHTML={{
-                  __html: `
-                    Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} 
-                    oferite de băncile din <span style="white-space: nowrap">${baseCountry.name}, ${localeDate()}</span>
-                  `,
-                }}/>
-                <tbody>
-                <tr>
-                  <th style={{ verticalAlign: 'bottom' }}>
-                    <strong
-                      title={currency.name}
-                      style={{
-                        fontFamily: 'Georgia, Lucida Bright, serif',
-                        fontStyle: 'italic',
-                        fontSize: '3rem',
-                      }}
-                    >
-                      {currency.slug}
-                    </strong>
-                  </th>
-                  <td>
-                    <RateCard
-                      key="central"
-                      value={centralQuote.bid}
-                      label={String(centralBank.slug).toUpperCase()}
-                      info={baseCurrency.symbol}
-                    />
-                  </td>
-                  <td>
-                    <RateCard
-                      key="bid"
-                      value={bestBid.bid}
-                      label={bestBid.institutionVObj.name}
-                      info={`cumpără`}
-                    />
-                  </td>
-                  <td>
-                    <RateCard
-                      key="ask"
-                      value={bestAsk.ask}
-                      label={bestAsk.institutionVObj.name}
-                      info={`vinde`}
-                    />
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </section>
+            <CurrencyTop
+              currency={currency}
+              centralQuote={centralQuote}
+              bestBid={bestBid}
+              bestAsk={bestAsk}
+            />
           )
         }
 
@@ -122,23 +76,25 @@ const CurrencyPageMarkup = ({
                         }}
                       >
                         <div className="flex flex--gutter-sm">
-                          <RateCard
-                            key="bid"
-                            value={quote.bid}
-                            info={`cumpără`}
-                          />
-
-                          <RateCard
-                            key="ask"
-                            value={quote.ask}
-                            info={`vinde`}
-                          />
+                          <div>
+                            <RateCard
+                              key="bid"
+                              value={quote.bid}
+                              info={`cumpără`}
+                            />
+                          </div>
+                          <div className="flex__item-grow">
+                            <RateCard
+                              key="ask"
+                              value={quote.ask}
+                              info={`vinde`}
+                            />
+                          </div>
                         </div>
                       </QuoteCard>
                     ))
                   }
                 </div>
-
 
                 <p
                   style={{
@@ -174,14 +130,14 @@ const CurrencyPageMarkup = ({
 
         {
           post && post.textFirst && (
-            <p style={{ marginTop: '3rem' }}
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textFirst }} />
           )
         }
 
         {
           post && post.textSecond && (
-            <p style={{ marginTop: '3rem' }}
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}
             />
           )

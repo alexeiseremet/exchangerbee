@@ -10,6 +10,10 @@ class ConverterCard extends React.Component {
     selectCurrency(quote.slug);
   };
 
+  resetCard = () => {
+    this.props.selectCurrency(null);
+  };
+
   componentDidMount() {
     const { quote, currencyChange, payCurrencySlug } = this.props;
 
@@ -45,6 +49,7 @@ class ConverterCard extends React.Component {
                         bid: quote.bid,
                       });
                     }}
+                    resetCard={this.resetCard}
                     className="converter-card__input"
                   />
                 )

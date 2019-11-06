@@ -135,28 +135,27 @@
   }
 }
 
-%link-with-bg {
-  color: $base-color;
-  text-decoration: none;
-  background-color: $white;
+%link-with-bg,
+%link-with-border {
+  color: $base-font-color;
   transition: $base-animation;
+  text-decoration: none;
+}
 
+%link-with-bg {
   &:hover,
   &.is-active {
-    color: $white;
-    background-color: $primary-background;
+    background-color: rgba($secondary-background, .2);
+    border-color: $primary-color;
   }
 }
 
-%link-with-bg-inverse {
-  color: $white;
-  text-decoration: none;
-  background-color: $primary-background;
-  transition: $base-animation;
+%link-with-border {
+  border: $base-border;
 
   &:hover,
-  .is-active {
-    color: $action-color;
-    background-color: $white
+  &.is-active {
+    border-color: $primary-color;
+    background-color: rgba($secondary-background, .2);
   }
 }

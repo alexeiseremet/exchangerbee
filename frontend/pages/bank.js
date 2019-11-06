@@ -41,9 +41,9 @@ const BankPageMarkup = ({
                     style={{ marginTop: '.5rem' }}
                   >
                     <div className="flex flex--gutter-sm">
-                      <>
-                        {
-                          institution.slug !== centralBank.slug && (
+                      {
+                        institution.slug !== centralBank.slug && (
+                          <div>
                             <RateCard
                               key="bid"
                               value={quote.bid}
@@ -53,19 +53,21 @@ const BankPageMarkup = ({
                                   : `cumpărare`
                               }
                             />
-                          )
-                        }
-                      </>
+                          </div>
+                        )
+                      }
 
-                      <RateCard
-                        key="ask"
-                        value={quote.ask}
-                        info={
-                          institution.slug === centralBank.slug
-                            ? baseCurrency.symbol
-                            : `vânzare`
-                        }
-                      />
+                      <div className="flex__item-grow">
+                        <RateCard
+                          key="ask"
+                          value={quote.ask}
+                          info={
+                            institution.slug === centralBank.slug
+                              ? baseCurrency.symbol
+                              : `vânzare`
+                          }
+                        />
+                      </div>
                     </div>
                   </QuoteCard>
                 ),
@@ -76,14 +78,14 @@ const BankPageMarkup = ({
 
         {
           post && post.textFirst && (
-            <p style={{ marginTop: '3rem' }}
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
           )
         }
 
         {
           post && post.textSecond && (
-            <p style={{ marginTop: '1rem' }}
+            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
           )
         }

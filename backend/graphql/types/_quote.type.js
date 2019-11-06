@@ -30,6 +30,7 @@ module.exports = `
       last: Int
     ): [Quote!]
     bestTodayQuote(
+      date: String
       currencies: [String!]
       excludeBanks: [String!]
       includeBanks: [String!]

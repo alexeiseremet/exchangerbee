@@ -18,7 +18,6 @@ class InputValue extends React.Component {
     }
   };
 
-
   componentDidMount() {
     this.handlerInputSelect();
   }
@@ -38,6 +37,7 @@ class InputValue extends React.Component {
         }}
         onBlur={() => {
           this.setInputFocus(false);
+          this.props.resetCard();
         }}
         onChange={this.props.onChange}
         className={this.props.className}

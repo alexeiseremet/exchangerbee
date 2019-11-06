@@ -2,12 +2,22 @@
 
 .best-quotes {
   @include flex-row;
-  flex-wrap: wrap;
   position: relative;
   margin-left: -$xsmall-spacing;
+  margin-top: $xsmall-spacing;
+  overflow-x: auto;
 
   .quote-card {
-    @include flex-width(calc(100%/5));
+    @include flex-column;
+    @include flex-width(14rem);
     padding-left: $xsmall-spacing;
+  }
+}
+
+@include mappy-bp(small) {
+  .best-quotes {
+    .quote-card {
+      @include flex-width(calc(100%/5));
+    }
   }
 }

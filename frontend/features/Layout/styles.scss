@@ -71,7 +71,7 @@ body {
 }
 
 .layout__header {
-  background-color: $header-background;
+  background-color: lighten($header-background, 7);
   width: 100%;
 }
 

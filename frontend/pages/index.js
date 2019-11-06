@@ -5,6 +5,7 @@ import _compose from 'lodash/flowRight';
 
 import { centralBank, baseCurrenciesArr, baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
+import { today } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
@@ -31,14 +32,14 @@ const IndexPageMarkup = ({
 
         {
           post.textFirst && (
-            <p style={{ marginTop: '3rem' }}
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
           )
         }
 
         {
           post.textSecond && (
-            <p style={{ marginTop: '1rem' }}
+            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}
             />
           )
@@ -63,8 +64,8 @@ const IndexPageI18N = withTranslation('common')(IndexPageMarkup);
 
 // Container.
 const GQL_INDEX_PAGE = gql`
-  query IndexPage ($currencies: [String!]!, $postSlug: String! $excludeBanks: [String!], $includeBanks: [String!]) {
-    centralQuote: bestTodayQuote (currencies: $currencies, includeBanks: $includeBanks) {
+  query IndexPage ($postSlug: String, $date: String, $currencies: [String!], $excludeBanks: [String!], $includeBanks: [String!]) {
+    centralQuote: bestTodayQuote (date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       institutionVObj {
         name
         slug
@@ -78,7 +79,7 @@ const GQL_INDEX_PAGE = gql`
       bid
       ask
     }
-    bestBidQuote: bestTodayQuote (currencies: $currencies, excludeBanks: $excludeBanks) {
+    bestBidQuote: bestTodayQuote (date: $date, currencies: $currencies, excludeBanks: $excludeBanks) {
       institutionVObj {
         name
         slug
@@ -92,7 +93,7 @@ const GQL_INDEX_PAGE = gql`
       bid
       ask
     }
-    bestAskQuote: bestTodayQuote (currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
+    bestAskQuote: bestTodayQuote (date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
       institutionVObj {
         name
         slug
@@ -121,6 +122,7 @@ export default _compose(
       options: ({ fullPath }) => ({
         variables: {
           postSlug: fullPath,
+          date: today(),
           currencies: baseCurrenciesArr,
           excludeBanks: [centralBank.slug],
           includeBanks: [centralBank.slug],

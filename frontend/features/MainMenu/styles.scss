@@ -9,8 +9,8 @@
 }
 
 .main-memu__link {
-  @extend %link-with-bg-inverse;
-  border-bottom: .1rem solid rgba($white, .65);
+  @extend %link-with-bg;
+  border-bottom: .1rem solid rgba($gray, .65);
   padding: .4rem;
   display: inline-block;
   font-size: 1.1rem;
@@ -47,7 +47,7 @@
   height: 2rem;
 
   svg {
-    fill: $white;
+    fill: $primary-color;
   }
 }
 

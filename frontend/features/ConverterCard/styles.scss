@@ -12,17 +12,13 @@
   @extend %link-with-bg;
   @extend %flex-row;
   border-bottom: $base-border;
-  padding: $small-spacing $xsmall-spacing;
+  padding: $xsmall-spacing;
   align-items: center;
-
-  @include mappy-bp(max small) {
-    flex-wrap: wrap;
-  }
 }
 
 .converter-card__label {
   @include flex-width();
-  @include heading-regular-italic;
+  @include heading-bold-italic;
   padding-right: $small-spacing;
   text-transform: lowercase;
   letter-spacing: -0.1rem;
@@ -35,10 +31,6 @@
   @include flex-width();
   justify-content: space-between;
   align-items: center;
-
-  @include mappy-bp(small) {
-    @include flex-width(40%);
-  }
 }
 
 .converter-card__input,
@@ -50,10 +42,6 @@
   line-height: 3rem;
   font-size: 1.6rem;
   width: 100%;
-
-  @include mappy-bp(small) {
-    font-size: 2rem;
-  }
 }
 
 .converter-card__input,
@@ -66,14 +54,8 @@
 
   .converter-card:hover &,
   .is-active & {
-    color: $white;
-    border-color: $white;
     background-color: transparent;
     outline: none;
-  }
-
-  @include mappy-bp(small) {
-    font-size: 2rem;
   }
 }
 
@@ -83,13 +65,22 @@
   font-size: 1.2rem;
   border-color: transparent;
   width: auto;
+}
 
-  .converter-card:hover &,
-  .is-active & {
-    color: $white;
+@include mappy-bp(max small) {
+  .converter-card__inner {
+    flex-wrap: wrap;
   }
 }
 
+@include mappy-bp(small) {
+  .converter-card__value-wrapper {
+    @include flex-width(40%);
+  }
 
-
+  .converter-card__input,
+  .converter-card__value {
+    font-size: 2rem;
+  }
+}
 

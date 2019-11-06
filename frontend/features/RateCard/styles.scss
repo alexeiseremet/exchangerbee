@@ -8,8 +8,13 @@
 .rate-card__value {
   @include base-regular;
   font-size: 1.6rem;
+  line-height: 2rem;
   margin-bottom: .5rem;
   display: block;
+
+  .rate-card--large & {
+    font-size: 2rem;
+  }
 }
 
 .rate-card__label {
@@ -18,7 +23,6 @@
   display: block;
   margin-bottom: .2rem;
   font-size: 1.2rem;
-
 }
 
 .rate-card__info {

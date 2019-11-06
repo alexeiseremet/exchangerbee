@@ -12,7 +12,7 @@ const createUpdateQuotes = require('./crawlerCreateUpdateQuotes');
 const updateParser = require('./crawlerUpdateParser');
 
 const runCrawler = async () => {
-  const startDate = new Date().getTime();
+  const startTime = new Date().getTime();
   const { data: { allParser } } = await getParser() || {};
   const {
     id, institution, period, url, quotes,
@@ -85,7 +85,7 @@ const runCrawler = async () => {
   }
 
   await browser.close();
-  result.time = `${Math.round((new Date().getTime() - startDate) / 1000)} s`;
+  result.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
 
   await createUpdateQuotes(result.quotes);
   await updateParser(id);

@@ -34,12 +34,12 @@ $yellow: #ffdc00;
 $olive: #3d9970;
 
 $base-color: $black !default;
-$primary-color: $olive !default;
-$secondary-color: $gray !default;
+$primary-color: $base-color !default;
+$secondary-color: $yellow !default;
 
 $base-background: $white !default;
-$primary-background: $olive !default;
-$secondary-background: $silver !default;
+$primary-background: $base-color !default;
+$secondary-background: $yellow !default;
 
 $action-color: $black !default;
 $action-active-color: $black !default;
@@ -80,7 +80,7 @@ $form-box-shadow-focus: 0 0 0 .2rem rgba($form-input-border-color, .8) !default;
 $base-animation: 250ms ease !default;
 
 // Layout.
-$header-background: $primary-background !default;
+$header-background: $silver !default;
 $footer-background: $white !default;
 
 // Breadcrumb.

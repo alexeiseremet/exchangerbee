@@ -78,14 +78,14 @@ class ConverterPageMarkup extends React.Component {
 
           {
             post && post.textFirst && (
-              <p style={{ marginTop: '3rem' }}
+              <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                  dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
             )
           }
 
           {
             post && post.textSecond && (
-              <p style={{ marginTop: '1rem' }}
+              <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
                  dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
             )
           }

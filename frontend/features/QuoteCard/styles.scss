@@ -5,13 +5,12 @@
 }
 
 .quote-card__inner {
-  padding: $small-spacing;
-  border: $base-border;
+  padding: $xsmall-spacing $small-spacing;
   border-radius: $base-border-radius;
   overflow: hidden;
 
   .quote-card--link & {
-    @extend %link-with-bg;
+    @extend %link-with-border;
   }
 }
 
@@ -31,7 +30,6 @@
   &:empty {
     display: none;
   }
-
 }
 
 .quote-card__rate--central {
@@ -41,4 +39,5 @@
 }
 
 .quote-card__rate--commercial {
+  position: relative;
 }

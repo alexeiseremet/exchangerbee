@@ -8,7 +8,7 @@
   @extend %flex-row;
   @extend %link-with-bg;
   border-bottom: $base-border;
-  padding: $small-spacing $xsmall-spacing;
+  padding: $xsmall-spacing;
   align-items: flex-end;
 }
 
