@@ -3,6 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
 import { siteGtagId, locale } from '../server.config';
+import script from '../lib/script';
 
 export default class ExbeeDocument extends Document {
   static async getInitialProps(ctx) {
@@ -15,6 +16,10 @@ export default class ExbeeDocument extends Document {
     };
   }
 
+  componentDidMount() {
+    script('CookieDeclaration', '//consent.cookiebot.com/9d78ff36-0af6-463e-b7e3-67642678e2cd/cd.js')
+  }
+
   render() {
     return (
       <html prefix="og: http://ogp.me/ns#">
@@ -25,14 +30,14 @@ export default class ExbeeDocument extends Document {
           />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script data-cookieconsent="ignore" async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
+          <script data-cookieconsent="ignore" async src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
           <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
             __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments)}
-            gtag('js', new Date());
-            gtag('config', '${siteGtagId}');
-          `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)}
+              gtag('js', new Date());
+              gtag('config', '${siteGtagId}');
+            `,
           }} />
 
           <script id="Cookiebot"
@@ -52,9 +57,6 @@ export default class ExbeeDocument extends Document {
             aria-hidden="true"
           />
           <NextScript />
-          <script async id="CookieDeclaration"
-                  src="//consent.cookiebot.com/9d78ff36-0af6-463e-b7e3-67642678e2cd/cd.js"
-          />
         </body>
       </html>
     );
