@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { siteGtagId } from '../server.config';
+import { siteGtagId, locale } from '../server.config';
 
 export default class ExbeeDocument extends Document {
   static async getInitialProps(ctx) {
@@ -20,10 +20,18 @@ export default class ExbeeDocument extends Document {
       <html prefix="og: http://ogp.me/ns#">
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+          <meta name="viewport"
+                content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+          />
+          <script id="Cookiebot"
+                  src="//consent.cookiebot.com/uc.js"
+                  data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
+                  data-blockingmode="auto"
+                  data-culture={String(locale).toUpperCase()}
+          />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}/>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
           <script dangerouslySetInnerHTML={{
             __html: `
             window.dataLayer = window.dataLayer || [];
@@ -43,6 +51,9 @@ export default class ExbeeDocument extends Document {
             aria-hidden="true"
           />
           <NextScript />
+          <script async id="CookieDeclaration"
+                  src="//consent.cookiebot.com/9d78ff36-0af6-463e-b7e3-67642678e2cd/cd.js"
+          />
         </body>
       </html>
     );

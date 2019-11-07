@@ -2,7 +2,9 @@ import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
 
-const RateCard = ({ value, label, info, type = null }) => {
+const RateCard = ({
+  value, label, info, type = null,
+}) => {
   const classes = classnames(
     'rate-card',
     {
@@ -22,7 +24,7 @@ const RateCard = ({ value, label, info, type = null }) => {
       {label && <strong className="rate-card__label">{label}</strong>}
       {info && <i className="rate-card__info">{info}</i>}
     </div>
-  )
+  );
 };
 
 export default RateCard;

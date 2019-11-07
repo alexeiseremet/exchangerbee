@@ -46,5 +46,4 @@ class InputValue extends React.Component {
   }
 }
 
-
 export default InputValue;

@@ -9,7 +9,7 @@ module.exports = {
     );
 
     if (!isAdmin) {
-      throw new Error(`You are not authorized.`);
+      throw new Error('You are not authorized.');
     }
 
     return next();

@@ -26,7 +26,9 @@ class ConverterCard extends React.Component {
   }
 
   render() {
-    const { baseAmount, quote, currencyChange, selectedCurrencySlug } = this.props;
+    const {
+      baseAmount, quote, currencyChange, selectedCurrencySlug,
+    } = this.props;
     const resultValue = Number(baseAmount / quote.bid).toFixed(2);
     const isActive = quote.slug === selectedCurrencySlug;
 

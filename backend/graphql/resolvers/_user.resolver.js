@@ -6,7 +6,7 @@ module.exports = {
       return new Promise((resolve, reject) => {
         password === jwtAdmin
           ? resolve({ token: jwtAdmin })
-          : reject('You are wrong.');
+          : reject(new Error('You are wrong.'));
       });
     },
   },

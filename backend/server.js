@@ -15,7 +15,7 @@ const {
   PORT,
   MONGO_URL,
   JWT_SECRET_SERVER,
-  NODE_ENV
+  NODE_ENV,
 } = process.env;
 const IS_PRODUCTION = NODE_ENV === 'production';
 
@@ -54,6 +54,7 @@ server.use((req, res, next) => {
   }
 
   next();
+  return undefined;
 });
 
 // GraphqQL server route.
@@ -63,7 +64,7 @@ server.use(
     schema,
     context: {
       startTime: Date.now(),
-      req
+      req,
     },
     graphiql: !IS_PRODUCTION,
     pretty: true,

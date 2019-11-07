@@ -8,7 +8,7 @@ import _minBy from 'lodash/minBy';
 
 import { centralBank, baseCurrency, baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
-import { today, localeDate } from '../lib/moment';
+import { today } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
@@ -80,14 +80,14 @@ const CurrencyPageMarkup = ({
                             <RateCard
                               key="bid"
                               value={quote.bid}
-                              info={`cumpără`}
+                              info={'cumpără'}
                             />
                           </div>
                           <div className="flex__item-grow">
                             <RateCard
                               key="ask"
                               value={quote.ask}
-                              info={`vinde`}
+                              info={'vinde'}
                             />
                           </div>
                         </div>

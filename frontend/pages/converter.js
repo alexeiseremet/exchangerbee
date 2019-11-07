@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrency, baseCurrenciesArr, baseCountry } from '../server.config';
+import {
+  centralBank, baseCurrency, baseCurrenciesArr, baseCountry,
+} from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
@@ -38,9 +40,9 @@ class ConverterPageMarkup extends React.Component {
       <Layout metadata={{
         url: `${fullPath}`,
         title: `Convertor valutar — ${baseCountry.name}`,
-        description: `Convertor valutar`,
+        description: 'Convertor valutar',
       }}>
-        <Page heading={`Convertor valutar`}>
+        <Page heading={'Convertor valutar'}>
           <section className="converter">
             {
               allQuote && allQuote.length ? (

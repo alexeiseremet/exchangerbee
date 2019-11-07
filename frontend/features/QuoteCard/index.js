@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from '../../lib/i18n';
 
 const QuoteCard = ({
-  label, centralBankItem, link, children, style
+  label, centralBankItem, link, children, style,
 }) => {
   const renderInner = () => (
     <article className="quote-card__inner">

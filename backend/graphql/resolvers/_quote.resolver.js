@@ -64,7 +64,7 @@ module.exports = {
                   },
                 },
                 { error: 'no' },
-                { date: { $eq: new Date(+date) } }
+                { date: { $eq: new Date(+date) } },
               ],
             },
           },

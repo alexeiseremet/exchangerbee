@@ -50,7 +50,7 @@ const BankPageMarkup = ({
                               info={
                                 institution.slug === centralBank.slug
                                   ? baseCurrency.symbol
-                                  : `cumpărare`
+                                  : 'cumpărare'
                               }
                             />
                           </div>
@@ -64,7 +64,7 @@ const BankPageMarkup = ({
                           info={
                             institution.slug === centralBank.slug
                               ? baseCurrency.symbol
-                              : `vânzare`
+                              : 'vânzare'
                           }
                         />
                       </div>

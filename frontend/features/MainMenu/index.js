@@ -1,7 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import { Link } from '../../lib/i18n';
-import { siteName, siteMenu, adminMenu, baseCountry } from '../../server.config';
+import {
+  siteName, siteMenu, adminMenu, baseCountry,
+} from '../../server.config';
 import Svg from '../Svg';
 // eslint-disable-next-line
 import iconClose from '../../assets/images/logo.svg?sprite';
@@ -43,7 +45,7 @@ const MainMenu = ({ type }) => {
         </nav>
       </div>
     </div>
-  )
+  );
 };
 
 export default MainMenu;

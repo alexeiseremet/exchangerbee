@@ -40,7 +40,7 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="bid"
                       value={quote.bid}
                       label={quote.institutionVObj.name}
-                      info={`cumpără`}
+                      info={'cumpără'}
                     />
                   )
                 ))
@@ -55,7 +55,7 @@ const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
                       key="ask"
                       value={quote.ask}
                       label={quote.institutionVObj.name}
-                      info={`vinde`}
+                      info={'vinde'}
                     />
                   )
                 ))

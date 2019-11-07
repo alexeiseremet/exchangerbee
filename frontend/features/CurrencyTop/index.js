@@ -4,7 +4,9 @@ import { baseCountry, baseCurrency, centralBank } from '../../server.config';
 import RateCard from '../RateCard';
 import { localeDate } from '../../lib/moment';
 
-const CurrencyTop = ({ currency, centralQuote, bestBid, bestAsk }) => (
+const CurrencyTop = ({
+  currency, centralQuote, bestBid, bestAsk,
+}) => (
   <section className="currency-top">
     <table className="currency-top__table">
       <caption dangerouslySetInnerHTML={{
@@ -41,7 +43,7 @@ const CurrencyTop = ({ currency, centralQuote, bestBid, bestAsk }) => (
             key="bid"
             value={bestBid.bid}
             label={bestBid.institutionVObj.name}
-            info={`cumpără`}
+            info={'cumpără'}
           />
         </td>
         <td className="currency-top__rate currency-top__rate--commercial">
@@ -49,7 +51,7 @@ const CurrencyTop = ({ currency, centralQuote, bestBid, bestAsk }) => (
             key="ask"
             value={bestAsk.ask}
             label={bestAsk.institutionVObj.name}
-            info={`vinde`}
+            info={'vinde'}
           />
         </td>
       </tr>
