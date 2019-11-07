@@ -50,8 +50,8 @@ const { getUserCookie } = require('./lib/session');
 
   // Serve static files.
   server
-    .use('/robots.txt', express.static(`${__dirname}/static/robots.txt`))
-    .use('/favicon.ico', express.static(`${__dirname}/static/favicon.ico`));
+    .use('/robots.txt', express.static(`${__dirname}/public/static/robots.txt`))
+    .use('/favicon.ico', express.static(`${__dirname}/public/static/favicon.ico`));
 
   server
     .use([apiPath, storagePath], appProxy)
