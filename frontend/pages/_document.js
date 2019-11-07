@@ -23,16 +23,10 @@ export default class ExbeeDocument extends Document {
           <meta name="viewport"
                 content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
           />
-          <script id="Cookiebot"
-                  src="//consent.cookiebot.com/uc.js"
-                  data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
-                  data-blockingmode="auto"
-                  data-culture={String(locale).toUpperCase()}
-          />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
-          <script dangerouslySetInnerHTML={{
+          <script data-cookieconsent="ignore" async src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
+          <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
             __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments)}
@@ -40,6 +34,13 @@ export default class ExbeeDocument extends Document {
             gtag('config', '${siteGtagId}');
           `,
           }} />
+
+          <script id="Cookiebot"
+                  src="//consent.cookiebot.com/uc.js"
+                  data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
+                  data-blockingmode="auto"
+                  data-culture={String(locale).toUpperCase()}
+          />
         </Head>
 
         <body itemScope itemType="http://schema.org/WebPage">
