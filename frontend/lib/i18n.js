@@ -8,6 +8,7 @@ module.exports = new NextI18Next({
     ro: 'ro',
     ru: 'ru',
   },
+  localePath: typeof window === "undefined" ? "public/locales" : "locales",
   ignoreRoutes: ['/_next', '/static', '/storage', '/graphql'],
   serverLanguageDetection: false,
   browserLanguageDetection: false,
