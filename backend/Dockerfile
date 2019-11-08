@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:12-alpine
 COPY --chown=node:node ./ /usr/src/backend
 WORKDIR /usr/src/backend
 RUN yarn install \

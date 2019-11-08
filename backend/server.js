@@ -53,8 +53,7 @@ server.use((req, res, next) => {
     return undefined;
   }
 
-  next();
-  return undefined;
+  return next();
 });
 
 // GraphqQL server route.

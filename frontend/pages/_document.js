@@ -16,10 +16,6 @@ export default class ExbeeDocument extends Document {
     };
   }
 
-  componentDidMount() {
-    script('CookieDeclaration', '//consent.cookiebot.com/9d78ff36-0af6-463e-b7e3-67642678e2cd/cd.js')
-  }
-
   render() {
     return (
       <html prefix="og: http://ogp.me/ns#">
