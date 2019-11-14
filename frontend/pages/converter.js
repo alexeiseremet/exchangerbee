@@ -3,38 +3,16 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import {
-  centralBank, baseCurrency, baseCurrenciesArr, baseCountry,
-} from '../server.config';
+import { baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
-import { today } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
-import ConverterCard from '../features/ConverterCard';
+import ConverterWidget from '../features/ConverterWidget';
 
 class ConverterPageMarkup extends React.Component {
-  state = {
-    baseAmount: null,
-    payCurrencySlug: baseCurrenciesArr[0],
-    selectedCurrencySlug: null,
-  };
-
-  handlerSelectCurrency = (slug) => {
-    this.setState({
-      selectedCurrencySlug: slug,
-    });
-  };
-
-  handlerCurrencyChange = ({ payValue, bid }) => {
-    this.setState({
-      baseAmount: Number(payValue * bid).toFixed(2),
-    });
-  };
-
   render() {
-    const { payCurrencySlug, baseAmount, selectedCurrencySlug } = this.state;
-    const { allQuote, post, fullPath } = this.props;
+    const { post, fullPath } = this.props;
 
     return (
       <Layout metadata={{
@@ -43,40 +21,7 @@ class ConverterPageMarkup extends React.Component {
         description: 'Convertor valutar',
       }}>
         <Page heading={'Convertor valutar'}>
-          <section className="converter">
-            {
-              allQuote && allQuote.length ? (
-                <>
-                  <ConverterCard
-                    baseAmount={baseAmount}
-                    quote={{ ...baseCurrency }}
-                    payCurrencySlug={payCurrencySlug}
-                    selectedCurrencySlug={selectedCurrencySlug}
-                    currencyChange={this.handlerCurrencyChange}
-                    selectCurrency={this.handlerSelectCurrency}
-                  />
-
-                  {
-                    allQuote.map((quote) => (
-                      <ConverterCard
-                        key={quote.currencyVObj.slug}
-                        baseAmount={baseAmount}
-                        quote={{
-                          slug: quote.currencyVObj.slug,
-                          name: quote.currencyVObj.name,
-                          bid: quote.bid,
-                        }}
-                        payCurrencySlug={payCurrencySlug}
-                        selectedCurrencySlug={selectedCurrencySlug}
-                        currencyChange={this.handlerCurrencyChange}
-                        selectCurrency={this.handlerSelectCurrency}
-                      />
-                    ))
-                  }
-                </>
-              ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
-            }
-          </section>
+          <ConverterWidget />
 
           {
             post && post.textFirst && (
@@ -97,7 +42,6 @@ class ConverterPageMarkup extends React.Component {
   }
 }
 
-
 // getInitialProps.
 ConverterPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
@@ -114,15 +58,7 @@ const ConverterPageI18N = withTranslation('common')(ConverterPageMarkup);
 
 // Container.
 const GQL_CONVERTER_PAGE = gql`
-  query ConverterPage ($where: QuoteWhereInput!, $postSlug: String!) {
-    allQuote (where: $where) {
-      currencyVObj {
-        name
-        slug
-      }
-      amount
-      bid
-    }
+  query ConverterPage ($postSlug: String!) {
     post(slug: $postSlug) {
       title
       textFirst
@@ -137,16 +73,10 @@ export default _compose(
     {
       options: ({ fullPath }) => ({
         variables: {
-          where: {
-            institution: { refSlug: centralBank.slug },
-            date: today(),
-            error: 'no',
-          },
           postSlug: fullPath,
         },
       }),
-      props: ({ data: { allQuote, post } }) => ({
-        allQuote,
+      props: ({ data: { post } }) => ({
         post,
       }),
     },

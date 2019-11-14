@@ -2,7 +2,6 @@ import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
 
-
 const Page = ({
   children, heading,
 }) => {

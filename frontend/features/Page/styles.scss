@@ -25,13 +25,3 @@
   font-size: 2rem;
   line-height: 1.2;
 }
-
-@include mappy-bp(small) {
-  .page__top {
-    padding-bottom: $base-spacing;
-  }
-
-  .page-heading {
-    font-size: 2.6rem;
-  }
-}

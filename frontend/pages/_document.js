@@ -26,15 +26,23 @@ export default class ExbeeDocument extends Document {
           />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script data-cookieconsent="ignore" async src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`} />
-          <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments)}
-              gtag('js', new Date());
-              gtag('config', '${siteGtagId}');
-            `,
-          }} />
+          {
+            process.env.NODE_ENV === 'production' && (
+              <>
+                <script data-cookieconsent="ignore"
+                        async
+                        src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`}/>
+                <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments)}
+                    gtag('js', new Date());
+                    gtag('config', '${siteGtagId}');
+                  `,
+                }}/>
+              </>
+            )
+          }
 
           <script id="Cookiebot"
                   src="//consent.cookiebot.com/uc.js"
