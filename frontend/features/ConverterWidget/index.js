@@ -29,7 +29,7 @@ class ConverterWidget extends React.Component {
       newAskAmount = Number((newBidAmount * bidCurrency.bid) / newAskCurrency.ask).toFixed(2);
     }
 
-    if (!value && activeWidget === type === 'bid') {
+    if (!value && activeWidget === 'bid' && type === 'bid') {
       newAskAmount = Number((newBidAmount * newBidCurrency.bid) / askCurrency.ask).toFixed(2);
     }
 
@@ -37,7 +37,7 @@ class ConverterWidget extends React.Component {
       newBidAmount = Number((newAskAmount * askCurrency.ask) / newBidCurrency.bid).toFixed(2);
     }
 
-    if (!value && activeWidget === type === 'ask') {
+    if (!value && activeWidget === 'ask' && type === 'ask') {
       newBidAmount = Number((newAskAmount * newAskCurrency.ask) / bidCurrency.bid).toFixed(2);
     }
 

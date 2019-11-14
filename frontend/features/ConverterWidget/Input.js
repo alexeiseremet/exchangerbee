@@ -21,7 +21,7 @@ class Input extends React.Component {
           className={className}
           defaultValue={defaultValue}
           onChange={(event) => { onInputChange(event.target.value); }}
-          onBlur={() => { onInputBlur(false) }}
+          onBlur={() => { onInputBlur(false); }}
           ref={(input) => { this.inputRef = input; }}
         />
       </>
