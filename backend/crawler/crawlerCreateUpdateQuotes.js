@@ -25,8 +25,8 @@ const createUpdateQuotes = (quotes) => {
     const whereQuote = { institution, currency, date: todayValue };
 
     code = code.trim();
-    bid = bid.trim();
-    ask = ask.trim();
+    bid = bid.trim().replace(',', '.');
+    ask = ask.trim().replace(',', '.');
 
     if (!parseFloat(bid) || !parseFloat(ask) || +bid <= 0 || +ask <= 0) {
       return undefined;
