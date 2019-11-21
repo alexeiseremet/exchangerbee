@@ -1,15 +1,15 @@
 // Load server variables from .env file.
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 const next = require('next');
 
 const {
-  PORT = 3050,
-  API_HOST = 'http://localhost:3010',
-  API_KEY = 'browser',
+  PORT,
+  API_HOST,
+  API_KEY,
   NODE_ENV,
 } = process.env;
 const IS_PRODUCTION = NODE_ENV === 'production';
@@ -35,7 +35,7 @@ const { getUserCookie } = require('./lib/session');
     cookiePathRewrite: apiPath,
     changeOrigin: true,
     router: {
-      [storagePath]: 'http://xezoom.com',
+      [storagePath]: 'http://space.xezoom.com',
     },
     onProxyReq(proxyReq, req) {
       const user = getUserCookie(req);
