@@ -33,7 +33,7 @@ const createUpdateQuotes = (quotes) => {
     }
 
     // Verify if parsed currency code is the same as refSlug (ex. usd !== usd).
-    const quoteHasError = code === currency.refSlug ? 'no' : 'yes';
+    const quoteHasError = code.includes(currency.refSlug) ? 'no' : 'yes';
 
     // Create cleaned Quote object.
     const cleanedQuote = { ...quote, bid, ask };

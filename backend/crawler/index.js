@@ -47,17 +47,17 @@ const runCrawler = async () => {
     await page.goto(url, { waitUntil: 'networkidle2' });
 
     const getXPathValue = async (key, xPath, quoteIndex) => {
-      const handle = await page.$x(xPath);
+      const [elem] = await page.$x(xPath);
 
       result.quotes[quoteIndex][key] = (
-        await page.evaluate((el) => el.textContent.toLowerCase(), handle[0])
+        await page.evaluate((el) => el.textContent.toLowerCase(), elem)
       );
 
       // Take screenshot.
-      // const fileName = url.replace(/([-=.:/%?#])/g, '_')
-      // await handle[0].screenshot({
-      //   path: `${__dirname}/screenshots/${fileName}_${currency.refSlug}_${key}.jpeg`
-      // })
+      // const fileName = url.replace(/([-=.:/%?#])/g, '_');
+      // await elem.screenshot({
+      //   path: `${__dirname}/../screenshots/${fileName}_${key}.jpeg`
+      // });
     };
 
     let promiseAllxPaths = [];
