@@ -3,6 +3,7 @@ const optimizedImages = require('next-optimized-images');
 const sass = require('@zeit/next-sass');
 
 const nextConfig = {
+  useFileSystemPublicRoutes: false,
   webpack: (config) => {
     // Unshift polyfills in main entrypoint.
     const {
