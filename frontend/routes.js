@@ -29,6 +29,10 @@ const APP_ROUTES = [
   },
   // Admin's pages.
   {
+    page: 'admin/login',
+    pattern: '/admin/login',
+  },
+  {
     page: 'admin/banks',
     pattern: '/admin/banks/:action(create)?',
   },
