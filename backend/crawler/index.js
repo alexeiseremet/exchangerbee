@@ -1,6 +1,6 @@
 // Load server variables from .env file.
-// const dotenv = require('dotenv')
-// dotenv.config()
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');

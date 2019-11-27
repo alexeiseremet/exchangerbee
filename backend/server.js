@@ -1,6 +1,6 @@
 // Load server variables from .env file.
-// const dotenv = require('dotenv')
-// dotenv.config()
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 const express = require('express');
 const expressGraphql = require('express-graphql');
