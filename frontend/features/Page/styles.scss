@@ -25,3 +25,10 @@
   font-size: 2rem;
   line-height: 1.2;
 }
+
+.page-lead {
+  padding: $xsmall-spacing;
+  background: rgba($secondary-color, .4);
+  box-shadow: 0 .2rem .4rem -.1rem rgba($primary-background, .4);
+  border-radius: $base-border-radius;
+}

@@ -1,4 +1,4 @@
-const host = 'http://md.xezoom.com';
+const host = 'https://md.xezoom.com';
 const apiPath = '/graphql';
 
 module.exports = {

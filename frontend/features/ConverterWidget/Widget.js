@@ -60,28 +60,30 @@ class Widget extends React.Component {
                 )
             }
 
-            <div className="flex flex--fit">
-              <button type="button"
-                      className={btnClasses(baseCurrency.slug)}
-                      onClick={() => this.props.currencyHandler(baseCurrency.slug, type)}
-              >
-                {baseCurrency.slug}
-              </button>
+            <div style={{ overflowX: 'scroll', overflowY: 'hidden' }}>
+              <div className="flex flex--fit">
+                <button type="button"
+                        className={btnClasses(baseCurrency.slug)}
+                        onClick={() => this.props.currencyHandler(baseCurrency.slug, type)}
+                >
+                  {baseCurrency.slug}
+                </button>
 
-              {
-                baseCurrenciesArr.map((slug, i) => (
-                  <button key={i} type="button"
-                          onClick={() => this.props.currencyHandler(slug, type)}
-                          className={btnClasses(slug)}
-                  >
-                    {slug}
-                  </button>
-                ))
-              }
+                {
+                  baseCurrenciesArr.map((slug, i) => (
+                    <button key={i} type="button"
+                            onClick={() => this.props.currencyHandler(slug, type)}
+                            className={btnClasses(slug)}
+                    >
+                      {slug}
+                    </button>
+                  ))
+                }
 
-              <button type="button" hidden className={btnClasses(null, 'more')}>
-                ...
-              </button>
+                <button type="button" hidden className={btnClasses(null, 'more')}>
+                  ...
+                </button>
+              </div>
             </div>
           </div>
         </div>

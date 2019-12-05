@@ -21,7 +21,9 @@ class ConverterPageMarkup extends React.Component {
         description: 'Convertor valutar',
       }}>
         <Page heading={'Convertor valutar'}>
-          <ConverterWidget />
+          <div className="page-lead">
+            <ConverterWidget />
+          </div>
 
           {
             post && post.textFirst && (

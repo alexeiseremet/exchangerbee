@@ -22,11 +22,11 @@ const BankPageMarkup = ({
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${institution.name} — curs valutar ${String(institution.slug).toUpperCase()}`,
-      description: `Cursul valutar la ${institution.name}`,
+      title: `${String(institution.slug).toUpperCase()} — curs valutar ${institution.name}`,
+      description: `Cursul valutar la ${institution.name} pentru azi.`,
     }}>
       <Page heading={`Cursul valutar la ${institution.name}`}>
-        <section className="quote-list">
+        <section>
           {
             allQuote && allQuote.length ? (
               allQuote.map(

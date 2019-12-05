@@ -10,6 +10,7 @@ import { today } from '../lib/moment';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
+import ConverterWidget from '../features/ConverterWidget';
 
 const IndexPageMarkup = ({
   post, centralQuote, bestBidQuote, bestAskQuote,
@@ -21,14 +22,33 @@ const IndexPageMarkup = ({
   return (
     <Layout metadata={{
       title: `Curs valutar — ${baseCountry.name}`,
-      description: `Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.`,
+      description: `
+        Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.
+        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}.
+      `,
     }}>
       <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}>
-        <BestQuotes
-          bestAskQuote={bestAskQuote}
-          bestBidQuote={bestBidQuote}
-          centralQuote={centralQuote}
+        <div style={{ marginBottom: '3rem' }}>
+          <BestQuotes
+            bestAskQuote={bestAskQuote}
+            bestBidQuote={bestBidQuote}
+            centralQuote={centralQuote}
+          />
+        </div>
+
+        <h2
+          style={{
+            marginBottom: '1.19rem',
+            fontSize: '1.6rem',
+            lineHeight: '1.3',
+            opacity: '0.8',
+          }}
+          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}`}}
         />
+
+        <div className="page-lead">
+          <ConverterWidget />
+        </div>
 
         {
           post.textFirst && (

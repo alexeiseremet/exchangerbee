@@ -15,6 +15,7 @@ import Page from '../features/Page';
 import QuoteCard from '../features/QuoteCard';
 import RateCard from '../features/RateCard';
 import CurrencyTop from '../features/CurrencyTop';
+import ConverterWidget from '../features/ConverterWidget';
 
 const CurrencyPageMarkup = ({
   currency, allQuote, post, fullPath,
@@ -37,8 +38,11 @@ const CurrencyPageMarkup = ({
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${currency.name} — curs valutar ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
-      description: `Curs ${String(currency.name).toLowerCase()} în raport cu ${String(baseCurrency.name).toLowerCase()}.`,
+      title: `Curs valutar ${currency.name} (${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()})`,
+      description: `
+        Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat la băncile din ${baseCountry.name}.
+        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
+      `,
     }}>
       <Page
         heading={`
@@ -48,16 +52,48 @@ const CurrencyPageMarkup = ({
       >
         {
           centralQuote && (
-            <CurrencyTop
-              currency={currency}
-              centralQuote={centralQuote}
-              bestBid={bestBid}
-              bestAsk={bestAsk}
-            />
+            <div className="page-lead" style={{ marginBottom: '3rem' }}>
+              <CurrencyTop
+                currency={currency}
+                centralQuote={centralQuote}
+                bestBid={bestBid}
+                bestAsk={bestAsk}
+              />
+            </div>
           )
         }
 
+        <h2
+          style={{
+            marginBottom: '1.19rem',
+            fontSize: '1.6rem',
+            lineHeight: '1.3',
+            opacity: '0.8',
+          }}
+          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi`}}
+        />
+
+        <div className="page-lead" style={{ marginTop: '1rem' }}>
+          <ConverterWidget />
+        </div>
+
         <section style={{ marginTop: '3rem' }}>
+          <h2
+            style={{
+              marginBottom: '1.19rem',
+              fontSize: '1.6rem',
+              lineHeight: '1.3',
+              opacity: '0.8',
+            }}
+            dangerouslySetInnerHTML={{
+              __html: (`
+                      Curs valutar pentru
+                      ${currency.name} (${String(currency.slug).toUpperCase()})
+                      afişat la băncile din ${baseCountry.name}
+                    `),
+            }}
+          />
+
           {
             allQuoteNoCentral.length ? (
               <>
@@ -95,23 +131,6 @@ const CurrencyPageMarkup = ({
                     ))
                   }
                 </div>
-
-                <p
-                  style={{
-                    marginTop: '.5rem',
-                    fontSize: '1.2rem',
-                    lineHeight: '1.3',
-                    textAlign: 'center',
-                    fontStyle: 'italic',
-                    opacity: '0.65',
-                  }}
-                  dangerouslySetInnerHTML={{
-                    __html: (`
-                      Ratele de shimb pentru
-                      <strong>${currency.name}</strong> (${String(currency.slug).toUpperCase()})
-                      afişate la băncile din ${baseCountry.name}
-                    `),
-                  }}/>
               </>
             ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
           }

@@ -9,9 +9,9 @@ import Widget from './Widget';
 class ConverterWidget extends React.Component {
   state = {
     activeWidget: 'bid',
-    bidAmount: '100',
+    bidAmount: '10',
     bidCurrency: baseCurrency,
-    askAmount: '100',
+    askAmount: '10',
     askCurrency: baseCurrency,
   };
 
@@ -51,7 +51,7 @@ class ConverterWidget extends React.Component {
   currencyHandler = (slug, type) => {
     let currency = baseCurrency;
 
-    if (baseCurrency.slug !== slug) {
+    if (this.props.allQuote && (baseCurrency.slug !== slug)) {
       [currency] = this.props.allQuote.filter((quote) => quote.currencyVObj.slug === slug);
     }
 
@@ -70,27 +70,25 @@ class ConverterWidget extends React.Component {
     }
 
     return (
-      <>
-        <div className="converter-widget">
-          <Widget
-            type="bid"
-            label="platesc"
-            data={this.state}
-            amountHandler={this.amountHandler}
-            currencyHandler={this.currencyHandler}
-            allQuote={allQuote}
-          />
+      <section className="converter-widget">
+        <Widget
+          type="bid"
+          label="plătesc"
+          data={this.state}
+          amountHandler={this.amountHandler}
+          currencyHandler={this.currencyHandler}
+          allQuote={allQuote}
+        />
 
-          <Widget
-            type="ask"
-            label="primesc"
-            data={this.state}
-            amountHandler={this.amountHandler}
-            currencyHandler={this.currencyHandler}
-            allQuote={allQuote}
-          />
-        </div>
-      </>
+        <Widget
+          type="ask"
+          label="primesc"
+          data={this.state}
+          amountHandler={this.amountHandler}
+          currencyHandler={this.currencyHandler}
+          allQuote={allQuote}
+        />
+      </section>
     );
   }
 }

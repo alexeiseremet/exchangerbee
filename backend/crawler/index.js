@@ -56,7 +56,7 @@ const runCrawler = async () => {
       // Take screenshot.
       // const fileName = url.replace(/([-=.:/%?#])/g, '_');
       // await elem.screenshot({
-      //   path: `${__dirname}/../screenshots/${fileName}_${key}.jpeg`
+      //   path: `${__dirname}/../screenshots/${fileName}_${key}.jpeg`,
       // });
     };
 
