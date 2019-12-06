@@ -70,7 +70,7 @@ const CurrencyPageMarkup = ({
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi`}}
+          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi` }}
         />
 
         <div className="page-lead" style={{ marginTop: '1rem' }}>

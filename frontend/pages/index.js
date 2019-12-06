@@ -13,7 +13,7 @@ import BestQuotes from '../features/BestQuotes';
 import ConverterWidget from '../features/ConverterWidget';
 
 const IndexPageMarkup = ({
-  post, centralQuote, bestBidQuote, bestAskQuote,
+  post, centralQuote, bestBidQuote, bestAskQuote, fullPath,
 }) => {
   if (!post) {
     return null;
@@ -21,6 +21,7 @@ const IndexPageMarkup = ({
 
   return (
     <Layout metadata={{
+      url: `${fullPath}`,
       title: `Curs valutar — ${baseCountry.name}`,
       description: `
         Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.
@@ -43,7 +44,7 @@ const IndexPageMarkup = ({
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}`}}
+          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}` }}
         />
 
         <div className="page-lead">
