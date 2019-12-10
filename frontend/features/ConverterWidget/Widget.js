@@ -60,7 +60,7 @@ class Widget extends React.Component {
                 )
             }
 
-            <div style={{ overflowX: 'scroll', overflowY: 'hidden' }}>
+            <div style={{ overflowX: 'auto', overflowY: 'hidden' }}>
               <div className="flex flex--fit">
                 <button type="button"
                         className={btnClasses(baseCurrency.slug)}
