@@ -4,8 +4,18 @@ import React from 'react';
 class Input extends React.Component {
   inputRef = React.createRef();
 
+  // is temporary, hopefully
+  blurHandler = () => {
+    this.props.onInputBlur(false)
+  };
+
   componentDidMount() {
     this.inputRef.select();
+    this.inputRef.onblur = this.blurHandler;
+  }
+
+  componentWillUnmount() {
+    this.inputRef.onblur = null;
   }
 
   render() {
@@ -21,7 +31,7 @@ class Input extends React.Component {
           className={className}
           defaultValue={defaultValue}
           onChange={(event) => { onInputChange(event.target.value); }}
-          onBlur={() => { onInputBlur(false); }}
+          // onBlur={() => { onInputBlur(false); }}
           ref={(input) => { this.inputRef = input; }}
         />
       </>
