@@ -5,7 +5,7 @@
 const express = require('express');
 const expressGraphql = require('express-graphql');
 const mongoose = require('mongoose');
-const cron = require('node-cron');
+const { CronJob } = require('cron');
 
 const schema = require('./graphql');
 const runCrawler = require('./crawler/');
@@ -23,33 +23,33 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 
 // mongoose.Promise = global.Promise
 // Connect to MongoDB with Mongoose.
-(function connectToMongoDB() {
-  let timer;
+let timer;
 
-  mongoose.connect(
-    MONGO_URL,
-    {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-    },
-  )
-    .then(() => {
-      // eslint-disable-next-line no-console
-      console.log('MongoDB connected');
-      clearTimeout(timer);
-    })
-    .catch(() => {
-      // eslint-disable-next-line no-console
-      console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
-      timer = setTimeout(connectToMongoDB, 5000);
-    });
+(async function connectToMongoDB() {
+  try {
+    await mongoose.connect(
+      MONGO_URL,
+      {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+      },
+    );
+
+    // eslint-disable-next-line no-console
+    console.log('MongoDB connected');
+    clearTimeout(timer);
+  } catch {
+    // eslint-disable-next-line no-console
+    console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
+    timer = setTimeout(connectToMongoDB, 5000);
+  }
 }());
 
 // Run crawler by cron.
-cron.schedule('*/1 0-1,8-10,13-14 * * *', async () => {
+new CronJob('0 */1 0-1,8-10,13-14 * * *', async () => {
   const data = await runCrawler();
   console.log('Crawler duration', data.time);
-}, { timezone });
+}, null, true, timezone);
 
 // Check server token.
 server.use((req, res, next) => {
