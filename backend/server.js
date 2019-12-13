@@ -4,12 +4,14 @@
 
 const express = require('express');
 const expressGraphql = require('express-graphql');
-
-const server = express();
-
 const mongoose = require('mongoose');
+const cron = require('node-cron');
+
 const schema = require('./graphql');
 const runCrawler = require('./crawler/');
+const { timezone } = require('./server.config');
+
+const server = express();
 
 const {
   PORT,
@@ -43,6 +45,12 @@ const IS_PRODUCTION = NODE_ENV === 'production';
     });
 }());
 
+// Run crawler by cron.
+cron.schedule('*/1 0-1,8-10,13-14 * * *', async () => {
+  const data = await runCrawler();
+  console.log('Crawler duration', data.time);
+}, { timezone });
+
 // Check server token.
 server.use((req, res, next) => {
   const apiKey = req.headers['x-api-key'];
@@ -66,7 +74,7 @@ server.use(
       req,
     },
     graphiql: !IS_PRODUCTION,
-    pretty: true,
+    pretty: !IS_PRODUCTION,
   })),
 );
 
