@@ -1,5 +1,6 @@
 // Load server variables from .env file.
 // const dotenv = require('dotenv');
+
 // dotenv.config();
 
 const express = require('express');
@@ -7,9 +8,9 @@ const expressGraphql = require('express-graphql');
 const mongoose = require('mongoose');
 const { CronJob } = require('cron');
 
-const schema = require('./graphql');
-const runCrawler = require('./crawler/');
 const { timezone } = require('./server.config');
+const schema = require('./graphql');
+const crawler = require('./crawler');
 
 const server = express();
 
@@ -47,7 +48,7 @@ let timer;
 
 // Run crawler by cron.
 new CronJob('0 */1 0-1,8-10,13-14 * * *', async () => {
-  const data = await runCrawler();
+  const data = await crawler();
   console.log('Crawler duration', data.time);
 }, null, true, timezone);
 
@@ -83,7 +84,7 @@ server.use(
   '/crawler',
   async (req, res, next) => {
     try {
-      const data = await runCrawler();
+      const data = await crawler();
       res.json(data);
     } catch (error) {
       next(error);

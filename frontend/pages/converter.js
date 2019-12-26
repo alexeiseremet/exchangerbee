@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { baseCountry } from '../server.config';
+import { baseCountry, centralBank } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
@@ -17,10 +17,10 @@ class ConverterPageMarkup extends React.Component {
     return (
       <Layout metadata={{
         url: `${fullPath}`,
-        title: `Convertor valutar — ${baseCountry.name}`,
+        title: `Convertor valutar ${String(centralBank.slug).toUpperCase()} — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
         description: 'Convertor valutar',
       }}>
-        <Page heading={'Convertor valutar'}>
+        <Page heading={`Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi`}>
           <div className="page-lead">
             <ConverterWidget />
           </div>

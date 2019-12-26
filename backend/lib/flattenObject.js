@@ -4,17 +4,15 @@ const flattenObject = (obj) => {
   const flatten = {};
 
   if (obj) {
-    Object.keys(obj).forEach((o) => {
-      if (Object.prototype.hasOwnProperty.call(obj, o) && isPlainObject(obj[o])) {
-        const subObj = flattenObject(obj[o]);
+    Object.keys(obj).forEach((key) => {
+      if (isPlainObject(obj[key])) {
+        const subObj = flattenObject(obj[key]);
 
-        Object.keys(subObj).forEach((so) => {
-          if (Object.prototype.hasOwnProperty.call(subObj, so)) {
-            flatten[`${o}.${so}`] = subObj[so];
-          }
+        Object.keys(subObj).forEach((soKey) => {
+          flatten[`${key}.${soKey}`] = subObj[soKey];
         });
       } else {
-        flatten[o] = obj[o];
+        flatten[key] = obj[key];
       }
     });
   }

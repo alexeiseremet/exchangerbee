@@ -21,14 +21,21 @@
   overflow: hidden;
 }
 
-.converter__label {
+.converter__label,
+.converter__rate {
   position: absolute;
-  left: $xsmall-spacing;
-  top: $xsmall-spacing;
+  left: 0;
+  top: 0;
+  padding: $xsmall-spacing;
   text-transform: uppercase;
   font-style: normal;
   font-size: .8rem;
   opacity: .65;
+}
+
+.converter__rate {
+  left: auto;
+  right: 0;
 }
 
 .converter__input {

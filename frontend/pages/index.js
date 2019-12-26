@@ -22,13 +22,13 @@ const IndexPageMarkup = ({
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `Curs valutar — ${baseCountry.name}`,
+      title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
       description: `
-        Cel mai bun curs (${String(baseCountry.slug).toUpperCase()}) oferit de bănci şi casele de schimb.
-        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}.
+        Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
+        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
       `,
     }}>
-      <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}>
+      <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
         <div style={{ marginBottom: '3rem' }}>
           <BestQuotes
             bestAskQuote={bestAskQuote}
@@ -114,7 +114,7 @@ const GQL_INDEX_PAGE = gql`
       bid
       ask
     }
-    bestAskQuote: bestTodayQuote (date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
+    bestAskQuote: bestTodayQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
       institutionVObj {
         name
         slug

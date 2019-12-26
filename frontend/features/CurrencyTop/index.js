@@ -11,7 +11,7 @@ const CurrencyTop = ({
     <table className="currency-top__table">
       <caption dangerouslySetInnerHTML={{
         __html: `
-          Cursul oficial şi cele mai bune rate de schimb pentru ${currency.name} 
+          Curs ${String(centralBank.slug).toUpperCase()} şi cele mai bune rate de schimb pentru ${currency.name} 
           oferite de băncile din <span style="white-space: nowrap">${baseCountry.name}, ${localeDate()}</span>
         `,
       }}/>

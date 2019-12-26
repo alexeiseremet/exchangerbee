@@ -9,8 +9,8 @@ module.exports = `
     amount: String!
     bid: String!
     ask: String!
-    period: QuotePeriod!
-    error: QuoteError!
+    period: QuotePeriodEnum!
+    error: QuoteErrorEnum!
   }
   
   type QuoteRef {
@@ -22,7 +22,7 @@ module.exports = `
     quote(id: ID): Quote
     allQuote(
       where: QuoteWhereInput
-      orderBy: QuoteOrderByInput
+      orderBy: [QuoteOrderByEnum]
       skip: Int
       after: String
       before: String
@@ -52,17 +52,17 @@ module.exports = `
     amount: String
     bid: String
     ask: String
-    period: QuotePeriod
-    error: QuoteError
+    period: QuotePeriodEnum
+    error: QuoteErrorEnum
   }
   
   input QuoteWhereInput {
     id: ID
     institution: QuoteRefInput
     currency: QuoteRefInput
-    date: String
-    period: QuotePeriod
-    error: QuoteError
+    date: [String]
+    period: QuotePeriodEnum
+    error: QuoteErrorEnum
   }
   
   input QuoteRefInput {
@@ -70,17 +70,17 @@ module.exports = `
     refSlug: String
   }
   
-  enum QuotePeriod {
+  enum QuotePeriodEnum {
     daily
     monthly
   }
   
-  enum QuoteError {
+  enum QuoteErrorEnum {
     yes
     no
   }
   
-  enum QuoteOrderByInput {
+  enum QuoteOrderByEnum {
     id_ASC
     id_DESC
     date_ASC

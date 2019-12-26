@@ -3,7 +3,7 @@ const apiPath = '/graphql';
 
 module.exports = {
   siteName: 'xezoom.com',
-  siteGtagId: 'G-FTFEZD3BQX',
+  siteGtagId: 'G-XXFEABCDEX',
   siteMenu: [
     { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },

@@ -116,7 +116,7 @@ export default _compose(
         variables: {
           where: {
             institution: { refSlug: centralBank.slug },
-            date: today(),
+            date: [today()],
             error: 'no',
           },
         },

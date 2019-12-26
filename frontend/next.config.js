@@ -4,6 +4,7 @@ const sass = require('@zeit/next-sass');
 
 const nextConfig = {
   useFileSystemPublicRoutes: false,
+  trailingSlash: false,
   webpack: (config) => {
     // Unshift polyfills in main entrypoint.
     const {

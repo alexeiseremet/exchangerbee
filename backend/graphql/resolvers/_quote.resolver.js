@@ -19,8 +19,26 @@ module.exports = {
           });
       });
     },
-    allQuote(_, { where }) {
-      const flattenWhere = flattenObject(where);
+    allQuote(_, { where, orderBy }) {
+      let flattenWhere = flattenObject(where);
+      let optsOrderBy = {};
+
+      if (where.date) {
+        flattenWhere = {
+          ...flattenWhere,
+          date: {
+            $gte: where.date[0],
+            ...(where.date[1] ? { $lte: where.date[1] } : null),
+          },
+        };
+      }
+
+      if (orderBy) {
+        orderBy.forEach((key) => {
+          const keyValue = key.split('_');
+          optsOrderBy[`${keyValue[0]}`] = keyValue[1];
+        })
+      }
 
       return new Promise((resolve, reject) => {
         Quote.find(flattenWhere)
@@ -33,9 +51,9 @@ module.exports = {
             select: 'name slug',
           })
           .sort({
-            'date': 'desc',
-            'currency.refId': 'asc',
-            'institution.refId': 'asc',
+            'date': 'DESC',
+            'institution.refId': 'ASC',
+            ...optsOrderBy,
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);

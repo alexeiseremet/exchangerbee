@@ -10,6 +10,10 @@
 }
 
 @include mappy-bp(max small) {
+  .currency-top__table {
+    margin: 0;
+  }
+
   .currency-top__rate {
     display: inline-block;
     width: 36%;

@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrency } from '../server.config';
+import { centralBank, baseCurrency, baseCountry } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
@@ -22,10 +22,10 @@ const BankPageMarkup = ({
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${String(institution.slug).toUpperCase()} — curs valutar ${institution.name}`,
-      description: `Cursul valutar la ${institution.name} pentru azi.`,
+      title: `Curs valutar ${institution.name} (${String(institution.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
+      description: `Cursul valutar la ${institution.name} (${String(institution.slug).toUpperCase()}) pentru azi.`,
     }}>
-      <Page heading={`Cursul valutar la ${institution.name}`}>
+      <Page heading={`Cursul valutar la ${institution.name} (${String(institution.slug).toUpperCase()})`}>
         <section>
           {
             allQuote && allQuote.length ? (
@@ -141,7 +141,7 @@ export default _compose(
           slug: query.slug,
           where: {
             institution: { refSlug: query.slug },
-            date: today(),
+            date: [today()],
             error: 'no',
           },
           postSlug: fullPath,

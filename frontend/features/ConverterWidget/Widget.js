@@ -21,14 +21,12 @@ class Widget extends React.Component {
   render() {
     const { data, label, type } = this.props;
     const [currency, amount] = [data[`${type}Currency`], data[`${type}Amount`]];
+    const currencySlug = currency.slug || currency.currencyVObj.slug;
 
     const btnClasses = (slug, mod) => classnames(
       'converter__currency-btn',
       {
-        'is-active': (
-          currency.slug === slug
-          || (currency.currencyVObj && currency.currencyVObj.slug === slug)
-        ),
+        'is-active': currencySlug === slug,
         [`converter__currency-btn--${mod}`]: mod,
       },
     );
@@ -40,6 +38,14 @@ class Widget extends React.Component {
             <div className="converter__label">
               {label}
             </div>
+
+            {
+              currencySlug !== baseCurrency.slug && (
+                <div className="converter__rate">
+                  {`${currencySlug}/${baseCurrency.slug} = ${currency.ask}`}
+                </div>
+              )
+            }
 
             {
               this.state.inputIsActive
@@ -80,7 +86,7 @@ class Widget extends React.Component {
                   ))
                 }
 
-                <button type="button" hidden className={btnClasses(null, 'more')}>
+                <button type="button" hidden="true" className={btnClasses(null, 'more')}>
                   ...
                 </button>
               </div>

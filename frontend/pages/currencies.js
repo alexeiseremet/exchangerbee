@@ -13,7 +13,7 @@ import CurrencyCard from '../features/CurrencyCard';
 const CurrenciesPageMarkup = ({ allCurrency, fullPath }) => (
   <Layout metadata={{
     url: `${fullPath}`,
-    title: `Lista valute — ${baseCountry.name}`,
+    title: `Lista valute — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
     description: `Lista valutelor negociate la băncile din ${baseCountry.name}`,
   }}>
     <Page heading={`Lista valutelor negociate la băncile din ${baseCountry.name}`}>

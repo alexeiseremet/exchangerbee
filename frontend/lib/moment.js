@@ -55,6 +55,13 @@ const localeDate = (date = moment()) => (
  */
 const today = () => `${moment().startOf('day').valueOf()}`;
 
+/**
+ * Substract day in Timestamp format.
+ *
+ * @returns {string} Date in UNIX format.
+ */
+const xDaysAgo = (x = 1) => `${moment().subtract(x, 'days').startOf('day').valueOf()}`;
+
 export {
   moment,
   monthToString,
@@ -62,4 +69,5 @@ export {
   inputDate,
   localeDate,
   today,
+  xDaysAgo,
 };

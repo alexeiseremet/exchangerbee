@@ -13,7 +13,7 @@ import BankCard from '../features/BankCard';
 const BanksPageMarkup = ({ allInstitution, fullPath }) => (
   <Layout metadata={{
     url: `${fullPath}`,
-    title: `Curs valutar bănci — ${baseCountry.name}`,
+    title: `Curs valutar bănci — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
     description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
     <Page heading={`Cursul valutar la băncile din ${baseCountry.name}`}>
