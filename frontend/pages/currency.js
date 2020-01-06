@@ -19,7 +19,7 @@ import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
 
 const CurrencyPageMarkup = ({
-  currency, allQuote, post, fullPath, archiveQuote
+  currency, allQuote, post, fullPath, archiveQuote,
 }) => {
   if (!currency) {
     return null;
@@ -156,7 +156,7 @@ const CurrencyPageMarkup = ({
             */
           }
 
-          <Chart data={archiveQuote} />
+          <Chart data={archiveQuote} id={currency.slug}/>
         </section>
 
         {
@@ -235,12 +235,16 @@ export default _compose(
           archiveWhere: {
             currency: { refSlug: query.slug },
             institution: { refSlug: centralBank.slug },
-            date: [xDaysAgo(4 ), today()],
+            date: [xDaysAgo(90), today()],
             error: 'no',
           },
         },
       }),
-      props: ({ data: { currency, allQuote, post, archiveQuote } }) => ({
+      props: ({
+        data: {
+          currency, allQuote, post, archiveQuote,
+        },
+      }) => ({
         currency,
         allQuote,
         post,

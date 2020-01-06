@@ -86,7 +86,9 @@ class Widget extends React.Component {
                   ))
                 }
 
-                <button type="button" hidden="true" className={btnClasses(null, 'more')}>
+                <button type="button" style={{ display: 'none' }}
+                        className={btnClasses(null, 'more')}
+                >
                   ...
                 </button>
               </div>

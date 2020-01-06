@@ -12,6 +12,16 @@
 @include mappy-bp(max small) {
   .currency-top__table {
     margin: 0;
+
+    tr {
+      display: block;
+    }
+
+    tr,
+    td,
+    th {
+      vertical-align: middle;
+    }
   }
 
   .currency-top__rate {

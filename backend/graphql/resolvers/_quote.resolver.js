@@ -23,7 +23,7 @@ module.exports = {
       let flattenWhere = flattenObject(where);
       let optsOrderBy = {};
 
-      if (where.date) {
+      if (where && where.date) {
         flattenWhere = {
           ...flattenWhere,
           date: {

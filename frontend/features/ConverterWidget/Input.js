@@ -6,7 +6,7 @@ class Input extends React.Component {
 
   // is temporary, hopefully
   blurHandler = () => {
-    this.props.onInputBlur(false)
+    this.props.onInputBlur(false);
   };
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Input extends React.Component {
 
   render() {
     const {
-      defaultValue, className, onInputChange, onInputBlur,
+      defaultValue, className, onInputChange, // onInputBlur,
     } = this.props;
 
     return (
