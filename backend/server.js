@@ -47,7 +47,7 @@ let timer;
 }());
 
 // Run crawler by cron.
-new CronJob('0 */1 0-1,8-10,13-16 * * *', async () => {
+new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
   const data = await crawler();
   console.log('Crawler duration', data.time);
 }, null, true, timezone);

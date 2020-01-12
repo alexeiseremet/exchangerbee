@@ -62,9 +62,9 @@ const getDiff = (current, prev) => (
   Number(current - prev).toFixed(4)
 );
 
-const Chart = ({ data, id }) => {
+const Chart = ({ data, id, count = 24 }) => {
   const woFirstDayChart = data.slice(1);
-  const severalDays = woFirstDayChart.slice(woFirstDayChart.length - 13);
+  const severalDays = woFirstDayChart.slice(woFirstDayChart.length - (count + 1));
   const woFirstDaySeveralDays = severalDays.slice(1);
   const formatDate = (value) => moment(+value).format('DD MMM');
 
@@ -89,8 +89,8 @@ const Chart = ({ data, id }) => {
             <YAxis tick={<CustomizedYAxisTick />}
                    tickLine={false}
                    domain={[
-                     (dataMin) => Number(dataMin - (dataMin / 400)).toFixed(2),
-                     (dataMax) => Number(dataMax + (dataMax / 1000)).toFixed(2),
+                     (dataMin) => Number(dataMin - (dataMin / 400)).toFixed(4),
+                     (dataMax) => Number(dataMax + (dataMax / 1000)).toFixed(4),
                    ]}
                    mirror={true}
                    axisLine={false}

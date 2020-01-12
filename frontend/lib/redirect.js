@@ -9,7 +9,7 @@ const redirect = (target, ctx) => {
     ctx.res.end();
   } else {
     // Redirect in the browser.
-    Router.push(target);
+    Router.replace(target);
   }
 
   return undefined;

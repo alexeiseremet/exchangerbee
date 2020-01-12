@@ -145,7 +145,7 @@ const CurrencyPageMarkup = ({
               lineHeight: '1.3',
               opacity: '0.8',
             }}
-            dangerouslySetInnerHTML={{ __html: `Evoluția cursului oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}` }}
+            dangerouslySetInnerHTML={{ __html: `Evoluție curs valutar oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}` }}
           />
 
           {
@@ -156,7 +156,11 @@ const CurrencyPageMarkup = ({
             */
           }
 
-          <Chart data={archiveQuote} id={currency.slug}/>
+          {
+            archiveQuote.map(currency => (
+              <Chart data={currency.quote} id={currency.slug} key={currency.slug} />
+            ))
+          }
         </section>
 
         {
@@ -194,7 +198,7 @@ const CurrencyPageI18N = withTranslation('common')(CurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY_PAGE = gql`
-  query CurrencyPage ($slug: String!, $where: QuoteWhereInput!, $archiveWhere: QuoteWhereInput!, $postSlug: String!) {
+  query CurrencyPage ($slug: String!, $where: QuoteWhereInput, $archiveWhere: QuoteArchiveWhereInput, $postSlug: String) {
     currency(slug: $slug) {
       slug
       name
@@ -212,9 +216,12 @@ const GQL_CURRENCY_PAGE = gql`
       textFirst
       textSecond
     }
-    archiveQuote: allQuote(where: $archiveWhere, orderBy: [date_ASC]) {
-      bid
-      date
+    archiveQuote(where: $archiveWhere) {
+      slug
+      quote {
+        bid
+        date
+      }
     }
   }
 `;
@@ -233,10 +240,9 @@ export default _compose(
           },
           postSlug: fullPath,
           archiveWhere: {
-            currency: { refSlug: query.slug },
-            institution: { refSlug: centralBank.slug },
             date: [xDaysAgo(90), today()],
-            error: 'no',
+            currencies: [query.slug],
+            includeBanks: [centralBank.slug],
           },
         },
       }),

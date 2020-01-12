@@ -3,17 +3,18 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrenciesArr, baseCountry } from '../server.config';
+import { centralBank, baseCurrenciesArr, baseCountry, baseCurrency } from '../server.config';
 import { withTranslation } from '../lib/i18n';
-import { today } from '../lib/moment';
+import { today, xDaysAgo } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
 import ConverterWidget from '../features/ConverterWidget';
+import Chart from '../features/Chart';
 
 const IndexPageMarkup = ({
-  post, centralQuote, bestBidQuote, bestAskQuote, fullPath,
+  post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
 }) => {
   if (!post) {
     return null;
@@ -25,17 +26,17 @@ const IndexPageMarkup = ({
       title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
       description: `
         Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
-        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
+        Convertor după cursul valutar ${String(centralBank.slug).toUpperCase()} de azi.
       `,
     }}>
       <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
-        <div style={{ marginBottom: '3rem' }}>
+        <section style={{ marginBottom: '3rem' }}>
           <BestQuotes
             bestAskQuote={bestAskQuote}
             bestBidQuote={bestBidQuote}
             centralQuote={centralQuote}
           />
-        </div>
+        </section>
 
         <h2
           style={{
@@ -44,12 +45,30 @@ const IndexPageMarkup = ({
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}` }}
+          dangerouslySetInnerHTML={{ __html: `Convertor după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
         />
 
         <div className="page-lead">
           <ConverterWidget />
         </div>
+
+        {
+          archiveQuote.map(currency => (
+            <div style={{ marginTop: '3rem' }} key={currency.slug}>
+              <h2
+                style={{
+                  marginBottom: '1.19rem',
+                  fontSize: '1.6rem',
+                  lineHeight: '1.3',
+                  opacity: '0.8',
+                }}
+                dangerouslySetInnerHTML={{ __html: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()} — evoluție curs valutar de referință` }}
+              />
+
+              <Chart data={currency.quote} id={currency.slug} count={12}/>
+            </div>
+          ))
+        }
 
         {
           post.textFirst && (
@@ -85,8 +104,8 @@ const IndexPageI18N = withTranslation('common')(IndexPageMarkup);
 
 // Container.
 const GQL_INDEX_PAGE = gql`
-  query IndexPage ($postSlug: String, $date: String, $currencies: [String!], $excludeBanks: [String!], $includeBanks: [String!]) {
-    centralQuote: bestTodayQuote (date: $date, currencies: $currencies, includeBanks: $includeBanks) {
+  query IndexPage ($postSlug: String, $date: String, $currencies: [String!], $excludeBanks: [String!], $includeBanks: [String!], $archiveWhere: QuoteArchiveWhereInput) {
+    centralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       institutionVObj {
         name
         slug
@@ -100,7 +119,7 @@ const GQL_INDEX_PAGE = gql`
       bid
       ask
     }
-    bestBidQuote: bestTodayQuote (date: $date, currencies: $currencies, excludeBanks: $excludeBanks) {
+    bestBidQuote: bestQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks) {
       institutionVObj {
         name
         slug
@@ -114,7 +133,7 @@ const GQL_INDEX_PAGE = gql`
       bid
       ask
     }
-    bestAskQuote: bestTodayQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
+    bestAskQuote: bestQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
       institutionVObj {
         name
         slug
@@ -133,6 +152,13 @@ const GQL_INDEX_PAGE = gql`
       textFirst
       textSecond
     }
+    archiveQuote(where: $archiveWhere) {
+      slug
+      quote {
+        bid
+        date
+      }
+    }
   }
 `;
 
@@ -147,17 +173,23 @@ export default _compose(
           currencies: baseCurrenciesArr,
           excludeBanks: [centralBank.slug],
           includeBanks: [centralBank.slug],
+          archiveWhere: {
+            date: [xDaysAgo(30), today()],
+            currencies: baseCurrenciesArr,
+            includeBanks: [centralBank.slug],
+          },
         },
       }),
       props: ({
         data: {
-          post, centralQuote, bestBidQuote, bestAskQuote,
+          post, centralQuote, bestBidQuote, bestAskQuote, archiveQuote,
         },
       }) => ({
         post,
         centralQuote,
         bestBidQuote,
         bestAskQuote,
+        archiveQuote,
       }),
     },
   ),

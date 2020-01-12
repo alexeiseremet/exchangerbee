@@ -29,13 +29,21 @@ module.exports = `
       first: Int
       last: Int
     ): [Quote!]
-    bestTodayQuote(
+    bestQuote(
       date: String
       currencies: [String!]
       excludeBanks: [String!]
       includeBanks: [String!]
       type: String
     ): [Quote!]
+    archiveQuote(
+      where: QuoteArchiveWhereInput
+    ): [ArchiveQuote!]
+  }
+  
+  type ArchiveQuote {
+    slug: String
+    quote: [Quote!]
   }
   
   type Mutation {
@@ -63,6 +71,12 @@ module.exports = `
     date: [String]
     period: QuotePeriodEnum
     error: QuoteErrorEnum
+  }
+  
+  input QuoteArchiveWhereInput {
+    date: [String]
+    currencies: [String!]
+    includeBanks: [String!]
   }
   
   input QuoteRefInput {

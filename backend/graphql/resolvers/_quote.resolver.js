@@ -60,7 +60,7 @@ module.exports = {
           });
       });
     },
-    bestTodayQuote(_, {
+    bestQuote(_, {
       date, currencies, excludeBanks, includeBanks, type,
     }) {
       return new Promise((resolve, reject) => {
@@ -103,14 +103,14 @@ module.exports = {
               const ids = res.map((item) => item.quote);
               const quotes = (
                 await Quote.find({ _id: { $in: ids } })
-                  .populate({
-                    path: 'institutionVObj',
-                    select: 'name slug',
-                  })
-                  .populate({
-                    path: 'currencyVObj',
-                    select: 'name slug numCode',
-                  })
+                .populate({
+                  path: 'institutionVObj',
+                  select: 'name slug',
+                })
+                .populate({
+                  path: 'currencyVObj',
+                  select: 'name slug numCode',
+                })
               );
 
               resolve(quotes);
@@ -121,6 +121,53 @@ module.exports = {
 
             return undefined;
           });
+      });
+    },
+    archiveQuote(_, { where }) {
+      return new Promise((resolve, reject) => {
+        Quote.aggregate([
+          {
+            $sort: {
+              'date': 1,
+              'currency.refSlug': 1,
+            },
+          },
+          {
+            $match: {
+              $and: [
+                { 'currency.refSlug': { $in: where.currencies } },
+                {
+                  'institution.refSlug': {
+                    ...(where.includeBanks ? { $in: where.includeBanks } : { $ne: '*' }),
+                  },
+                },
+                { error: 'no' },
+                {
+                  date: {
+                    $gte: new Date(+where.date[0]),
+                    ...(where.date[1] ? { $lte: new Date(+where.date[1]) } : null),
+                  },
+                },
+              ],
+            },
+          },
+          {
+            $group: {
+              _id: '$currency.refSlug',
+              quote: { $push: '$$ROOT' },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              slug: '$_id',
+              quote: '$quote'
+            }
+          },
+        ])
+        .exec((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
       });
     },
   },
