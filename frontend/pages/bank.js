@@ -23,7 +23,7 @@ const BankPageMarkup = ({
     <Layout metadata={{
       url: `${fullPath}`,
       title: `Curs valutar la ${institution.name} (${String(institution.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-      description: `Curs valutar afișat la ${institution.name} (${String(institution.slug).toUpperCase()}) pentru azi.`,
+      description: `✅ Curs valutar afișat la ${institution.name} (${String(institution.slug).toUpperCase()}) pentru azi.`,
     }}>
       <Page heading={`Curs valutar la ${institution.name} (${String(institution.slug).toUpperCase()})`}>
         <section>

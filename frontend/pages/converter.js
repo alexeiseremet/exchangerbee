@@ -18,9 +18,9 @@ class ConverterPageMarkup extends React.Component {
       <Layout metadata={{
         url: `${fullPath}`,
         title: `Convertor valutar ${String(centralBank.slug).toUpperCase()} — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-        description: 'Convertor valutar',
+        description: `✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.`,
       }}>
-        <Page heading={`Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi`}>
+        <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
           <div className="page-lead">
             <ConverterWidget />
           </div>

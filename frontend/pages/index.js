@@ -25,8 +25,8 @@ const IndexPageMarkup = ({
       url: `${fullPath}`,
       title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
       description: `
-        Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
-        Convertor după cursul valutar ${String(centralBank.slug).toUpperCase()} de azi.
+        ✅ Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
+        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
       `,
     }}>
       <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
@@ -45,7 +45,7 @@ const IndexPageMarkup = ({
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: `Convertor după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
+          dangerouslySetInnerHTML={{ __html: `Convertor rate după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
         />
 
         <div className="page-lead">

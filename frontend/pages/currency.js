@@ -41,8 +41,8 @@ const CurrencyPageMarkup = ({
       url: `${fullPath}`,
       title: `Curs valutar ${currency.name} (${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
       description: `
-        Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat la băncile din ${baseCountry.name}.
-        Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
+        ✅ Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat la băncile din ${baseCountry.name}.
+        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
       `,
     }}>
       <Page

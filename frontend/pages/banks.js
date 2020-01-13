@@ -14,7 +14,7 @@ const BanksPageMarkup = ({ allInstitution, fullPath }) => (
   <Layout metadata={{
     url: `${fullPath}`,
     title: `Curs valutar bănci — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-    description: `Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
+    description: `✅ Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
     <Page heading={`Cursul valutar la băncile din ${baseCountry.name}`}>
       {
