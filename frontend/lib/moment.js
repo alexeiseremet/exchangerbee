@@ -1,11 +1,19 @@
-import momentjs from 'moment-timezone';
-import { locale, timezone } from '../server.config';
+import dayjsMod from 'dayjs';
+import dayjsPluginUTC from 'dayjs/plugin/utc';
+import { locale, utcOffset } from '../server.config';
+
+const localDateFiles = {
+  en: locale === 'en' && require('dayjs/locale/en'),
+  ro: locale === 'ro' && require('dayjs/locale/ro'),
+  ru: locale === 'ru' && require('dayjs/locale/ru'),
+  uk: locale === 'uk' && require('dayjs/locale/uk'),
+};
 
 // Set the default locale & timezone.
-momentjs.locale(locale);
-momentjs.tz.setDefault(timezone);
+dayjsMod.extend(dayjsPluginUTC);
+dayjsMod.locale(localDateFiles[locale]);
 
-const moment = momentjs;
+const dayjs = (date = new Date()) => dayjsMod(+date).utcOffset(utcOffset);
 
 /**
  * Convert month from num (0-11) to string (01-12).
@@ -34,8 +42,8 @@ const monthToIndex = (str) => (+str - 1);
  *
  * @returns {string} Date in YYYY-MM-DD format.
  */
-const inputDate = (date = moment()) => (
-  moment(+date).startOf('day').format('YYYY-MM-DD')
+const inputDate = (date) => (
+  dayjs(date).startOf('day').format('YYYY-MM-DD')
 );
 
 /**
@@ -44,8 +52,8 @@ const inputDate = (date = moment()) => (
  *
  * @returns {string} Date in locale format.
  */
-const localeDate = (date = moment()) => (
-  moment(+date).format('DD MMM YYYY')
+const localeDate = (date) => (
+  dayjs(date).format('DD MMM YYYY')
 );
 
 /**
@@ -53,17 +61,17 @@ const localeDate = (date = moment()) => (
  *
  * @returns {string} Today in UNIX format.
  */
-const today = () => `${moment().startOf('day').valueOf()}`;
+const today = () => `${dayjs().startOf('day').valueOf()}`;
 
 /**
  * Substract day in Timestamp format.
  *
  * @returns {string} Date in UNIX format.
  */
-const xDaysAgo = (x = 1) => `${moment().subtract(x, 'days').startOf('day').valueOf()}`;
+const xDaysAgo = (x = 1) => `${dayjs().subtract(x, 'days').startOf('day').valueOf()}`;
 
 export {
-  moment,
+  dayjs,
   monthToString,
   monthToIndex,
   inputDate,

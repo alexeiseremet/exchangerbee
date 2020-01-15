@@ -16,10 +16,7 @@ const MainMenu = ({ type }) => {
       <div className="header__inner">
         <div className="header__brand">
           <Link href="/">
-            <a role="brand"
-               className="brand"
-               title={siteName}
-            >
+            <a className="brand" title={siteName}>
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">
                 {`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}

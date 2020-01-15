@@ -5,6 +5,7 @@
 }
 
 .quote-card__inner {
+  display: block;
   padding: $xsmall-spacing $small-spacing;
   border-radius: $base-border-radius;
   overflow: hidden;

@@ -9,7 +9,7 @@ import { ApolloProvider } from 'react-apollo';
 import withApolloClient from '../lib/apollo/with-apollo-client';
 import { appWithTranslation } from '../lib/i18n';
 
-class ExbeeApp extends App {
+class XezoomApp extends App {
   render() {
     const { Component, pageProps, apolloClient } = this.props;
 
@@ -21,4 +21,4 @@ class ExbeeApp extends App {
   }
 }
 
-export default withApolloClient(appWithTranslation(ExbeeApp));
+export default withApolloClient(appWithTranslation(XezoomApp));

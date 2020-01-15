@@ -3,7 +3,7 @@ import React from 'react';
 import {
   AreaChart, Area, CartesianGrid, ResponsiveContainer, YAxis, XAxis,
 } from 'recharts';
-import { moment } from '../../lib/moment';
+import { dayjs } from '../../lib/moment';
 
 // import Svg from '../Svg';
 // eslint-disable-next-line
@@ -12,7 +12,7 @@ import { moment } from '../../lib/moment';
 let lastXAxisMonth = '';
 
 const CustomizedXAxisTick = ({ x, y, payload }) => {
-  const month = moment(+payload.value).format('MM/YY');
+  const month = dayjs(+payload.value).format('MM/YY');
 
   if (month === lastXAxisMonth) {
     return null;
@@ -20,8 +20,8 @@ const CustomizedXAxisTick = ({ x, y, payload }) => {
 
   lastXAxisMonth = month;
 
-  const DD = moment(+payload.value).format('DD');
-  const MM = moment(+payload.value).format('MMM');
+  const DD = dayjs(+payload.value).format('DD');
+  const MM = dayjs(+payload.value).format('MMM');
 
   return (
     <g transform={`translate(${x},${y})`} style={{ textTransform: 'uppercase', fontSize: '9px' }}>
@@ -45,14 +45,14 @@ const CustomizedYAxisTick = ({ x, y, payload }) => (
 );
 
 const getStyleOpts = (diff) => {
-  let styleOpts = { color: '#aaa' };
+  let styleOpts = { color: '#757575' };
 
   if (+diff > 0) {
-    styleOpts = { color: '#3d9970' };
+    styleOpts = { color: '#30825d' };
   }
 
   if (+diff < 0) {
-    styleOpts = { color: '#ff4136' };
+    styleOpts = { color: '#da372d' };
   }
 
   return styleOpts;
@@ -66,7 +66,7 @@ const Chart = ({ data, id, count = 24 }) => {
   const woFirstDayChart = data.slice(1);
   const severalDays = woFirstDayChart.slice(woFirstDayChart.length - (count + 1));
   const woFirstDaySeveralDays = severalDays.slice(1);
-  const formatDate = (value) => moment(+value).format('DD MMM');
+  const formatDate = (value) => dayjs(value).format('DD MMM');
 
   return (
     <div className="chart">
@@ -74,12 +74,11 @@ const Chart = ({ data, id, count = 24 }) => {
         <ResponsiveContainer>
           <AreaChart data={woFirstDayChart} id={`chart-${id}`} margin={{ top: 14 }}>
             <defs>
-              <linearGradient id="colorBid" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id={`colorBid-${id}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#ffdd05" stopOpacity={0.4}/>
                 <stop offset="100%" stopColor="#ffdd05" stopOpacity={0}/>
               </linearGradient>
             </defs>
-
 
             <XAxis dataKey="date" tick={<CustomizedXAxisTick />}
                    tickLine={false} axisLine={{ stroke: '#aaa', opacity: 0.6 }}
@@ -96,7 +95,7 @@ const Chart = ({ data, id, count = 24 }) => {
                    axisLine={false}
             />
 
-            <Area dataKey='bid' fillOpacity={1} strokeWidth={2} stroke="#aaa" strokeOpacity={0.4} fill="url(#colorBid)"
+            <Area dataKey='bid' fillOpacity={1} strokeWidth={2} stroke="#aaa" strokeOpacity={0.4} fill={`url(#colorBid-${id})`}
                   isAnimationActive={false} minPointSize={3}
             />
 

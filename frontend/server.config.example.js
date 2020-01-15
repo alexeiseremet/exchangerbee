@@ -2,6 +2,7 @@ const host = 'https://md.xezoom.com';
 const apiPath = '/graphql';
 
 module.exports = {
+  gdpr: false,
   siteName: 'xezoom.com',
   siteGtagId: 'G-XXFEABCDEX',
   siteMenu: [
@@ -18,7 +19,7 @@ module.exports = {
   apiBaseUrl: `${host}${apiPath}`,
   storagePath: '/storage',
   locale: 'ro',
-  timezone: 'Europe/Chisinau',
+  utcOffset: 120, // 'Europe/Chisinau'
   baseCountry: {
     slug: 'md',
     name: 'Moldova',

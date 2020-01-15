@@ -6,7 +6,7 @@ const QuoteCard = ({
   label, centralBankItem, link, children, style,
 }) => {
   const renderInner = () => (
-    <article className="quote-card__inner">
+    <>
       <h6 className="quote-card__label">
         {label}
       </h6>
@@ -18,23 +18,27 @@ const QuoteCard = ({
           </div>
         ))
       }
-    </article>
+    </>
   );
 
   if (!link) {
     return (
-      <section className="quote-card" style={style}>
-        {renderInner()}
-      </section>
+      <article className="quote-card" style={style}>
+        <div className="quote-card__inner" style={style} title={label}>
+          {renderInner()}
+        </div>
+      </article>
     );
   }
 
   return (
-    <Link {...link}>
-      <a className="quote-card quote-card--link" style={style}>
-        {renderInner()}
-      </a>
-    </Link>
+    <article className="quote-card quote-card--link" style={style}>
+      <Link {...link}>
+        <a className="quote-card__inner" title={label}>
+          {renderInner()}
+        </a>
+      </Link>
+    </article>
   );
 };
 
