@@ -21,9 +21,10 @@ export default class XezoomDocument extends Document {
       <html prefix="og: http://ogp.me/ns#" lang={locale}>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport"
-                content="width=device-width, initial-scale=1"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#111111" />
+          <link rel="manifest" href="/ro/manifest.json" />
+          <link rel="apple-touch-icon" href="/static/images/icons/icon-192x192.png" />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
           {

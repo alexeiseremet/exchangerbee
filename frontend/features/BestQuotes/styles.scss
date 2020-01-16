@@ -6,6 +6,7 @@
   margin-left: -$xsmall-spacing;
   margin-top: $xsmall-spacing;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
   .quote-card {
     @include flex-column;

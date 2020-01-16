@@ -1,8 +1,17 @@
 const withPlugins = require('next-compose-plugins');
+const withOffline = require('next-offline');
 const optimizedImages = require('next-optimized-images');
 const sass = require('@zeit/next-sass');
 
-const nextConfig = {
+const nextConfig = withOffline({
+  workboxOpts: {
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'StaleWhileRevalidate',
+      },
+    ],
+  },
   useFileSystemPublicRoutes: false,
   trailingSlash: false,
   webpack: (config) => {
@@ -26,7 +35,7 @@ const nextConfig = {
       entry: newEntry,
     };
   },
-};
+});
 
 module.exports = withPlugins(
   [

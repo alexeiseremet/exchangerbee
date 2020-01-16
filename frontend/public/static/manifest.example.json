@@ -1,0 +1,27 @@
+{
+  "short_name": "XEZOOM_PWA",
+  "name": "(MD) Curs valutar PWA",
+  "description": "Curs valutar Moldova",
+  "start_url": "https://md.xezoom.com/ro?source=pwa",
+  "scope": "https://md.xezoom.com/ro",
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/static/images/icons/icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/static/images/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/images/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

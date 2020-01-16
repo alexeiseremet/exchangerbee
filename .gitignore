@@ -14,3 +14,4 @@ backend/screenshots
 database/db
 database/data
 server.config.js
+manifest.json

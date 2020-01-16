@@ -36,7 +36,7 @@ const { getUserCookie } = require('./lib/session');
     cookiePathRewrite: apiPath,
     changeOrigin: true,
     router: {
-      [storagePath]: 'http://space.xezoom.com',
+      [storagePath]: 'https://space.xezoom.com',
     },
     onProxyReq(proxyReq, req) {
       const user = getUserCookie(req);
@@ -52,7 +52,10 @@ const { getUserCookie } = require('./lib/session');
   // Serve static files.
   server
     .use('/robots.txt', express.static(`${__dirname}/public/static/robots.txt`))
-    .use('/favicon.ico', express.static(`${__dirname}/public/static/favicon.ico`));
+    .use('/favicon.ico', express.static(`${__dirname}/public/static/favicon.ico`))
+    .use('/service-worker.js', express.static(`${__dirname}/.next/service-worker.js`))
+    .use('/ro/manifest.json', express.static(`${__dirname}/public/static/manifest.json`))
+    .use('/static', express.static(`${__dirname}/public/static`));
 
   server
     .use([apiPath, storagePath], appProxy)

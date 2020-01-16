@@ -8,7 +8,7 @@ const expressGraphql = require('express-graphql');
 const mongoose = require('mongoose');
 const { CronJob } = require('cron');
 
-const { timezone } = require('./server.config');
+const { utcOffset } = require('./server.config');
 const schema = require('./graphql');
 const crawler = require('./crawler');
 
@@ -50,7 +50,7 @@ let timer;
 new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
   const data = await crawler();
   console.log('Crawler duration', data.time);
-}, null, true, timezone);
+}, null, true, null, null, false, utcOffset);
 
 // Check server token.
 server.use((req, res, next) => {
