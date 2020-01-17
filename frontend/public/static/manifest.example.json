@@ -1,9 +1,7 @@
 {
-  "short_name": "XEZOOM_PWA",
-  "name": "(MD) Curs valutar PWA",
-  "description": "Curs valutar Moldova",
-  "start_url": "https://md.xezoom.com/ro?source=pwa",
-  "scope": "https://md.xezoom.com/ro",
+  "short_name": "CursValutar",
+  "name": "(MD) Curs valutar Moldova",
+  "start_url": "./?utm_source=pwa",
   "background_color": "#ffffff",
   "theme_color": "#111111",
   "display": "standalone",

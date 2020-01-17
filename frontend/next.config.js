@@ -5,12 +5,14 @@ const sass = require('@zeit/next-sass');
 
 const nextConfig = withOffline({
   workboxOpts: {
+    exclude: [/admin/],
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
         handler: 'StaleWhileRevalidate',
       },
     ],
+    offlineGoogleAnalytics: true,
   },
   useFileSystemPublicRoutes: false,
   trailingSlash: false,
