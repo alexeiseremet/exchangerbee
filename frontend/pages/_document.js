@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { gdpr, siteGtagId, locale } from '../server.config';
+import { gdpr, siteGtagId, siteGadId, locale } from '../server.config';
 import script from '../lib/script';
 
 export default class XezoomDocument extends Document {
@@ -32,7 +32,7 @@ export default class XezoomDocument extends Document {
               <>
                 <script data-cookieconsent="ignore"
                         async
-                        src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
+                        src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
                 />
                 <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
                   __html: `
@@ -49,16 +49,24 @@ export default class XezoomDocument extends Document {
           {
             process.env.NODE_ENV === 'production' && gdpr && (
               <script id="Cookiebot"
-                      src="//consent.cookiebot.com/uc.js"
+                      src="https://consent.cookiebot.com/uc.js"
                       data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
                       data-blockingmode="auto"
                       data-culture={String(locale).toUpperCase()}
               />
             )
           }
+
+          {
+            process.env.NODE_ENV === 'production' && (
+              <script data-ad-client={siteGadId} async
+                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+              />
+            )
+          }
         </Head>
 
-        <body itemScope itemType="http://schema.org/WebPage">
+        <body itemScope itemType="https://schema.org/WebPage">
           <Main />
           <div id="modal-portal" />
           <div

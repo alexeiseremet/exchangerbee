@@ -5,6 +5,7 @@ module.exports = {
   gdpr: false,
   siteName: 'xezoom.com',
   siteGtagId: 'G-XXFEABCDEX',
+  siteGadId: 'ca-pub-7297847103200000',
   siteMenu: [
     { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },
