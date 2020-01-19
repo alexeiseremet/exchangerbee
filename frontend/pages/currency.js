@@ -17,6 +17,7 @@ import RateCard from '../features/RateCard';
 import CurrencyTop from '../features/CurrencyTop';
 import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
+import Ad from '../features/Ad';
 
 const CurrencyPageMarkup = ({
   currency, allQuote, post, fullPath, archiveQuote,
@@ -74,9 +75,11 @@ const CurrencyPageMarkup = ({
           dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi` }}
         />
 
-        <div className="page-lead" style={{ marginTop: '1rem', marginBottom: '3rem' }}>
+        <div className="page-lead" style={{ marginTop: '1rem' }}>
           <ConverterWidget />
         </div>
+
+        <Ad />
 
         <section style={{ marginTop: '3rem' }}>
           <h2

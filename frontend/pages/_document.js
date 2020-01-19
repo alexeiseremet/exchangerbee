@@ -4,6 +4,7 @@ import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
 import { gdpr, siteGtagId, siteGadId, locale } from '../server.config';
 import script from '../lib/script';
+import Ad from '../features/Ad';
 
 export default class XezoomDocument extends Document {
   static async getInitialProps(ctx) {
@@ -56,18 +57,13 @@ export default class XezoomDocument extends Document {
               />
             )
           }
-
-          {
-            process.env.NODE_ENV === 'production' && (
-              <script data-ad-client={siteGadId} async
-                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-              />
-            )
-          }
         </Head>
 
         <body itemScope itemType="https://schema.org/WebPage">
           <Main />
+
+          <Ad />
+
           <div id="modal-portal" />
           <div
             className="sprite"

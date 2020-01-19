@@ -9,6 +9,7 @@ import { withTranslation } from '../lib/i18n';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import ConverterWidget from '../features/ConverterWidget';
+import Ad from '../features/Ad';
 
 class ConverterPageMarkup extends React.Component {
   render() {
@@ -21,6 +22,8 @@ class ConverterPageMarkup extends React.Component {
         description: `✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.`,
       }}>
         <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
+          <Ad />
+
           <div className="page-lead">
             <ConverterWidget />
           </div>

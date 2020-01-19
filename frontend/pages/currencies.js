@@ -9,6 +9,7 @@ import { withTranslation } from '../lib/i18n';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
+import Ad from '../features/Ad';
 
 const CurrenciesPageMarkup = ({ allCurrency, fullPath }) => (
   <Layout metadata={{
@@ -17,6 +18,8 @@ const CurrenciesPageMarkup = ({ allCurrency, fullPath }) => (
     description: `✅ Lista valutelor negociate la băncile din ${baseCountry.name}`,
   }}>
     <Page heading={`Lista valutelor negociate la băncile din ${baseCountry.name}`}>
+      <Ad />
+
       {
         allCurrency && (
           <section className="currency-list">
