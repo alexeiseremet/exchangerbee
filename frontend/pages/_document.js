@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { gdpr, siteGtagId, locale } from '../server.config';
+import { gdpr, siteGtagId, siteGads, locale } from '../server.config';
 import script from '../lib/script';
 import Ad from '../features/Ad';
 
@@ -54,6 +54,14 @@ export default class XezoomDocument extends Document {
                       data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
                       data-blockingmode="auto"
                       data-culture={String(locale).toUpperCase()}
+              />
+            )
+          }
+
+          {
+            siteGads && (
+              <script data-ad-client="ca-pub-7297847103287274" async
+                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
               />
             )
           }

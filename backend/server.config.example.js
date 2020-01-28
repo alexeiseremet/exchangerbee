@@ -1,6 +1,6 @@
 module.exports = {
   locale: 'ro',
-  utcOffset: 120, // 'Europe/Chisinau',
+  utcOffset: 120, // 'Europe/Chisinau'
   baseCurrency: {
     slug: 'mdl',
     name: 'Leul moldovenesc',
