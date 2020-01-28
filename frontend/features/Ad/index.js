@@ -9,7 +9,7 @@ export default () => {
   return (
     <div style={{ margin: '1rem 0', minHeight: '2rem' }} dangerouslySetInnerHTML={{
       __html: `
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-7297847103287274"
