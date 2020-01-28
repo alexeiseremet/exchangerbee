@@ -4,8 +4,8 @@ const apiPath = '/graphql';
 module.exports = {
   gdpr: false,
   siteName: 'xezoom.com',
-  siteGtagId: 'G-XXFEABCDEX',
-  siteGadId: 'ca-pub-7297847103200000',
+  siteGtagId: 'G-XXXEZD3BQX',
+  siteGads: false,
   siteMenu: [
     { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },

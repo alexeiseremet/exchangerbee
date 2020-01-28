@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { gdpr, siteGtagId, siteGadId, locale } from '../server.config';
+import { gdpr, siteGtagId, locale } from '../server.config';
 import script from '../lib/script';
 import Ad from '../features/Ad';
 

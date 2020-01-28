@@ -15,7 +15,7 @@ const MainMenu = ({ type }) => {
     <div className="header">
       <div className="header__inner">
         <div className="header__brand">
-          <Link href="/">
+          <Link href="/?utm_content=logo">
             <a className="brand" title={siteName}>
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">

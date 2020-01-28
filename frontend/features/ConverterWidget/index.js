@@ -2,7 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
-import { centralBank, baseCurrency } from '../../server.config';
+import { centralBank, baseCurrency, baseCurrenciesArr } from '../../server.config';
 import { today } from '../../lib/moment';
 import Widget from './Widget';
 
@@ -14,6 +14,16 @@ class ConverterWidget extends React.Component {
     askAmount: '10',
     askCurrency: baseCurrency,
   };
+
+  componentDidMount() {
+    let { defaultAsk } = this.props;
+
+    if (!baseCurrenciesArr.includes(defaultAsk)) {
+      [defaultAsk] = baseCurrenciesArr;
+    }
+
+    this.currencyHandler(defaultAsk, 'bid');
+  }
 
   amountHandler = (value, type, newCurrency) => {
     const {

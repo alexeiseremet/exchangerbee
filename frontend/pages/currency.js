@@ -20,7 +20,7 @@ import Chart from '../features/Chart';
 import Ad from '../features/Ad';
 
 const CurrencyPageMarkup = ({
-  currency, allQuote, post, fullPath, archiveQuote,
+  currency, allQuote, post, fullPath, archiveQuote, query,
 }) => {
   if (!currency) {
     return null;
@@ -76,7 +76,7 @@ const CurrencyPageMarkup = ({
         />
 
         <div className="page-lead" style={{ marginTop: '1rem' }}>
-          <ConverterWidget />
+          <ConverterWidget defaultAsk={query.slug} />
         </div>
 
         <Ad />
@@ -160,8 +160,8 @@ const CurrencyPageMarkup = ({
           }
 
           {
-            archiveQuote.map(currency => (
-              <Chart data={currency.quote} id={currency.slug} key={currency.slug} />
+            archiveQuote.map((currencyItem) => (
+              <Chart data={currencyItem.quote} id={currencyItem.slug} key={currencyItem.slug} />
             ))
           }
         </section>

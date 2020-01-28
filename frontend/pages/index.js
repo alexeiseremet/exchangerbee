@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrenciesArr, baseCountry, baseCurrency } from '../server.config';
+import {
+  centralBank, baseCurrenciesArr, baseCountry, baseCurrency,
+} from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
@@ -16,12 +18,7 @@ import Ad from '../features/Ad';
 
 const IndexPageMarkup = ({
   post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
-}) => {
-  if (!post) {
-    return null;
-  }
-
-  return (
+}) => (
     <Layout metadata={{
       url: `${fullPath}`,
       title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
@@ -56,7 +53,7 @@ const IndexPageMarkup = ({
         <Ad />
 
         {
-          archiveQuote.map(currency => (
+          archiveQuote && archiveQuote.map((currency) => (
             <div style={{ marginTop: '3rem' }} key={currency.slug}>
               <h2
                 style={{
@@ -74,14 +71,14 @@ const IndexPageMarkup = ({
         }
 
         {
-          post.textFirst && (
+          post && post.textFirst && (
             <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
           )
         }
 
         {
-          post.textSecond && (
+          post && post.textSecond && (
             <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}
             />
@@ -89,8 +86,7 @@ const IndexPageMarkup = ({
         }
       </Page>
     </Layout>
-  );
-};
+);
 
 // getInitialProps.
 IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {

@@ -28,7 +28,7 @@ const updateParser = async (id) => {
         variables: {
           id,
           parser: {
-            processedAt: String(dayjs()),
+            processedAt: String(dayjs().valueOf()),
           },
         },
       }),

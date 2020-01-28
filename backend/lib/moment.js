@@ -1,19 +1,26 @@
 const dayjsMod = require('dayjs');
 const dayjsPluginUTC = require('dayjs/plugin/utc');
+const enLocale = require('dayjs/locale/en');
+const roLocale =  require('dayjs/locale/ro');
+const ruLocale = require('dayjs/locale/ru');
+const ukLocale = require('dayjs/locale/uk');
 const { locale, utcOffset } = require('../server.config');
 
 const localDateFiles = {
-  en: locale === 'en' && require('dayjs/locale/en'),
-  ro: locale === 'ro' && require('dayjs/locale/ro'),
-  ru: locale === 'ru' && require('dayjs/locale/ru'),
-  uk: locale === 'uk' && require('dayjs/locale/uk'),
+  en: locale === 'en' && enLocale,
+  ro: locale === 'ro' && roLocale,
+  ru: locale === 'ru' && ruLocale,
+  uk: locale === 'uk' && ukLocale,
 };
 
 // Set the default locale & timezone.
 dayjsMod.extend(dayjsPluginUTC);
 dayjsMod.locale(localDateFiles[locale]);
 
-const dayjs = (date = new Date()) => dayjsMod(+date).utcOffset(utcOffset);
+const dayjs = (date) => {
+  const dateValue = +date || dayjsMod().utcOffset(utcOffset);
+  return dayjsMod(dateValue);
+};
 
 /**
  * Convert month from num (0-11) to string (01-12).

@@ -24,9 +24,9 @@ const Page = ({
           </section>
         }
 
-        <main className="page__content">
+        <section className="page__content">
           {children}
-        </main>
+        </section>
       </div>
     </div>
   );

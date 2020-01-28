@@ -12,7 +12,7 @@ import { dayjs } from '../../lib/moment';
 let lastXAxisMonth = '';
 
 const CustomizedXAxisTick = ({ x, y, payload }) => {
-  const month = dayjs(+payload.value).format('MM/YY');
+  const month = dayjs(payload.value).format('MM/YY');
 
   if (month === lastXAxisMonth) {
     return null;
@@ -20,8 +20,8 @@ const CustomizedXAxisTick = ({ x, y, payload }) => {
 
   lastXAxisMonth = month;
 
-  const DD = dayjs(+payload.value).format('DD');
-  const MM = dayjs(+payload.value).format('MMM');
+  const DD = dayjs(payload.value).format('DD');
+  const MM = dayjs(payload.value).format('MMM');
 
   return (
     <g transform={`translate(${x},${y})`} style={{ textTransform: 'uppercase', fontSize: '9px' }}>
