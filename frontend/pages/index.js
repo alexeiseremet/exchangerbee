@@ -14,7 +14,6 @@ import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
 import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
-import Ad from '../features/Ad';
 
 const IndexPageMarkup = ({
   post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
@@ -50,7 +49,6 @@ const IndexPageMarkup = ({
           <ConverterWidget />
         </div>
 
-        <Ad />
 
         {
           archiveQuote && archiveQuote.map((currency) => (

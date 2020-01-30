@@ -17,7 +17,6 @@ import RateCard from '../features/RateCard';
 import CurrencyTop from '../features/CurrencyTop';
 import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
-import Ad from '../features/Ad';
 
 const CurrencyPageMarkup = ({
   currency, allQuote, post, fullPath, archiveQuote, query,
@@ -79,7 +78,6 @@ const CurrencyPageMarkup = ({
           <ConverterWidget defaultAsk={query.slug} />
         </div>
 
-        <Ad />
 
         <section style={{ marginTop: '3rem' }}>
           <h2
@@ -169,7 +167,8 @@ const CurrencyPageMarkup = ({
         {
           post && post.textFirst && (
             <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-               dangerouslySetInnerHTML={{ __html: post.textFirst }} />
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}
+            />
           )
         }
 

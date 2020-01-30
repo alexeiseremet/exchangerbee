@@ -11,7 +11,6 @@ import Layout from '../features/Layout';
 import Page from '../features/Page';
 import RateCard from '../features/RateCard';
 import QuoteCard from '../features/QuoteCard';
-import Ad from '../features/Ad';
 
 const BankPageMarkup = ({
   institution, allQuote, post, fullPath,
@@ -27,7 +26,6 @@ const BankPageMarkup = ({
       description: `✅ Curs valutar afișat la ${institution.name} (${String(institution.slug).toUpperCase()}) pentru azi.`,
     }}>
       <Page heading={`Curs valutar la ${institution.name} (${String(institution.slug).toUpperCase()})`}>
-        <Ad />
 
         <section>
           {

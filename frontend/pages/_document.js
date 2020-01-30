@@ -2,9 +2,8 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { gdpr, siteGtagId, siteGads, locale } from '../server.config';
+import { siteGdpr, siteGtagId, siteGads, locale } from '../server.config';
 import script from '../lib/script';
-import Ad from '../features/Ad';
 
 export default class XezoomDocument extends Document {
   static async getInitialProps(ctx) {
@@ -21,15 +20,16 @@ export default class XezoomDocument extends Document {
     return (
       <html prefix="og: http://ogp.me/ns#" lang={locale}>
         <Head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta httpEquiv="content-type" content="text/html; charset=utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#111111" />
-          <link rel="manifest" href="/ro/manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/static/images/icons/icon-192x192.png" />
 
           {/* Global site tag (gtag.js) - Google Analytics */}
           {
-            process.env.NODE_ENV === 'production' && (
+            siteGtagId && (
               <>
                 <script data-cookieconsent="ignore"
                         async
@@ -48,7 +48,7 @@ export default class XezoomDocument extends Document {
           }
 
           {
-            process.env.NODE_ENV === 'production' && gdpr && (
+            siteGdpr && (
               <script id="Cookiebot"
                       src="https://consent.cookiebot.com/uc.js"
                       data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
@@ -69,8 +69,6 @@ export default class XezoomDocument extends Document {
 
         <body itemScope itemType="https://schema.org/WebPage">
           <Main />
-
-          <Ad />
 
           <div id="modal-portal" />
           <div

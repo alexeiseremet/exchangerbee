@@ -9,7 +9,6 @@ import { withTranslation } from '../lib/i18n';
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import BankCard from '../features/BankCard';
-import Ad from '../features/Ad';
 
 const BanksPageMarkup = ({ allInstitution, fullPath }) => (
   <Layout metadata={{
@@ -18,7 +17,6 @@ const BanksPageMarkup = ({ allInstitution, fullPath }) => (
     description: `✅ Cursul valutar afişat la băncile din ${baseCountry.name} pentru azi.`,
   }}>
     <Page heading={`Cursul valutar la băncile din ${baseCountry.name}`}>
-      <Ad />
 
       {
         allInstitution && (

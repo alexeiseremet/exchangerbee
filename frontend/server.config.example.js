@@ -2,10 +2,10 @@ const host = 'https://md.xezoom.com';
 const apiPath = '/graphql';
 
 module.exports = {
-  gdpr: false,
   siteName: 'xezoom.com',
-  siteGtagId: 'G-XXXEZD3BQX',
+  siteGtagId: false,
   siteGads: false,
+  siteGdpr: false,
   siteMenu: [
     { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },
@@ -18,7 +18,7 @@ module.exports = {
     { url: '/admin/posts', label: 'Posts' },
   ],
   apiBaseUrl: `${host}${apiPath}`,
-  storagePath: '/storage',
+  storagePath: '/space',
   locale: 'ro',
   utcOffset: 120, // 'Europe/Chisinau'
   baseCountry: {
