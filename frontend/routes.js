@@ -72,6 +72,11 @@ const APP_ROUTES = [
     page: 'admin/quote',
     pattern: '/admin/quotes/:id',
   },
+  // Widget's pages.
+  {
+    page: 'widget/top',
+    pattern: '/widget/top',
+  },
 ];
 
 APP_ROUTES.map((route) => routes.add(route));

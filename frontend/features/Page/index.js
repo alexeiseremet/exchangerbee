@@ -17,7 +17,7 @@ const Page = ({
             {
               heading && (
                 <div className="page-heading">
-                  <h1 dangerouslySetInnerHTML={{ __html: heading }}/>
+                  <h1 dangerouslySetInnerHTML={{ __html: heading }} />
                 </div>
               )
             }
