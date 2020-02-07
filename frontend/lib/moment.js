@@ -18,7 +18,7 @@ dayjsMod.extend(dayjsPluginUTC);
 dayjsMod.locale(localDateFiles[locale]);
 
 const dayjs = (date) => {
-  const dateValue = +date || dayjsMod().utcOffset(utcOffset);
+  const dateValue = date ? (typeof date === 'string' ? +date : date) : dayjsMod().add(utcOffset, 'minute');
   return dayjsMod(dateValue);
 };
 
@@ -68,14 +68,14 @@ const localeDate = (date) => (
  *
  * @returns {string} Today in UNIX format.
  */
-const today = () => `${dayjs().startOf('day').valueOf()}`;
+const today = () => `${dayjs().startOf('day').format('YYYY-MM-DD')}`;
 
 /**
  * Substract day in Timestamp format.
  *
  * @returns {string} Date in UNIX format.
  */
-const xDaysAgo = (x = 1) => `${dayjs().subtract(x, 'days').startOf('day').valueOf()}`;
+const xDaysAgo = (x = 1) => `${dayjs().subtract(x, 'days').startOf('day').format('YYYY-MM-DD')}`;
 
 export {
   dayjs,

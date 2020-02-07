@@ -3,7 +3,6 @@
 // dotenv.config()
 
 const fetch = require('isomorphic-unfetch');
-const { dayjs } = require('../lib/moment');
 
 const GQL_UPDATE_PARSER = `
   mutation UpdateParser ($id: ID!, $parser: ParserInput!) {
@@ -28,7 +27,7 @@ const updateParser = async (id) => {
         variables: {
           id,
           parser: {
-            processedAt: String(dayjs().valueOf()),
+            processedAt: new Date(),
           },
         },
       }),

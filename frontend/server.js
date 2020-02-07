@@ -20,8 +20,8 @@ const nextI18next = require('./lib/i18n');
 
 const app = next({ dev: !IS_PRODUCTION });
 const routes = require('./routes');
-
 const handler = routes.getRequestHandler(app);
+
 const { apiPath, storagePath } = require('./server.config');
 const { getUserCookie } = require('./lib/session');
 

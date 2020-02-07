@@ -28,6 +28,7 @@ module.exports = `
       before: String
       first: Int
       last: Int
+      limit: Int
     ): [Quote!]
     bestQuote(
       date: String

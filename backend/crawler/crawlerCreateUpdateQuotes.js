@@ -61,7 +61,7 @@ const createUpdateQuotes = (quotes) => {
             where: whereQuote,
             quote: {
               ...cleanedQuote,
-              date: String(todayValue),
+              date: todayValue,
               error: quoteHasError,
             },
           },

@@ -19,7 +19,7 @@ module.exports = {
           });
       });
     },
-    allQuote(_, { where, orderBy }) {
+    allQuote(_, { where, orderBy, limit = 100 }) {
       let flattenWhere = flattenObject(where);
       let optsOrderBy = {};
 
@@ -27,8 +27,8 @@ module.exports = {
         flattenWhere = {
           ...flattenWhere,
           date: {
-            $gte: where.date[0],
-            ...(where.date[1] ? { $lte: where.date[1] } : null),
+            $gte: new Date(where.date[0]),
+            ...(where.date[1] ? { $lte: new Date(where.date[1]) } : null),
           },
         };
       }
@@ -55,6 +55,7 @@ module.exports = {
             'institution.refId': 'ASC',
             ...optsOrderBy,
           })
+          .limit(limit)
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
@@ -82,7 +83,7 @@ module.exports = {
                   },
                 },
                 { error: 'no' },
-                { date: { $eq: new Date(+date) } },
+                { date: { $eq: new Date(date) } },
               ],
             },
           },
@@ -144,8 +145,8 @@ module.exports = {
                 { error: 'no' },
                 {
                   date: {
-                    $gte: new Date(+where.date[0]),
-                    ...(where.date[1] ? { $lte: new Date(+where.date[1]) } : null),
+                    $gte: new Date(where.date[0]),
+                    ...(where.date[1] ? { $lte: new Date(where.date[1]) } : null),
                   },
                 },
               ],
