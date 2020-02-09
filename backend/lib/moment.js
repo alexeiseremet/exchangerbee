@@ -45,17 +45,17 @@ const monthToIndex = (str) => (+str - 1);
 
 /**
  * Convert date from Timestamp to input[type=date] format or
- * create new Date (start of day).
+ * create new Date.
  *
  * @returns {string} Date in YYYY-MM-DD format.
  */
 const inputDate = (date) => (
-  dayjs(date).startOf('day').format('YYYY-MM-DD')
+  dayjs(date).format('YYYY-MM-DD')
 );
 
 /**
  * Convert date from Timestamp to locale format or
- * create new Date (start of day).
+ * create new Date.
  *
  * @returns {string} Date in locale format.
  */
@@ -68,14 +68,14 @@ const localeDate = (date) => (
  *
  * @returns {string} Today in UNIX format.
  */
-const today = () => `${dayjs().startOf('day').format('YYYY-MM-DD')}`;
+const today = () => dayjs().format('YYYY-MM-DD');
 
 /**
  * Substract day in Timestamp format.
  *
  * @returns {string} Date in UNIX format.
  */
-const xDaysAgo = (x = 1) => `${dayjs().subtract(x, 'days').startOf('day').format('YYYY-MM-DD')}`;
+const xDaysAgo = (x = 1) => dayjs().subtract(x, 'days').format('YYYY-MM-DD');
 
 module.exports = {
   dayjs,
