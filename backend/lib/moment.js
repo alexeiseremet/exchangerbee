@@ -18,7 +18,7 @@ dayjsMod.extend(dayjsPluginUTC);
 dayjsMod.locale(localDateFiles[locale]);
 
 const dayjs = (date) => {
-  const dateValue = date ? (typeof date === 'string' ? +date : date) : dayjsMod().add(utcOffset, 'minute');
+  const dateValue = date ? (typeof date === 'string' ? +date : date) : dayjsMod().utcOffset(utcOffset);
   return dayjsMod(dateValue);
 };
 
