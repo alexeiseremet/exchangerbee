@@ -6,6 +6,8 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 const next = require('next');
+const fetch = require('isomorphic-unfetch');
+const jsdom = require('jsdom');
 
 const {
   PORT,
@@ -24,6 +26,8 @@ const handler = routes.getRequestHandler(app);
 
 const { apiPath, storagePath } = require('./server.config');
 const { getUserCookie } = require('./lib/session');
+
+const { JSDOM } = jsdom;
 
 (async () => {
   await app.prepare();
@@ -57,6 +61,30 @@ const { getUserCookie } = require('./lib/session');
     .use('/manifest.json', express.static(`${__dirname}/public/static/manifest.json`))
     .use('/ads.txt', express.static(`${__dirname}/public/static/ads.txt`))
     .use('/static', express.static(`${__dirname}/public/static`));
+
+  server.get(
+    '/widget',
+    async (req, res, next) => {
+      try {
+        const { lng } = req.query;
+        let widgets = {};
+
+        const promises = ['md', 'ro', 'ru', 'ua'].map(url => (
+          fetch(`//${url}.xezoom.com/${lng}/widget/top`)
+          .then(doc => doc.text())
+          .then(html => {
+            const htmlAbsUrl = html.split(`/${lng}/`).join(`//${url}.xezoom.com/${lng}/`);
+            const dom = new JSDOM(htmlAbsUrl);
+            widgets[url] = dom.window.document.querySelector('.widget-top').innerHTML;
+          })
+        ));
+
+        await Promise.all(promises);
+        res.json(widgets);
+      } catch (error) {
+        next(error);
+      }
+    });
 
   server
     .use([apiPath, storagePath], appProxy)

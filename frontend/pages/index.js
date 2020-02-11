@@ -18,72 +18,71 @@ import Chart from '../features/Chart';
 const IndexPageMarkup = ({
   post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
 }) => (
-    <Layout metadata={{
-      url: `${fullPath}`,
-      title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-      description: `
-        ✅ Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
-        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
-      `,
-    }}>
-      <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
-        <section style={{ marginBottom: '3rem' }}>
-          <BestQuotes
-            bestAskQuote={bestAskQuote}
-            bestBidQuote={bestBidQuote}
-            centralQuote={centralQuote}
-          />
-        </section>
-
-        <h2
-          style={{
-            marginBottom: '1.19rem',
-            fontSize: '1.6rem',
-            lineHeight: '1.3',
-            opacity: '0.8',
-          }}
-          dangerouslySetInnerHTML={{ __html: `Convertor rate după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
+  <Layout metadata={{
+    url: `${fullPath}`,
+    title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
+    description: `
+      ✅ Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
+      ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
+    `,
+  }}>
+    <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
+      <section style={{ marginBottom: '3rem' }}>
+        <BestQuotes
+          bestAskQuote={bestAskQuote}
+          bestBidQuote={bestBidQuote}
+          centralQuote={centralQuote}
         />
+      </section>
 
-        <div className="page-lead">
-          <ConverterWidget />
-        </div>
+      <h2
+        style={{
+          marginBottom: '1.19rem',
+          fontSize: '1.6rem',
+          lineHeight: '1.3',
+          opacity: '0.8',
+        }}
+        dangerouslySetInnerHTML={{ __html: `Convertor rate după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
+      />
 
+      <div className="page-lead">
+        <ConverterWidget />
+      </div>
 
-        {
-          archiveQuote && archiveQuote.map((currency) => (
-            <div style={{ marginTop: '3rem' }} key={currency.slug}>
-              <h2
-                style={{
-                  marginBottom: '1.19rem',
-                  fontSize: '1.6rem',
-                  lineHeight: '1.3',
-                  opacity: '0.8',
-                }}
-                dangerouslySetInnerHTML={{ __html: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()} — evoluție curs valutar de referință` }}
-              />
-
-              <Chart data={currency.quote} id={currency.slug} count={12}/>
-            </div>
-          ))
-        }
-
-        {
-          post && post.textFirst && (
-            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-          )
-        }
-
-        {
-          post && post.textSecond && (
-            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
-               dangerouslySetInnerHTML={{ __html: post.textSecond }}
+      {
+        archiveQuote && archiveQuote.map((currency) => (
+          <div style={{ marginTop: '3rem' }} key={currency.slug}>
+            <h2
+              style={{
+                marginBottom: '1.19rem',
+                fontSize: '1.6rem',
+                lineHeight: '1.3',
+                opacity: '0.8',
+              }}
+              dangerouslySetInnerHTML={{ __html: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()} — evoluție curs valutar de referință` }}
             />
-          )
-        }
-      </Page>
-    </Layout>
+
+            <Chart data={currency.quote} id={currency.slug} count={12}/>
+          </div>
+        ))
+      }
+
+      {
+        post && post.textFirst && (
+          <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+        )
+      }
+
+      {
+        post && post.textSecond && (
+          <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: post.textSecond }}
+          />
+        )
+      }
+    </Page>
+  </Layout>
 );
 
 // getInitialProps.

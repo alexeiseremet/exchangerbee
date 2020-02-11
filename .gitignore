@@ -14,4 +14,5 @@ backend/screenshots
 database/db
 database/data
 server.config.js
+routes.js
 manifest.json

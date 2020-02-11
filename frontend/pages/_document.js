@@ -2,7 +2,8 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { siteGdpr, siteGtagId, siteGads, locale } from '../server.config';
+import { i18n } from '../lib/i18n';
+import { siteGdpr, siteGtagId, siteGads } from '../server.config';
 import script from '../lib/script';
 
 export default class XezoomDocument extends Document {
@@ -10,7 +11,10 @@ export default class XezoomDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     const spriteContent = sprite.stringify();
 
+    const { lng } = ctx.req ? ctx.req : i18n;
+
     return {
+      lng,
       spriteContent,
       ...initialProps,
     };
@@ -18,7 +22,7 @@ export default class XezoomDocument extends Document {
 
   render() {
     return (
-      <html prefix="og: http://ogp.me/ns#" lang={locale}>
+      <html prefix="og: http://ogp.me/ns#" lang={this.props.lng}>
         <Head>
           <meta httpEquiv="content-type" content="text/html; charset=utf-8" />
           <meta httpEquiv="x-ua-compatible" content="IE=edge" />

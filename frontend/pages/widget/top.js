@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrenciesArr } from '../../server.config';
+import { centralBank, baseCurrenciesArr, baseCountry } from '../../server.config';
 import { withTranslation } from '../../lib/i18n';
 import { today } from '../../lib/moment';
 
@@ -13,6 +13,18 @@ const WidgetTopPageMarkup = ({
   centralQuote, bestBidQuote, bestAskQuote,
 }) => (
   <div className="widget-top">
+    <h2
+      style={{
+        marginBottom: '1.19rem',
+        fontSize: '1.6rem',
+        lineHeight: '1.3',
+        opacity: '0.8',
+      }}
+      dangerouslySetInnerHTML={{
+        __html: `${baseCountry.flag} Curs ${String(centralBank.slug).toUpperCase()} și cel mai bun curs la băncile din ${baseCountry.name}`
+      }}
+    />
+
     <BestQuotes
       bestAskQuote={bestAskQuote}
       bestBidQuote={bestBidQuote}
