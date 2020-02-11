@@ -53,7 +53,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => (
 MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const lng = req ? req.lng : i18n.lng;
   const fullPath = req ? `/${lng}${asPath}` : asPath;
-  const fetchWidgets = await fetch(`${host}/widget/?lng=${lng}`);
+  const fetchWidgets = await fetch(`${host}/jsonwidget/?lng=${lng}`);
   const widgets = await fetchWidgets.json();
 
   return {

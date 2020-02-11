@@ -9,7 +9,7 @@ module.exports = new NextI18Next({
     ru: 'ru',
   },
   localePath: typeof window === 'undefined' ? 'public/locales' : 'locales',
-  ignoreRoutes: ['/_next', '/static', '/storage', '/graphql', '/widget'],
+  ignoreRoutes: ['/_next', '/static', '/storage', '/graphql', '/jsonwidget'],
   serverLanguageDetection: false,
   browserLanguageDetection: false,
   strictMode: false,

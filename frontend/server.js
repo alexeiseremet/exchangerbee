@@ -63,7 +63,7 @@ const { JSDOM } = jsdom;
     .use('/static', express.static(`${__dirname}/public/static`));
 
   server.get(
-    '/widget',
+    '/jsonwidget',
     async (req, res, next) => {
       try {
         const { lng } = req.query;
