@@ -28,13 +28,21 @@ const MainMenu = ({ type }) => {
         <nav className="header__menu" role="navigation">
           <ul className="main-memu">
             {
-              items.map((item, i) => (
-                <li className="main-memu__item" key={i}>
-                  <Link href={item.url}>
-                    <a className="main-memu__link">
-                      {item.label}
-                    </a>
-                  </Link>
+              items.map((item) => (
+                <li className="main-memu__item" key={item.url}>
+                  {
+                    item.url.startsWith('//') ? (
+                      <a href={item.url} className="main-memu__link" target="_blank">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={item.url}>
+                        <a className="main-memu__link">
+                          {item.label}
+                        </a>
+                      </Link>
+                    )
+                  }
                 </li>
               ))
             }

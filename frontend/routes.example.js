@@ -77,6 +77,11 @@ const APP_ROUTES = [
     page: 'widget/top',
     pattern: '/widget/top',
   },
+  // Globals's pages.
+  {
+    page: 'global/main',
+    pattern: '/global',
+  },
 ];
 
 APP_ROUTES.map((route) => routes.add(route));
