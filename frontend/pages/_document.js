@@ -57,7 +57,7 @@ export default class XezoomDocument extends Document {
                       src="https://consent.cookiebot.com/uc.js"
                       data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
                       data-blockingmode="auto"
-                      data-culture={String(locale).toUpperCase()}
+                      data-culture={String(this.props.lng).toUpperCase()}
               />
             )
           }
