@@ -35,11 +35,10 @@ export default class XezoomDocument extends Document {
           {
             siteGtagId && (
               <>
-                <script data-cookieconsent="ignore"
+                <script src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
                         async
-                        src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
                 />
-                <script data-cookieconsent="ignore" dangerouslySetInnerHTML={{
+                <script dangerouslySetInnerHTML={{
                   __html: `
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments)}
@@ -53,25 +52,20 @@ export default class XezoomDocument extends Document {
 
           {
             siteGdpr && (
-              <script id="Cookiebot"
-                      src="https://consent.cookiebot.com/uc.js"
-                      data-cbid="9d78ff36-0af6-463e-b7e3-67642678e2cd"
-                      data-blockingmode="auto"
-                      data-culture={String(this.props.lng).toUpperCase()}
-              />
+              <>
+                <script src="https://config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
+                        crossOrigin
+                />
+                <script src="https://consent-manager.metomic.io/embed.js" crossOrigin />
+              </>
             )
           }
 
           {
             siteGads && (
-              <>
-                <script src="https://config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
-                        crossOrigin
-                />
-                <script src="https://consent-manager.metomic.io/embed.js"
-                        crossOrigin
-                />
-              </>
+              <script data-ad-client="ca-pub-7297847103287274" async
+                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+              />
             )
           }
         </Head>
