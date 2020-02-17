@@ -64,9 +64,14 @@ export default class XezoomDocument extends Document {
 
           {
             siteGads && (
-              <script data-ad-client="ca-pub-7297847103287274" async
-                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-              />
+              <>
+                <script src="https://config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
+                        crossOrigin
+                />
+                <script src="https://consent-manager.metomic.io/embed.js"
+                        crossOrigin
+                />
+              </>
             )
           }
         </Head>
