@@ -54,9 +54,9 @@ export default class XezoomDocument extends Document {
             siteGdpr && (
               <>
                 <script src="https://config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
-                        crossOrigin
+                        crossOrigin="true"
                 />
-                <script src="https://consent-manager.metomic.io/embed.js" crossOrigin />
+                <script src="https://consent-manager.metomic.io/embed.js" crossOrigin="true" />
               </>
             )
           }
