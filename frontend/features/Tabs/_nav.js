@@ -9,8 +9,8 @@ export default ({ items, activeIndex, onClick }) => (
         classnames(
           'tabs__nav-button',
           {
-            'tabs__nav-button--selected': index === activeIndex,
-            'tabs__nav-button--disabled': nav.disabled,
+            'is-active': index === activeIndex,
+            'is-disabled': nav.disabled,
           },
         )
       }

@@ -19,19 +19,24 @@
 }
 
 .tabs__nav-label {
-  @include heading-bold;
-  font-size: $base-font-size;
+  background: lighten($silver, 8);
+  padding: $xsmall-spacing $small-spacing;
+  margin-bottom: $small-spacing;
+  border-radius: $base-border-radius;
+  line-height: 1;
+  font-size: 1rem;
+  text-transform: uppercase;
   display: block;
 
   .tabs__nav-button.is-active & {
-    color: $base-font-color;
+    background: lighten($secondary-background, 1);
   }
 }
 
 .tabs__panels {
-  border: $base-border;
+  border-top: .1rem solid $silver;
   margin-top: $small-spacing;
-  padding: $small-spacing;
+  padding-top: $small-spacing;
   width: 100%;
 }
 

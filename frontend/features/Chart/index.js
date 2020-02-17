@@ -64,7 +64,8 @@ const getDiff = (current, prev) => (
 
 const Chart = ({ data, id, count = 24 }) => {
   const woFirstDayChart = data.slice(0);
-  const severalDays = woFirstDayChart.slice(woFirstDayChart.length - (count + 1));
+  const sliceFrom = woFirstDayChart.length > count ? woFirstDayChart.length - (count + 1) : 0;
+  const severalDays = woFirstDayChart.slice(sliceFrom);
   const woFirstDaySeveralDays = severalDays.slice(1);
   const formatDate = (value) => dayjs(value).format('DD MMM');
 

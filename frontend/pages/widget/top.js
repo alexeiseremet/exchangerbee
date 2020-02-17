@@ -21,7 +21,7 @@ const WidgetTopPageMarkup = ({
         opacity: '0.8',
       }}
       dangerouslySetInnerHTML={{
-        __html: `${baseCountry.flag} Curs ${String(centralBank.slug).toUpperCase()} și cel mai bun curs la băncile din ${baseCountry.name}`
+        __html: `${baseCountry.flag} ${baseCountry.name} — curs ${String(centralBank.slug).toUpperCase()} și cel mai bun curs la bănci`
       }}
     />
 

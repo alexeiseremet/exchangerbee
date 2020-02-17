@@ -14,6 +14,7 @@ import Page from '../features/Page';
 import BestQuotes from '../features/BestQuotes';
 import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
+import Tabs from '../features/Tabs';
 
 const IndexPageMarkup = ({
   post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
@@ -49,23 +50,31 @@ const IndexPageMarkup = ({
         <ConverterWidget />
       </div>
 
-      {
-        archiveQuote && archiveQuote.map((currency) => (
-          <div style={{ marginTop: '3rem' }} key={currency.slug}>
-            <h2
-              style={{
-                marginBottom: '1.19rem',
-                fontSize: '1.6rem',
-                lineHeight: '1.3',
-                opacity: '0.8',
-              }}
-              dangerouslySetInnerHTML={{ __html: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()} — evoluție curs valutar de referință` }}
-            />
+      {archiveQuote && (
+        <>
+          <h2
+            style={{
+              marginBottom: '1.19rem',
+              marginTop: '3rem',
+              fontSize: '1.6rem',
+              lineHeight: '1.3',
+              opacity: '0.8',
+            }}
+            dangerouslySetInnerHTML={{ __html: 'Evoluție curs valutar de referință' }}
+          />
 
-            <Chart data={currency.quote} id={currency.slug} count={12}/>
-          </div>
-        ))
-      }
+          <Tabs
+            activeIndex={1}
+            items={archiveQuote.map((currency) => ({
+              id: currency.slug,
+              label: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
+              content: (
+                <Chart data={currency.quote} id={currency.slug} count={12} />
+              )
+            }))}
+          />
+        </>
+      )}
 
       {
         post && post.textFirst && (

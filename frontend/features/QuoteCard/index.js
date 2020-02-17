@@ -34,7 +34,7 @@ const QuoteCard = ({
   return (
     <article className="quote-card quote-card--link" style={style}>
       <Link {...link}>
-        <a className="quote-card__inner" title={label}>
+        <a className="quote-card__inner" title={`curs ${label}`}>
           {renderInner()}
         </a>
       </Link>
