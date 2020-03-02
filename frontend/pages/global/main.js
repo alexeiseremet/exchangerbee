@@ -16,9 +16,9 @@ import Tabs from '../../features/Tabs';
 import ConverterWidget from '../../features/ConverterWidget';
 
 const MainPageMarkup = ({ widgets, post, fullPath }) => {
-  // if (!post) {
-  //   return null;
-  // }
+  if (!post) {
+    return null;
+  }
 
   return (
     <Layout metadata={{
