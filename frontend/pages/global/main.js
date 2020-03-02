@@ -1,7 +1,3 @@
-import '../../features/BestQuotes/styles.scss';
-import '../../features/QuoteCard/styles.scss';
-import '../../features/RateCard/styles.scss';
-
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
@@ -45,8 +41,8 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
               id: country.slug,
               label: country.name,
               content: (
-                <ConverterWidget centralQuote={widgets[country.slug]['centralQuote']} />
-              )
+                <ConverterWidget {...widgets[country.slug]} />
+              ),
             }))
           }
         />
@@ -68,7 +64,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
         }
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.

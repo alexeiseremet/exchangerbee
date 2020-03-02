@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { baseCountry, baseCurrenciesArr, centralBank } from '../server.config';
+import {
+  baseCountry, baseCurrency, baseCurrenciesArr, centralBank,
+} from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
@@ -12,7 +14,7 @@ import Page from '../features/Page';
 import ConverterWidget from '../features/ConverterWidget';
 
 const ConverterPageMarkup = ({
-  centralQuote, post, fullPath
+  centralQuote, post, fullPath,
 }) => (
   <Layout metadata={{
     url: `${fullPath}`,
@@ -21,7 +23,12 @@ const ConverterPageMarkup = ({
   }}>
     <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
       <div className="page-lead">
-        <ConverterWidget centralQuote={centralQuote} />
+        <ConverterWidget
+          centralQuote={centralQuote}
+          { ...{
+            baseCountry, baseCurrency, baseCurrenciesArr, centralBank,
+          } }
+        />
       </div>
 
       {

@@ -1,24 +1,25 @@
 import React from 'react';
-import { centralBank, baseCurrenciesArr, baseCurrency } from '../../server.config';
 
-const WidgetToday = ({ archiveQuote }) => {
+const WidgetToday = ({
+  archiveQuote, centralBank, baseCurrenciesArr, baseCurrency,
+}) => {
   if (!archiveQuote) {
     return null;
   }
 
   const getText = (quote) => ({
-    name: quote[1]['currencyVObj']['name'],
-    bid: quote[1]['bid'],
-    prevBid: quote[0]['bid'],
-    t2: Math.abs(quote[1]['bid'] - quote[0]['bid']).toFixed(4),
-    t3: quote[1]['bid'] > quote[0]['bid'],
+    name: quote[1].currencyVObj.name,
+    bid: quote[1].bid,
+    prevBid: quote[0].bid,
+    t2: Math.abs(quote[1].bid - quote[0].bid).toFixed(4),
+    t3: quote[1].bid > quote[0].bid,
   });
 
   const text = {};
 
-  for (const i in baseCurrenciesArr) {
-    text[`q${i}`] = getText(archiveQuote[i]['quote']);
-  }
+  baseCurrenciesArr.forEach((value, i) => {
+    text[`q${i}`] = getText(archiveQuote[i].quote);
+  });
 
   return (
     <div className="today"
@@ -42,8 +43,9 @@ const WidgetToday = ({ archiveQuote }) => {
           ieri (vineri), ajungând la <b>${text.q3.bid}</b>. Iar pentru <b>${text.q4.name}</b>, ${centralBank.name} a afișat 
           un curs de referință de <b>${text.q4.bid}</b>, cu ${text.q4.t2} mai ${text.q4.t3 ? 'mult' : 'puțin'} decât ieri (vineri).
           </p>
-    `}}/>
-  )
+    `,
+         }}/>
+  );
 };
 
 export default WidgetToday;

@@ -32,7 +32,7 @@ const MainMenu = ({ type }) => {
                 <li className="main-memu__item" key={item.url}>
                   {
                     item.url.startsWith('//') ? (
-                      <a href={item.url} className="main-memu__link" target="_blank">
+                      <a href={item.url} className="main-memu__link" target="_blank" rel="noopener noreferrer">
                         {item.label}
                       </a>
                     ) : (

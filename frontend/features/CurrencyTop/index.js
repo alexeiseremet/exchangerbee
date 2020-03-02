@@ -1,11 +1,11 @@
 import './styles.scss';
 import React from 'react';
-import { baseCountry, baseCurrency, centralBank } from '../../server.config';
-import RateCard from '../RateCard';
 import { localeDate } from '../../lib/moment';
+import RateCard from '../RateCard';
 
 const CurrencyTop = ({
   currency, centralQuote, bestBid, bestAsk,
+  centralBank, baseCountry, baseCurrency,
 }) => (
   <section className="currency-top">
     <table className="currency-top__table">

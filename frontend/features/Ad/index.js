@@ -8,7 +8,8 @@ export default () => {
 
   return (
     <div style={{ margin: '1rem 0', minHeight: '2rem', maxWidth: '100%' }}
-         dangerouslySetInnerHTML={{ __html: `
+         dangerouslySetInnerHTML={{
+           __html: `
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle"
             style="display:block"
@@ -18,7 +19,8 @@ export default () => {
             data-full-width-responsive="true"
             />
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          ` }}
+          `,
+         }}
     />
   );
 };

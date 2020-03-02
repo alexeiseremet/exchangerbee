@@ -1,24 +1,24 @@
 import React from 'react';
-import { baseCurrency, baseCurrenciesArr } from '../../server.config';
 import Widget from './Widget';
 
 class ConverterWidget extends React.Component {
   state = {
     activeWidget: 'bid',
     bidAmount: '10',
-    bidCurrency: baseCurrency,
+    bidCurrency: this.props.baseCurrency,
     askAmount: '10',
-    askCurrency: baseCurrency,
+    askCurrency: this.props.baseCurrency,
   };
 
   componentDidMount() {
-    let { defaultAsk } = this.props;
+    const { defaultAsk, baseCurrenciesArr } = this.props;
+    let askValue = defaultAsk;
 
     if (!baseCurrenciesArr.includes(defaultAsk)) {
-      [defaultAsk] = baseCurrenciesArr;
+      [askValue] = baseCurrenciesArr;
     }
 
-    this.currencyHandler(defaultAsk, 'bid');
+    this.currencyHandler(askValue, 'bid');
   }
 
   amountHandler = (value, type, newCurrency) => {
@@ -55,6 +55,7 @@ class ConverterWidget extends React.Component {
   };
 
   currencyHandler = (slug, type) => {
+    const { baseCurrency } = this.props;
     let currency = baseCurrency;
 
     if (this.props.centralQuote && (baseCurrency.slug !== slug)) {
@@ -69,7 +70,7 @@ class ConverterWidget extends React.Component {
   };
 
   render() {
-    const { centralQuote } = this.props;
+    const { centralQuote, baseCurrency, baseCurrenciesArr } = this.props;
 
     if (!centralQuote || !centralQuote.length) {
       return null;
@@ -83,6 +84,7 @@ class ConverterWidget extends React.Component {
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
+          {... { baseCurrency, baseCurrenciesArr } }
         />
 
         <Widget
@@ -91,6 +93,7 @@ class ConverterWidget extends React.Component {
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
+          {... { baseCurrency, baseCurrenciesArr } }
         />
       </section>
     );

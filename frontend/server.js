@@ -5,7 +5,7 @@
 
 const express = require('express');
 const proxy = require('http-proxy-middleware');
-const next = require('next');
+const nextjs = require('next');
 const fetch = require('isomorphic-unfetch');
 const jsdom = require('jsdom');
 
@@ -20,8 +20,9 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 const nextI18NextMiddleware = require('next-i18next/middleware').default;
 const nextI18next = require('./lib/i18n');
 
-const app = next({ dev: !IS_PRODUCTION });
+const app = nextjs({ dev: !IS_PRODUCTION });
 const routes = require('./routes');
+
 const handler = routes.getRequestHandler(app);
 
 const { apiPath, storagePath, countries } = require('./server.config');
@@ -67,17 +68,16 @@ const { JSDOM } = jsdom;
     async (req, res, next) => {
       try {
         const { lng } = req.query;
-        let widgets = {};
+        const widgets = {};
 
         const promises = countries.map(({ slug }) => (
           fetch(`//${slug}.xezoom.com/${lng}/widgets`)
-          .then(doc => doc.text())
-          .then(async html => {
-            const htmlAbsUrl = html.split(`/${lng}/`).join(`//${slug}.xezoom.com/${lng}/`);
-            const dom = new JSDOM(htmlAbsUrl);
+            .then((doc) => doc.text())
+            .then(async (html) => {
+              const dom = new JSDOM(html);
 
-            widgets[slug] = JSON.parse(dom.window.document.querySelector(`#data-json`).innerHTML);
-          })
+              widgets[slug] = JSON.parse(dom.window.document.querySelector('#data-json').innerHTML);
+            })
         ));
 
         await Promise.all(promises);
@@ -85,7 +85,8 @@ const { JSDOM } = jsdom;
       } catch (error) {
         next(error);
       }
-    });
+    },
+  );
 
   server
     .use([apiPath, storagePath], appProxy)

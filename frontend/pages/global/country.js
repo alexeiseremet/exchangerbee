@@ -15,22 +15,31 @@ import Page from '../../features/Page';
 import BestQuotes from '../../features/BestQuotes';
 import Today from '../../features/Today';
 
-const CountryPageMarkup = ({ widgets, post, query, fullPath }) => {
+const CountryPageMarkup = ({
+  widgets, post, query, fullPath,
+}) => {
   if (!post) {
     return null;
   }
+
+  const {
+    centralQuote, archiveQuote, centralBank, baseCurrenciesArr, baseCurrency,
+  } = widgets[query.slug];
 
   return (
     <Layout metadata={{
       url: `${fullPath}`,
       title: post.title,
-      description: post.description, //'✅ Curs de schimb valutar la băncile din Moldova.',
+      description: post.description, // '✅ Curs de schimb valutar la băncile din Moldova.',
     }}>
       <Page heading={post.title}>
-        <BestQuotes centralQuote={widgets[query.slug]['centralQuote']} />
+        <BestQuotes centralQuote={centralQuote} />
 
         <div style={{ marginTop: '3rem' }}>
-          <Today archiveQuote={widgets[query.slug]['archiveQuote']} />
+          <Today
+            archiveQuote={archiveQuote}
+            {... { centralBank, baseCurrenciesArr, baseCurrency }}
+          />
         </div>
 
         {
@@ -50,7 +59,7 @@ const CountryPageMarkup = ({ widgets, post, query, fullPath }) => {
         }
       </Page>
     </Layout>
-  )
+  );
 };
 
 // getInitialProps.

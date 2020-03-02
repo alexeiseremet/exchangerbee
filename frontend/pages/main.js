@@ -33,6 +33,7 @@ const IndexPageMarkup = ({
           bestAskQuote={bestAskQuote}
           bestBidQuote={bestBidQuote}
           centralQuote={centralQuote}
+          {... { baseCurrenciesArr }}
         />
       </section>
 
@@ -47,7 +48,10 @@ const IndexPageMarkup = ({
       />
 
       <div className="page-lead">
-        <ConverterWidget centralQuote={centralQuote} />
+        <ConverterWidget
+          centralQuote={centralQuote}
+          {... { baseCurrency, baseCurrenciesArr } }
+        />
       </div>
 
       {archiveQuote && (
@@ -70,7 +74,7 @@ const IndexPageMarkup = ({
               label: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
               content: (
                 <Chart data={currency.quote} id={currency.slug} count={12} />
-              )
+              ),
             }))}
           />
         </>

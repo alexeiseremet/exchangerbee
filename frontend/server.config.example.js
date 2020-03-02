@@ -44,7 +44,7 @@ module.exports = {
     { slug: 'md', name: 'Moldova' },
     { slug: 'ro', name: 'România' },
     { slug: 'ru', name: 'Rusia' },
-    { slug: 'ua', name: 'Ucraina' }
+    { slug: 'ua', name: 'Ucraina' },
   ],
   apiPath,
   host,

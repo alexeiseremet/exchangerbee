@@ -1,7 +1,6 @@
 import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
-import { baseCurrency, baseCurrenciesArr } from '../../server.config';
 import Input from './Input';
 
 class Widget extends React.Component {
@@ -19,7 +18,9 @@ class Widget extends React.Component {
   };
 
   render() {
-    const { data, label, type } = this.props;
+    const {
+      data, label, type, baseCurrency, baseCurrenciesArr,
+    } = this.props;
     const [currency, amount] = [data[`${type}Currency`], data[`${type}Amount`]];
     const currencySlug = currency.slug || currency.currencyVObj.slug;
 

@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrenciesArr } from '../server.config';
+import { centralBank, baseCurrency, baseCurrenciesArr } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
@@ -14,18 +14,22 @@ const WidgetPageMarkup = ({ centralQuote, archiveQuote }) => (
     <Metadata noindex={true} title="Widgets" />
 
     <script id="data-json" type="application/json" dangerouslySetInnerHTML={{
-      __html: JSON.stringify({ centralQuote, archiveQuote })
+      __html: JSON.stringify({
+        centralBank,
+        baseCurrency,
+        baseCurrenciesArr,
+        centralQuote,
+        archiveQuote,
+      }),
     }} />
   </>
 );
 
 // getInitialProps.
-WidgetPageMarkup.getInitialProps = async ({ query }) => {
-  return {
-    namespacesRequired: ['common'],
-    query,
-  };
-};
+WidgetPageMarkup.getInitialProps = async ({ query }) => ({
+  namespacesRequired: ['common'],
+  query,
+});
 
 // i18n.
 const WidgetPageI18N = withTranslation('common')(WidgetPageMarkup);

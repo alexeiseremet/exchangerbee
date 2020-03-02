@@ -6,7 +6,9 @@ import _filter from 'lodash/filter';
 import _maxBy from 'lodash/maxBy';
 import _minBy from 'lodash/minBy';
 
-import { centralBank, baseCurrency, baseCountry, baseCurrenciesArr } from '../server.config';
+import {
+  centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
+} from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
@@ -59,6 +61,9 @@ const CurrencyPageMarkup = ({
                 centralQuote={centralQuote}
                 bestBid={bestBid}
                 bestAsk={bestAsk}
+                {... {
+                  centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
+                } }
               />
             </div>
           )
@@ -74,12 +79,18 @@ const CurrencyPageMarkup = ({
           dangerouslySetInnerHTML={{
             __html: (`
               Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} valabil astăzi
-            `)
+            `),
           }}
         />
 
         <div className="page-lead" style={{ marginTop: '1rem' }}>
-          <ConverterWidget centralQuote={allCentralQuote} defaultAsk={query.slug}/>
+          <ConverterWidget
+            centralQuote={allCentralQuote}
+            defaultAsk={query.slug}
+            {... {
+              centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
+            } }
+          />
         </div>
 
 
@@ -96,7 +107,7 @@ const CurrencyPageMarkup = ({
                 Cursul valutar pentru
                 ${currency.name} (${String(currency.slug).toUpperCase()})
                 afişat azi la băncile din ${baseCountry.name}
-              `)
+              `),
             }}
           />
 
@@ -153,7 +164,7 @@ const CurrencyPageMarkup = ({
             dangerouslySetInnerHTML={{
               __html: (
                 `Evoluție curs valutar oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`
-              )
+              ),
             }}
           />
 
@@ -269,7 +280,7 @@ export default _compose(
       }),
       props: ({
         data: {
-          currency, allQuote, archiveQuote, allCentralQuote, post
+          currency, allQuote, archiveQuote, allCentralQuote, post,
         },
       }) => ({
         currency,

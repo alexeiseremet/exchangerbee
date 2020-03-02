@@ -1,10 +1,11 @@
 import './styles.scss';
 import React from 'react';
-import { baseCurrenciesArr } from '../../server.config';
 import RateCard from '../RateCard';
 import QuoteCard from '../QuoteCard';
 
-const BestQuotes = ({ centralQuote, bestBidQuote, bestAskQuote }) => (
+const BestQuotes = ({
+  centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
+}) => (
   <section className="best-quotes">
     {
       baseCurrenciesArr.map((slug) => (
