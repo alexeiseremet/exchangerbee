@@ -6,7 +6,7 @@ import _filter from 'lodash/filter';
 import _maxBy from 'lodash/maxBy';
 import _minBy from 'lodash/minBy';
 
-import { centralBank, baseCurrency, baseCountry } from '../server.config';
+import { centralBank, baseCurrency, baseCountry, baseCurrenciesArr } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
@@ -19,7 +19,7 @@ import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
 
 const CurrencyPageMarkup = ({
-  currency, allQuote, post, fullPath, archiveQuote, query,
+  currency, allQuote, archiveQuote, allCentralQuote, post, query, fullPath,
 }) => {
   if (!currency) {
     return null;
@@ -41,8 +41,8 @@ const CurrencyPageMarkup = ({
       url: `${fullPath}`,
       title: `Curs valutar ${currency.name} (${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
       description: `
-        ✅ Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat la băncile din ${baseCountry.name}.
-        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
+        ✅ Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat azi la băncile din ${baseCountry.name}.
+        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} valabil astăzi.
       `,
     }}>
       <Page
@@ -71,11 +71,15 @@ const CurrencyPageMarkup = ({
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: `Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi` }}
+          dangerouslySetInnerHTML={{
+            __html: (`
+              Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} valabil astăzi
+            `)
+          }}
         />
 
         <div className="page-lead" style={{ marginTop: '1rem' }}>
-          <ConverterWidget defaultAsk={query.slug} />
+          <ConverterWidget centralQuote={allCentralQuote} defaultAsk={query.slug}/>
         </div>
 
 
@@ -89,10 +93,10 @@ const CurrencyPageMarkup = ({
             }}
             dangerouslySetInnerHTML={{
               __html: (`
-                      Cursul valutar pentru
-                      ${currency.name} (${String(currency.slug).toUpperCase()})
-                      afişat la băncile din ${baseCountry.name}
-                    `),
+                Cursul valutar pentru
+                ${currency.name} (${String(currency.slug).toUpperCase()})
+                afişat azi la băncile din ${baseCountry.name}
+              `)
             }}
           />
 
@@ -146,7 +150,11 @@ const CurrencyPageMarkup = ({
               lineHeight: '1.3',
               opacity: '0.8',
             }}
-            dangerouslySetInnerHTML={{ __html: `Evoluție curs valutar oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}` }}
+            dangerouslySetInnerHTML={{
+              __html: (
+                `Evoluție curs valutar oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`
+              )
+            }}
           />
 
           {
@@ -159,7 +167,7 @@ const CurrencyPageMarkup = ({
 
           {
             archiveQuote.map((currencyItem) => (
-              <Chart data={currencyItem.quote} id={currencyItem.slug} key={currencyItem.slug} />
+              <Chart data={currencyItem.quote} id={currencyItem.slug} key={currencyItem.slug}/>
             ))
           }
         </section>
@@ -200,7 +208,7 @@ const CurrencyPageI18N = withTranslation('common')(CurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY_PAGE = gql`
-  query CurrencyPage ($slug: String!, $where: QuoteWhereInput, $archiveWhere: QuoteArchiveWhereInput, $postSlug: String) {
+  query CurrencyPage ($slug: String!, $where: QuoteWhereInput, $archiveWhere: QuoteArchiveWhereInput, $date: String, $currencies: [String!], $includeBanks: [String!], $postSlug: String) {
     currency(slug: $slug) {
       slug
       name
@@ -213,17 +221,25 @@ const GQL_CURRENCY_PAGE = gql`
       bid
       ask
     }
-    post(slug: $postSlug) {
-      title
-      textFirst
-      textSecond
-    }
     archiveQuote(where: $archiveWhere) {
       slug
       quote {
         bid
         date
       }
+    }
+    allCentralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
+      currencyVObj {
+        name
+        slug
+      }
+      bid
+      ask
+    }
+    post(slug: $postSlug) {
+      title
+      textFirst
+      textSecond
     }
   }
 `;
@@ -240,23 +256,27 @@ export default _compose(
             date: [today()],
             error: 'no',
           },
-          postSlug: fullPath,
           archiveWhere: {
             date: [xDaysAgo(90), today()],
             currencies: [query.slug],
             includeBanks: [centralBank.slug],
           },
+          date: today(),
+          currencies: baseCurrenciesArr,
+          includeBanks: [centralBank.slug],
+          postSlug: fullPath,
         },
       }),
       props: ({
         data: {
-          currency, allQuote, post, archiveQuote,
+          currency, allQuote, archiveQuote, allCentralQuote, post
         },
       }) => ({
         currency,
         allQuote,
-        post,
         archiveQuote,
+        allCentralQuote,
+        post,
       }),
     },
   ),

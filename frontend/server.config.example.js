@@ -10,6 +10,7 @@ module.exports = {
     { url: '/converter', label: 'Convertor valutar' },
     { url: '/banks', label: 'Cursul la bănci' },
     { url: '/currencies', label: 'Lista valute' },
+    { url: '/countries', label: 'Lista ţărilor' },
   ],
   adminMenu: [
     { url: '/admin/banks', label: 'Banks' },
@@ -39,6 +40,12 @@ module.exports = {
     slug: 'bnm',
   },
   baseCurrenciesArr: ['usd', 'eur', 'ron', 'rub', 'uah'],
+  countries: [
+    { slug: 'md', name: 'Moldova' },
+    { slug: 'ro', name: 'România' },
+    { slug: 'ru', name: 'Rusia' },
+    { slug: 'ua', name: 'Ucraina' }
+  ],
   apiPath,
   host,
 };

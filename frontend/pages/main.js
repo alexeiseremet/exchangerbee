@@ -47,7 +47,7 @@ const IndexPageMarkup = ({
       />
 
       <div className="page-lead">
-        <ConverterWidget />
+        <ConverterWidget centralQuote={centralQuote} />
       </div>
 
       {archiveQuote && (
@@ -79,7 +79,8 @@ const IndexPageMarkup = ({
       {
         post && post.textFirst && (
           <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-             dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+             dangerouslySetInnerHTML={{ __html: post.textFirst }}
+          />
         )
       }
 

@@ -155,19 +155,43 @@ module.exports = {
           {
             $group: {
               _id: '$currency.refSlug',
-              quote: { $push: '$$ROOT' },
+              quote: { $push: '$_id' },
             },
           },
-          {
-            $project: {
-              _id: 0,
-              slug: '$_id',
-              quote: '$quote'
-            }
-          },
         ])
-        .exec((err, res) => {
-          err ? reject(err) : resolve(res);
+        .exec(async (err, res) => {
+          if (err) {
+            reject(err);
+            return undefined;
+          }
+
+          try {
+            const quotes = res.map(async (group) => {
+              const groupQuotes = (
+                await Quote.find({ _id: { $in: group.quote} })
+                .populate({
+                  path: 'institutionVObj',
+                  select: 'name slug',
+                })
+                .populate({
+                  path: 'currencyVObj',
+                  select: 'name slug numCode',
+                })
+              );
+
+              return {
+                slug: group._id,
+                quote: groupQuotes,
+              }
+            });
+
+            resolve(quotes);
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error(error);
+          }
+
+          return undefined;
         });
       });
     },

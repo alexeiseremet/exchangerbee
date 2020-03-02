@@ -27,6 +27,10 @@ const APP_ROUTES = [
     page: 'converter',
     pattern: '/converter',
   },
+  {
+    page: 'widgets',
+    pattern: '/widgets',
+  },
   // Admin's pages.
   {
     page: 'admin/login',
@@ -72,15 +76,14 @@ const APP_ROUTES = [
     page: 'admin/quote',
     pattern: '/admin/quotes/:id',
   },
-  // Widget's pages.
-  {
-    page: 'widget/top',
-    pattern: '/widget/top',
-  },
-  // Globals's pages.
+  // Global's pages.
   {
     page: 'global/main',
     pattern: '/global',
+  },
+  {
+    page: 'global/country',
+    pattern: '/global/countries/:slug',
   },
 ];
 

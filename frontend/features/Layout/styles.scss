@@ -99,6 +99,7 @@ body {
 }
 
 .layout__footer {
+  border-top: .1rem solid rgba($gray, .25);
   background-color: $footer-background;
   width: 100%;
 }

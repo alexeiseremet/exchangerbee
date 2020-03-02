@@ -7,49 +7,31 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { host, countries } from '../../server.config';
+import { host } from '../../server.config';
 import { i18n, withTranslation } from '../../lib/i18n';
 
 import Layout from '../../features/Layout';
 import Page from '../../features/Page';
-import Tabs from '../../features/Tabs';
-import ConverterWidget from '../../features/ConverterWidget';
+import BestQuotes from '../../features/BestQuotes';
+import Today from '../../features/Today';
 
-const MainPageMarkup = ({ widgets, post, fullPath }) => {
-  // if (!post) {
-  //   return null;
-  // }
+const CountryPageMarkup = ({ widgets, post, query, fullPath }) => {
+  if (!post) {
+    return null;
+  }
 
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: 'xezoom.com',
-      description: '✅ Cel mai bun curs valutar oferit de băncile din Moldova, România, Rusia și Ucraina.',
+      title: post.title,
+      description: post.description, //'✅ Curs de schimb valutar la băncile din Moldova.',
     }}>
-      <Page heading="xezoom.com">
-        <h2
-          style={{
-            marginBottom: '1.19rem',
-            marginTop: '3rem',
-            fontSize: '1.6rem',
-            lineHeight: '1.3',
-            opacity: '0.8',
-          }}
-          dangerouslySetInnerHTML={{ __html: 'Convertor valutar' }}
-        />
+      <Page heading={post.title}>
+        <BestQuotes centralQuote={widgets[query.slug]['centralQuote']} />
 
-        <Tabs
-          activeIndex={1}
-          items={
-            countries.map((country) => ({
-              id: country.slug,
-              label: country.name,
-              content: (
-                <ConverterWidget centralQuote={widgets[country.slug]['centralQuote']} />
-              )
-            }))
-          }
-        />
+        <div style={{ marginTop: '3rem' }}>
+          <Today archiveQuote={widgets[query.slug]['archiveQuote']} />
+        </div>
 
         {
           post && post.textFirst && (
@@ -72,7 +54,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
 };
 
 // getInitialProps.
-MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
+CountryPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
   const lng = req ? req.lng : i18n.lng;
   const fullPath = req ? `/${lng}${asPath}` : asPath;
   const fetchWidgets = await fetch(`${host}/widgets/?lng=${lng}`);
@@ -80,17 +62,18 @@ MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
 
   return {
     namespacesRequired: ['common'],
+    query,
     fullPath,
     widgets,
   };
 };
 
 // i18n.
-const MainPageI18N = withTranslation('common')(MainPageMarkup);
+const CountryPageI18N = withTranslation('common')(CountryPageMarkup);
 
 // Container.
-const GQL_GLOBAL_MAIN_PAGE = gql`
-  query GlobalMainPage ($postSlug: String) {
+const GQL_GLOBAL_COUNTRY_PAGE = gql`
+  query GlobalCountryPage ($postSlug: String) {
     post(slug: $postSlug) {
       title
       textFirst
@@ -101,7 +84,7 @@ const GQL_GLOBAL_MAIN_PAGE = gql`
 
 export default _compose(
   graphql(
-    GQL_GLOBAL_MAIN_PAGE,
+    GQL_GLOBAL_COUNTRY_PAGE,
     {
       options: ({ fullPath }) => ({
         variables: {
@@ -117,4 +100,4 @@ export default _compose(
       }),
     },
   ),
-)(MainPageI18N);
+)(CountryPageI18N);

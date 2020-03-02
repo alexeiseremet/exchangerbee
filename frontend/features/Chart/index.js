@@ -96,7 +96,8 @@ const Chart = ({ data, id, count = 24 }) => {
                    axisLine={false}
             />
 
-            <Area dataKey='bid' fillOpacity={1} strokeWidth={2} stroke="#aaa" strokeOpacity={0.4} fill={`url(#colorBid-${id})`}
+            <Area dataKey='bid' fillOpacity={1} strokeWidth={2} stroke="#ffdd05"
+                  fill={`url(#colorBid-${id})`}
                   isAnimationActive={false} minPointSize={3}
             />
 

@@ -17,7 +17,11 @@ const Layout = ({ children, metadata, type }) => (
         <MainMenu type={type}/>
       </Header>
       <Content>{children}</Content>
-      <Footer />
+      <Footer>
+        <p style={{ margin: '2rem 0', fontSize: '1.2rem' }}>
+          © 2020 xezoom. Toate drepturile rezervate.
+        </p>
+      </Footer>
     </div>
   </>
 );

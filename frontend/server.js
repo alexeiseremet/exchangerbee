@@ -24,7 +24,7 @@ const app = next({ dev: !IS_PRODUCTION });
 const routes = require('./routes');
 const handler = routes.getRequestHandler(app);
 
-const { apiPath, storagePath } = require('./server.config');
+const { apiPath, storagePath, countries } = require('./server.config');
 const { getUserCookie } = require('./lib/session');
 
 const { JSDOM } = jsdom;
@@ -63,19 +63,20 @@ const { JSDOM } = jsdom;
     .use('/static', express.static(`${__dirname}/public/static`));
 
   server.get(
-    '/jsonwidget',
+    '/widgets',
     async (req, res, next) => {
       try {
         const { lng } = req.query;
         let widgets = {};
 
-        const promises = ['md', 'ro', 'ru', 'ua'].map(url => (
-          fetch(`//${url}.xezoom.com/${lng}/widget/top`)
+        const promises = countries.map(({ slug }) => (
+          fetch(`//${slug}.xezoom.com/${lng}/widgets`)
           .then(doc => doc.text())
-          .then(html => {
-            const htmlAbsUrl = html.split(`/${lng}/`).join(`//${url}.xezoom.com/${lng}/`);
+          .then(async html => {
+            const htmlAbsUrl = html.split(`/${lng}/`).join(`//${slug}.xezoom.com/${lng}/`);
             const dom = new JSDOM(htmlAbsUrl);
-            widgets[url] = dom.window.document.querySelector('.widget-top').innerHTML;
+
+            widgets[slug] = JSON.parse(dom.window.document.querySelector(`#data-json`).innerHTML);
           })
         ));
 

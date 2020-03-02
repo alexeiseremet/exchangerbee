@@ -3,55 +3,50 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { baseCountry, centralBank } from '../server.config';
+import { baseCountry, baseCurrenciesArr, centralBank } from '../server.config';
 import { withTranslation } from '../lib/i18n';
+import { today } from '../lib/moment';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import ConverterWidget from '../features/ConverterWidget';
 
-class ConverterPageMarkup extends React.Component {
-  render() {
-    const { post, fullPath } = this.props;
+const ConverterPageMarkup = ({
+  centralQuote, post, fullPath
+}) => (
+  <Layout metadata={{
+    url: `${fullPath}`,
+    title: `Convertor valutar ${String(centralBank.slug).toUpperCase()} — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
+    description: `✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.`,
+  }}>
+    <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
+      <div className="page-lead">
+        <ConverterWidget centralQuote={centralQuote} />
+      </div>
 
-    return (
-      <Layout metadata={{
-        url: `${fullPath}`,
-        title: `Convertor valutar ${String(centralBank.slug).toUpperCase()} — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-        description: `✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.`,
-      }}>
-        <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
+      {
+        post && post.textFirst && (
+          <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+        )
+      }
 
-          <div className="page-lead">
-            <ConverterWidget />
-          </div>
-
-          {
-            post && post.textFirst && (
-              <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-                 dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
-            )
-          }
-
-          {
-            post && post.textSecond && (
-              <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
-                 dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
-            )
-          }
-        </Page>
-      </Layout>
-    );
-  }
-}
+      {
+        post && post.textSecond && (
+          <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+             dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+        )
+      }
+    </Page>
+  </Layout>
+);
 
 // getInitialProps.
-ConverterPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+ConverterPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
 
   return {
     namespacesRequired: ['common'],
-    query,
     fullPath,
   };
 };
@@ -61,7 +56,15 @@ const ConverterPageI18N = withTranslation('common')(ConverterPageMarkup);
 
 // Container.
 const GQL_CONVERTER_PAGE = gql`
-  query ConverterPage ($postSlug: String!) {
+  query ConverterPage ($date: String, $currencies: [String!], $includeBanks: [String!], $postSlug: String!) {
+    centralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
+      currencyVObj {
+        name
+        slug
+      }
+      bid
+      ask
+    }
     post(slug: $postSlug) {
       title
       textFirst
@@ -76,10 +79,14 @@ export default _compose(
     {
       options: ({ fullPath }) => ({
         variables: {
+          date: today(),
+          currencies: baseCurrenciesArr,
+          includeBanks: [centralBank.slug],
           postSlug: fullPath,
         },
       }),
-      props: ({ data: { post } }) => ({
+      props: ({ data: { centralQuote, post } }) => ({
+        centralQuote,
         post,
       }),
     },

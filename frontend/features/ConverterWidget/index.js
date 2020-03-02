@@ -1,9 +1,5 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
-import { graphql } from 'react-apollo';
-import _compose from 'lodash/flowRight';
-import { centralBank, baseCurrency, baseCurrenciesArr } from '../../server.config';
-import { today } from '../../lib/moment';
+import { baseCurrency, baseCurrenciesArr } from '../../server.config';
 import Widget from './Widget';
 
 class ConverterWidget extends React.Component {
@@ -61,8 +57,8 @@ class ConverterWidget extends React.Component {
   currencyHandler = (slug, type) => {
     let currency = baseCurrency;
 
-    if (this.props.allQuote && (baseCurrency.slug !== slug)) {
-      [currency] = this.props.allQuote.filter((quote) => quote.currencyVObj.slug === slug);
+    if (this.props.centralQuote && (baseCurrency.slug !== slug)) {
+      [currency] = this.props.centralQuote.filter((quote) => quote.currencyVObj.slug === slug);
     }
 
     this.setState({
@@ -73,9 +69,9 @@ class ConverterWidget extends React.Component {
   };
 
   render() {
-    const { allQuote } = this.props;
+    const { centralQuote } = this.props;
 
-    if (!allQuote || !allQuote.length) {
+    if (!centralQuote || !centralQuote.length) {
       return null;
     }
 
@@ -87,7 +83,6 @@ class ConverterWidget extends React.Component {
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
-          allQuote={allQuote}
         />
 
         <Widget
@@ -96,44 +91,10 @@ class ConverterWidget extends React.Component {
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
-          allQuote={allQuote}
         />
       </section>
     );
   }
 }
 
-// Container.
-const GQL_CONVERTER_WIDGET = gql`
-  query ConverterWidget ($where: QuoteWhereInput!) {
-    allQuote (where: $where) {
-      currencyVObj {
-        name
-        slug
-      }
-      amount
-      bid
-      ask
-    }
-  }
-`;
-
-export default _compose(
-  graphql(
-    GQL_CONVERTER_WIDGET,
-    {
-      options: () => ({
-        variables: {
-          where: {
-            institution: { refSlug: centralBank.slug },
-            date: [today()],
-            error: 'no',
-          },
-        },
-      }),
-      props: ({ data: { allQuote } }) => ({
-        allQuote,
-      }),
-    },
-  ),
-)(ConverterWidget);
+export default ConverterWidget;
