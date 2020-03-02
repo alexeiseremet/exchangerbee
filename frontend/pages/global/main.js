@@ -35,7 +35,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
         />
 
         <Tabs
-          activeIndex={1}
+          activeIndex={0}
           items={
             countries.map((country) => ({
               id: country.slug,
@@ -70,7 +70,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
 // getInitialProps.
 MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const lng = req ? req.lng : i18n.lng;
-  const fullPath = req ? `/${lng}${asPath}` : asPath;
+  const fullPath = req ? `/${lng}` : asPath;
   const fetchWidgets = await fetch(`${host}/widgets/?lng=${lng}`);
   const widgets = await fetchWidgets.json();
 
