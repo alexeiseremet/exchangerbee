@@ -19,6 +19,7 @@ const {
   MONGO_URL,
   JWT_SECRET_SERVER,
   NODE_ENV,
+  CRAWLER_OFF,
 } = process.env;
 const IS_PRODUCTION = NODE_ENV === 'production';
 
@@ -47,10 +48,12 @@ let timer;
 }());
 
 // Run crawler by cron.
-new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
-  const data = await crawler();
-  console.log('Crawler duration', data.time);
-}, null, true, null, null, false, utcOffset);
+if (!CRAWLER_OFF) {
+  new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
+    const data = await crawler();
+    console.log('Crawler duration', data.time);
+  }, null, true, null, null, false, utcOffset);
+}
 
 // Check server token.
 server.use((req, res, next) => {

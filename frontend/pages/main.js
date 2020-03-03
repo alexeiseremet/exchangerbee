@@ -50,7 +50,7 @@ const IndexPageMarkup = ({
       <div className="page-lead">
         <ConverterWidget
           centralQuote={centralQuote}
-          {... { baseCurrency, baseCurrenciesArr } }
+          {... { baseCurrency, baseCurrenciesArr }}
         />
       </div>
 

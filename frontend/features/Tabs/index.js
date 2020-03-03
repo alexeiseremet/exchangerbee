@@ -3,17 +3,13 @@ import TabsNav from './_nav';
 import TabsPanels from './_panels';
 
 class Tabs extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeIndex: props.activeIndex || 0,
-    };
-  }
+  state = {
+    activeIndex: this.props.activeIndex || 0,
+  };
 
   handlerOnClick = (index) => {
     this.setState({ activeIndex: index });
-  }
+  };
 
   render() {
     const { items } = this.props;

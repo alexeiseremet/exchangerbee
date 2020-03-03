@@ -3,7 +3,7 @@ const apiPath = '/graphql';
 
 module.exports = {
   siteName: 'xezoom.com',
-  siteGtagId: false,
+  siteGtagId: null,
   siteGads: false,
   siteGdpr: false,
   siteMenu: [

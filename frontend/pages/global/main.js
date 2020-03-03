@@ -41,7 +41,9 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
               id: country.slug,
               label: country.name,
               content: (
-                <ConverterWidget {...widgets[country.slug]} />
+                <div className="page-lead">
+                  <ConverterWidget {...widgets[country.slug]} />
+                </div>
               ),
             }))
           }
