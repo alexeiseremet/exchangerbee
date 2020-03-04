@@ -48,7 +48,7 @@ let timer;
 }());
 
 // Run crawler by cron.
-if (!!CRAWLER_ON) {
+if (CRAWLER_ON === 'true') {
   new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
     const data = await crawler();
     console.log('Crawler duration', data.time);
