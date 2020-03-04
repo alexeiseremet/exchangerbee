@@ -19,7 +19,7 @@ const {
   MONGO_URL,
   JWT_SECRET_SERVER,
   NODE_ENV,
-  CRAWLER_OFF,
+  CRAWLER_ON,
 } = process.env;
 const IS_PRODUCTION = NODE_ENV === 'production';
 
@@ -48,7 +48,7 @@ let timer;
 }());
 
 // Run crawler by cron.
-if (!CRAWLER_OFF) {
+if (!!CRAWLER_ON) {
   new CronJob('0 */1 0-3,8-10,13-16 * * *', async () => {
     const data = await crawler();
     console.log('Crawler duration', data.time);
