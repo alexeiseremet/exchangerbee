@@ -10,6 +10,8 @@ import Layout from '../../features/Layout';
 import Page from '../../features/Page';
 import Tabs from '../../features/Tabs';
 import ConverterWidget from '../../features/ConverterWidget';
+import Today from '../../features/Today';
+import Grid from '../../features/Grid';
 
 const MainPageMarkup = ({ widgets, post, fullPath }) => {
   if (!post) {
@@ -20,9 +22,19 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
     <Layout metadata={{
       url: `${fullPath}`,
       title: 'xezoom.com',
-      description: '✅ Cel mai bun curs valutar oferit de băncile din Moldova, România, Rusia și Ucraina.',
+      description: '✅ Curs valutar oferit de băncile centrale din Moldova, România, Rusia și Ucraina.',
     }}>
       <Page heading="xezoom.com">
+        <p
+          style={{ fontSize: '1.2rem' }}
+          dangerouslySetInnerHTML={{
+            __html: `
+          Folosind convertorul valutar de mai jos poți ușor calcula suma obținută în urma 
+          schimbului valutar după cursul anunţat pentru azi de către băncile centrale ale țărilor 
+          menționate, instituții care au competenţa de reglementare şi autorizare în domeniul bancar.
+        `,
+          }} />
+
         <h2
           style={{
             marginBottom: '1.19rem',
@@ -49,21 +61,44 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
           }
         />
 
-        {
+        <h2
+          style={{
+            marginBottom: '1.19rem',
+            marginTop: '3rem',
+            fontSize: '1.6rem',
+            lineHeight: '1.3',
+            opacity: '0.8',
+          }}
+          dangerouslySetInnerHTML={{
+            __html: 'Cursul valutar anunțat de băncile centrale pentru astăzi',
+          }}
+        />
+
+        <Grid colsXs={1} colsMd={2}>
+          {
+            countries.map((country) => (
+              <Today key={country.slug} {... widgets[country.slug]}
+                     link={`/countries/${country.slug}`}
+              />
+            ))
+          }
+        </Grid>
+
+         {
           post && post.textFirst && (
             <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textFirst }}
             />
           )
-        }
+         }
 
-        {
+         {
           post && post.textSecond && (
             <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
                dangerouslySetInnerHTML={{ __html: post.textSecond }}
             />
           )
-        }
+         }
       </Page>
     </Layout>
   );

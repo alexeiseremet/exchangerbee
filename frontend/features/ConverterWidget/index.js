@@ -79,7 +79,7 @@ class ConverterWidget extends React.Component {
     return (
       <section className="converter-widget">
         <Widget
-          type="bid"
+          quoteType="bid"
           label="plătesc"
           data={this.state}
           amountHandler={this.amountHandler}
@@ -88,7 +88,7 @@ class ConverterWidget extends React.Component {
         />
 
         <Widget
-          type="ask"
+          quoteType="ask"
           label="primesc"
           data={this.state}
           amountHandler={this.amountHandler}

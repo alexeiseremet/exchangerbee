@@ -4,7 +4,7 @@ const routes = nextRoutes();
 
 const APP_ROUTES = [
   {
-    page: 'main',
+    page: 'index',
     pattern: '/',
   },
   {

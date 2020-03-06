@@ -28,6 +28,7 @@ class Input extends React.Component {
         <input
           type="text"
           pattern="[0-9]*"
+          inputMode="numeric"
           className={className}
           defaultValue={defaultValue}
           onChange={(event) => { onInputChange(event.target.value); }}

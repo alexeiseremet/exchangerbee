@@ -19,17 +19,27 @@ const ConverterPageMarkup = ({
   <Layout metadata={{
     url: `${fullPath}`,
     title: `Convertor valutar ${String(centralBank.slug).toUpperCase()} — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-    description: `✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.`,
+    description: `✅ Convertorul valutar după cursul de schimb anunțat de ${centralBank.name} pentru astăzi.`,
   }}>
-    <Page heading={`Convertor valutar după cursul de schimb ${String(centralBank.slug).toUpperCase()} de azi`}>
+    <Page heading={`Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()}`}>
       <div className="page-lead">
         <ConverterWidget
           centralQuote={centralQuote}
-          { ...{
+          {... {
             baseCountry, baseCurrency, baseCurrenciesArr, centralBank,
-          } }
+          }}
         />
       </div>
+
+      <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+         dangerouslySetInnerHTML={{
+           __html: `Convertorul valutar de mai sus face conversia folosind cursul de schimb
+           anunțat de ${centralBank.name} (${String(centralBank.slug).toUpperCase()}) pentru azi
+           şi îl poți folosi atunci când vrei să calculezi suma obținută în urma schimbului valutar 
+           la cursul băncii centrale.
+           `,
+         }}
+      />
 
       {
         post && post.textFirst && (

@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrency, baseCurrenciesArr } from '../server.config';
+import {
+  centralBank, baseCountry, baseCurrency, baseCurrenciesArr,
+} from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
@@ -16,6 +18,7 @@ const WidgetPageMarkup = ({ centralQuote, archiveQuote }) => (
     <script id="data-json" type="application/json" dangerouslySetInnerHTML={{
       __html: JSON.stringify({
         centralBank,
+        baseCountry,
         baseCurrency,
         baseCurrenciesArr,
         centralQuote,
@@ -71,7 +74,7 @@ export default _compose(
           currencies: baseCurrenciesArr,
           includeBanks: [centralBank.slug],
           archiveWhere: {
-            date: [xDaysAgo(2), today()],
+            date: [xDaysAgo(1), today()],
             currencies: baseCurrenciesArr,
             includeBanks: [centralBank.slug],
           },

@@ -4,7 +4,7 @@ import RateCard from '../RateCard';
 import QuoteCard from '../QuoteCard';
 
 const BestQuotes = ({
-  centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
+  noLink, centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
 }) => (
   <section className="best-quotes">
     {
@@ -13,10 +13,13 @@ const BestQuotes = ({
           key={slug}
           label={slug}
           centralBankItem={0}
-          link={{
-            href: `/currency?slug=${slug}`,
-            as: `/currencies/${slug}`,
-          }}
+          link={
+            noLink
+              ? null
+              : {
+                href: `/currency?slug=${slug}`,
+                as: `/currencies/${slug}`,
+              }}
         >
           <>
             {

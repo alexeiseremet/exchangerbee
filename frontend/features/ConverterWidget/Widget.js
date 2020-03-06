@@ -13,15 +13,15 @@ class Widget extends React.Component {
   };
 
   onInputChange = (value) => {
-    const { amountHandler, type } = this.props;
-    amountHandler(value, type);
+    const { amountHandler, quoteType } = this.props;
+    amountHandler(value, quoteType);
   };
 
   render() {
     const {
-      data, label, type, baseCurrency, baseCurrenciesArr,
+      data, label, quoteType, baseCurrency, baseCurrenciesArr,
     } = this.props;
-    const [currency, amount] = [data[`${type}Currency`], data[`${type}Amount`]];
+    const [currency, amount] = [data[`${quoteType}Currency`], data[`${quoteType}Amount`]];
     const currencySlug = currency.slug || currency.currencyVObj.slug;
 
     const btnClasses = (slug, mod) => classnames(
@@ -51,8 +51,7 @@ class Widget extends React.Component {
             {
               this.state.inputIsActive
                 ? (
-                  <Input type={type}
-                         defaultValue={amount}
+                  <Input defaultValue={amount}
                          onInputChange={this.onInputChange}
                          onInputBlur={this.setInputActive}
                          className="converter__input"
@@ -71,7 +70,7 @@ class Widget extends React.Component {
               <div className="flex flex--fit">
                 <button type="button"
                         className={btnClasses(baseCurrency.slug)}
-                        onClick={() => this.props.currencyHandler(baseCurrency.slug, type)}
+                        onClick={() => this.props.currencyHandler(baseCurrency.slug, quoteType)}
                 >
                   {baseCurrency.slug}
                 </button>
@@ -79,7 +78,7 @@ class Widget extends React.Component {
                 {
                   baseCurrenciesArr.map((slug, i) => (
                     <button key={i} type="button"
-                            onClick={() => this.props.currencyHandler(slug, type)}
+                            onClick={() => this.props.currencyHandler(slug, quoteType)}
                             className={btnClasses(slug)}
                     >
                       {slug}

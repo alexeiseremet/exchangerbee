@@ -33,17 +33,18 @@ const CountryPageMarkup = ({
       description: post.description, // '✅ Curs de schimb valutar la băncile din Moldova.',
     }}>
       <Page heading={post.title}>
-        <BestQuotes
-          centralQuote={centralQuote}
-          {...{ baseCurrenciesArr }}
-        />
-
-        <div style={{ marginTop: '3rem' }}>
-          <Today
-            archiveQuote={archiveQuote}
-            {... { centralBank, baseCurrenciesArr, baseCurrency }}
+        <div className="page-lead" style={{ marginBottom: '3rem' }}>
+          <BestQuotes
+            centralQuote={centralQuote}
+            noLink={`${query.slug}.xezoom.com/${i18n.lng}`}
+            {... { baseCurrenciesArr }}
           />
         </div>
+
+        <Today
+          archiveQuote={archiveQuote}
+          {... { centralBank, baseCurrenciesArr, baseCurrency }}
+        />
 
         {
           post && post.textFirst && (
