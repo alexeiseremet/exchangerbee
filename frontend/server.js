@@ -41,7 +41,7 @@ const { JSDOM } = jsdom;
     cookiePathRewrite: apiPath,
     changeOrigin: true,
     router: {
-      [storagePath]: 'https://space.exchangerbee.com',
+      [storagePath]: 'https://space.xezoom.com',
     },
     onProxyReq(proxyReq, req) {
       const user = getUserCookie(req);
@@ -71,7 +71,7 @@ const { JSDOM } = jsdom;
         const widgets = {};
 
         const promises = countries.map(({ slug }) => (
-          fetch(`//${slug}.exchangerbee.com/${lng}/widgets`)
+          fetch(`//${slug}.xezoom.com/${lng}/widgets`)
             .then((doc) => doc.text())
             .then(async (html) => {
               const dom = new JSDOM(html);

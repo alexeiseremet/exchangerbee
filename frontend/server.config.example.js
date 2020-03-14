@@ -1,8 +1,8 @@
-const host = 'https://md.exchangerbee.com';
+const host = 'https://md.xezoom.com';
 const apiPath = '/graphql';
 
 module.exports = {
-  siteName: 'exchangerbee.com',
+  siteName: 'xezoom.com',
   siteGtagId: null,
   siteGads: false,
   siteGdpr: false,

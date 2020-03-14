@@ -21,10 +21,10 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: 'exchangerbee.com',
+      title: 'xezoom.com',
       description: '✅ Curs valutar oferit de băncile centrale din Moldova, România, Rusia și Ucraina.',
     }}>
-      <Page heading="exchangerbee.com">
+      <Page heading="xezoom.com">
         <p
           style={{ fontSize: '1.2rem' }}
           dangerouslySetInnerHTML={{
