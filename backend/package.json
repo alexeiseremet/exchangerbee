@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@xezoom/backend",
+  "name": "@exchangerbee/backend",
   "version": "1.0.0",
   "engines": {
     "node": ">=8.16.0"
@@ -12,8 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "exhangerbee",
-    "xezoom"
+    "exhangerbee"
   ],
   "author": "Alexei Seremet <alexei.seremet@gmail.com>",
   "license": "ISC",
