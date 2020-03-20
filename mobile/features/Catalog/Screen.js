@@ -1,37 +1,25 @@
 import React from 'react';
 import {
   StyleSheet,
-  ScrollView,
   View,
   Text,
 } from 'react-native';
 import Menu from './Menu';
 
-class CatalogScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Oferte',
-    headerTitle: 'Catalog oferte',
-  };
+const CatalogScreen = () => {
+  return (
+    <View>
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Catalog oferte</Text>
+        <Text style={styles.sectionDescription}>
+          Electronice si electrocasnice online la cel mai mic pret.
+        </Text>
+      </View>
 
-  render() {
-    return (
-      <ScrollView
-        // centerContent
-        style={{ backgroundColor: '#eaeaea' }}
-        contentInsetAdjustmentBehavior="automatic"
-      >
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Catalog oferte</Text>
-          <Text style={styles.sectionDescription}>
-            Electronice si electrocasnice online la cel mai mic pret.
-          </Text>
-        </View>
-
-        <Menu/>
-      </ScrollView>
-    )
-  };
-}
+      <Menu/>
+    </View>
+  )
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {

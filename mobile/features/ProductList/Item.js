@@ -6,28 +6,32 @@ import {
   Image,
   View,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 
-const ProductListItem = ({ image, name, sku, navigation }) => (
-  <TouchableHighlight
-    onPress={() => {
-      navigation.navigate({ routeName: 'Product', params: { name, productSku: sku } })
-    }}
-    underlayColor="#eaeaea">
-    <View style={styles.item}>
-      <View>
-        <Image
-          style={{ width: 64, height: 64 }}
-          source={{ uri: `https://cdna.altex.ro${image}` }}
-        />
+const ProductListItem = ({ image, name, sku }) => {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableHighlight
+      onPress={() => {
+        navigation.navigate('Product', { name, sku })
+      }}
+    >
+      <View style={styles.item}>
+        <View>
+          <Image
+            style={{ width: 64, height: 64 }}
+            source={{ uri: `https://lcdn.altex.ro${image}` }}
+          />
+        </View>
+        <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap', paddingLeft: 10 }}>
+          <Text>{name}</Text>
+          <Text style={{ marginTop: 5, color: '#8c8c8c' }}>{sku}</Text>
+        </View>
       </View>
-      <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap', paddingLeft: 10 }}>
-        <Text>{name}</Text>
-        <Text style={{ marginTop: 5, color: '#8c8c8c' }}>{sku}</Text>
-      </View>
-    </View>
-  </TouchableHighlight>
-);
+    </TouchableHighlight>
+  )
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -39,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ProductListItem)
+export default ProductListItem;

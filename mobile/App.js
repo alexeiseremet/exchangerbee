@@ -1,40 +1,49 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ */
+
 import React from 'react';
-import {
-  createStackNavigator,
-  createBottomTabNavigator,
-  createAppContainer
-} from "react-navigation";
-import HomeScreen from './features/HomeScreen'
-import CatalogScreen from './features/Catalog/Screen'
+import 'react-native-gesture-handler';
+
+// import {
+//   Colors,
+// } from 'react-native/Libraries/NewAppScreen';
+
+import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeScreen from './features/Home/Screen'
+import CatalogScreen from './features/Catalog/Screen';
 import ProductListScreen from './features/ProductList/Screen';
 import ProductScreen from './features/Product/Screen';
 
-const CatalogStack = createStackNavigator(
-  {
-    Index: CatalogScreen,
-    ProductList: ProductListScreen,
-    Product: ProductScreen,
-  },
-  {
-    initialRouteName: 'Index',
-  }
+const TabBottom = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const CatalogStack = () => (
+  <Stack.Navigator initialRouteName="Index">
+    <Stack.Screen name="Catalog" component={CatalogScreen} />
+    <Stack.Screen name="ProductList" component={ProductListScreen} />
+    <Stack.Screen name="Product" component={ProductScreen} />
+  </Stack.Navigator>
 );
 
+const App = () => {
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
 
-const AppNavigator = createBottomTabNavigator(
-  {
-    Home: HomeScreen,
-    Catalog: {
-      screen: CatalogStack,
-      navigationOptions: {
-        title: 'Catalog',
-      },
-    },
-  },
-  {
-    initialRouteName: 'Home',
-    resetOnBlur: true,
-  }
-);
+      <NavigationContainer>
+        <TabBottom.Navigator initialRouteName="Home" resetOnBlur={true}>
+          <TabBottom.Screen name="Home" component={HomeScreen} />
+          <TabBottom.Screen name="Catalog" component={CatalogStack} options={{ title: 'Catalog' }} />
+        </TabBottom.Navigator>
+      </NavigationContainer>
+    </>
+  );
+};
 
-export default createAppContainer(AppNavigator);
+export default App;

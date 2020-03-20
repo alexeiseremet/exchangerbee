@@ -6,28 +6,22 @@ import {
   Image,
   View,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 
-const CatalogMenuItem = ({ id, name, properties, navigation }) => (
-  <TouchableHighlight
-    onPress={() => {
-      navigation.navigate({ routeName: 'ProductList', params: { name, categoryId: id } })
-    }}
-    underlayColor="#dadada"
-  >
-    <View style={styles.item}>
-      <View>
-        <Image
-          style={{ width: 32, height: 32 }}
-          source={{ uri: `https://cdna.altex.ro${properties.icon_image}` }}
-        />
-      </View>
-      <View style={{ flexDirection: 'row', flex: 1, flexWrap: 'wrap', paddingLeft: 10 }}>
+const CatalogMenuItem = ({ slug, name }) => {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableHighlight
+      onPress={() => { navigation.navigate('ProductList', { name, slug }) }}
+      underlayColor="#dadada"
+    >
+      <View style={styles.item}>
         <Text>{name}</Text>
       </View>
-    </View>
-  </TouchableHighlight>
-);
+    </TouchableHighlight>
+  )
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -39,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(CatalogMenuItem)
+export default CatalogMenuItem;

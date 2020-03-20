@@ -1,39 +1,54 @@
 import React from 'react';
 import {
-  StyleSheet,
-  ScrollView,
+  ActivityIndicator,
+  FlatList,
+  View,
 } from 'react-native';
-import List from './List'
+import ProductListItem from './Item';
 
 class ProductListScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`
-  });
+  state = {
+    products: [],
+    isLoading: true,
+  };
+
+  async componentDidMount() {
+    const { slug } = this.props.route.params;
+
+    try {
+      const res = await fetch(`https://fenrir.altex.ro/promo/campaign/oferte-catalog/${slug}/`);
+      const resJSON = await res.json();
+
+      this.setState({
+        products: resJSON.products,
+        isLoading: false,
+      });
+    }
+    catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  }
 
   render() {
-    const { navigation } = this.props;
+    const { products, isLoading } = this.state;
 
     return (
-      <ScrollView
-        // centerContent
-        style={{ backgroundColor: '#e1e1e1' }}
-        contentInsetAdjustmentBehavior="automatic"
-      >
-        <List categoryId={navigation.state.params.categoryId}/>
-      </ScrollView>
-    )
-  };
+      <View>
+        {
+          isLoading
+            ? <ActivityIndicator size="large"/>
+            : (
+              <FlatList
+                data={Object.keys(products).map(key => products[key])}
+                keyExtractor={item => `${item.id}`}
+                renderItem={({ item }) => <ProductListItem {...item}/>}
+              />
+            )
+        }
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginVertical: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-});
-
-export default ProductListScreen;
+export default ProductListScreen

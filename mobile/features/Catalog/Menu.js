@@ -14,11 +14,11 @@ class CatalogMenu extends React.Component {
 
   async componentDidMount() {
     try {
-      const res = await fetch('https://fenrir.altex.ro/promo/campaign/838/categories');
+      const res = await fetch('https://fenrir.altex.ro/promo/campaign/oferte-catalog/?include_products=1');
       const resJSON = await res.json();
 
       this.setState({
-        items: resJSON.categories,
+        items: resJSON.tree,
         isLoading: false,
       });
     }
