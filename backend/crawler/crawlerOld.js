@@ -14,6 +14,17 @@ const runCrawlerOld = async (url, xPath) => {
     return null;
   }
 
+  const response = {
+    query: {
+      count: 1,
+      created: startTime,
+      lang: 'en',
+      result: {
+        content: null
+      }
+    }
+  };
+
   const result = {
     value: null,
     time: '0s',
