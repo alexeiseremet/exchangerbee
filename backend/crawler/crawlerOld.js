@@ -20,14 +20,10 @@ const runCrawlerOld = async (url, xPath) => {
       created: startTime,
       lang: 'en',
       result: {
-        content: null
+        content: null,
+        time: '0s'
       }
     }
-  };
-
-  const result = {
-    value: null,
-    time: '0s',
   };
 
   const browser = await puppeteer.connect({
@@ -49,7 +45,7 @@ const runCrawlerOld = async (url, xPath) => {
   try {
     await page.goto(url, { waitUntil: 'networkidle2' });
     const [elem] = await page.$x(xPath);
-    result.value = await page.evaluate((el) => el.textContent.toLowerCase(), elem);
+    response.query.result.content = await page.evaluate((el) => el.textContent.toLowerCase(), elem);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`An error occurred on ${url}`);
@@ -58,9 +54,9 @@ const runCrawlerOld = async (url, xPath) => {
   }
 
   await browser.close();
-  result.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
+  response.query.result.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
 
-  return result;
+  return response;
 };
 
 module.exports = runCrawlerOld;
