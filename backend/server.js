@@ -11,6 +11,7 @@ const { CronJob } = require('cron');
 const { utcOffset } = require('./server.config');
 const schema = require('./graphql');
 const crawler = require('./crawler');
+const crawlerOld = require('./crawler/crawlerOld');
 
 const server = express();
 
@@ -88,6 +89,20 @@ server.use(
   async (req, res, next) => {
     try {
       const data = await crawler();
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+// Old Crawler server route.
+server.use(
+  '/crawler-old',
+  async (req, res, next) => {
+    try {
+      const {url, xpath} = req.query;
+      const data = await crawlerOld(url, xpath);
       res.json(data);
     } catch (error) {
       next(error);
