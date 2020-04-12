@@ -17,12 +17,10 @@ const runCrawlerOld = async (url, xPath) => {
   const response = {
     query: {
       count: 1,
-      created: startTime,
+      created: startTime.toString(),
       lang: 'en',
-      result: {
-        content: null,
-        time: '0s'
-      }
+      result: null,
+      time: '0s'
     }
   };
 
@@ -45,7 +43,7 @@ const runCrawlerOld = async (url, xPath) => {
   try {
     await page.goto(url, { waitUntil: 'networkidle2' });
     const [elem] = await page.$x(xPath);
-    response.query.result.content = await page.evaluate((el) => el.textContent.toLowerCase(), elem);
+    response.query.result = await page.evaluate((el) => el.textContent.toLowerCase(), elem);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`An error occurred on ${url}`);
@@ -54,7 +52,7 @@ const runCrawlerOld = async (url, xPath) => {
   }
 
   await browser.close();
-  response.query.result.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
+  response.query.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
 
   return response;
 };
