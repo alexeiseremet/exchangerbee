@@ -32,7 +32,7 @@ class CatalogMenu extends React.Component {
     const { items, isLoading } = this.state;
 
     return (
-      <View>
+      <View style={{ flex: 1}}>
         {
           isLoading
             ? <ActivityIndicator size="large"/>

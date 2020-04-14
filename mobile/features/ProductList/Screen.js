@@ -34,7 +34,7 @@ class ProductListScreen extends React.Component {
     const { products, isLoading } = this.state;
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {
           isLoading
             ? <ActivityIndicator size="large"/>

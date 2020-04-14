@@ -2,13 +2,13 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
+  Text, SafeAreaView,
 } from 'react-native';
 import Menu from './Menu';
 
 const CatalogScreen = () => {
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Catalog oferte</Text>
         <Text style={styles.sectionDescription}>
@@ -17,7 +17,7 @@ const CatalogScreen = () => {
       </View>
 
       <Menu/>
-    </View>
+    </SafeAreaView>
   )
 };
 
