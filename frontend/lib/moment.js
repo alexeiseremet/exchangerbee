@@ -1,26 +1,19 @@
 import dayjsMod from 'dayjs';
 import dayjsPluginUTC from 'dayjs/plugin/utc';
-import enLocale from 'dayjs/locale/en';
-import roLocale from 'dayjs/locale/ro';
-import ruLocale from 'dayjs/locale/ru';
-import ukLocale from 'dayjs/locale/uk';
+// import 'dayjs/locale/en';
+import 'dayjs/locale/ro';
+import 'dayjs/locale/ru';
+// import 'dayjs/locale/uk';
 import { locale, utcOffset } from '../server.config';
-
-const localDateFiles = {
-  en: locale === 'en' && enLocale,
-  ro: locale === 'ro' && roLocale,
-  ru: locale === 'ru' && ruLocale,
-  uk: locale === 'uk' && ukLocale,
-};
 
 // Set the default locale & timezone.
 dayjsMod.extend(dayjsPluginUTC);
-dayjsMod.locale(localDateFiles[locale]);
+dayjsMod.locale(locale);
 
-const dayjs = (date) => {
+const dayjs = (date, lng = locale) => {
   const dateAsNumber = typeof date === 'string' ? +date : date;
   const dateValue = date ? dateAsNumber : dayjsMod().utcOffset(utcOffset);
-  return dayjsMod(dateValue);
+  return dayjsMod(dateValue).locale(lng);
 };
 
 /**
@@ -50,8 +43,8 @@ const monthToIndex = (str) => (+str - 1);
  *
  * @returns {string} Date in YYYY-MM-DD format.
  */
-const inputDate = (date) => (
-  dayjs(date).format('YYYY-MM-DD')
+const inputDate = (date, lng) => (
+  dayjs(date, lng).format('YYYY-MM-DD')
 );
 
 /**
@@ -60,8 +53,8 @@ const inputDate = (date) => (
  *
  * @returns {string} Date in locale format.
  */
-const localeDate = (date) => (
-  dayjs(date).format('DD MMM YYYY')
+const localeDate = (date, lng) => (
+  dayjs(date, lng).format('DD MMM YYYY')
 );
 
 /**
@@ -69,14 +62,14 @@ const localeDate = (date) => (
  *
  * @returns {string} Today in UNIX format.
  */
-const today = () => dayjs().format('YYYY-MM-DD');
+const today = (lng) => dayjs(null, lng).format('YYYY-MM-DD');
 
 /**
  * Substract day in Timestamp format.
  *
  * @returns {string} Date in UNIX format.
  */
-const xDaysAgo = (x = 1) => dayjs().subtract(x, 'days').format('YYYY-MM-DD');
+const xDaysAgo = (x = 1, lng) => dayjs(null, lng).subtract(x, 'days').format('YYYY-MM-DD');
 
 export {
   dayjs,

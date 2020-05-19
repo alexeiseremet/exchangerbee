@@ -3,47 +3,51 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { baseCountry } from '../server.config';
+import { getTranslatedConfig } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 
 import Layout from '../features/Layout';
 import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
 
-const CurrenciesPageMarkup = ({ allCurrency, fullPath }) => (
-  <Layout metadata={{
-    url: `${fullPath}`,
-    title: `Lista valute — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-    description: `✅ Lista valutelor negociate la băncile din ${baseCountry.name}`,
-  }}>
-    <Page heading={`Lista valutelor negociate la băncile din ${baseCountry.name}`}>
+const CurrenciesPageMarkup = (props) => {
+  const { t, allCurrency, fullPath } = props;
+  const { baseCountry } = getTranslatedConfig(t);
+  const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
 
-      {
-        allCurrency && (
-          <section className="currency-list">
-            {
-              allCurrency.map((c, i) => <CurrencyCard key={i} currency={c}/>)
-            }
-          </section>
-        )
-      }
-    </Page>
-  </Layout>
-);
+  return (
+    <Layout metadata={{
+      url: `${fullPath}`,
+      title: `(${tBCS}) ${t('Lista valutelor negociate la bănci')} — ${tBCN}`,
+      description: t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
+    }}>
+      <Page heading={`(${tBCS}) ${t('Lista valutelor negociate la bănci')}`}>
+        {
+          allCurrency && (
+            <section className="currency-list">
+              {
+                allCurrency.map((c, i) => <CurrencyCard key={i} currency={c}/>)
+              }
+            </section>
+          )
+        }
+      </Page>
+    </Layout>
+  );
+};
 
 // getInitialProps.
 CurrenciesPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
 
   return {
-    namespacesRequired: ['common'],
     query,
     fullPath,
   };
 };
 
 // i18n.
-const CurrenciesPageI18N = withTranslation('common')(CurrenciesPageMarkup);
+const CurrenciesPageI18N = withTranslation()(CurrenciesPageMarkup);
 
 // Container.
 const GQL_ALL_CURRENCY = gql`

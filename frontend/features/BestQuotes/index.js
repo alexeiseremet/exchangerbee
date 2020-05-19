@@ -1,73 +1,78 @@
 import './styles.scss';
 import React from 'react';
+import { withTranslation } from '../../lib/i18n';
 import RateCard from '../RateCard';
 import QuoteCard from '../QuoteCard';
 
-const BestQuotes = ({
-  noLink, centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
-}) => (
-  <section className="best-quotes">
-    {
-      baseCurrenciesArr.map((slug) => (
-        <QuoteCard
-          key={slug}
-          label={slug}
-          centralBankItem={0}
-          link={
-            noLink
-              ? null
-              : {
-                href: `/currency?slug=${slug}`,
-                as: `/currencies/${slug}`,
-              }}
-        >
-          <>
-            {
-              centralQuote && centralQuote.map((quote) => (
-                quote.currencyVObj.slug === slug && (
-                  <RateCard
-                    key="central"
-                    value={quote.bid}
-                    label={String(quote.institutionVObj.slug).toUpperCase()}
-                  />
-                )
-              ))
-            }
-          </>
+const BestQuotes = (props) => {
+  const {
+    t, noLink, centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
+  } = props;
 
-          <>
-            {
-              bestBidQuote && bestBidQuote.map((quote) => (
-                quote.currencyVObj.slug === slug && (
-                  <RateCard
-                    key="bid"
-                    value={quote.bid}
-                    label={quote.institutionVObj.name}
-                    info={'cumpără'}
-                  />
-                )
-              ))
-            }
-          </>
+  return (
+    <section className="best-quotes">
+      {
+        baseCurrenciesArr.map((slug) => (
+          <QuoteCard
+            key={slug}
+            label={slug}
+            centralBankItem={0}
+            link={
+              noLink
+                ? null
+                : {
+                  href: `/currency?slug=${slug}`,
+                  as: `/currencies/${slug}`,
+                }}
+          >
+            <>
+              {
+                centralQuote && centralQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="central"
+                      value={quote.bid}
+                      label={String(quote.institutionVObj.slug).toUpperCase()}
+                    />
+                  )
+                ))
+              }
+            </>
 
-          <>
-            {
-              bestAskQuote && bestAskQuote.map((quote) => (
-                quote.currencyVObj.slug === slug && (
-                  <RateCard
-                    key="ask"
-                    value={quote.ask}
-                    label={quote.institutionVObj.name}
-                    info={'vinde'}
-                  />
-                )
-              ))
-            }
-          </>
-        </QuoteCard>
-      ))
-    }
-  </section>
-);
+            <>
+              {
+                bestBidQuote && bestBidQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="bid"
+                      value={quote.bid}
+                      label={quote.institutionVObj.name}
+                      info={t('cumpără')}
+                    />
+                  )
+                ))
+              }
+            </>
 
-export default BestQuotes;
+            <>
+              {
+                bestAskQuote && bestAskQuote.map((quote) => (
+                  quote.currencyVObj.slug === slug && (
+                    <RateCard
+                      key="ask"
+                      value={quote.ask}
+                      label={quote.institutionVObj.name}
+                      info={t('vinde')}
+                    />
+                  )
+                ))
+              }
+            </>
+          </QuoteCard>
+        ))
+      }
+    </section>
+  );
+};
+
+export default withTranslation()(BestQuotes);

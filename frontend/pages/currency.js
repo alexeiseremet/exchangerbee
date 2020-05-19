@@ -6,10 +6,8 @@ import _filter from 'lodash/filter';
 import _maxBy from 'lodash/maxBy';
 import _minBy from 'lodash/minBy';
 
-import {
-  centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
-} from '../server.config';
-import { withTranslation } from '../lib/i18n';
+import config, { getTranslatedConfig } from '../server.config';
+import { i18n, withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
 import Layout from '../features/Layout';
@@ -20,38 +18,49 @@ import CurrencyTop from '../features/CurrencyTop';
 import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
 
-const CurrencyPageMarkup = ({
-  currency, allQuote, archiveQuote, allCentralQuote, post, query, fullPath,
-}) => {
+const CurrencyPageMarkup = (props) => {
+  const {
+    t, lng, currency, allQuote, archiveQuote, allCentralQuote, post, query, fullPath,
+  } = props;
+
   if (!currency) {
     return null;
   }
 
+  const {
+    centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
+  } = getTranslatedConfig(t);
+  const tCBS = centralBank.slug;
+  const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
+  const [tBCyS, tBCyN] = [
+    String(baseCurrency.slug).toUpperCase(),
+    String(baseCurrency.name).toLowerCase(),
+  ];
+  const [tCS, tCN] = [String(currency.slug).toUpperCase(), String(currency.name).toLowerCase()];
   const allQuoteValid = allQuote && allQuote.length;
-
   const allQuoteNoCentral = (
     allQuoteValid
-      ? _filter(allQuote, (q) => q.institutionVObj.slug !== centralBank.slug)
+      ? _filter(allQuote, (q) => q.institutionVObj.slug !== config.centralBank.slug)
       : []
   );
-  const centralQuote = _filter(allQuote, (q) => q.institutionVObj.slug === centralBank.slug)[0];
+  const centralQuote = _filter(
+    allQuote,
+    (q) => q.institutionVObj.slug === config.centralBank.slug,
+  )[0];
   const bestBid = _maxBy(allQuoteNoCentral, 'bid');
   const bestAsk = _minBy(allQuoteNoCentral, 'ask');
 
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `Curs valutar ${currency.name} (${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
+      title: `(${tBCS}) ${t('Curs')} ${tCN} ${tCS}/${tBCyS} — ${tBCN}`,
       description: `
-        ✅ Cursul valutar pentru ${currency.name} (${String(currency.slug).toUpperCase()}) afişat azi la băncile din ${baseCountry.name}.
-        ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} valabil astăzi.
+        ${t('✅ Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
+        ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.
       `,
     }}>
       <Page
-        heading={`
-          Curs ${String(currency.name).toLowerCase()} 
-          în raport cu ${String(baseCurrency.name).toLowerCase()} 
-        `}
+        heading={`${t('Curs')} ${tCN} ${t('în raport cu')} ${tBCyN}`}
       >
         {
           centralQuote && (
@@ -61,6 +70,7 @@ const CurrencyPageMarkup = ({
                 centralQuote={centralQuote}
                 bestBid={bestBid}
                 bestAsk={bestAsk}
+                trans={{ tCBS, tCN, tBCN }}
                 {... {
                   centralBank, baseCurrency, baseCountry, baseCurrenciesArr,
                 } }
@@ -77,9 +87,7 @@ const CurrencyPageMarkup = ({
             opacity: '0.8',
           }}
           dangerouslySetInnerHTML={{
-            __html: (`
-              Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} valabil astăzi
-            `),
+            __html: t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS }),
           }}
         />
 
@@ -103,11 +111,7 @@ const CurrencyPageMarkup = ({
               opacity: '0.8',
             }}
             dangerouslySetInnerHTML={{
-              __html: (`
-                Cursul valutar pentru
-                ${currency.name} (${String(currency.slug).toUpperCase()})
-                afişat azi la băncile din ${baseCountry.name}
-              `),
+              __html: t('Curs {{tCN}} ({{tCS}}) afişat azi la bănci', { tCN, tCS }),
             }}
           />
 
@@ -133,14 +137,14 @@ const CurrencyPageMarkup = ({
                             <RateCard
                               key="bid"
                               value={quote.bid}
-                              info={'cumpără'}
+                              info={t('cumpără')}
                             />
                           </div>
                           <div className="flex__item-grow">
                             <RateCard
                               key="ask"
                               value={quote.ask}
-                              info={'vinde'}
+                              info={t('vinde')}
                             />
                           </div>
                         </div>
@@ -149,7 +153,7 @@ const CurrencyPageMarkup = ({
                   }
                 </div>
               </>
-            ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
+            ) : <p>{t('Nu a fost găsit niciun rezultat')}.</p>
           }
         </section>
 
@@ -162,8 +166,9 @@ const CurrencyPageMarkup = ({
               opacity: '0.8',
             }}
             dangerouslySetInnerHTML={{
-              __html: (
-                `Evoluție curs valutar oficial pentru ${currency.name}, ${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`
+              __html: t(
+                'Evoluție curs valutar oficial pentru {{tCN}}, ({{tCS}}/{{tBCyS}})',
+                { tCN, tCS, tBCyS },
               ),
             }}
           />
@@ -178,7 +183,11 @@ const CurrencyPageMarkup = ({
 
           {
             archiveQuote.map((currencyItem) => (
-              <Chart data={currencyItem.quote} id={currencyItem.slug} key={currencyItem.slug}/>
+              <Chart key={currencyItem.slug}
+                     id={currencyItem.slug}
+                     data={currencyItem.quote}
+                     lng={lng}
+              />
             ))
           }
         </section>
@@ -205,17 +214,18 @@ const CurrencyPageMarkup = ({
 
 // getInitialProps.
 CurrencyPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
-  const fullPath = req ? `/${req.lng}${asPath}` : asPath;
+  const lng = req ? req.lng : i18n.language;
+  const fullPath = req ? `/${lng}${asPath}` : asPath;
 
   return {
-    namespacesRequired: ['common'],
+    lng,
     query,
     fullPath,
   };
 };
 
 // i18n.
-const CurrencyPageI18N = withTranslation('common')(CurrencyPageMarkup);
+const CurrencyPageI18N = withTranslation()(CurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY_PAGE = gql`
@@ -270,11 +280,11 @@ export default _compose(
           archiveWhere: {
             date: [xDaysAgo(90), today()],
             currencies: [query.slug],
-            includeBanks: [centralBank.slug],
+            includeBanks: [config.centralBank.slug],
           },
           date: today(),
-          currencies: baseCurrenciesArr,
-          includeBanks: [centralBank.slug],
+          currencies: config.baseCurrenciesArr,
+          includeBanks: [config.centralBank.slug],
           postSlug: fullPath,
         },
       }),

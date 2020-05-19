@@ -11,8 +11,10 @@ import { dayjs } from '../../lib/moment';
 
 let lastXAxisMonth = '';
 
-const CustomizedXAxisTick = ({ x, y, payload }) => {
-  const month = dayjs(payload.value).format('MM/YY');
+const CustomizedXAxisTick = ({
+  x, y, payload, lng,
+}) => {
+  const month = dayjs(payload.value, lng).format('MM/YY');
 
   if (month === lastXAxisMonth) {
     return null;
@@ -20,8 +22,8 @@ const CustomizedXAxisTick = ({ x, y, payload }) => {
 
   lastXAxisMonth = month;
 
-  const DD = dayjs(payload.value).format('DD');
-  const MM = dayjs(payload.value).format('MMM');
+  const DD = dayjs(payload.value, lng).format('DD');
+  const MM = dayjs(payload.value, lng).format('MMM');
 
   return (
     <g transform={`translate(${x},${y})`} style={{ textTransform: 'uppercase', fontSize: '9px' }}>
@@ -62,12 +64,14 @@ const getDiff = (current, prev) => (
   Number(current - prev).toFixed(4)
 );
 
-const Chart = ({ data, id, count = 24 }) => {
+const Chart = ({
+  data, id, count = 24, lng,
+}) => {
   const woFirstDayChart = data.slice(0);
   const sliceFrom = woFirstDayChart.length > count ? woFirstDayChart.length - (count + 1) : 0;
   const severalDays = woFirstDayChart.slice(sliceFrom);
   const woFirstDaySeveralDays = severalDays.slice(1);
-  const formatDate = (value) => dayjs(value).format('DD MMM');
+  const formatDate = (value) => dayjs(value, lng).format('DD MMM');
 
   return (
     <div className="chart">
@@ -81,7 +85,7 @@ const Chart = ({ data, id, count = 24 }) => {
               </linearGradient>
             </defs>
 
-            <XAxis dataKey="date" tick={<CustomizedXAxisTick />}
+            <XAxis dataKey="date" tick={<CustomizedXAxisTick lng={lng} />}
                    tickLine={false} axisLine={{ stroke: '#aaa', opacity: 0.6 }}
                    interval={0}
             />

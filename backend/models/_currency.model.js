@@ -25,6 +25,10 @@ const currencySchema = new Schema({
     type: String,
     trim: true,
   },
+  image: {
+    type: String,
+    trim: true,
+  },
 });
 
 module.exports = model('Currency', currencySchema);

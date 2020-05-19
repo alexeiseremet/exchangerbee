@@ -16,11 +16,11 @@ const LoginPageMarkup = () => (
 );
 
 // getInitialProps.
-LoginPageMarkup.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
+LoginPageMarkup.getInitialProps = async ({ query }) => ({
+  query,
 });
 
 // i18n.
-const LoginPageI18N = withTranslation('common')(LoginPageMarkup);
+const LoginPageI18N = withTranslation()(LoginPageMarkup);
 
 export default LoginPageI18N;

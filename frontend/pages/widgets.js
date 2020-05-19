@@ -3,39 +3,43 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import {
-  centralBank, baseCountry, baseCurrency, baseCurrenciesArr,
-} from '../server.config';
+import config, { getTranslatedConfig } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
 import Metadata from '../features/Metadata';
 
-const WidgetPageMarkup = ({ centralQuote, archiveQuote }) => (
-  <>
-    <Metadata noindex={true} title="Widgets" />
+const WidgetPageMarkup = (props) => {
+  const { t, centralQuote, archiveQuote } = props;
+  const {
+    centralBank, baseCountry, baseCurrency, baseCurrenciesArr,
+  } = getTranslatedConfig(t);
 
-    <script id="data-json" type="application/json" dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        centralBank,
-        baseCountry,
-        baseCurrency,
-        baseCurrenciesArr,
-        centralQuote,
-        archiveQuote,
-      }),
-    }} />
-  </>
-);
+  return (
+    <>
+      <Metadata noindex={true} title="Widgets"/>
+
+      <script id="data-json" type="application/json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          centralBank,
+          baseCountry,
+          baseCurrency,
+          baseCurrenciesArr,
+          centralQuote,
+          archiveQuote,
+        }),
+      }}/>
+    </>
+  );
+};
 
 // getInitialProps.
 WidgetPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const WidgetPageI18N = withTranslation('common')(WidgetPageMarkup);
+const WidgetPageI18N = withTranslation()(WidgetPageMarkup);
 
 // Container.
 const GQL_WIDGET_PAGE = gql`
@@ -71,12 +75,12 @@ export default _compose(
         variables: {
           slug: query.slug,
           date: today(),
-          currencies: baseCurrenciesArr,
-          includeBanks: [centralBank.slug],
+          currencies: config.baseCurrenciesArr,
+          includeBanks: [config.centralBank.slug],
           archiveWhere: {
             date: [xDaysAgo(1), today()],
-            currencies: baseCurrenciesArr,
-            includeBanks: [centralBank.slug],
+            currencies: config.baseCurrenciesArr,
+            includeBanks: [config.centralBank.slug],
           },
         },
       }),

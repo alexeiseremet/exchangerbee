@@ -12,6 +12,11 @@ services:
     - ./database/data:/data
     - ./database/data/db:/data/db
     - ./database/data/dump:/data/dump
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
 
   backend:
     build: ./backend
@@ -26,6 +31,11 @@ services:
     - ./backend:/usr/src/backend
     - ./backend/screenshots:/usr/src/backend/screenshots
     - /usr/src/backend/node_modules
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
 
   crawler:
     build: ./crawler
@@ -36,6 +46,11 @@ services:
     ports:
     - "3030:3030"
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
 
   frontend:
     build: ./frontend
@@ -50,6 +65,11 @@ services:
     - ./frontend:/usr/src/frontend
     - /usr/src/frontend/node_modules
     - /usr/src/frontend/.next
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "5"
 
 #########################
 # docker-compose build --no-cache [frontend]
@@ -59,6 +79,7 @@ services:
 # docker exec -it 89fc7b0ff34d bash/sh
 # docker logs 89fc7b0ff34d
 # docker system prune
+# truncate -s 0 $(docker inspect --format='{{.LogPath}}' <container_name_or_id>)
 
 # With Dockerfile.
 # docker build --no-cache --tag=exbee_frontend_1 .

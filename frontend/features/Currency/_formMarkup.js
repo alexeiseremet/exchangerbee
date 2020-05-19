@@ -26,6 +26,7 @@ const FormMarkup = (
         slug: '',
         numCode: '',
         symbol: '',
+        image: '',
         ...currency,
       }}
       onSubmit={onSubmit}
@@ -57,6 +58,12 @@ const FormMarkup = (
         id="currency-symbol"
         component="input"
         labelText="Symbol"
+      />
+      <Input
+        name="image"
+        id="currency-image"
+        component="input"
+        labelText="Image source"
       />
     </Form>
   </>

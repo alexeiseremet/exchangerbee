@@ -28,12 +28,11 @@ const ParserPageMarkup = ({ parser }) => {
 
 // getInitialProps.
 ParserPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const ParserPageI18N = withTranslation('common')(ParserPageMarkup);
+const ParserPageI18N = withTranslation()(ParserPageMarkup);
 
 // Container.
 const GQL_PARSER = gql`

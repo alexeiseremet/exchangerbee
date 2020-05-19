@@ -48,12 +48,11 @@ const PostsPageMarkup = ({ query: { action }, allPost }) => (
 
 // getInitialProps.
 PostsPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const PostsPageI18N = withTranslation('common')(PostsPageMarkup);
+const PostsPageI18N = withTranslation()(PostsPageMarkup);
 
 // Container.
 const GQL_ALL_POST = gql`

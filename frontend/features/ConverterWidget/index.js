@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from '../../lib/i18n';
 import Widget from './Widget';
 
 class ConverterWidget extends React.Component {
@@ -70,7 +71,9 @@ class ConverterWidget extends React.Component {
   };
 
   render() {
-    const { centralQuote, baseCurrency, baseCurrenciesArr } = this.props;
+    const {
+      t, centralQuote, baseCurrency, baseCurrenciesArr,
+    } = this.props;
 
     if (!centralQuote || !centralQuote.length) {
       return null;
@@ -80,7 +83,7 @@ class ConverterWidget extends React.Component {
       <section className="converter-widget">
         <Widget
           quoteType="bid"
-          label="plătesc"
+          label={t('plătesc')}
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
@@ -89,7 +92,7 @@ class ConverterWidget extends React.Component {
 
         <Widget
           quoteType="ask"
-          label="primesc"
+          label={t('primesc')}
           data={this.state}
           amountHandler={this.amountHandler}
           currencyHandler={this.currencyHandler}
@@ -100,4 +103,4 @@ class ConverterWidget extends React.Component {
   }
 }
 
-export default ConverterWidget;
+export default withTranslation()(ConverterWidget);
