@@ -28,12 +28,11 @@ const QuotePageMarkup = ({ quote }) => {
 
 // getInitialProps.
 QuotePageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const QuotePageI18N = withTranslation('common')(QuotePageMarkup);
+const QuotePageI18N = withTranslation()(QuotePageMarkup);
 
 // Container.
 const GQL_QUOTE = gql`

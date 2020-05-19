@@ -7,14 +7,6 @@ export const textModal = {
  Pages
  ======================
  */
-export const textIndexPage = {
-  metaTitle: 'metaTitle',
-  metaDescription: 'metaDescription',
-  ogTitle: 'ogTitle',
-  ogDescription: 'ogDescription',
-  pageTitle: 'pageTitle',
-};
-
 export const textAdminPage = {
   metaTitle: 'Admin Page',
   currency: 'Currency',

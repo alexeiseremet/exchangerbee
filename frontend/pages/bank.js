@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { centralBank, baseCurrency, baseCountry } from '../server.config';
+import { getTranslatedConfig } from '../server.config';
 import { withTranslation } from '../lib/i18n';
 import { today } from '../lib/moment';
 
@@ -12,21 +12,26 @@ import Page from '../features/Page';
 import RateCard from '../features/RateCard';
 import QuoteCard from '../features/QuoteCard';
 
-const BankPageMarkup = ({
-  institution, allQuote, post, fullPath,
-}) => {
+const BankPageMarkup = (props) => {
+  const {
+    t, institution, allQuote, post, fullPath,
+  } = props;
+
   if (!institution) {
     return null;
   }
 
+  const { baseCountry, centralBank, baseCurrency } = getTranslatedConfig(t);
+  const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
+  const [tIN, tIS] = [institution.name, String(institution.slug).toUpperCase()];
+
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `Curs valutar la ${institution.name} (${String(institution.slug).toUpperCase()}) — ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-      description: `✅ Curs valutar afișat la ${institution.name} (${String(institution.slug).toUpperCase()}) pentru azi.`,
+      title: `(${tBCS}) ${t('Curs valutar')} ${tIS} — ${tBCN}`,
+      description: `${t('✅ Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.`,
     }}>
-      <Page heading={`Curs valutar la ${institution.name} (${String(institution.slug).toUpperCase()})`}>
-
+      <Page heading={`(${tBCS}) ${tIN}: ${t('curs de schimb valutar')}`}>
         <section>
           {
             allQuote && allQuote.length ? (
@@ -50,8 +55,8 @@ const BankPageMarkup = ({
                               value={quote.bid}
                               info={
                                 institution.slug === centralBank.slug
-                                  ? baseCurrency.symbol
-                                  : 'cumpărare'
+                                  ? t(baseCurrency.symbol)
+                                  : t('cumpără')
                               }
                             />
                           </div>
@@ -64,8 +69,8 @@ const BankPageMarkup = ({
                           value={quote.ask}
                           info={
                             institution.slug === centralBank.slug
-                              ? baseCurrency.symbol
-                              : 'vânzare'
+                              ? t(baseCurrency.symbol)
+                              : t('vinde')
                           }
                         />
                       </div>
@@ -73,7 +78,7 @@ const BankPageMarkup = ({
                   </QuoteCard>
                 ),
               )
-            ) : <p>{'Nu a fost găsit niciun rezultat.'}</p>
+            ) : <p>{t('Nu a fost găsit niciun rezultat')}.</p>
           }
         </section>
 
@@ -100,14 +105,13 @@ BankPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
 
   return {
-    namespacesRequired: ['common'],
     query,
     fullPath,
   };
 };
 
 // i18n.
-const BankPageI18N = withTranslation('common')(BankPageMarkup);
+const BankPageI18N = withTranslation()(BankPageMarkup);
 
 // Container.
 const GQL_BANK_PAGE = gql`

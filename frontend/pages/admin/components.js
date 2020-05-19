@@ -47,10 +47,9 @@ const ComponentsPageMarkup = () => (
 
 // getInitialProps.
 ComponentsPageMarkup.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
 });
 
 // i18n.
-const ComponentsPageI18N = withTranslation('common')(ComponentsPageMarkup);
+const ComponentsPageI18N = withTranslation()(ComponentsPageMarkup);
 
 export default securePage(ComponentsPageI18N);

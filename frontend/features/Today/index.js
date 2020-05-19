@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from '../../lib/i18n';
+import { Link, withTranslation } from '../../lib/i18n';
 
-const Today = ({
-  link, archiveQuote, centralBank, baseCurrenciesArr, baseCurrency,
-}) => {
+const Today = (props) => {
+  const {
+    link, archiveQuote, centralBank, baseCurrenciesArr, baseCurrency,
+  } = props;
   if (!archiveQuote) {
     return null;
   }
@@ -82,4 +83,4 @@ const TextLong = ({ text, centralBank, baseCurrency }) => (
   </div>
 );
 
-export default Today;
+export default withTranslation()(Today);

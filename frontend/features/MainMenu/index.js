@@ -1,14 +1,16 @@
 import './styles.scss';
 import React from 'react';
-import { Link } from '../../lib/i18n';
-import {
-  siteName, siteMenu, adminMenu, baseCountry,
-} from '../../server.config';
+import { Link, withTranslation } from '../../lib/i18n';
+import { getTranslatedConfig } from '../../server.config';
 import Svg from '../Svg';
 // eslint-disable-next-line
 import iconClose from '../../assets/images/logo.svg?sprite';
 
-const MainMenu = ({ type }) => {
+const MainMenu = (props) => {
+  const { type, t } = props;
+  const {
+    siteName, siteMenu, adminMenu, baseCountry,
+  } = getTranslatedConfig(t);
   const items = type === 'admin' ? adminMenu : siteMenu;
 
   return (
@@ -19,7 +21,7 @@ const MainMenu = ({ type }) => {
             <a className="brand" title={siteName}>
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">
-                {`(${String(baseCountry.slug).toUpperCase()}) Curs valutar`}
+                {`(${baseCountry.slug}) ${siteName}`}
               </span>
             </a>
           </Link>
@@ -53,4 +55,4 @@ const MainMenu = ({ type }) => {
   );
 };
 
-export default MainMenu;
+export default withTranslation()(MainMenu);

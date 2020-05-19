@@ -28,12 +28,11 @@ const AdminBankPageMarkup = ({ institution }) => {
 
 // getInitialProps.
 AdminBankPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const AdminBankPageI18N = withTranslation('common')(AdminBankPageMarkup);
+const AdminBankPageI18N = withTranslation()(AdminBankPageMarkup);
 
 // Container.
 const GQL_BANK_PAGE = gql`

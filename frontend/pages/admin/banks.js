@@ -17,11 +17,10 @@ const AdminBanksPageMarkup = () => (
 
 // getInitialProps.
 AdminBanksPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const AdminBanksPageI18N = withTranslation('common')(AdminBanksPageMarkup);
+const AdminBanksPageI18N = withTranslation()(AdminBanksPageMarkup);
 
 export default securePage(AdminBanksPageI18N);

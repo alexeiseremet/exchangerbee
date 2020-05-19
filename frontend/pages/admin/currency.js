@@ -28,12 +28,11 @@ const AdminCurrencyPageMarkup = ({ currency }) => {
 
 // getInitialProps.
 AdminCurrencyPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const AdminCurrencyPageI18N = withTranslation('common')(AdminCurrencyPageMarkup);
+const AdminCurrencyPageI18N = withTranslation()(AdminCurrencyPageMarkup);
 
 // Container.
 const GQL_CURRENCY_PAGE = gql`
@@ -44,6 +43,7 @@ const GQL_CURRENCY_PAGE = gql`
       name
       numCode
       symbol
+      image
     }
   }
 `;

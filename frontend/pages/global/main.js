@@ -13,7 +13,11 @@ import ConverterWidget from '../../features/ConverterWidget';
 import Today from '../../features/Today';
 import Grid from '../../features/Grid';
 
-const MainPageMarkup = ({ widgets, post, fullPath }) => {
+const MainPageMarkup = (props) => {
+  const {
+    t, widgets, post, fullPath,
+  } = props;
+
   if (!post) {
     return null;
   }
@@ -22,15 +26,15 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
     <Layout metadata={{
       url: `${fullPath}`,
       title: 'exchangerbee.com',
-      description: '✅ Curs valutar oferit de băncile centrale din Moldova, România, Rusia și Ucraina.',
+      description: `${t('✅ Curs valutar oferit de băncile centrale din Moldova, România, Rusia și Ucraina')}.`,
     }}>
       <Page heading="exchangerbee.com">
         <p
           style={{ fontSize: '1.2rem' }}
           dangerouslySetInnerHTML={{
             __html: `
-          Folosind convertorul valutar de mai jos poți ușor calcula suma obținută în urma 
-          schimbului valutar după cursul anunţat pentru azi de către băncile centrale ale țărilor 
+          Folosind convertorul valutar de mai jos poți ușor calcula suma obținută în urma
+          schimbului valutar după cursul anunţat pentru azi de către băncile centrale ale țărilor
           menționate, instituții care au competenţa de reglementare şi autorizare în domeniul bancar.
         `,
           }} />
@@ -43,7 +47,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
             lineHeight: '1.3',
             opacity: '0.8',
           }}
-          dangerouslySetInnerHTML={{ __html: 'Convertor valutar' }}
+          dangerouslySetInnerHTML={{ __html: t('Convertor valutar') }}
         />
 
         <Tabs
@@ -51,7 +55,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
           items={
             countries.map((country) => ({
               id: country.slug,
-              label: country.name,
+              label: t(country.name),
               content: (
                 <div className="page-lead">
                   <ConverterWidget {...widgets[country.slug]} />
@@ -70,7 +74,7 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
             opacity: '0.8',
           }}
           dangerouslySetInnerHTML={{
-            __html: 'Cursul valutar anunțat de băncile centrale pentru astăzi',
+            __html: t('Cursul valutar anunțat de băncile centrale pentru astăzi'),
           }}
         />
 
@@ -106,20 +110,19 @@ const MainPageMarkup = ({ widgets, post, fullPath }) => {
 
 // getInitialProps.
 MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
-  const lng = req ? req.lng : i18n.lng;
+  const lng = req ? req.lng : i18n.language;
   const fullPath = req ? `/${lng}` : asPath;
   const fetchWidgets = await fetch(`${host}/widgets/?lng=${lng}`);
   const widgets = await fetchWidgets.json();
 
   return {
-    namespacesRequired: ['common'],
     fullPath,
     widgets,
   };
 };
 
 // i18n.
-const MainPageI18N = withTranslation('common')(MainPageMarkup);
+const MainPageI18N = withTranslation()(MainPageMarkup);
 
 // Container.
 const GQL_GLOBAL_MAIN_PAGE = gql`

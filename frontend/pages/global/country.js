@@ -68,13 +68,12 @@ const CountryPageMarkup = ({
 
 // getInitialProps.
 CountryPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
-  const lng = req ? req.lng : i18n.lng;
+  const lng = req ? req.lng : i18n.language;
   const fullPath = req ? `/${lng}${asPath}` : asPath;
   const fetchWidgets = await fetch(`${host}/widgets/?lng=${lng}`);
   const widgets = await fetchWidgets.json();
 
   return {
-    namespacesRequired: ['common'],
     query,
     fullPath,
     widgets,
@@ -82,7 +81,7 @@ CountryPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
 };
 
 // i18n.
-const CountryPageI18N = withTranslation('common')(CountryPageMarkup);
+const CountryPageI18N = withTranslation()(CountryPageMarkup);
 
 // Container.
 const GQL_GLOBAL_COUNTRY_PAGE = gql`

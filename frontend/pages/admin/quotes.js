@@ -53,12 +53,11 @@ const QuotesPageMarkup = ({ query: { action }, allQuote }) => (
 
 // getInitialProps.
 QuotesPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const QuotesPageI18N = withTranslation('common')(QuotesPageMarkup);
+const QuotesPageI18N = withTranslation()(QuotesPageMarkup);
 
 // Container.
 const GQL_ALL_QUOTE = gql`

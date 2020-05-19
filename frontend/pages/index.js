@@ -3,10 +3,8 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import {
-  centralBank, baseCurrenciesArr, baseCountry, baseCurrency,
-} from '../server.config';
-import { withTranslation } from '../lib/i18n';
+import config, { getTranslatedConfig } from '../server.config';
+import { i18n, withTranslation } from '../lib/i18n';
 import { today, xDaysAgo } from '../lib/moment';
 
 import Layout from '../features/Layout';
@@ -16,101 +14,113 @@ import ConverterWidget from '../features/ConverterWidget';
 import Chart from '../features/Chart';
 import Tabs from '../features/Tabs';
 
-const IndexPageMarkup = ({
-  post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
-}) => (
-  <Layout metadata={{
-    url: `${fullPath}`,
-    title: `Curs valutar ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()})`,
-    description: `
-      ✅ Cel mai bun curs valutar oferit de băncile din ${baseCountry.name} (${String(baseCountry.slug).toUpperCase()}).
-      ✅ Convertor valutar după cursul ${String(centralBank.slug).toUpperCase()} de azi.
-    `,
-  }}>
-    <Page heading={`(${String(baseCountry.slug).toUpperCase()}) Curs valutar ${baseCountry.name}`}>
-      <section style={{ marginBottom: '3rem' }}>
-        <BestQuotes
-          bestAskQuote={bestAskQuote}
-          bestBidQuote={bestBidQuote}
-          centralQuote={centralQuote}
-          {... { baseCurrenciesArr }}
+const IndexPageMarkup = (props) => {
+  const {
+    t, lng, post, centralQuote, bestBidQuote, bestAskQuote, fullPath, archiveQuote,
+  } = props;
+  const {
+    baseCountry, centralBank, baseCurrency, baseCurrenciesArr,
+  } = getTranslatedConfig(t);
+  const tCBS = centralBank.slug;
+  const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
+
+  return (
+    <Layout metadata={{
+      url: `${fullPath}`,
+      title: `(${tBCS}) ${t('Curs valutar')} — ${tBCN}`,
+      description: (
+        `${t('✅ Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}. 
+        ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.`
+      ),
+    }}>
+      <Page heading={`(${tBCS}) ${t('Curs valutar')}`}>
+        <section style={{ marginBottom: '3rem' }}>
+          <BestQuotes
+            bestAskQuote={bestAskQuote}
+            bestBidQuote={bestBidQuote}
+            centralQuote={centralQuote}
+            {... { baseCurrenciesArr }}
+          />
+        </section>
+
+        <h2
+          style={{
+            marginBottom: '1.19rem',
+            fontSize: '1.6rem',
+            lineHeight: '1.3',
+            opacity: '0.8',
+          }}
+          dangerouslySetInnerHTML={{
+            __html: t('Calculator valutar după cursul de schimb {{tCBS}}', { tCBS }),
+          }}
         />
-      </section>
 
-      <h2
-        style={{
-          marginBottom: '1.19rem',
-          fontSize: '1.6rem',
-          lineHeight: '1.3',
-          opacity: '0.8',
-        }}
-        dangerouslySetInnerHTML={{ __html: `Convertor rate după cursul valutar ${String(centralBank.slug).toUpperCase()}` }}
-      />
-
-      <div className="page-lead">
-        <ConverterWidget
-          centralQuote={centralQuote}
-          {... { baseCurrency, baseCurrenciesArr }}
-        />
-      </div>
-
-      {archiveQuote && (
-        <>
-          <h2
-            style={{
-              marginBottom: '1.19rem',
-              marginTop: '3rem',
-              fontSize: '1.6rem',
-              lineHeight: '1.3',
-              opacity: '0.8',
-            }}
-            dangerouslySetInnerHTML={{ __html: 'Evoluție curs valutar de referință' }}
+        <div className="page-lead">
+          <ConverterWidget
+            centralQuote={centralQuote}
+            {... { baseCurrency, baseCurrenciesArr }}
           />
+        </div>
 
-          <Tabs
-            activeIndex={1}
-            items={archiveQuote.map((currency) => ({
-              id: currency.slug,
-              label: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
-              content: (
-                <Chart data={currency.quote} id={currency.slug} count={12} />
-              ),
-            }))}
-          />
-        </>
-      )}
+        {archiveQuote && (
+          <>
+            <h2
+              style={{
+                marginBottom: '1.19rem',
+                marginTop: '3rem',
+                fontSize: '1.6rem',
+                lineHeight: '1.3',
+                opacity: '0.8',
+              }}
+              dangerouslySetInnerHTML={{ __html: t('Evoluție curs valutar de referință') }}
+            />
 
-      {
-        post && post.textFirst && (
-          <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-             dangerouslySetInnerHTML={{ __html: post.textFirst }}
-          />
-        )
-      }
+            <Tabs
+              activeIndex={1}
+              items={archiveQuote.map((currency) => ({
+                id: currency.slug,
+                label: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
+                content: (
+                  <Chart data={currency.quote} id={currency.slug} count={12} lng={lng} />
+                ),
+              }))}
+            />
+          </>
+        )}
 
-      {
-        post && post.textSecond && (
-          <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
-             dangerouslySetInnerHTML={{ __html: post.textSecond }}
-          />
-        )
-      }
-    </Page>
-  </Layout>
-);
+        {
+          post && post.textFirst && (
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}
+            />
+          )
+        }
+
+        {
+          post && post.textSecond && (
+            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}
+            />
+          )
+        }
+      </Page>
+    </Layout>
+  );
+};
 
 // getInitialProps.
 IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {
-  const fullPath = req ? `/${req.lng}` : asPath;
+  const lng = req ? req.lng : i18n.language;
+  const fullPath = req ? `/${lng}${asPath}` : asPath;
 
   return {
-    namespacesRequired: ['common'],
+    lng,
     fullPath,
   };
 };
 
 // i18n.
-const IndexPageI18N = withTranslation('common')(IndexPageMarkup);
+const IndexPageI18N = withTranslation()(IndexPageMarkup);
 
 // Container.
 const GQL_INDEX_PAGE = gql`
@@ -180,13 +190,13 @@ export default _compose(
         variables: {
           postSlug: fullPath,
           date: today(),
-          currencies: baseCurrenciesArr,
-          excludeBanks: [centralBank.slug],
-          includeBanks: [centralBank.slug],
+          currencies: config.baseCurrenciesArr,
+          excludeBanks: [config.centralBank.slug],
+          includeBanks: [config.centralBank.slug],
           archiveWhere: {
             date: [xDaysAgo(30), today()],
-            currencies: baseCurrenciesArr,
-            includeBanks: [centralBank.slug],
+            currencies: config.baseCurrenciesArr,
+            includeBanks: [config.centralBank.slug],
           },
         },
       }),

@@ -5,6 +5,7 @@ module.exports = `
     name: String!
     numCode: String!
     symbol: String
+    image: String
   }
   
   type Query {
@@ -32,6 +33,7 @@ module.exports = `
     name: String
     numCode: String
     symbol: String
+    image: String
   }
   
   input CurrencyWhereInput {

@@ -28,12 +28,11 @@ const PostPageMarkup = ({ post }) => {
 
 // getInitialProps.
 PostPageMarkup.getInitialProps = async ({ query }) => ({
-  namespacesRequired: ['common'],
   query,
 });
 
 // i18n.
-const PostPageI18N = withTranslation('common')(PostPageMarkup);
+const PostPageI18N = withTranslation()(PostPageMarkup);
 
 // Container.
 const GQL_POST = gql`
