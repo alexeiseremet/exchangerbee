@@ -116,6 +116,7 @@ MainPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const widgets = await fetchWidgets.json();
 
   return {
+    lng,
     fullPath,
     widgets,
   };
