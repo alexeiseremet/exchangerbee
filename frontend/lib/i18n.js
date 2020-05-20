@@ -4,7 +4,7 @@ const localeSubpaths = {
   en: 'en',
   ro: 'ro',
   ru: 'ru',
-  ua: 'ua',
+  uk: 'uk',
 };
 const otherLanguages = Object.keys(localeSubpaths).filter(key => key !== locale);
 
