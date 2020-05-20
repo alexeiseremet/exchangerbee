@@ -10,11 +10,11 @@ const iPad = devices['iPad Pro landscape'];
 const runCrawlerOld = async (url, xPath) => {
   const startTime = new Date().getTime();
 
-  if (!url || !xPath) {
+  if (!url && !xPath) {
     return null;
   }
 
-  const result = {
+  const response = {
     query: {
       count: 1,
       created: new Date().toISOString(),
@@ -46,7 +46,7 @@ const runCrawlerOld = async (url, xPath) => {
     await page.goto(url, { waitUntil: 'networkidle2' });
     const [elem] = await page.$x(xPath);
     const value = await page.evaluate((el) => el.textContent.toLowerCase(), elem);
-    result.query.results.content = value.trim().replace(',', '.');
+    response.query.results.content = value.trim().replace(',', '.');
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`An error occurred on ${url}`);
@@ -55,9 +55,9 @@ const runCrawlerOld = async (url, xPath) => {
   }
 
   await browser.close();
-  result.query.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
+  response.query.time = `${Math.round((new Date().getTime() - startTime) / 1000)} s`;
 
-  return result;
+  return response;
 };
 
 module.exports = runCrawlerOld;
