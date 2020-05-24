@@ -27,13 +27,13 @@ const IndexPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs valutar')} — ${tBCN}`,
+      title: `(${tBCS}) ${t('Curs valutar la bănci')} — ${tBCN}`,
       description: (
         `${t('✅ Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}. 
         ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.`
       ),
     }}>
-      <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar la bănci').toLowerCase()}`}>
         <section style={{ marginBottom: '3rem' }}>
           <BestQuotes
             bestAskQuote={bestAskQuote}
