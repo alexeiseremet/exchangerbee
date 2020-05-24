@@ -21,7 +21,7 @@ const BanksPageMarkup = (props) => {
       title: `(${tBCS}) ${t('Cursul valutar la bănci')} — ${tBCN}`,
       description: `${t('✅ Cursul valutar afişat la băncile din {{tBCN}} pentru azi', { tBCN })}.`,
     }}>
-      <Page heading={`(${tBCS}) ${t('Cursul valutar la bănci')}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Cursul valutar la bănci').toLowerCase()}`}>
 
         {
           allInstitution && (

@@ -28,7 +28,7 @@ const BankPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs valutar')} ${tIS} — ${tBCN}`,
+      title: `(${tBCS}) ${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN}`,
       description: `${t('✅ Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.`,
     }}>
       <Page heading={`(${tBCS}) ${tIN}: ${t('curs de schimb valutar')}`}>

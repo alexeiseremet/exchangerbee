@@ -60,7 +60,7 @@ const CurrencyPageMarkup = (props) => {
       `,
     }}>
       <Page
-        heading={`${t('Curs')} ${tCN} ${t('în raport cu')} ${tBCyN}`}
+        heading={`(${tBCS}) ${tBCN}: ${t('Curs').toLowerCase()} ${tCN} ${t('în raport cu')} ${tBCyN}`}
       >
         {
           centralQuote && (

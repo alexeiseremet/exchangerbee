@@ -21,7 +21,7 @@ const CurrenciesPageMarkup = (props) => {
       title: `(${tBCS}) ${t('Lista valutelor negociate la bănci')} — ${tBCN}`,
       description: t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
     }}>
-      <Page heading={`(${tBCS}) ${t('Lista valutelor negociate la bănci')}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Lista valutelor negociate la bănci').toLowerCase()}`}>
         {
           allCurrency && (
             <section className="currency-list">

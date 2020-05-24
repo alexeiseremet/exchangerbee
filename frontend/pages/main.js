@@ -33,7 +33,7 @@ const IndexPageMarkup = (props) => {
         ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.`
       ),
     }}>
-      <Page heading={`(${tBCS}) ${t('Curs valutar')}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()}`}>
         <section style={{ marginBottom: '3rem' }}>
           <BestQuotes
             bestAskQuote={bestAskQuote}

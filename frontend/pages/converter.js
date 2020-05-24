@@ -27,7 +27,7 @@ const ConverterPageMarkup = (props) => {
       title: `(${tBCS}) ${t('Convertor valutar')} ${tCBS} — ${tBCN}`,
       description: `${t('✅ Convertorul valutar după cursul de schimb anunțat de {{tCBN}} pentru astăzi', { tCBN })}.`,
     }}>
-      <Page heading={`(${tBCS}) ${t('Convertor valutar')} ${tCBS}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Convertor valutar').toLowerCase()} ${tCBS}`}>
         <div className="page-lead">
           <ConverterWidget
             centralQuote={centralQuote}

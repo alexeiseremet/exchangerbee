@@ -18,10 +18,10 @@ const MainMenu = (props) => {
       <div className="header__inner">
         <div className="header__brand">
           <Link href="/">
-            <a className="brand" title={siteName}>
+            <a className="brand">
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">
-                {`(${baseCountry.slug}) ${siteName}`}
+                {`((${baseCountry.slug}) ${baseCountry.name}: ${t('Curs valutar').toLowerCase()}`}
               </span>
             </a>
           </Link>
