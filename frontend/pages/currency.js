@@ -53,14 +53,14 @@ const CurrencyPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs')} ${tCN} ${tCS}/${tBCyS} — ${tBCN}`,
+      title: `(${tBCS}) ${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN}`,
       description: `
         ${t('✅ Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
         ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.
       `,
     }}>
       <Page
-        heading={`(${tBCS}) ${tBCN}: ${t('Curs').toLowerCase()} ${tCN} ${t('în raport cu')} ${tBCyN}`}
+        heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
       >
         {
           centralQuote && (

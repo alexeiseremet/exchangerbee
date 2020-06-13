@@ -5,7 +5,7 @@
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
 
-const iPad = devices['iPad Pro landscape'];
+const iPad = devices['iPad landscape'];
 
 const getParser = require('./crawlerGetParser');
 const createUpdateQuotes = require('./crawlerCreateUpdateQuotes');

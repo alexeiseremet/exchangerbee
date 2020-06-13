@@ -31,7 +31,7 @@ const BankPageMarkup = (props) => {
       title: `(${tBCS}) ${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN}`,
       description: `${t('✅ Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.`,
     }}>
-      <Page heading={`(${tBCS}) ${tIN}: ${t('curs de schimb valutar')}`}>
+      <Page heading={`(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}>
         <section>
           {
             allQuote && allQuote.length ? (
