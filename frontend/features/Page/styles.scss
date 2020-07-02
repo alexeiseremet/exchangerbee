@@ -9,10 +9,14 @@
   flex-wrap: wrap;
 }
 
+.page__breadcrumbs {
+  @include flex-width();
+  padding-bottom: $small-spacing;
+}
+
 .page__top {
   @include flex-width();
   padding-bottom: $small-spacing;
-  position: relative;
 }
 
 .page__content {
@@ -22,7 +26,7 @@
 }
 
 .page-heading {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 1.2;
 }
 

@@ -43,7 +43,7 @@ const MainPageMarkup = (props) => {
           style={{
             marginBottom: '1.19rem',
             marginTop: '3rem',
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             lineHeight: '1.3',
             opacity: '0.8',
           }}
@@ -69,7 +69,7 @@ const MainPageMarkup = (props) => {
           style={{
             marginBottom: '1.19rem',
             marginTop: '3rem',
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             lineHeight: '1.3',
             opacity: '0.8',
           }}

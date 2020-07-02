@@ -28,10 +28,18 @@ const BankPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN}`,
-      description: `${t('✅ Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.`,
+      title: `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
+      description: (`
+        ${tBCN} ✅ ${tIN} ${tIS}
+        — ${t('Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.
+      `),
     }}>
-      <Page heading={`(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}>
+      <Page
+        heading={`(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}
+        breadcrumb={[
+          { href: '/banks', label: t('Lista bănci') },
+        ]}
+      >
         <section>
           {
             allQuote && allQuote.length ? (

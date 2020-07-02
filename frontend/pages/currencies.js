@@ -18,10 +18,10 @@ const CurrenciesPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Lista valutelor negociate la bănci')} — ${tBCN}`,
+      title: `${t('Lista valute')} — ${tBCN} (${tBCS})`,
       description: t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
     }}>
-      <Page heading={`(${tBCS}) ${tBCN}: ${t('Lista valutelor negociate la bănci').toLowerCase()}`}>
+      <Page heading={`(${tBCS}) ${tBCN}: ${t('Lista valute').toLowerCase()}`}>
         {
           allCurrency && (
             <section className="currency-list">

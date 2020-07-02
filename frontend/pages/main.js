@@ -27,11 +27,11 @@ const IndexPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs valutar la bănci')} — ${tBCN}`,
-      description: (
-        `${t('✅ Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}. 
-        ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.`
-      ),
+      title: `${t('Curs valutar')} — ${tBCN} (${tBCS})`,
+      description: (`
+        ${tBCN} ✅ ${tBCS} 
+        — ${t('Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}.
+      `),
     }}>
       <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar la bănci').toLowerCase()}`}>
         <section style={{ marginBottom: '3rem' }}>
@@ -46,7 +46,7 @@ const IndexPageMarkup = (props) => {
         <h2
           style={{
             marginBottom: '1.19rem',
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             lineHeight: '1.3',
             opacity: '0.8',
           }}
@@ -68,7 +68,7 @@ const IndexPageMarkup = (props) => {
               style={{
                 marginBottom: '1.19rem',
                 marginTop: '3rem',
-                fontSize: '1.6rem',
+                fontSize: '1.4rem',
                 lineHeight: '1.3',
                 opacity: '0.8',
               }}

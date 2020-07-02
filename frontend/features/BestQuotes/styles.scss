@@ -2,7 +2,6 @@
 
 .best-quotes {
   @include flex-row;
-  position: relative;
   margin-left: -$xsmall-spacing;
   margin-top: $xsmall-spacing;
   overflow-x: auto;

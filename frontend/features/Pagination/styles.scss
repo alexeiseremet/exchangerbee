@@ -1,9 +1,5 @@
 @import "root";
 
 .pagination {
-  position: relative;
-}
-
-.pagination__items {
-  margin-top: 20px;
+  margin-top: $base-spacing;
 }

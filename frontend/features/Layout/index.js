@@ -1,5 +1,6 @@
 import './styles.scss';
 import React from 'react';
+import { getTranslatedConfig } from '../../server.config';
 import { withTranslation } from '../../lib/i18n';
 
 import Metadata from '../Metadata';
@@ -13,6 +14,7 @@ const Layout = (props) => {
   const {
     t, children, metadata, type,
   } = props;
+  const { siteName, countries } = getTranslatedConfig(t);
 
   return (
     <>
@@ -25,10 +27,18 @@ const Layout = (props) => {
         <Content>{children}</Content>
         <Footer>
           <div className="flex flex--wrap" style={{ margin: '2rem 0', fontSize: '1.2rem' }}>
-            <p className="flex__item-grow">
+            <div className="flex__item-grow">
+              {countries.map((country, index) => (
+                <div style={{ display: 'inline' }} key={index}>
+                  {!!index && (' / ')}
+                  <a href={`//${country.slug}.${siteName}`}>{country.name}</a>
+                </div>
+              ))}
+            </div>
+
+            <div>
               <a href="/ro">română</a>{' / '}<a href="/ru">русский</a>
-            </p>
-            <p>{`© 2020 exchangerbee.com ${t('Toate drepturile rezervate')}.`}</p>
+            </div>
           </div>
         </Footer>
       </div>

@@ -12,9 +12,7 @@ export default ({ hasMore, loadMore }) => {
   return (
     <VisibilitySensor onChange={onChange} intervalDelay={1000}>
       <div className="pagination">
-        <div className="pagination__items">
-          <Loading />
-        </div>
+        <Loading />
       </div>
     </VisibilitySensor>
   );

@@ -24,8 +24,11 @@ const ConverterPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Convertor valutar')} ${tCBS} — ${tBCN}`,
-      description: `${t('✅ Convertorul valutar după cursul de schimb anunțat de {{tCBN}} pentru astăzi', { tCBN })}.`,
+      title: `${t('Convertor valutar')} ${tCBS} — ${tBCN} (${tBCS})`,
+      description: (`
+        ${tCBS} ✅ ${tBCN}
+        ${t('Convertorul valutar după cursul de schimb anunțat de {{tCBN}} pentru astăzi', { tCBN })}.
+      `),
     }}>
       <Page heading={`(${tBCS}) ${tBCN}: ${t('Convertor valutar').toLowerCase()} ${tCBS}`}>
         <div className="page-lead">

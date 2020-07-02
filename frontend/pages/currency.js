@@ -32,9 +32,8 @@ const CurrencyPageMarkup = (props) => {
   } = getTranslatedConfig(t);
   const tCBS = centralBank.slug;
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
-  const [tBCyS, tBCyN] = [
+  const [tBCyS] = [
     String(baseCurrency.slug).toUpperCase(),
-    String(baseCurrency.name).toLowerCase(),
   ];
   const [tCS, tCN] = [String(currency.slug).toUpperCase(), String(currency.name).toLowerCase()];
   const allQuoteValid = allQuote && allQuote.length;
@@ -53,14 +52,17 @@ const CurrencyPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `(${tBCS}) ${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN}`,
-      description: `
-        ${t('✅ Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
-        ${t('Convertor valutar după cursul {{tCBS}} valabil astăzi', { tCBS })}.
-      `,
+      title: `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
+      description: (`
+        ${tBCN} ✅ ${tCS} 
+        — ${t('Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
+      `),
     }}>
       <Page
         heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
+        breadcrumb={[
+          { href: '/currencies', label: t('Lista valute') },
+        ]}
       >
         {
           centralQuote && (
@@ -82,7 +84,7 @@ const CurrencyPageMarkup = (props) => {
         <h2
           style={{
             marginBottom: '1.19rem',
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             lineHeight: '1.3',
             opacity: '0.8',
           }}
@@ -106,7 +108,7 @@ const CurrencyPageMarkup = (props) => {
           <h2
             style={{
               marginBottom: '1.19rem',
-              fontSize: '1.6rem',
+              fontSize: '1.4rem',
               lineHeight: '1.3',
               opacity: '0.8',
             }}
@@ -161,7 +163,7 @@ const CurrencyPageMarkup = (props) => {
           <h2
             style={{
               marginBottom: '1.19rem',
-              fontSize: '1.6rem',
+              fontSize: '1.4rem',
               lineHeight: '1.3',
               opacity: '0.8',
             }}

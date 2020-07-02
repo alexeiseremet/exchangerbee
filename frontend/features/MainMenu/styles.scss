@@ -11,14 +11,15 @@
 .main-memu__link {
   @extend %link-with-bg;
   border-bottom: .1rem solid rgba($gray, .65);
-  padding: .4rem;
+  padding: .2rem;
   display: inline-block;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.4;
   text-transform: uppercase;
 
   @include mappy-bp(medium) {
     font-size: $base-font-size;
+    padding: .4rem;
     text-transform: none;
   }
 }

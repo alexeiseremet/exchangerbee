@@ -1,22 +1,22 @@
 import './styles.scss';
 import React from 'react';
 
-export default ({ type, children }) => {
+export default ({ type, children, ...restProps }) => {
   switch (type) {
     case 'dl':
       return (
-        <dl>{children}</dl>
+        <dl {...restProps}>{children}</dl>
       );
 
     case 'ordered':
       return (
-        <ol className="ordered-list">{children}</ol>
+        <ol className="ordered-list" {...restProps}>{children}</ol>
       );
 
     case 'unordered':
     default:
       return (
-        <ul className="unordered-list">{children}</ul>
+        <ul className="unordered-list" {...restProps}>{children}</ul>
       );
   }
 };

@@ -1,10 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
+import Breadcrumb from '../Breadcrumb';
 
-const Page = ({
-  children, heading,
-}) => {
+const Page = ({ children, heading, breadcrumb }) => {
   const classes = classnames(
     'page',
   );
@@ -13,20 +12,26 @@ const Page = ({
     <div className={classes}>
       <div className="page__inner">
         {
-          <section className="page__top">
-            {
-              heading && (
-                <div className="page-heading">
-                  <h1 dangerouslySetInnerHTML={{ __html: heading }} />
-                </div>
-              )
-            }
-          </section>
+          breadcrumb && (
+            <div className="page__breadcrumb">
+              <Breadcrumb items={breadcrumb}/>
+            </div>
+          )
         }
 
-        <section className="page__content">
+        <div className="page__top">
+          {
+            heading && (
+              <div className="page-heading">
+                <h1 dangerouslySetInnerHTML={{ __html: heading }}/>
+              </div>
+            )
+          }
+        </div>
+
+        <div className="page__content">
           {children}
-        </section>
+        </div>
       </div>
     </div>
   );

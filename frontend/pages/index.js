@@ -1,13 +1,14 @@
-import React from 'react';
 import config from '../server.config';
 
 import LocalMainPage from './main';
 import GlobalMainPage from './global/main';
 
-let DynamicMainPage = LocalMainPage;
+let dynamicMainPage = LocalMainPage;
 
 if (config.baseCountry.slug === 'eu') {
-  DynamicMainPage = GlobalMainPage;
+  dynamicMainPage = GlobalMainPage;
 }
 
-export default DynamicMainPage;
+const Page = dynamicMainPage;
+
+export default Page;

@@ -23,7 +23,7 @@ const CustomizedXAxisTick = ({
   lastXAxisMonth = month;
 
   const DD = dayjs(payload.value, lng).format('DD');
-  const MM = dayjs(payload.value, lng).format('MMM');
+  const MM = dayjs(payload.value, lng).format('MMMM');
 
   return (
     <g transform={`translate(${x},${y})`} style={{ textTransform: 'uppercase', fontSize: '9px' }}>
@@ -71,7 +71,7 @@ const Chart = ({
   const sliceFrom = woFirstDayChart.length > count ? woFirstDayChart.length - (count + 1) : 0;
   const severalDays = woFirstDayChart.slice(sliceFrom);
   const woFirstDaySeveralDays = severalDays.slice(1);
-  const formatDate = (value) => dayjs(value, lng).format('DD MMM');
+  const formatDate = (value) => dayjs(value, lng).format('DD MMMM');
 
   return (
     <div className="chart">

@@ -1,12 +1,13 @@
 const NextI18Next = require('next-i18next').default;
 const { locale } = require('../server.config');
+
 const localeSubpaths = {
   en: 'en',
   ro: 'ro',
   ru: 'ru',
   uk: 'uk',
 };
-const otherLanguages = Object.keys(localeSubpaths).filter(key => key !== locale);
+const otherLanguages = Object.keys(localeSubpaths).filter((key) => key !== locale);
 
 module.exports = new NextI18Next({
   defaultLanguage: locale,

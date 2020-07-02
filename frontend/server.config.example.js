@@ -9,10 +9,11 @@ const getTranslatedConfig = (t = tFun) => ({
   siteGads: false,
   siteGdpr: false,
   siteMenu: [
+    { url: '/', label: t('Curs valutar') },
     { url: '/converter', label: t('Convertor valutar') },
-    { url: '/banks', label: t('Cursul la bănci') },
+    { url: '/banks', label: t('Lista bănci') },
     { url: '/currencies', label: t('Lista valute') },
-    { url: '/countries', label: t('Lista ţărilor') },
+    { url: '/countries', label: t('Lista ţări') },
   ],
   adminMenu: [
     { url: '/admin/banks', label: t('Banks') },

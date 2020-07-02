@@ -9,7 +9,7 @@ import iconClose from '../../assets/images/logo.svg?sprite';
 const MainMenu = (props) => {
   const { type, t } = props;
   const {
-    siteName, siteMenu, adminMenu, baseCountry,
+    siteMenu, adminMenu, baseCountry,
   } = getTranslatedConfig(t);
   const items = type === 'admin' ? adminMenu : siteMenu;
 
@@ -21,7 +21,7 @@ const MainMenu = (props) => {
             <a className="brand">
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">
-                {`((${baseCountry.slug}) ${baseCountry.name}: ${t('Curs valutar').toLowerCase()}`}
+                {`(${t('Curs valutar').toLowerCase()} ${baseCountry.name} (${baseCountry.slug})`}
               </span>
             </a>
           </Link>
