@@ -4,7 +4,7 @@
 // dotenv.config();
 
 const express = require('express');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const nextjs = require('next');
 const fetch = require('isomorphic-unfetch');
 const jsdom = require('jsdom');
@@ -36,7 +36,7 @@ const { JSDOM } = jsdom;
   const server = express();
 
   // Setup API proxy.
-  const appProxy = proxy({
+  const appProxy = createProxyMiddleware({
     target: API_HOST,
     cookiePathRewrite: apiPath,
     changeOrigin: true,
