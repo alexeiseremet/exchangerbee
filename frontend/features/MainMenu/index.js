@@ -21,7 +21,7 @@ const MainMenu = (props) => {
             <a className="brand">
               <Svg glyph={iconClose.id} />
               <span className="brand__slag">
-                {`(${t('Curs valutar').toLowerCase()} ${baseCountry.name} (${baseCountry.slug})`}
+                {`${t('Curs valutar')} ${baseCountry.name} (${baseCountry.slug})`}
               </span>
             </a>
           </Link>

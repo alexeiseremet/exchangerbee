@@ -9,10 +9,9 @@ const nextConfig = withOffline({
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
-        handler: 'StaleWhileRevalidate',
+        handler: 'NetworkOnly',
       },
     ],
-    offlineGoogleAnalytics: true,
   },
   useFileSystemPublicRoutes: false,
   trailingSlash: false,
