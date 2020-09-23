@@ -64,7 +64,7 @@
 
 %separator--right {
   &::after {
-    content: '\2022';
+    content: '\2014';
     float: right;
     margin-left: $small-spacing;
   }

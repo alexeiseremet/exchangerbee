@@ -6,11 +6,17 @@ const Item = ({ data }) => (
     <li className="breadcrumb__item" itemProp="itemListElement"
         itemScope itemType="http://schema.org/ListItem"
     >
-      <Link href={data.href}>
-        <a className="breadcrumb__link" itemProp="item">
-          <span itemProp="name">{data.label}</span>
-        </a>
-      </Link>
+      {
+        data.href ? (
+          <Link href={data.href}>
+            <a className="breadcrumb__link" itemProp="item">
+              <span itemProp="name">{data.label}</span>
+            </a>
+          </Link>
+        ) : (
+          <span itemProp="name" className="breadcrumb__text">{data.label}</span>
+        )
+      }
 
       <meta itemProp="position" content={data.order}/>
     </li>

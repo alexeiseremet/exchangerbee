@@ -26,7 +26,7 @@ export default ({
     <Head>
       <title>{title}</title>
       <link rel="canonical" href={newUrl} />
-      {description && <meta name="description" content={`${baseCountry.flag} ${description}`} />}
+      {description && <meta name="description" content={description} />}
       {keywords && <meta name="keywords" content={keywords} />}
       {noindex && <meta name="robots" content="noindex, nofollow" />}
 

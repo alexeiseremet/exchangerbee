@@ -2,6 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
+import fetch from 'isomorphic-unfetch';
 
 import { host, countries } from '../../server.config';
 import { i18n, withTranslation } from '../../lib/i18n';

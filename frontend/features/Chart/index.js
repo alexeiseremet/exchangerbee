@@ -71,7 +71,7 @@ const Chart = ({
   const sliceFrom = woFirstDayChart.length > count ? woFirstDayChart.length - (count + 1) : 0;
   const severalDays = woFirstDayChart.slice(sliceFrom);
   const woFirstDaySeveralDays = severalDays.slice(1);
-  const formatDate = (value) => dayjs(value, lng).format('DD MMMM');
+  const formatDate = (value) => dayjs(value, lng).format('DD MMM');
 
   return (
     <div className="chart">

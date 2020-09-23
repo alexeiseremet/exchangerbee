@@ -71,7 +71,7 @@ const { JSDOM } = jsdom;
         const widgets = {};
 
         const promises = countries.map(({ slug }) => (
-          fetch(`//${slug}.exchangerbee.com/${lng}/widgets`)
+          fetch(`https://${slug}.exchangerbee.com/${lng}/widgets`)
             .then((doc) => doc.text())
             .then(async (html) => {
               const dom = new JSDOM(html);
