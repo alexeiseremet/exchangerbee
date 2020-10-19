@@ -30,14 +30,16 @@ const BankPageMarkup = (props) => {
       url: `${fullPath}`,
       title: `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
       description: (`
-        ${tBCN} ✅ ${tIN} ${tIS}
-        — ${t('Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.
+        #${t('curs')} #${tIS} #${t('cursvalutar')} #${tIN} 
+        ✅ ${t('Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.
       `),
     }}>
       <Page
         heading={`(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}
         breadcrumb={[
+          { href: '/', label: t('Curs valutar') },
           { href: '/banks', label: t('Lista bănci') },
+          { href: null, label: `${tIN} (${tIS})` },
         ]}
       >
         <section>
@@ -127,11 +129,21 @@ const GQL_BANK_PAGE = gql`
     institution(slug: $slug) {
       slug
       name
+      tVO: translationVObj {
+        fields {
+          name
+        }
+      }
     }
     allQuote (where: $where) {
       currencyVObj {
         name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       amount
       bid

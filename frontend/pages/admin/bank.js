@@ -9,6 +9,7 @@ import securePage from '../../lib/securePage';
 import Layout from '../../features/Layout';
 import Page from '../../features/Page';
 import { UpdateInstitution, DeleteInstitution } from '../../features/Institution';
+import { UpdateTranslation } from '../../features/Translation';
 
 const AdminBankPageMarkup = ({ institution }) => {
   if (!institution) {
@@ -21,6 +22,19 @@ const AdminBankPageMarkup = ({ institution }) => {
         <DeleteInstitution institution={institution}/>
         <hr/>
         <UpdateInstitution institution={institution}/>
+        <hr/>
+        <UpdateTranslation translation={{
+          locale: 'ru',
+          fields: {
+            name: '',
+          },
+          model: {
+            refId: institution.id,
+            refSlug: institution.slug,
+            refType: 'institution',
+          },
+          ...institution.translationVObj,
+        }}/>
       </Page>
     </Layout>
   );
@@ -41,6 +55,18 @@ const GQL_BANK_PAGE = gql`
       id
       slug
       name
+      translationVObj {
+        id
+        locale
+        model {
+          refId
+          refSlug
+          refType
+        }
+        fields {
+          name
+        }
+      }
     }
   }
 `;

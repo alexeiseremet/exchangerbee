@@ -17,7 +17,9 @@ export default (
     initialValues={initialValues}
     onSubmit={onSubmit}
     validationSchema={validationSchema}
-    render={(props) => {
+    noValidate
+  >
+    {(props) => {
       const classes = classnames(
         'form',
       );
@@ -38,6 +40,5 @@ export default (
         </FormikForm>
       );
     }}
-    noValidate
-  />
+  </Formik>
 );

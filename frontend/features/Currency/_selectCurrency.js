@@ -25,7 +25,6 @@ const SelectCurrency = ({
   />
 );
 
-
 // Container.
 const GQL_ALL_CURRENCY = gql`
   query AllCurrency {

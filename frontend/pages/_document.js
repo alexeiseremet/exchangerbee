@@ -35,7 +35,7 @@ export default class XezoomDocument extends Document {
           {
             siteGtagId && (
               <>
-                <script src={`https://www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
+                <script src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
                         async
                 />
                 <script dangerouslySetInnerHTML={{
@@ -53,10 +53,10 @@ export default class XezoomDocument extends Document {
           {
             siteGdpr && (
               <>
-                <script src="https://config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
+                <script src="//config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
                         crossOrigin="true"
                 />
-                <script src="https://consent-manager.metomic.io/embed.js" crossOrigin="true" />
+                <script src="//consent-manager.metomic.io/embed.js" crossOrigin="true" />
               </>
             )
           }
@@ -64,7 +64,7 @@ export default class XezoomDocument extends Document {
           {
             siteGads && (
               <script data-ad-client="ca-pub-7297847103287274" async
-                      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+                      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
               />
             )
           }

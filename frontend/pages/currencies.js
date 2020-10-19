@@ -21,7 +21,13 @@ const CurrenciesPageMarkup = (props) => {
       title: `${t('Lista valute')} — ${tBCN} (${tBCS})`,
       description: t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
     }}>
-      <Page heading={`(${tBCS}) ${tBCN}: ${t('Lista valute').toLowerCase()}`}>
+      <Page
+        heading={`(${tBCS}) ${tBCN}: ${t('Lista valute').toLowerCase()}`}
+        breadcrumb={[
+          { href: '/', label: t('Curs valutar') },
+          { href: null, label: t('Lista valute') },
+        ]}
+      >
         {
           allCurrency && (
             <section className="currency-list">

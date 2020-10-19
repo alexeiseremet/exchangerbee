@@ -1,7 +1,7 @@
 const dayjsMod = require('dayjs');
 const dayjsPluginUTC = require('dayjs/plugin/utc');
 const enLocale = require('dayjs/locale/en');
-const roLocale =  require('dayjs/locale/ro');
+const roLocale = require('dayjs/locale/ro');
 const ruLocale = require('dayjs/locale/ru');
 const ukLocale = require('dayjs/locale/uk');
 const { locale, utcOffset } = require('../server.config');

@@ -1,8 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import {
-  host, locale, siteName, baseCountry,
-} from '../../server.config';
+import { host, locale, siteName } from '../../server.config';
 
 /**
  * Component to render Metadata.

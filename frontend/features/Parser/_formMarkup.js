@@ -1,7 +1,6 @@
 import React from 'react';
 import { FieldArray } from 'formik';
 
-import { textAdminPage as t } from '../../lib/locale';
 import { SelectInstitution } from '../Institution';
 import { SelectCurrency } from '../Currency';
 import Form from '../Form';
@@ -30,7 +29,7 @@ const FormMarkup = ({
   <>
     <div className="text">
       <h1>
-        {t.parser}
+        {'Parser'}
         {' '}
         {action}
       </h1>

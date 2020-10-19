@@ -9,6 +9,7 @@ import securePage from '../../lib/securePage';
 import Layout from '../../features/Layout';
 import Page from '../../features/Page';
 import { UpdateCurrency, DeleteCurrency } from '../../features/Currency';
+import { UpdateTranslation } from '../../features/Translation';
 
 const AdminCurrencyPageMarkup = ({ currency }) => {
   if (!currency) {
@@ -21,6 +22,20 @@ const AdminCurrencyPageMarkup = ({ currency }) => {
         <DeleteCurrency currency={currency}/>
         <hr/>
         <UpdateCurrency currency={currency}/>
+        <hr/>
+        <UpdateTranslation translation={{
+          locale: 'ru',
+          fields: {
+            name: '',
+            symbol: currency.symbol,
+          },
+          model: {
+            refId: currency.id,
+            refSlug: currency.slug,
+            refType: 'currency',
+          },
+          ...currency.translationVObj,
+        }}/>
       </Page>
     </Layout>
   );
@@ -44,6 +59,19 @@ const GQL_CURRENCY_PAGE = gql`
       numCode
       symbol
       image
+      translationVObj {
+        id
+        locale
+        model {
+          refId
+          refSlug
+          refType
+        }
+        fields {
+          name
+          symbol
+        }
+      }
     }
   }
 `;

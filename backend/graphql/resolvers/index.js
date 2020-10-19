@@ -6,6 +6,7 @@ const ParserResolver = require('./_parser.resolver');
 const QuoteResolver = require('./_quote.resolver');
 const PostResolver = require('./_post.resolver');
 const UserResolver = require('./_user.resolver');
+const TranslationResolver = require('./_translation.resolver');
 
 const resolvers = [
   CurrencyResolver,
@@ -14,6 +15,7 @@ const resolvers = [
   QuoteResolver,
   PostResolver,
   UserResolver,
+  TranslationResolver,
 ];
 
 module.exports = mergeResolvers(resolvers);

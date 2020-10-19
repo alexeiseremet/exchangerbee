@@ -30,4 +30,11 @@ const institutionSchema = new Schema({
   },
 });
 
+institutionSchema.virtual('translationVObj', {
+  ref: 'Translation',
+  localField: '_id',
+  foreignField: 'model.refId',
+  justOne: true,
+});
+
 module.exports = model('Institution', institutionSchema);

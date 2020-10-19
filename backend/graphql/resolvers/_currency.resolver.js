@@ -2,9 +2,12 @@ const { Currency } = require('../../models');
 
 module.exports = {
   Query: {
-    currency(_, args) {
+    currency(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Currency.findOne(args)
+        Currency.findOne({ $or: [{ _id: id }, args] })
+          .populate({
+            path: 'translationVObj',
+          })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
@@ -13,6 +16,9 @@ module.exports = {
     allCurrency(_, args) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
+          .populate({
+            path: 'translationVObj',
+          })
           .sort({ id: 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);

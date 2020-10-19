@@ -70,5 +70,4 @@ quoteSchema.virtual('institutionVObj', {
   justOne: true,
 });
 
-
 module.exports = model('Quote', quoteSchema);

@@ -6,13 +6,14 @@ module.exports = `
     numCode: String!
     symbol: String
     image: String
+    translationVObj: Translation
   }
   
   type Query {
     currency(slug: String!): Currency
     allCurrency(
       where: CurrencyWhereInput
-      orderBy: CurrencyOrderByInput
+      orderBy: CurrencyOrderByEnum
       skip: Int
       after: String
       before: String
@@ -41,7 +42,7 @@ module.exports = `
     slug: String
   }
   
-  enum CurrencyOrderByInput {
+  enum CurrencyOrderByEnum {
     id_ASC
     id_DESC
     slug_ASC

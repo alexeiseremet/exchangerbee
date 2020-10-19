@@ -5,14 +5,14 @@ module.exports = {
   Query: {
     quote(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Quote.findOne({ _id: id, ...args })
+        Quote.findOne({ $or: [{ _id: id }, args] })
           .populate({
             path: 'institutionVObj',
-            select: 'name slug',
+            select: 'name slug translationVObj',
           })
           .populate({
             path: 'currencyVObj',
-            select: 'name slug',
+            select: 'name slug translationVObj',
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
@@ -21,7 +21,7 @@ module.exports = {
     },
     allQuote(_, { where, orderBy, limit = 100 }) {
       let flattenWhere = flattenObject(where);
-      let optsOrderBy = {};
+      const optsOrderBy = {};
 
       if (where && where.date) {
         flattenWhere = {
@@ -37,18 +37,18 @@ module.exports = {
         orderBy.forEach((key) => {
           const keyValue = key.split('_');
           optsOrderBy[`${keyValue[0]}`] = keyValue[1];
-        })
+        });
       }
 
       return new Promise((resolve, reject) => {
         Quote.find(flattenWhere)
           .populate({
             path: 'institutionVObj',
-            select: 'name slug',
+            select: 'name slug translationVObj',
           })
           .populate({
             path: 'currencyVObj',
-            select: 'name slug',
+            select: 'name slug translationVObj',
           })
           .sort({
             'date': 'DESC',
@@ -104,14 +104,14 @@ module.exports = {
               const ids = res.map((item) => item.quote);
               const quotes = (
                 await Quote.find({ _id: { $in: ids } })
-                .populate({
-                  path: 'institutionVObj',
-                  select: 'name slug',
-                })
-                .populate({
-                  path: 'currencyVObj',
-                  select: 'name slug numCode',
-                })
+                  .populate({
+                    path: 'institutionVObj',
+                    select: 'name slug translationVObj',
+                  })
+                  .populate({
+                    path: 'currencyVObj',
+                    select: 'name slug numCode translationVObj',
+                  })
               );
 
               resolve(quotes);
@@ -159,40 +159,40 @@ module.exports = {
             },
           },
         ])
-        .exec(async (err, res) => {
-          if (err) {
-            reject(err);
-            return undefined;
-          }
+          .exec(async (err, res) => {
+            if (err) {
+              reject(err);
+              return undefined;
+            }
 
-          try {
-            const quotes = res.map(async (group) => {
-              const groupQuotes = (
-                await Quote.find({ _id: { $in: group.quote} })
-                .populate({
-                  path: 'institutionVObj',
-                  select: 'name slug',
-                })
-                .populate({
-                  path: 'currencyVObj',
-                  select: 'name slug numCode',
-                })
-              );
+            try {
+              const quotes = res.map(async (group) => {
+                const groupQuotes = (
+                  await Quote.find({ _id: { $in: group.quote } })
+                    .populate({
+                      path: 'institutionVObj',
+                      select: 'name slug translationVObj',
+                    })
+                    .populate({
+                      path: 'currencyVObj',
+                      select: 'name slug numCode translationVObj',
+                    })
+                );
 
-              return {
-                slug: group._id,
-                quote: groupQuotes,
-              }
-            });
+                return {
+                  slug: group._id,
+                  quote: groupQuotes,
+                };
+              });
 
-            resolve(quotes);
-          } catch (error) {
+              resolve(quotes);
+            } catch (error) {
             // eslint-disable-next-line no-console
-            console.error(error);
-          }
+              console.error(error);
+            }
 
-          return undefined;
-        });
+            return undefined;
+          });
       });
     },
   },

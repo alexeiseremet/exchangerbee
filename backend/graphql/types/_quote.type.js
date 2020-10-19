@@ -4,13 +4,13 @@ module.exports = `
     institution: QuoteRef!
     institutionVObj: Institution
     currency: QuoteRef!
-    currencyVObj: Currency
     date: String!
     amount: String!
     bid: String!
     ask: String!
     period: QuotePeriodEnum!
     error: QuoteErrorEnum!
+    currencyVObj: Currency
   }
   
   type QuoteRef {
@@ -19,7 +19,7 @@ module.exports = `
   }
   
   type Query {
-    quote(id: ID): Quote
+    quote(id: ID!): Quote
     allQuote(
       where: QuoteWhereInput
       orderBy: [QuoteOrderByEnum]

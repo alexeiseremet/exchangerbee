@@ -101,7 +101,7 @@ server.use(
   '/crawler-old',
   async (req, res, next) => {
     try {
-      const {url, xpath} = req.query;
+      const { url, xpath } = req.query;
       const data = await crawlerOld(url, xpath);
       res.json(data);
     } catch (error) {

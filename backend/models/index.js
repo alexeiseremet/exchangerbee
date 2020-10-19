@@ -3,6 +3,7 @@ const Institution = require('./_institution.model');
 const Parser = require('./_parser.model');
 const Quote = require('./_quote.model');
 const Post = require('./_post.model');
+const Translation = require('./_translation.model');
 
 module.exports = {
   Currency,
@@ -10,4 +11,5 @@ module.exports = {
   Parser,
   Quote,
   Post,
+  Translation,
 };

@@ -2,9 +2,12 @@ const { Institution } = require('../../models');
 
 module.exports = {
   Query: {
-    institution(_, args) {
+    institution(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Institution.findOne(args)
+        Institution.findOne({ $or: [{ _id: id }, args] })
+          .populate({
+            path: 'translationVObj',
+          })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
@@ -13,6 +16,9 @@ module.exports = {
     allInstitution(_, args) {
       return new Promise((resolve, reject) => {
         Institution.find(args)
+          .populate({
+            path: 'translationVObj',
+          })
           .sort({ id: 'asc' })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);

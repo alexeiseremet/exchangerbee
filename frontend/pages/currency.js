@@ -54,14 +54,16 @@ const CurrencyPageMarkup = (props) => {
       url: `${fullPath}`,
       title: `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
       description: (`
-        ${tBCN} ✅ ${tCS} 
-        — ${t('Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
+        #${t('curs')} #${tCS} #${t('cursvalutar')} #${tCN} 
+        ✅ ${t('Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
       `),
     }}>
       <Page
         heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
         breadcrumb={[
+          { href: '/', label: t('Curs valutar') },
           { href: '/currencies', label: t('Lista valute') },
+          { href: null, label: `${currency.name} (${tCS})` },
         ]}
       >
         {
@@ -102,7 +104,6 @@ const CurrencyPageMarkup = (props) => {
             } }
           />
         </div>
-
 
         <section style={{ marginTop: '3rem' }}>
           <h2

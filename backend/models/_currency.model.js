@@ -31,4 +31,11 @@ const currencySchema = new Schema({
   },
 });
 
+currencySchema.virtual('translationVObj', {
+  ref: 'Translation',
+  localField: '_id',
+  foreignField: 'model.refId',
+  justOne: true,
+});
+
 module.exports = model('Currency', currencySchema);

@@ -9,15 +9,19 @@
 
 .breadcrumb__item {
   @extend %separator--right;
-  color: $silver;
-}
-
-.breadcrumb__link,
-.breadcrumb__text {
   font-size: 1.2rem;
   color: $gray;
 }
 
 .breadcrumb__link {
   @extend %link;
+}
+
+.breadcrumb__text {
+}
+
+@include mappy-bp(max small) {
+  .breadcrumb__item:last-child {
+    @include visually-hidden;
+  }
 }

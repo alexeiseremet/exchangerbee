@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { textAdminPage as t } from '../../lib/locale';
 import Form from '../Form';
 import Input from '../Input';
 
@@ -14,7 +13,7 @@ const FormMarkup = (
   <>
     <div className="text">
       <h1>
-        {t.currency}
+        {'Currency'}
         {' '}
         {action}
       </h1>

@@ -21,7 +21,13 @@ const BanksPageMarkup = (props) => {
       title: `${t('Lista bănci')} — ${tBCN} (${tBCS})`,
       description: `${t('✅ Cursul valutar afişat la băncile din {{tBCN}} pentru azi', { tBCN })}.`,
     }}>
-      <Page heading={`(${tBCS}) ${tBCN}: ${t('Lista bănci').toLowerCase()}`}>
+      <Page
+        heading={`(${tBCS}) ${tBCN}: ${t('Lista bănci').toLowerCase()}`}
+        breadcrumb={[
+          { href: '/', label: t('Curs valutar') },
+          { href: null, label: t('Lista bănci') },
+        ]}
+      >
         {
           allInstitution && (
             <section className="bank-list">

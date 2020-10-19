@@ -29,8 +29,8 @@ const IndexPageMarkup = (props) => {
       url: `${fullPath}`,
       title: `${t('Curs valutar')} — ${tBCN} (${tBCS})`,
       description: (`
-        ${tBCN} ✅ ${tBCS} 
-        — ${t('Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}.
+        #${t('curs')} #${tBCS} #${t('cursvalutar')} #${tBCN}
+        ✅ ${t('Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}.
       `),
     }}>
       <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar la bănci').toLowerCase()}`}>
@@ -81,7 +81,7 @@ const IndexPageMarkup = (props) => {
                 id: currency.slug,
                 label: `${String(currency.slug).toUpperCase()}/${String(baseCurrency.slug).toUpperCase()}`,
                 content: (
-                  <Chart data={currency.quote} id={currency.slug} count={12} lng={lng} />
+                  <Chart data={currency.quote} id={currency.slug} count={6} lng={lng} />
                 ),
               }))}
             />

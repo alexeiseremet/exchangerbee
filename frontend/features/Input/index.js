@@ -13,17 +13,21 @@ export default (
     type = 'text',
     component = 'input',
     name = null,
-    autocomplete = 'off',
+    autocomplete = null,
     labelText,
     id,
   },
 ) => {
   const valueByName = _get(values, name);
+  const checked = type !== 'text' && (
+    (value !== '' && valueByName === value) || (valueByName === true)
+  );
+
   const classes = classnames(
     'input',
     {
       [`input--${type}`]: type,
-      'input--checked': (value !== '' && valueByName === value) || (valueByName === true),
+      'input--checked': checked,
       'input--required': required,
     },
   );
@@ -45,7 +49,7 @@ export default (
           readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
-          checked={valueByName === true || valueByName === value}
+          checked={checked}
           type={type}
           component={component}
           value={value || valueByName}

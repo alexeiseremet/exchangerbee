@@ -1,5 +1,3 @@
-import { textModal as t } from '../../lib/locale';
-
 export const modalContent = {
   AUTH: 'AUTH',
   SEND: 'SEND',
@@ -33,7 +31,7 @@ export const showModal = (name) => {
       return {
         type: types.SHOW_MODAL,
         payload: {
-          title: t.authTitle,
+          title: 'Auth',
           content: 'LoginForm',
         },
       };

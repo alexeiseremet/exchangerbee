@@ -11,7 +11,7 @@ module.exports = `
     post(id: ID, slug: String): Post
     allPost(
       where: PostWhereInput
-      orderBy: PostOrderByInput
+      orderBy: PostOrderByEnum
       skip: Int
       after: String
       before: String
@@ -39,7 +39,7 @@ module.exports = `
     slug: String
   }
   
-  enum PostOrderByInput {
+  enum PostOrderByEnum {
     id_ASC
     id_DESC
     slug_ASC

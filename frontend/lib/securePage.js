@@ -2,7 +2,6 @@ import React from 'react';
 import { isUserLogged } from './session';
 import redirect from './redirect';
 
-
 /**
  * Higher Order Component that used to protect routes (pages). That'll check
  * if the user is logged in before proceeding. And if the user is not logged in,

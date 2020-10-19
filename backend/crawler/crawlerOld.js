@@ -23,7 +23,7 @@ const runCrawlerOld = async (url, xPath) => {
         content: null,
       },
       time: '0s',
-    }
+    },
   };
 
   const browser = await puppeteer.connect({

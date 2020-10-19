@@ -4,7 +4,7 @@ module.exports = {
   Query: {
     parser(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Parser.findOne({ _id: id, ...args })
+        Parser.findOne({ $or: [{ _id: id }, args] })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });

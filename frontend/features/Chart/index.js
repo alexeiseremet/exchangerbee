@@ -65,7 +65,7 @@ const getDiff = (current, prev) => (
 );
 
 const Chart = ({
-  data, id, count = 24, lng,
+  data, id, count = 6, lng,
 }) => {
   const woFirstDayChart = data.slice(0);
   const sliceFrom = woFirstDayChart.length > count ? woFirstDayChart.length - (count + 1) : 0;

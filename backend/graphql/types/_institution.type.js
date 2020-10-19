@@ -3,16 +3,17 @@ module.exports = `
     id: ID!
     slug: String!
     name: String!
-    category: InstitutionCategory!
+    category: InstitutionCategoryEnum!
     logo: String
     website: String
+    translationVObj: Translation
   }
   
   type Query {
     institution(slug: String!): Institution
     allInstitution(
       where: InstitutionWhereInput
-      orderBy: InstitutionOrderByInput
+      orderBy: InstitutionOrderByEnum
       skip: Int
       after: String
       before: String
@@ -31,21 +32,23 @@ module.exports = `
     id: ID
     slug: String
     name: String
-    category: InstitutionCategory
+    category: InstitutionCategoryEnum
+    logo: String
+    website: String
   }
   
   input InstitutionWhereInput {
     id: ID
     slug: String
-    category: InstitutionCategory
+    category: InstitutionCategoryEnum
   }
   
-  enum InstitutionCategory {
+  enum InstitutionCategoryEnum {
     central
     commercial
   }
   
-  enum InstitutionOrderByInput {
+  enum InstitutionOrderByEnum {
     id_ASC
     id_DESC
     name_ASC
