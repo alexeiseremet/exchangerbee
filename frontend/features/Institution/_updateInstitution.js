@@ -35,7 +35,7 @@ export default _compose(
           mutate({
             variables: {
               id: institution.id,
-              institution: excludeKeys(formValues, ['id', 'slug', '__typename']),
+              institution: excludeKeys(formValues, ['id', 'slug', 'translationVObj', '__typename']),
             },
           })
             .then(({ data: { updateInstitution } }) => {

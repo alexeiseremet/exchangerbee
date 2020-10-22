@@ -35,7 +35,7 @@ export default _compose(
           mutate({
             variables: {
               id: currency.id,
-              currency: excludeKeys(formValues, ['id', 'slug', '__typename']),
+              currency: excludeKeys(formValues, ['id', 'slug', 'translationVObj', '__typename']),
             },
           })
             .then(({ data: { updateCurrency } }) => {
