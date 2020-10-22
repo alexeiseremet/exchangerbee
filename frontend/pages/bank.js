@@ -14,7 +14,7 @@ import QuoteCard from '../features/QuoteCard';
 
 const BankPageMarkup = (props) => {
   const {
-    t, institution, allQuote, post, fullPath,
+    t, post, institution, allQuote, fullPath,
   } = props;
 
   if (!institution) {
@@ -28,18 +28,18 @@ const BankPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
-      description: (`
+      title: post && post.title ? post.title : `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : (`
         #${t('curs')} #${tIS} #${t('cursvalutar')} #${tIN} 
         ✅ ${t('Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.
       `),
     }}>
       <Page
-        heading={`(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
           { href: '/banks', label: t('Lista bănci') },
-          { href: null, label: `${tIN} (${tIS})` },
+          { href: null, label: post && post.heading ? post.heading : `${tIN} (${tIS})` },
         ]}
       >
         <section>
@@ -95,14 +95,16 @@ const BankPageMarkup = (props) => {
         {
           post && post.textFirst && (
             <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
-               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}
+            />
           )
         }
 
         {
           post && post.textSecond && (
-            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
-               dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}
+            />
           )
         }
       </Page>
@@ -151,6 +153,8 @@ const GQL_BANK_PAGE = gql`
     }
     post(slug: $postSlug) {
       title
+      description
+      heading
       textFirst
       textSecond
     }

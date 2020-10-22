@@ -24,17 +24,17 @@ const ConverterPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Convertor valutar')} ${tCBS} — ${tBCN} (${tBCS})`,
-      description: (`
+      title: post && post.title ? post.title : `${t('Convertor valutar')} ${tCBS} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : (`
         ${tCBS} ✅ ${tBCN}
         ${t('Convertorul valutar după cursul de schimb anunțat de {{tCBN}} pentru astăzi', { tCBN })}.
       `),
     }}>
       <Page
-        heading={`(${tBCS}) ${tBCN}: ${t('Convertor valutar').toLowerCase()} ${tCBS}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Convertor valutar').toLowerCase()} ${tCBS}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
-          { href: null, label: t('Convertor valutar') },
+          { href: null, label: post && post.heading ? post.heading : t('Convertor valutar') },
         ]}
       >
         <div className="page-lead">
@@ -98,6 +98,8 @@ const GQL_CONVERTER_PAGE = gql`
     }
     post(slug: $postSlug) {
       title
+      description
+      heading
       textFirst
       textSecond
     }

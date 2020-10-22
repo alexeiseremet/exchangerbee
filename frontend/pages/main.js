@@ -27,13 +27,13 @@ const IndexPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Curs valutar')} — ${tBCN} (${tBCS})`,
-      description: (`
+      title: post && post.title ? post.title : `${t('Curs valutar')} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : (`
         #${t('curs')} #${tBCS} #${t('cursvalutar')} #${tBCN}
         ✅ ${t('Cel mai bun curs valutar oferit de băncile din {{tBCN}} ({{tBCS}})', { tBCN, tBCS })}.
       `),
     }}>
-      <Page heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar la bănci').toLowerCase()}`}>
+      <Page heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Curs valutar la bănci').toLowerCase()}`}>
         <section style={{ marginBottom: '3rem' }}>
           <BestQuotes
             bestAskQuote={bestAskQuote}
@@ -115,7 +115,7 @@ IndexPageMarkup.getInitialProps = async ({ req, asPath }) => {
 
   return {
     lng,
-    fullPath,
+    fullPath: fullPath.replace(/\/$/, ''),
   };
 };
 
@@ -169,6 +169,8 @@ const GQL_INDEX_PAGE = gql`
     }
     post(slug: $postSlug) {
       title
+      description
+      heading
       textFirst
       textSecond
     }

@@ -11,23 +11,32 @@ import Page from '../features/Page';
 import BankCard from '../features/BankCard';
 
 const BanksPageMarkup = (props) => {
-  const { t, allInstitution, fullPath } = props;
+  const { t, post, allInstitution, fullPath } = props;
   const { baseCountry } = getTranslatedConfig(t);
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
 
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Lista bănci')} — ${tBCN} (${tBCS})`,
-      description: `${t('✅ Cursul valutar afişat la băncile din {{tBCN}} pentru azi', { tBCN })}.`,
+      title: post && post.title ? post.title : `${t('Lista bănci')} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : (`
+        ${t('✅ Cursul valutar afişat la băncile din {{tBCN}} pentru azi', { tBCN })}.
+      `),
     }}>
       <Page
-        heading={`(${tBCS}) ${tBCN}: ${t('Lista bănci').toLowerCase()}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Lista bănci').toLowerCase()}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
-          { href: null, label: t('Lista bănci') },
+          { href: null, label: post && post.heading ? post.heading : t('Lista bănci') },
         ]}
       >
+        {
+          post && post.textFirst && (
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
+
         {
           allInstitution && (
             <section className="bank-list">
@@ -37,17 +46,23 @@ const BanksPageMarkup = (props) => {
             </section>
           )
         }
+
+        {
+          post && post.textSecond && (
+            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+          )
+        }
       </Page>
     </Layout>
   );
 };
 
 // getInitialProps.
-BanksPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+BanksPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
 
   return {
-    query,
     fullPath,
   };
 };
@@ -57,10 +72,17 @@ const BanksPageI18N = withTranslation()(BanksPageMarkup);
 
 // Container.
 const GQL_ALL_INSTITUTION = gql`
-  query AllInstitution {
+  query AllInstitution ($postSlug: String!) {
     allInstitution {
       slug
       name
+    }
+    post(slug: $postSlug) {
+      title
+      description
+      heading
+      textFirst
+      textSecond
     }
   }
 `;
@@ -69,8 +91,14 @@ export default _compose(
   graphql(
     GQL_ALL_INSTITUTION,
     {
-      props: ({ data: { allInstitution } }) => ({
+      options: ({ fullPath }) => ({
+        variables: {
+          postSlug: fullPath,
+        },
+      }),
+      props: ({ data: { allInstitution, post } }) => ({
         allInstitution,
+        post,
       }),
     },
   ),

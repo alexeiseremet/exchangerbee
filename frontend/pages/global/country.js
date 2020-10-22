@@ -36,7 +36,7 @@ const CountryPageMarkup = ({
         <div className="page-lead" style={{ marginBottom: '3rem' }}>
           <BestQuotes
             centralQuote={centralQuote}
-            link={`${query.slug}.exchangerbee.com/${i18n.lng}`}
+            link="no-link"
             {... { baseCurrenciesArr }}
           />
         </div>

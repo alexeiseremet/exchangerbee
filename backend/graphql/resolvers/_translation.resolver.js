@@ -1,11 +1,12 @@
 const { Translation } = require('../../models');
 const flattenObject = require('../../lib/flattenObject');
+const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
     translation(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Translation.findOne({ $or: [{ _id: id }, args] })
+        Translation.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });

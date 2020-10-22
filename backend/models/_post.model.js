@@ -15,6 +15,14 @@ const postSchema = new Schema({
     required: true,
     trim: true,
   },
+  description: {
+    type: String,
+    trim: true,
+  },
+  heading: {
+    type: String,
+    trim: true,
+  },
   textFirst: {
     type: String,
     trim: true,

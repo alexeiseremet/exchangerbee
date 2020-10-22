@@ -20,7 +20,7 @@ import Chart from '../features/Chart';
 
 const CurrencyPageMarkup = (props) => {
   const {
-    t, lng, currency, allQuote, archiveQuote, allCentralQuote, post, query, fullPath,
+    t, lng, post, currency, allQuote, archiveQuote, allCentralQuote, query, fullPath,
   } = props;
 
   if (!currency) {
@@ -52,18 +52,18 @@ const CurrencyPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
-      description: (`
+      title: post && post.title ? post.title : `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : (`
         #${t('curs')} #${tCS} #${t('cursvalutar')} #${tCN} 
         ✅ ${t('Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
       `),
     }}>
       <Page
-        heading={`(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
           { href: '/currencies', label: t('Lista valute') },
-          { href: null, label: `${currency.name} (${tCS})` },
+          { href: null, label: post && post.heading ? post.heading : `${currency.name} (${tCS})` },
         ]}
       >
         {
@@ -221,8 +221,8 @@ CurrencyPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
   const fullPath = req ? `/${lng}${asPath}` : asPath;
 
   return {
-    lng,
     query,
+    lng,
     fullPath,
   };
 };
@@ -262,6 +262,8 @@ const GQL_CURRENCY_PAGE = gql`
     }
     post(slug: $postSlug) {
       title
+      description
+      heading
       textFirst
       textSecond
     }

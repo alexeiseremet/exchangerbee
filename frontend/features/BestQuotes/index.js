@@ -6,7 +6,7 @@ import QuoteCard from '../QuoteCard';
 
 const BestQuotes = (props) => {
   const {
-    t, noLink, centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
+    t, link, centralQuote, bestBidQuote, bestAskQuote, baseCurrenciesArr,
   } = props;
 
   return (
@@ -18,7 +18,7 @@ const BestQuotes = (props) => {
             label={slug}
             centralBankItem={0}
             link={
-              noLink
+              link === 'no-link'
                 ? null
                 : {
                   href: `/currency?slug=${slug}`,

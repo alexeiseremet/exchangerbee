@@ -1,11 +1,12 @@
 const { Quote } = require('../../models');
 const flattenObject = require('../../lib/flattenObject');
+const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
     quote(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Quote.findOne({ $or: [{ _id: id }, args] })
+        Quote.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .populate({
             path: 'institutionVObj',
             select: 'name slug translationVObj',

@@ -1,10 +1,11 @@
 const { Currency } = require('../../models');
+const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
     currency(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Currency.findOne({ $or: [{ _id: id }, args] })
+        Currency.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .populate({
             path: 'translationVObj',
           })

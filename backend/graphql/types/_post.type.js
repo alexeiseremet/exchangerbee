@@ -3,6 +3,8 @@ module.exports = `
     id: ID!
     slug: String!
     title: String!
+    description: String
+    heading: String
     textFirst: String
     textSecond: String
   }
@@ -30,6 +32,8 @@ module.exports = `
     id: ID
     slug: String
     title: String
+    description: String
+    heading: String
     textFirst: String
     textSecond: String
   }

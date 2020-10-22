@@ -1,10 +1,11 @@
 const { Post } = require('../../models');
+const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
     post(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Post.findOne({ $or: [{ _id: id }, args] })
+        Post.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });

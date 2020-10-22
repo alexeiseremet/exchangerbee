@@ -21,6 +21,8 @@ const FormMarkup = ({
       initialValues={{
         slug: '',
         title: '',
+        description: '',
+        heading: '',
         textFirst: '',
         textSecond: '',
         ...post,
@@ -41,6 +43,18 @@ const FormMarkup = ({
         component="input"
         labelText="Title"
         required
+      />
+      <Input
+        name="description"
+        id="post-description"
+        component="input"
+        labelText="Description"
+      />
+      <Input
+        name="heading"
+        id="post-heading"
+        component="input"
+        labelText="Heading"
       />
       <Input
         name="textFirst"

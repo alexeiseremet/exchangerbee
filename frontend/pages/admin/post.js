@@ -41,6 +41,8 @@ const GQL_POST = gql`
       id
       slug
       title
+      description
+      heading
       textFirst
       textSecond
     }

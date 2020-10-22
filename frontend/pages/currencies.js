@@ -11,23 +11,30 @@ import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
 
 const CurrenciesPageMarkup = (props) => {
-  const { t, allCurrency, fullPath } = props;
+  const { t, post, allCurrency, fullPath } = props;
   const { baseCountry } = getTranslatedConfig(t);
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
 
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: `${t('Lista valute')} — ${tBCN} (${tBCS})`,
-      description: t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
+      title: post && post.title ? post.title : `${t('Lista valute')} — ${tBCN} (${tBCS})`,
+      description: post && post.description ? post.description : t('✅ Lista valutelor negociate la băncile din {{tBCN}}', { tBCN }),
     }}>
       <Page
-        heading={`(${tBCS}) ${tBCN}: ${t('Lista valute').toLowerCase()}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Lista valute').toLowerCase()}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
-          { href: null, label: t('Lista valute') },
+          { href: null, label: post && post.heading ? post.heading : t('Lista valute') },
         ]}
       >
+        {
+          post && post.textFirst && (
+            <p style={{ marginTop: '3rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textFirst }}/>
+          )
+        }
+
         {
           allCurrency && (
             <section className="currency-list">
@@ -37,17 +44,23 @@ const CurrenciesPageMarkup = (props) => {
             </section>
           )
         }
+
+        {
+          post && post.textSecond && (
+            <p style={{ marginTop: '1rem', fontSize: '1.2rem' }}
+               dangerouslySetInnerHTML={{ __html: post.textSecond }}/>
+          )
+        }
       </Page>
     </Layout>
   );
 };
 
 // getInitialProps.
-CurrenciesPageMarkup.getInitialProps = async ({ query, req, asPath }) => {
+CurrenciesPageMarkup.getInitialProps = async ({ req, asPath }) => {
   const fullPath = req ? `/${req.lng}${asPath}` : asPath;
 
   return {
-    query,
     fullPath,
   };
 };
@@ -57,10 +70,17 @@ const CurrenciesPageI18N = withTranslation()(CurrenciesPageMarkup);
 
 // Container.
 const GQL_ALL_CURRENCY = gql`
-  query AllCurrency {
+  query AllCurrency ($postSlug: String!) {
     allCurrency {
       slug
       name
+    }
+    post(slug: $postSlug) {
+      title
+      description
+      heading
+      textFirst
+      textSecond
     }
   }
 `;
@@ -69,8 +89,14 @@ export default _compose(
   graphql(
     GQL_ALL_CURRENCY,
     {
-      props: ({ data: { allCurrency } }) => ({
+      options: ({ fullPath }) => ({
+        variables: {
+          postSlug: fullPath,
+        },
+      }),
+      props: ({ data: { allCurrency, post } }) => ({
         allCurrency,
+        post,
       }),
     },
   ),

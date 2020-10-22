@@ -1,10 +1,11 @@
 const { Institution } = require('../../models');
+const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
     institution(_, { id, ...args }) {
       return new Promise((resolve, reject) => {
-        Institution.findOne({ $or: [{ _id: id }, args] })
+        Institution.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .populate({
             path: 'translationVObj',
           })

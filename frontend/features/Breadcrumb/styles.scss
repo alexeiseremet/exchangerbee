@@ -2,7 +2,7 @@
 
 .breadcrumb {
   @extend %inline-list;
-  margin-bottom: $xsmall-spacing;
+  margin-bottom: $small-spacing;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
