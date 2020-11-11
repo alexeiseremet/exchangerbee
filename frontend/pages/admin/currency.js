@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { withTranslation } from '../../lib/i18n';
+import { i18n, withTranslation } from '../../lib/i18n';
 import securePage from '../../lib/securePage';
 
 import Layout from '../../features/Layout';
@@ -11,7 +11,7 @@ import Page from '../../features/Page';
 import { UpdateCurrency, DeleteCurrency } from '../../features/Currency';
 import { UpdateTranslation } from '../../features/Translation';
 
-const AdminCurrencyPageMarkup = ({ currency }) => {
+const AdminCurrencyPageMarkup = ({ currency, lng }) => {
   if (!currency) {
     return null;
   }
@@ -24,7 +24,7 @@ const AdminCurrencyPageMarkup = ({ currency }) => {
         <UpdateCurrency currency={currency}/>
         <hr/>
         <UpdateTranslation translation={{
-          locale: 'ru',
+          locale: lng,
           fields: {
             name: '',
             symbol: currency.symbol,
@@ -42,9 +42,14 @@ const AdminCurrencyPageMarkup = ({ currency }) => {
 };
 
 // getInitialProps.
-AdminCurrencyPageMarkup.getInitialProps = async ({ query }) => ({
-  query,
-});
+AdminCurrencyPageMarkup.getInitialProps = async ({ query, req }) => {
+  const lng = req ? req.lng : i18n.language;
+
+  return {
+    query,
+    lng,
+  };
+};
 
 // i18n.
 const AdminCurrencyPageI18N = withTranslation()(AdminCurrencyPageMarkup);

@@ -46,7 +46,8 @@ const ComponentsPageMarkup = () => (
 );
 
 // getInitialProps.
-ComponentsPageMarkup.getInitialProps = async () => ({
+ComponentsPageMarkup.getInitialProps = async ({ query }) => ({
+  query,
 });
 
 // i18n.

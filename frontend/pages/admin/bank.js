@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import _compose from 'lodash/flowRight';
 
-import { withTranslation } from '../../lib/i18n';
+import { i18n, withTranslation } from '../../lib/i18n';
 import securePage from '../../lib/securePage';
 
 import Layout from '../../features/Layout';
@@ -11,7 +11,7 @@ import Page from '../../features/Page';
 import { UpdateInstitution, DeleteInstitution } from '../../features/Institution';
 import { UpdateTranslation } from '../../features/Translation';
 
-const AdminBankPageMarkup = ({ institution }) => {
+const AdminBankPageMarkup = ({ institution, lng }) => {
   if (!institution) {
     return null;
   }
@@ -24,7 +24,7 @@ const AdminBankPageMarkup = ({ institution }) => {
         <UpdateInstitution institution={institution}/>
         <hr/>
         <UpdateTranslation translation={{
-          locale: 'ru',
+          locale: lng,
           fields: {
             name: '',
           },
@@ -41,9 +41,14 @@ const AdminBankPageMarkup = ({ institution }) => {
 };
 
 // getInitialProps.
-AdminBankPageMarkup.getInitialProps = async ({ query }) => ({
-  query,
-});
+AdminBankPageMarkup.getInitialProps = async ({ query, req }) => {
+  const lng = req ? req.lng : i18n.language;
+
+  return {
+    query,
+    lng,
+  };
+};
 
 // i18n.
 const AdminBankPageI18N = withTranslation()(AdminBankPageMarkup);
