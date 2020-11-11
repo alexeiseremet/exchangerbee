@@ -10,7 +10,7 @@ const Today = (props) => {
   }
 
   const getText = (quote) => ({
-    name: quote[1].currencyVObj.name,
+    name: quote[1].currencyVObj.tVO.fields.name,
     bid: quote[1].bid,
     prevBid: quote[0].bid,
     t2: Math.abs(quote[1].bid - quote[0].bid).toFixed(4),

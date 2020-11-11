@@ -1,5 +1,5 @@
-const cookie = require('js-cookie');
-const jwtoken = require('jsonwebtoken');
+const Cookies = require('js-cookie');
+const JWtoken = require('jsonwebtoken');
 
 const AUTH_SECRET = process.env.JWT_SECRET || 'browser';
 const AUTH_COOKIE_NAME = 'xeUserData';
@@ -13,7 +13,7 @@ const AUTH_COOKIE_NAME = 'xeUserData';
  */
 const setCookie = (key, value, day = 1) => {
   if (process.browser) {
-    cookie.set(key, value, {
+    Cookies.set(key, value, {
       expires: day,
       path: '/',
     });
@@ -50,7 +50,7 @@ const getCookieFromServer = (key, req) => {
  * @param {string} key Cookie name.
  */
 const removeCookie = (key) => (
-  process.browser && cookie.remove(key)
+  process.browser && Cookies.remove(key)
 );
 
 /**
@@ -62,7 +62,7 @@ const removeCookie = (key) => (
  */
 const getCookie = (key, req) => (
   process.browser
-    ? cookie.get(key)
+    ? Cookies.get(key)
     : getCookieFromServer(key, req)
 );
 
@@ -76,7 +76,7 @@ const getUserCookie = (req = null) => {
   const userJwt = getCookie(AUTH_COOKIE_NAME, req);
 
   if (userJwt) {
-    return jwtoken.verify(userJwt, AUTH_SECRET);
+    return JWtoken.verify(userJwt, AUTH_SECRET);
   }
 
   return undefined;
@@ -88,7 +88,7 @@ const getUserCookie = (req = null) => {
  * @param {Object} data User data to save.
  */
 const setUserCookie = (data) => {
-  const dataJwt = jwtoken.sign(data, AUTH_SECRET, { expiresIn: '30d' });
+  const dataJwt = JWtoken.sign(data, AUTH_SECRET, { expiresIn: '30d' });
   setCookie(AUTH_COOKIE_NAME, dataJwt, 30);
 };
 
@@ -138,7 +138,7 @@ const isUserLogged = (req) => {
   let isLogged = false;
 
   try {
-    isLogged = !!userJwt && jwtoken.verify(userJwt, AUTH_SECRET);
+    isLogged = !!userJwt && JWtoken.verify(userJwt, AUTH_SECRET);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);

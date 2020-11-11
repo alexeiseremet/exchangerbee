@@ -4,23 +4,31 @@ const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
-    quote(_, { id, ...args }) {
+    quote(_, { id, ...args }, ctx) {
       return new Promise((resolve, reject) => {
         Quote.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .populate({
             path: 'institutionVObj',
             select: 'name slug translationVObj',
+            populate: {
+              path: 'translationVObj',
+              match: { locale: ctx.lng },
+            },
           })
           .populate({
             path: 'currencyVObj',
             select: 'name slug translationVObj',
+            populate: {
+              path: 'translationVObj',
+              match: { locale: ctx.lng },
+            },
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
       });
     },
-    allQuote(_, { where, orderBy, limit = 100 }) {
+    allQuote(_, { where, orderBy, limit = 100 }, ctx) {
       let flattenWhere = flattenObject(where);
       const optsOrderBy = {};
 
@@ -46,10 +54,18 @@ module.exports = {
           .populate({
             path: 'institutionVObj',
             select: 'name slug translationVObj',
+            populate: {
+              path: 'translationVObj',
+              match: { locale: ctx.lng },
+            },
           })
           .populate({
             path: 'currencyVObj',
             select: 'name slug translationVObj',
+            populate: {
+              path: 'translationVObj',
+              match: { locale: ctx.lng },
+            },
           })
           .sort({
             'date': 'DESC',
@@ -62,9 +78,7 @@ module.exports = {
           });
       });
     },
-    bestQuote(_, {
-      date, currencies, excludeBanks, includeBanks, type,
-    }) {
+    bestQuote(_, { date, currencies, excludeBanks, includeBanks, type}, ctx) {
       return new Promise((resolve, reject) => {
         Quote.aggregate([
           {
@@ -108,10 +122,18 @@ module.exports = {
                   .populate({
                     path: 'institutionVObj',
                     select: 'name slug translationVObj',
+                    populate: {
+                      path: 'translationVObj',
+                      match: { locale: ctx.lng },
+                    },
                   })
                   .populate({
                     path: 'currencyVObj',
                     select: 'name slug numCode translationVObj',
+                    populate: {
+                      path: 'translationVObj',
+                      match: { locale: ctx.lng },
+                    },
                   })
               );
 
@@ -125,7 +147,7 @@ module.exports = {
           });
       });
     },
-    archiveQuote(_, { where }) {
+    archiveQuote(_, { where }, ctx) {
       return new Promise((resolve, reject) => {
         Quote.aggregate([
           {
@@ -173,10 +195,18 @@ module.exports = {
                     .populate({
                       path: 'institutionVObj',
                       select: 'name slug translationVObj',
+                      populate: {
+                        path: 'translationVObj',
+                        match: { locale: ctx.lng },
+                      },
                     })
                     .populate({
                       path: 'currencyVObj',
                       select: 'name slug numCode translationVObj',
+                      populate: {
+                        path: 'translationVObj',
+                        match: { locale: ctx.lng },
+                      },
                     })
                 );
 

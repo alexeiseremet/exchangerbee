@@ -61,6 +61,8 @@ server.use((req, res, next) => {
   const apiKey = req.headers['x-api-key'];
   const decodedToken = apiKey === JWT_SECRET_SERVER;
 
+  console.log('=====qwertyuiop====', req.query, req.hostname);
+
   if (!decodedToken) {
     res.status(401).send();
     return undefined;
@@ -76,6 +78,7 @@ server.use(
     schema,
     context: {
       startTime: Date.now(),
+      lng: req.query.lng,
       req,
     },
     graphiql: !IS_PRODUCTION,

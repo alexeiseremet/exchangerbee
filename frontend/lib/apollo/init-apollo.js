@@ -11,7 +11,7 @@ if (!process.browser) {
   global.fetch = fetch;
 }
 
-function create(initialState) {
+function create(initialState, lng) {
   const cache = new InMemoryCache().restore(initialState || {});
 
   cache.writeData({
@@ -23,7 +23,7 @@ function create(initialState) {
     connectToDevTools: process.browser,
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
-      uri: apiBaseUrl, // Server URL (must be absolute)
+      uri: `${apiBaseUrl}/?lng=${lng}`, // Server URL (must be absolute)
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     }),
     cache,
@@ -32,16 +32,16 @@ function create(initialState) {
   });
 }
 
-export default function initApollo(initialState) {
+export default function initApollo(initialState, lng) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
-    return create(initialState);
+    return create(initialState, lng);
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState);
+    apolloClient = create(initialState, lng);
   }
 
   return apolloClient;

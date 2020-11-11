@@ -3,22 +3,24 @@ const excludeEmptyObject = require('../../lib/excludeEmptyObject');
 
 module.exports = {
   Query: {
-    currency(_, { id, ...args }) {
+    currency(_, { id, ...args }, ctx) {
       return new Promise((resolve, reject) => {
         Currency.findOne({ $or: excludeEmptyObject([{ _id: id }, args]) })
           .populate({
             path: 'translationVObj',
+            match: { locale: ctx.lng },
           })
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
       });
     },
-    allCurrency(_, args) {
+    allCurrency(_, args, ctx) {
       return new Promise((resolve, reject) => {
         Currency.find(args)
           .populate({
             path: 'translationVObj',
+            match: { locale: ctx.lng },
           })
           .sort({ id: 'asc' })
           .exec((err, res) => {

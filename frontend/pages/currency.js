@@ -32,10 +32,8 @@ const CurrencyPageMarkup = (props) => {
   } = getTranslatedConfig(t);
   const tCBS = centralBank.slug;
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
-  const [tBCyS] = [
-    String(baseCurrency.slug).toUpperCase(),
-  ];
-  const [tCS, tCN] = [String(currency.slug).toUpperCase(), String(currency.name).toLowerCase()];
+  const [tBCyS] = [baseCurrency.slug];
+  const [tCS, tCN] = [currency.slug, currency.tVO.fields.name];
   const allQuoteValid = allQuote && allQuote.length;
   const allQuoteNoCentral = (
     allQuoteValid
@@ -54,16 +52,16 @@ const CurrencyPageMarkup = (props) => {
       url: `${fullPath}`,
       title: post && post.title ? post.title : `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
       description: post && post.description ? post.description : (`
-        #${t('curs')} #${tCS} #${t('cursvalutar')} #${tCN} 
-        ✅ ${t('Cursul valutar pentru {{tCN}} ({{tCS}}) afişat azi la băncile din {{tBCN}}', { tCN, tCS, tBCN })}.
+        #${t('cursvalutar')} #${tCN} #${t('curs')} #${tCS}/${tBCyS}
+        ✅ ${t('Cursul valutar pentru {{tCN}} afişat azi la băncile din {{tBCN}}', { tCN, tBCN })}.
       `),
     }}>
       <Page
-        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Curs valutar').toLowerCase()} ${tCN}`}
+        heading={post && post.heading ? post.heading : `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
           { href: '/currencies', label: t('Lista valute') },
-          { href: null, label: post && post.heading ? post.heading : `${currency.name} (${tCS})` },
+          { href: null, label: post && post.heading ? post.heading : tCN },
         ]}
       >
         {
@@ -126,7 +124,7 @@ const CurrencyPageMarkup = (props) => {
                     allQuoteNoCentral.map((quote, i) => (
                       <QuoteCard
                         key={i}
-                        label={quote.institutionVObj.name}
+                        label={quote.institutionVObj.tVO.fields.name}
                         link={{
                           href: `/bank?slug=${quote.institutionVObj.slug}`,
                           as: `/banks/${quote.institutionVObj.slug}`,
@@ -235,12 +233,20 @@ const GQL_CURRENCY_PAGE = gql`
   query CurrencyPage ($slug: String!, $where: QuoteWhereInput, $archiveWhere: QuoteArchiveWhereInput, $date: String, $currencies: [String!], $includeBanks: [String!], $postSlug: String) {
     currency(slug: $slug) {
       slug
-      name
+      tVO: translationVObj {
+        fields {
+          name
+        }
+      }
     }
     allQuote(where: $where) {
       institutionVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       bid
       ask
@@ -254,8 +260,12 @@ const GQL_CURRENCY_PAGE = gql`
     }
     allCentralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       currencyVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       bid
       ask

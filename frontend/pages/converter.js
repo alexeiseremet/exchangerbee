@@ -90,8 +90,12 @@ const GQL_CONVERTER_PAGE = gql`
   query ConverterPage ($date: String, $currencies: [String!], $includeBanks: [String!], $postSlug: String!) {
     centralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       currencyVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       bid
       ask

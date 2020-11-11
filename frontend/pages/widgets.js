@@ -46,12 +46,20 @@ const GQL_WIDGET_PAGE = gql`
   query WidgetPage ($date: String, $currencies: [String!], $includeBanks: [String!], $archiveWhere: QuoteArchiveWhereInput) {
     centralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       institutionVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       currencyVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       bid
       ask
@@ -59,7 +67,11 @@ const GQL_WIDGET_PAGE = gql`
     archiveQuote(where: $archiveWhere) {
       quote {
         currencyVObj {
-          name
+          tVO: translationVObj {
+            fields {
+              name
+            }
+          }
         }
         bid
       }

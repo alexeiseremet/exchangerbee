@@ -17,7 +17,7 @@ const CurrencyTop = ({
         <tr>
           <th className="currency-top__label">
             <strong
-              title={currency.name}
+              title={currency.tVO.fields.name}
               style={{
                 fontFamily: 'Georgia, Lucida Bright, serif',
                 fontStyle: 'italic',
@@ -40,7 +40,7 @@ const CurrencyTop = ({
             <RateCard
               key="bid"
               value={bestBid.bid}
-              label={bestBid.institutionVObj.name}
+              label={bestBid.institutionVObj.tVO.fields.name}
               info={t('cumpără')}
             />
           </td>
@@ -48,7 +48,7 @@ const CurrencyTop = ({
             <RateCard
               key="ask"
               value={bestAsk.ask}
-              label={bestAsk.institutionVObj.name}
+              label={bestAsk.institutionVObj.tVO.fields.name}
               info={t('vinde')}
             />
           </td>

@@ -51,7 +51,7 @@ const IndexPageMarkup = (props) => {
             opacity: '0.8',
           }}
           dangerouslySetInnerHTML={{
-            __html: t('Calculator valutar după cursul de schimb {{tCBS}}', { tCBS }),
+            __html: t('Convertor valutar după cursul de schimb {{tCBS}}', { tCBS }),
           }}
         />
 
@@ -127,13 +127,21 @@ const GQL_INDEX_PAGE = gql`
   query IndexPage ($postSlug: String, $date: String, $currencies: [String!], $excludeBanks: [String!], $includeBanks: [String!], $archiveWhere: QuoteArchiveWhereInput) {
     centralQuote: bestQuote(date: $date, currencies: $currencies, includeBanks: $includeBanks) {
       institutionVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       currencyVObj {
-        name
         slug
         numCode
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       amount
       bid
@@ -141,13 +149,21 @@ const GQL_INDEX_PAGE = gql`
     }
     bestBidQuote: bestQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks) {
       institutionVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       currencyVObj {
-        name
         slug
         numCode
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       amount
       bid
@@ -155,13 +171,21 @@ const GQL_INDEX_PAGE = gql`
     }
     bestAskQuote: bestQuote(date: $date, currencies: $currencies, excludeBanks: $excludeBanks, type: "ask") {
       institutionVObj {
-        name
         slug
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       currencyVObj {
-        name
         slug
         numCode
+        tVO: translationVObj {
+          fields {
+            name
+          }
+        }
       }
       amount
       bid

@@ -46,7 +46,7 @@ const BestQuotes = (props) => {
                     <RateCard
                       key="bid"
                       value={quote.bid}
-                      label={quote.institutionVObj.name}
+                      label={quote.institutionVObj.tVO.fields.name}
                       info={t('cumpără')}
                     />
                   )
@@ -61,7 +61,7 @@ const BestQuotes = (props) => {
                     <RateCard
                       key="ask"
                       value={quote.ask}
-                      label={quote.institutionVObj.name}
+                      label={quote.institutionVObj.tVO.fields.name}
                       info={t('vinde')}
                     />
                   )

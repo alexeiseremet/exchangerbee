@@ -23,7 +23,7 @@ const BankPageMarkup = (props) => {
 
   const { baseCountry, centralBank, baseCurrency } = getTranslatedConfig(t);
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
-  const [tIN, tIS] = [institution.name, String(institution.slug).toUpperCase()];
+  const [tIN, tIS] = [institution.tVO.fields.name, institution.slug];
 
   return (
     <Layout metadata={{
@@ -31,14 +31,14 @@ const BankPageMarkup = (props) => {
       title: post && post.title ? post.title : `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
       description: post && post.description ? post.description : (`
         #${t('curs')} #${tIS} #${t('cursvalutar')} #${tIN} 
-        ✅ ${t('Curs valutar afișat la casele de schimb {{tIN}} ({{tIS}}) pentru azi', { tIN, tIS })}.
+        ✅ ${t('Curs valutar afișat la casele de schimb {{tIN}} pentru azi', { tIN, tIS })}.
       `),
     }}>
       <Page
-        heading={post && post.heading ? post.heading : `(${tBCS}) ${tIN}: ${t('curs valutar de azi')}`}
+        heading={post && post.heading ? post.heading : `${t('Curs valutar')} ${tIN} (${tIS})`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
-          { href: '/banks', label: t('Lista bănci') },
+          { href: '/banks', label: t('Curs bănci') },
           { href: null, label: post && post.heading ? post.heading : `${tIN} (${tIS})` },
         ]}
       >
@@ -49,7 +49,7 @@ const BankPageMarkup = (props) => {
                 (quote, i) => (
                   <QuoteCard
                     key={i}
-                    label={quote.currencyVObj.name}
+                    label={quote.currencyVObj.tVO.fields.name}
                     link={{
                       href: `/currency?slug=${quote.currencyVObj.slug}`,
                       as: `/currencies/${quote.currencyVObj.slug}`,
@@ -130,7 +130,6 @@ const GQL_BANK_PAGE = gql`
   query BankPage ($slug: String!, $where: QuoteWhereInput!, $postSlug: String!) {
     institution(slug: $slug) {
       slug
-      name
       tVO: translationVObj {
         fields {
           name
@@ -139,7 +138,6 @@ const GQL_BANK_PAGE = gql`
     }
     allQuote (where: $where) {
       currencyVObj {
-        name
         slug
         tVO: translationVObj {
           fields {

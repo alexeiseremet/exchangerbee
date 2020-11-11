@@ -18,16 +18,16 @@ const BanksPageMarkup = (props) => {
   return (
     <Layout metadata={{
       url: `${fullPath}`,
-      title: post && post.title ? post.title : `${t('Lista bănci')} — ${tBCN} (${tBCS})`,
+      title: post && post.title ? post.title : `${t('Curs bănci')} — ${tBCN} (${tBCS})`,
       description: post && post.description ? post.description : (`
         ${t('✅ Cursul valutar afişat la băncile din {{tBCN}} pentru azi', { tBCN })}.
       `),
     }}>
       <Page
-        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Lista bănci').toLowerCase()}`}
+        heading={post && post.heading ? post.heading : `(${tBCS}) ${tBCN}: ${t('Curs bănci').toLowerCase()}`}
         breadcrumb={[
           { href: '/', label: t('Curs valutar') },
-          { href: null, label: post && post.heading ? post.heading : t('Lista bănci') },
+          { href: null, label: post && post.heading ? post.heading : t('Curs bănci') },
         ]}
       >
         {
@@ -75,7 +75,11 @@ const GQL_ALL_INSTITUTION = gql`
   query AllInstitution ($postSlug: String!) {
     allInstitution {
       slug
-      name
+      tVO: translationVObj {
+        fields {
+          name
+        }
+      }
     }
     post(slug: $postSlug) {
       title

@@ -74,6 +74,11 @@ const GQL_ALL_CURRENCY = gql`
     allCurrency {
       slug
       name
+      tVO: translationVObj {
+        fields {
+          name
+        }
+      }
     }
     post(slug: $postSlug) {
       title
