@@ -53,7 +53,7 @@ const CurrencyPageMarkup = (props) => {
       title: post && post.title ? post.title : `${t('Curs valutar')} ${tCN} ${tCS}/${tBCyS} — ${tBCN} (${tBCS})`,
       description: post && post.description ? post.description : (`
         #${t('cursvalutar')} #${tCN} #${t('curs')} #${tCS}/${tBCyS}
-        ✅ ${t('Cursul valutar pentru {{tCN}} afişat azi la băncile din {{tBCN}}', { tCN, tBCN })}.
+        ✅ ${t('Curs valutar {{tCN}} afişat azi la casele de schimb {{tBCN}}', { tCN, tBCN })}.
       `),
     }}>
       <Page

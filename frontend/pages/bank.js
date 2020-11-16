@@ -30,8 +30,8 @@ const BankPageMarkup = (props) => {
       url: `${fullPath}`,
       title: post && post.title ? post.title : `${t('Curs valutar')} ${tIN} ${tIS} — ${tBCN} (${tBCS})`,
       description: post && post.description ? post.description : (`
-        #${t('curs')} #${tIS} #${t('cursvalutar')} #${tIN} 
-        ✅ ${t('Curs valutar afișat la casele de schimb {{tIN}} pentru azi', { tIN, tIS })}.
+        ✅ #${t('cursvalutar')} #${tIN} #${t('curs')} #${tIS}
+        ${t('Curs valutar {{tIN}} ({{tIS}}) afișat azi la casele de schimb', { tIN, tIS })}.
       `),
     }}>
       <Page

@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { siteGdpr, siteGtagId, siteGads } from '../server.config';
+import { host, siteGdpr, siteGtagId, siteGads } from '../server.config';
 import { i18n } from '../lib/i18n';
 import script from '../lib/script';
 
@@ -11,7 +11,7 @@ export default class XezoomDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     const spriteContent = sprite.stringify();
 
-    const { lng } = ctx.req ? ctx.req : i18n;
+    const { lng } = ctx.req ?? i18n;
 
     return {
       lng,
@@ -21,8 +21,10 @@ export default class XezoomDocument extends Document {
   }
 
   render() {
+    const { lng } = this.props;
+
     return (
-      <html prefix="og: http://ogp.me/ns#" lang={this.props.lng}>
+      <html prefix="og: http://ogp.me/ns#" lang={lng}>
         <Head>
           <meta httpEquiv="content-type" content="text/html; charset=utf-8" />
           <meta httpEquiv="x-ua-compatible" content="IE=edge" />
@@ -31,9 +33,12 @@ export default class XezoomDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/static/images/icons/icon-192x192.png" />
 
+          <link href={`${host}/ro`} rel="alternate" hrefLang="ro"/>
+          <link href={`${host}/ru`} rel="alternate" hrefLang="ru"/>
+
           {/* Global site tag (gtag.js) - Google Analytics */}
           {
-            siteGtagId && (
+            !!siteGtagId && (
               <>
                 <script src={`//www.googletagmanager.com/gtag/js?id=${siteGtagId}`}
                         async
@@ -51,7 +56,7 @@ export default class XezoomDocument extends Document {
           }
 
           {
-            siteGdpr && (
+            !!siteGdpr && (
               <>
                 <script src="//config.metomic.io/config.js?id=prj:48fa7355-78a1-42bb-bd23-2d549b346058"
                         crossOrigin="true"
@@ -62,7 +67,7 @@ export default class XezoomDocument extends Document {
           }
 
           {
-            siteGads && (
+            !!siteGads && (
               <script data-ad-client="ca-pub-7297847103287274" async
                       src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
               />
