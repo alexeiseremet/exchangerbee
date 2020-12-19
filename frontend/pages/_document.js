@@ -2,7 +2,9 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
-import { host, siteGdpr, siteGtagId, siteGads } from '../server.config';
+import {
+  host, siteGdpr, siteGtagId, siteGads,
+} from '../server.config';
 import { i18n } from '../lib/i18n';
 import script from '../lib/script';
 

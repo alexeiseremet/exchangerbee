@@ -11,7 +11,9 @@ import Page from '../features/Page';
 import CurrencyCard from '../features/CurrencyCard';
 
 const CurrenciesPageMarkup = (props) => {
-  const { t, post, allCurrency, fullPath } = props;
+  const {
+    t, post, allCurrency, fullPath,
+  } = props;
   const { baseCountry } = getTranslatedConfig(t);
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
 

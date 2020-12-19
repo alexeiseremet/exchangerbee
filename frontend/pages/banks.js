@@ -11,7 +11,9 @@ import Page from '../features/Page';
 import BankCard from '../features/BankCard';
 
 const BanksPageMarkup = (props) => {
-  const { t, post, allInstitution, fullPath } = props;
+  const {
+    t, post, allInstitution, fullPath,
+  } = props;
   const { baseCountry } = getTranslatedConfig(t);
   const [tBCN, tBCS] = [baseCountry.name, baseCountry.slug];
 
