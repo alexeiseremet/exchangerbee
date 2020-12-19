@@ -4,22 +4,20 @@ import classnames from 'classnames';
 import { Field } from 'formik';
 import _get from 'lodash/get';
 
-export default (
-  {
-    value = '',
-    values,
-    required = false,
-    readOnly = null,
-    type = 'text',
-    component = 'input',
-    name = null,
-    autocomplete = null,
-    labelText,
-    id,
-  },
-) => {
+function Input({
+  value = '',
+  values,
+  required = null,
+  readOnly = null,
+  type = 'text',
+  component = 'input',
+  name,
+  autocomplete = null,
+  labelText,
+  id,
+}) {
   const valueByName = _get(values, name);
-  const checked = type !== 'text' && (
+  const checked = ['checkbox', 'radio'].includes(type) && (
     (value !== '' && valueByName === value) || (valueByName === true)
   );
 
@@ -49,17 +47,19 @@ export default (
           readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
-          checked={checked}
           type={type}
           component={component}
-          value={value || valueByName}
           name={name}
           id={id}
           autoComplete={autocomplete}
+          {...(checked && { checked })}
+          {...(value || (valueByName && { value: value || valueByName }))}
         />
 
         {type !== 'text' && (<i className="input__toggle" />)}
       </div>
     </div>
   );
-};
+}
+
+export default Input;

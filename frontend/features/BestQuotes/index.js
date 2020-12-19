@@ -16,6 +16,7 @@ const BestQuotes = (props) => {
           <QuoteCard
             key={slug}
             label={slug}
+            slug={slug}
             centralBankItem={0}
             link={
               link === 'no-link'
@@ -23,7 +24,8 @@ const BestQuotes = (props) => {
                 : {
                   href: `/currency?slug=${slug}`,
                   as: `/currencies/${slug}`,
-                }}
+                }
+            }
           >
             <>
               {

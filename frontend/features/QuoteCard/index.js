@@ -1,15 +1,17 @@
 import './styles.scss';
 import React from 'react';
 import { Link } from '../../lib/i18n';
+import Svg from '../Svg';
 
 const QuoteCard = ({
-  label, centralBankItem, link, children, style,
+  label, centralBankItem, link, slug, children, style,
 }) => {
   const renderInner = () => (
     <>
-      <h6 className="quote-card__label">
+      <div className="quote-card__label">
         {label}
-      </h6>
+        <Svg flag={slug} style={{ width: '2.4rem', height: '2.4rem', float: 'right' }}/>
+      </div>
 
       {
         React.Children.map(children, (child, i) => (

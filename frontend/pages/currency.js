@@ -129,9 +129,8 @@ const CurrencyPageMarkup = (props) => {
                           href: `/bank?slug=${quote.institutionVObj.slug}`,
                           as: `/banks/${quote.institutionVObj.slug}`,
                         }}
-                        style={{
-                          marginTop: '.5rem',
-                        }}
+                        slug={quote.institutionVObj.slug}
+                        style={{ marginTop: '.5rem' }}
                       >
                         <div className="flex flex--gutter-sm">
                           <div>

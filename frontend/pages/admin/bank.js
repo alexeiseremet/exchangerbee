@@ -60,6 +60,7 @@ const GQL_BANK_PAGE = gql`
       id
       slug
       name
+      logo
       translationVObj {
         id
         locale

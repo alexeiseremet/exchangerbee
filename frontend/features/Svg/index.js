@@ -1,9 +1,18 @@
 import React from 'react';
+import './_flags';
 
 export default ({
-  className, glyph, icon, ...restProps
-}) => (
-  <svg className={className} {...restProps} role="img">
-    <use xlinkHref={icon ? `#icon-${icon}--sprite` : `#${glyph}`} />
-  </svg>
-);
+  className, glyph, icon, flag, ...restProps
+}) => {
+  let xlinkHref;
+
+  if (icon) xlinkHref = `#icon-${icon}--sprite`;
+  if (glyph) xlinkHref = `#${glyph}`;
+  if (flag) xlinkHref = `#${flag}--sprite`;
+
+  return (
+    <svg className={className} {...restProps} role="img">
+      <use xlinkHref={xlinkHref}/>
+    </svg>
+  );
+};

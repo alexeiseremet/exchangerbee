@@ -3,6 +3,7 @@ import React from 'react';
 import Form from '../Form';
 import Input from '../Input';
 import Select from '../Input/select';
+import InputFile from '../Input/file';
 
 const FormMarkup = ({
   institution = null,
@@ -22,6 +23,7 @@ const FormMarkup = ({
       initialValues={{
         name: '',
         slug: '',
+        logo: '',
         category: 'commercial',
         ...institution,
       }}
@@ -50,6 +52,12 @@ const FormMarkup = ({
         labelText="Slug"
         required
         readOnly={action === 'update'}
+      />
+      <InputFile
+        name="logo"
+        id="institution-logo"
+        accept="image/png, image/jpeg"
+        labelText="Logo"
       />
     </Form>
   </>

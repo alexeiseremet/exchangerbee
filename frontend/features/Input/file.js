@@ -1,24 +1,32 @@
 import './styles.scss';
 import React from 'react';
 import classnames from 'classnames';
-import { Field } from 'formik';
 
-function InputSelect({
-  children,
-  onChange,
+function InputFile({
   required = false,
   readOnly = null,
   name = null,
   labelText,
   id,
+  setFieldValue,
 }) {
   const classes = classnames(
     'input',
-    'input--select',
+    'input--file',
     {
       'input--required': required,
     },
   );
+
+  const onChange = (file) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setFieldValue(name, reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className={classes}>
@@ -31,24 +39,25 @@ function InputSelect({
       }
 
       <div className="input__control">
-        <Field
+        <input
           className="input__element"
-          component="select"
+          type="file"
           required={required}
           readOnly={readOnly}
           aria-required={required}
           aria-label={labelText}
-          name={name}
           id={id}
-          {...(onChange && { onChange })}
-        >
-          {children}
-        </Field>
+          onChange={(e) => {
+            onChange(e.currentTarget.files[0]);
+          }}
+        />
 
-        <i className="input__toggle" />
+        <div className="">
+          preview
+        </div>
       </div>
     </div>
   );
 }
 
-export default InputSelect;
+export default InputFile;

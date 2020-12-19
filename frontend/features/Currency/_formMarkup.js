@@ -3,13 +3,11 @@ import React from 'react';
 import Form from '../Form';
 import Input from '../Input';
 
-const FormMarkup = (
-  {
-    currency = null,
-    onSubmit,
-    action,
-  },
-) => (
+const FormMarkup = ({
+  currency = null,
+  onSubmit,
+  action,
+}) => (
   <>
     <div className="text">
       <h1>
@@ -57,12 +55,6 @@ const FormMarkup = (
         id="currency-symbol"
         component="input"
         labelText="Symbol"
-      />
-      <Input
-        name="image"
-        id="currency-image"
-        component="input"
-        labelText="Image source"
       />
     </Form>
   </>
