@@ -1,7 +1,7 @@
 // Load server variables from .env file.
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 
-// dotenv.config();
+dotenv.config();
 
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
